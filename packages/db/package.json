@@ -1,0 +1,23 @@
+{
+  "name": "@spark/db",
+  "version": "0.1.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "license": "MIT",
+  "scripts": {
+    "dev": "prisma studio --port 5556",
+    "clean": "rm -rf .turbo node_modules",
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down",
+    "db:restart": "docker-compose restart"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.4.0"
+  },
+  "devDependencies": {
+    "prisma": "^4.5.0",
+    "typescript": "^4.8.3"
+  }
+}
