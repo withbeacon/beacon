@@ -4,22 +4,22 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -42,6 +42,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  websites      Website[]
 }
 
 model VerificationToken {
@@ -50,4 +51,54 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Event {
+  id         String    @id @default(cuid())
+  name       String
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  pageViewId String?   @map("page_view_id")
+  pageView   PageView? @relation(fields: [pageViewId], references: [id])
+}
+
+model PageView {
+  id            String      @id @default(cuid())
+  name          String
+  url           String
+  referrer      String?
+  visitDuration Int?        @map("visit_duration")
+  events        Event[]
+  queryParams   String[]    @map("query_params")
+  bounced       Boolean     @default(false)
+  createdAt     DateTime    @default(now()) @map("created_at")
+  sessionId     String      @map("session_id")
+  session       UserSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+model UserSession {
+  id        String     @id @default(cuid())
+  expires   DateTime
+  country   String?
+  device    String?
+  os        String
+  browser   String?
+  screen    String
+  pageViews PageView[]
+  live      Boolean    @default(false)
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+  websiteId String?    @map("website_id")
+  website   Website?   @relation(fields: [websiteId], references: [id])
+}
+
+model Website {
+  id        String        @id @default(cuid())
+  url       String        @unique
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+  name      String
+  userId    String
+  sessions  UserSession[]
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
