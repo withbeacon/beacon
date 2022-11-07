@@ -44,7 +44,6 @@ document.addEventListener(
       });
     }
   },
-  { passive: true }
 );
 
 window.addEventListener("blur", async () => {

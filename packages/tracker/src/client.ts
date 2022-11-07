@@ -14,7 +14,8 @@ if (!currentScript) {
 }
 
 export const websiteId = currentScript.getAttribute("data-website-id");
-export const title = currentScript.getAttribute("data-website-name") ?? document.title;
+export const title =
+  currentScript.getAttribute("data-website-name") ?? document.title;
 
 function getOs(): string {
   if (userAgent.indexOf("Windows") > -1) {
@@ -23,22 +24,43 @@ function getOs(): string {
     return "Mac";
   } else if (userAgent.indexOf("X11") > -1) {
     return "Linux";
-  } 
+  }
 
   return "Unknown";
 }
 
 function getCurrentBrowser(): string {
-  if (userAgent.indexOf("Opera") || userAgent.indexOf("OPR")) {
-    return "Opera";
-  } else if (userAgent.indexOf("Chrome")) {
-    return "Chrome";
-  } else if (userAgent.indexOf("Safari")) {
-    return "Safari";
-  } else if (userAgent.indexOf("Firefox")) {
-    return "Firefox";
-  } else if (userAgent.indexOf("MSIE") || !!document["documentMode"] == true) {
-    return "IE";
+  const regexes = [
+    {
+      regex: /MSIE ([0-9]{1,}[\.0-9]{0,})/,
+      name: "Internet Explorer",
+    },
+    {
+      regex: /edg/i,
+      name: "Microsoft Edge",
+    },
+    {
+      regex: /opr\//i,
+      name: "Opera",
+    },
+    {
+      regex: /chrome|chromium|crios/i,
+      name: "Chrome",
+    },
+    {
+      regex: /safari/i,
+      name: "Safari",
+    },
+    {
+      regex: /firefox|iceweasel|fxios/i,
+      name: "Firefox",
+    },
+  ]
+
+  for (const { regex, name } of regexes) {
+    if (regex.test(userAgent)) {
+      return name;
+    }
   }
 
   return "Unknown";
@@ -53,5 +75,3 @@ function getDevice(): "Mobile" | "Desktop" {
 
   return "Desktop";
 }
-
-
