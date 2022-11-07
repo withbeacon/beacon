@@ -28,6 +28,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.33.0
       '@typescript-eslint/parser': ^5.33.0
       autoprefixer: ^10.4.7
+      cuid: ^2.1.8
       eslint: 8.22.0
       eslint-config-next: 13.0.2
       next: 13.0.2
@@ -49,6 +50,7 @@ importers:
       '@trpc/next': 10.0.0-proxy-beta.13_622bvf6ff5jmviipdinbic3aeq
       '@trpc/react': 10.0.0-proxy-beta.13_3whvodcar3pdbrhpuez2wm6yzq
       '@trpc/server': 10.0.0-proxy-beta.13
+      cuid: 2.1.8
       next: 13.0.2_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.15.1_pknogjuzx4bv7zxtatcb2ahtsq
       react: 18.2.0
@@ -1150,6 +1152,10 @@ packages:
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
     dev: true
+
+  /cuid/2.1.8:
+    resolution: {integrity: sha512-xiEMER6E7TlTPnDxrM4eRiC6TRgjNX9xzEZ5U/Se2YJKr7Mq4pJn/2XEHjl3STcSh96GmkHPcBXLES8M29wyyg==}
+    dev: false
 
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}

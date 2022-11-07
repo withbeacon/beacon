@@ -17,6 +17,7 @@
     "@trpc/next": "10.0.0-proxy-beta.13",
     "@trpc/react": "10.0.0-proxy-beta.13",
     "@trpc/server": "10.0.0-proxy-beta.13",
+    "cuid": "^2.1.8",
     "next": "13.0.2",
     "next-auth": "^4.15.1",
     "react": "18.2.0",

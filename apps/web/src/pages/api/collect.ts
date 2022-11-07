@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@spark/db";
 import { getSession } from "~/utils";
+import cuid from "cuid";
 
 type BodyParams = {
   websiteId: string;
@@ -16,6 +17,10 @@ type BodyParams = {
 
 type QueryParams = {
   [key: string]: string;
+}
+
+function isExpired(expiredDate: Date) {
+  return new Date() > expiredDate;
 }
 
 export default async function handler(
@@ -61,9 +66,25 @@ export default async function handler(
     },
   });
 
-  if (session === null) {
+  if (session && isExpired(session.expires)) {
+    // remove the fingerprint when the session is expired after 24 hours
+    // but still be able to get information about the session this way we don't
+    // have anything specific to the user but completely anonymous history
+    await prisma.userSession.update(
+      {
+        where: {
+          id: sessionId,
+        },
+        data: {
+          id: cuid(),
+        },
+      }
+    );
+  }
+
+  if (session === null || isExpired(session.expires)) {
     const expires = new Date();
-    expires.setHours(expires.getHours() + 48);
+    expires.setHours(expires.getHours() + 24);
 
     await prisma.userSession.create({
       data: {
