@@ -69,7 +69,7 @@ model PageView {
   referrer      String?
   visitDuration Int?        @map("visit_duration")
   events        Event[]
-  queryParams   String[]    @map("query_params")
+  queryParams   Json?       @map("query_params")
   bounced       Boolean     @default(false)
   createdAt     DateTime    @default(now()) @map("created_at")
   sessionId     String      @map("session_id")
