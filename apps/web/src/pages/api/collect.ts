@@ -14,6 +14,10 @@ type BodyParams = {
   browser?: string;
 };
 
+type QueryParams = {
+  [key: string]: string;
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -34,7 +38,10 @@ export default async function handler(
     return res.status(400).json("Missing data in the body");
   }
 
-  const host = new URL(url).hostname;
+  let { hostname: host, pathname } = new URL(url);
+  pathname = pathname.replace("/", "");
+  
+  const queryParams: QueryParams = Object.fromEntries(new URLSearchParams(pathname));
   const sessionId = getSession(req, host);
 
   const website = await prisma.website.findUnique({
@@ -91,6 +98,7 @@ export default async function handler(
         },
         url,
         referrer,
+        queryParams,
         bounced: visitTime < 10 * 1000,
         visitDuration: visitTime < 10 * 1000 ? null : visitTime,
         name: title,
@@ -109,6 +117,7 @@ export default async function handler(
           id: sessionId,
         },
       },
+      queryParams,
       bounced: visitTime < 10 * 1000,
       visitDuration: visitTime < 10 * 1000 ? null : visitTime,
       name: title,
