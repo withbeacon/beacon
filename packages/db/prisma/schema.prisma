@@ -53,22 +53,13 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Event {
-  id         String    @id @default(cuid())
-  name       String
-  createdAt  DateTime  @default(now()) @map("created_at")
-  updatedAt  DateTime  @updatedAt @map("updated_at")
-  pageViewId String?   @map("page_view_id")
-  pageView   PageView? @relation(fields: [pageViewId], references: [id])
-}
-
 model PageView {
   id            String      @id @default(cuid())
   name          String
   url           String
   referrer      String?
   visitDuration Int?        @map("visit_duration")
-  events        Event[]
+  events        Json?
   queryParams   Json?       @map("query_params")
   bounced       Boolean     @default(false)
   createdAt     DateTime    @default(now()) @map("created_at")
