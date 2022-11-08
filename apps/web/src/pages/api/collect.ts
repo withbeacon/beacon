@@ -13,11 +13,20 @@ type BodyParams = {
   referrer: string;
   title: string;
   browser?: string;
+  events?: Events;
 };
 
-type QueryParams = {
+type KeyValuePairs = {
   [key: string]: string;
-}
+};
+
+type Events = {
+  [key: string]: {
+    [key: string]: boolean;
+  };
+};
+
+type QueryParams = KeyValuePairs;
 
 function isExpired(expiredDate: Date) {
   return new Date() > expiredDate;
@@ -36,8 +45,15 @@ export default async function handler(
   res.setHeader("Access-Control-Allow-Methods", "POST");
   res.setHeader("Accept", "application/json");
 
-  const { websiteId, url, visitTime, referrer, title, ...body }: BodyParams =
-    JSON.parse(req.body);
+  const {
+    websiteId,
+    url,
+    visitTime,
+    referrer,
+    title,
+    events,
+    ...body
+  }: BodyParams = JSON.parse(req.body);
 
   if (!websiteId) {
     return res.status(400).json("Missing data in the body");
@@ -45,7 +61,7 @@ export default async function handler(
 
   let { hostname: host, pathname } = new URL(url);
   pathname = pathname.replace("/", "");
-  
+
   const queryParams: QueryParams = Object.fromEntries(new URLSearchParams(pathname));
   const sessionId = getSession(req, host);
 
@@ -70,16 +86,14 @@ export default async function handler(
     // remove the fingerprint when the session is expired after 24 hours
     // but still be able to get information about the session this way we don't
     // have anything specific to the user but completely anonymous history
-    await prisma.userSession.update(
-      {
-        where: {
-          id: sessionId,
-        },
-        data: {
-          id: cuid(),
-        },
-      }
-    );
+    await prisma.userSession.update({
+      where: {
+        id: sessionId,
+      },
+      data: {
+        id: cuid(),
+      },
+    });
   }
 
   if (session === null || isExpired(session.expires)) {
@@ -120,6 +134,7 @@ export default async function handler(
         url,
         referrer,
         queryParams,
+        events,
         bounced: visitTime < 10 * 1000,
         visitDuration: visitTime < 10 * 1000 ? null : visitTime,
         name: title,
@@ -142,6 +157,7 @@ export default async function handler(
       bounced: visitTime < 10 * 1000,
       visitDuration: visitTime < 10 * 1000 ? null : visitTime,
       name: title,
+      events,
     },
   });
 
