@@ -55,7 +55,7 @@ function getCurrentBrowser(): string {
       regex: /firefox|iceweasel|fxios/i,
       name: "Firefox",
     },
-  ]
+  ];
 
   for (const { regex, name } of regexes) {
     if (regex.test(userAgent)) {

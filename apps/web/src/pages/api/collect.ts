@@ -64,7 +64,9 @@ export default async function handler(
   let pathname = new URL(url).pathname;
   pathname = pathname.replace("/", "");
 
-  const queryParams: QueryParams = Object.fromEntries(new URLSearchParams(pathname));
+  const queryParams: QueryParams = Object.fromEntries(
+    new URLSearchParams(pathname)
+  );
   const sessionId = getSession(req, host);
 
   const website = await prisma.website.findUnique({

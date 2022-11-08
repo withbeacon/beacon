@@ -1,7 +1,7 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@spark/db";
 
 export const authOptions = {
@@ -12,7 +12,6 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_SECRET as string,
     }),
   ],
-}
+};
 
-export default NextAuth(authOptions)
-
+export default NextAuth(authOptions);
