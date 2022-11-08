@@ -1,23 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { trpc } from "../utils/trpc";
-import type { inferProcedureOutput } from "@trpc/server";
-import type { AppRouter } from "@spark/api";
-
-const PostCard: React.FC<{
-  post: inferProcedureOutput<AppRouter["post"]["all"]>[number];
-}> = ({ post }) => {
-  return (
-    <div className="p-4 border-2 border-gray-500 rounded-lg max-w-2xl">
-      <h2 className="text-2xl font-bold text-gray-800">{post.title}</h2>
-      <p className="text-gray-600">{post.content}</p>
-    </div>
-  );
-};
 
 const Home: NextPage = () => {
-  const postQuery = trpc.post.all.useQuery();
-
   return (
     <>
       <Head>
@@ -29,17 +13,6 @@ const Home: NextPage = () => {
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
           Create <span className="text-indigo-500">T3</span> Turbo
         </h1>
-        <div className="flex items-center justify-center w-full pt-6 text-2xl text-blue-500">
-          {postQuery.data ? (
-            <div className="flex flex-col gap-4">
-              {postQuery.data?.map((p) => {
-                return <PostCard key={p.id} post={p} />;
-              })}
-            </div>
-          ) : (
-            <p>Loading..</p>
-          )}
-        </div>
       </main>
     </>
   );
