@@ -59,7 +59,9 @@ export default async function handler(
     return res.status(400).json("Missing data in the body");
   }
 
-  let { hostname: host, pathname } = new URL(url);
+  const host = new URL(url).hostname;
+
+  let pathname = new URL(url).pathname;
   pathname = pathname.replace("/", "");
 
   const queryParams: QueryParams = Object.fromEntries(new URLSearchParams(pathname));
