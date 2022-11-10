@@ -15,7 +15,9 @@ env:
 jobs:
   build-lint:
     env:
-      DATABASE_URL: file:./db.sqlite
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      GOOGLE_ID: ${{ secrets.GOOGLE_ID }}
+      GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
     runs-on: ubuntu-latest
 
     steps:
