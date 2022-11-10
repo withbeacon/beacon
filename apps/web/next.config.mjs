@@ -14,7 +14,7 @@ function defineNextConfig(config) {
   return config;
 }
 
-export default withTM(["@spark/api", "@spark/db"])(
+export default withTM(["@spark/api", "@spark/db", "@spark/ui"])(
   defineNextConfig({
     reactStrictMode: true,
     swcMinify: true,
