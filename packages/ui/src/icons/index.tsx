@@ -5,4 +5,5 @@ export * from "./calendar";
 export * from "./arrowUp";
 export * from "./arrowDown";
 export * from "./bar";
+export * from "./cross";
 
