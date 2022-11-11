@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@feedback-fish/react": "^1.2.1",
     "@spark/api": "*",
     "@spark/db": "*",
     "@spark/ui": "*",
