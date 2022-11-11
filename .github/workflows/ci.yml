@@ -18,6 +18,7 @@ jobs:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       GOOGLE_ID: ${{ secrets.GOOGLE_ID }}
       GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
+      NEXT_PUBLIC_FEEDBACK_FISH: ${{ secrets.NEXT_PUBLIC_FEEDBACK_FISH }}
     runs-on: ubuntu-latest
 
     steps:
