@@ -1,4 +1,2 @@
-import NextAuth from "next-auth";
-import { authOptions } from "@spark/auth";
-
-export default NextAuth(authOptions);
+import { Auth } from "@spark/auth";
+export default Auth;
