@@ -16,6 +16,7 @@
     "@spark/api": "*",
     "@spark/db": "*",
     "@spark/ui": "*",
+    "@spark/auth": "*",
     "@tanstack/react-query": "^4.7.2",
     "@trpc/client": "10.0.0-proxy-beta.13",
     "@trpc/next": "10.0.0-proxy-beta.13",
