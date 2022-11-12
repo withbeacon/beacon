@@ -1,20 +1,20 @@
 {
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "^db-generate"],
-      "outputs": [".next/**", ".expo/**"]
+      "dependsOn": ["^db:generate", "^build"],
+      "outputs": [".next/**"]
     },
     "lint": {
       "outputs": []
     },
     "dev": {
-      "dependsOn": ["^db-generate"],
+      "dependsOn": ["^db:generate"],
       "cache": false
     },
-    "db-generate": {
-      "cache": true 
+    "db:generate": {
+      "cache": true
     },
-    "db-push": {
+    "db:push": {
       "cache": false
     },
     "clean": {
