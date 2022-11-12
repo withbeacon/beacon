@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+  @apply bg-primary-200;
+}
+
 body {
   @apply bg-gray-100;
 }
