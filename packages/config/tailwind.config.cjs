@@ -2,7 +2,7 @@ const colors = require("tailwindcss/colors");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["../../apps/web/src/**/*.tsx", "../../packages/*/src/**/*.{tsx,ts,jsx,js}"],
+  content: ["../../apps/web/src/**/*.tsx", "../../packages/*/src/**/*.tsx"],
   theme: {
     extend: {
       fontFamily: {
