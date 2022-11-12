@@ -48,9 +48,6 @@ jobs:
 
       - name: Install deps (with cache)
         run: pnpm install
-   
-      - name: Generate prisma client
-        run: cd packages/db && pnpm prisma generate
 
       - name: Next.js cache
         uses: actions/cache@v3
