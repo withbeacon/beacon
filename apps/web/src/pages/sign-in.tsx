@@ -20,6 +20,7 @@ export default function SignIn() {
     },
 
     config: config.slow,
+    delay: 100,
   });
 
   function handleSignIn() {
