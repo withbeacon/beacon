@@ -4,4 +4,5 @@ packages:
   - packages/db
   - packages/ui
   - packages/config
+  - packages/tracker
   - packages/auth
