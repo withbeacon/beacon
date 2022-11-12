@@ -7,4 +7,5 @@ export * from "./arrowDown";
 export * from "./bar";
 export * from "./menu";
 export * from "./cross";
+export * from "./google";
 
