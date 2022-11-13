@@ -51,6 +51,7 @@ interface Props extends VariantProps<typeof buttonStyles> {
   tinted?: boolean;
   filled?: boolean;
   loading?: boolean;
+  submit?: boolean;
 }
 
 export function Button({
@@ -58,6 +59,7 @@ export function Button({
   filled = false,
   loading = false,
   disabled = false,
+  submit,
   intent,
   className,
   children,
@@ -77,6 +79,7 @@ export function Button({
       className={buttonStyles({ intent, loading, disabled, ...props }) + " " + className}
       onClick={() => onClick?.()}
       disabled={disabled || loading}
+      type={submit ? "submit" : "button"}
     >
       {loading ? <Loading /> : children}
     </button>
