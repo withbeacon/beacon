@@ -84,7 +84,7 @@ export default async function handler(
 
   if (website === null) {
     try {
-      await prisma.website.create({
+      website = await prisma.website.create({
         data: {
           id: cuid(),
           url: host,
@@ -199,10 +199,10 @@ async function getPageDetails(
   const $ = load(html);
 
   let favicon = $("link[rel='icon']").attr("href") || null;
-  let title = $("title").text();
+  const title = $("title").text();
 
   // remove all the seperators
-  let [name, _] = title.split(/[-|:|−|–]/);
+  let [name] = title.split(/[-|:|−|–]/);
 
   if (!name) {
     name = `${userName}'s website`;
