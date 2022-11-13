@@ -13,7 +13,7 @@ if (!currentScript) {
   throw new Error("Unable to get the spark script");
 }
 
-export const websiteId = currentScript.getAttribute("data-website-id");
+export const id = currentScript.getAttribute("data-id");
 export const title =
   currentScript.getAttribute("data-website-name") ?? document.title;
 

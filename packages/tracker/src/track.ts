@@ -1,6 +1,6 @@
 import {
   url,
-  websiteId,
+  id,
   screen,
   device,
   os,
@@ -10,8 +10,8 @@ import {
 } from "./client";
 import { COLLECT_API } from "./constants";
 
-if (!websiteId) {
-  throw new Error("Missing website id");
+if (!id) {
+  throw new Error("Missing tracking id");
 }
 
 type Events = {
@@ -34,7 +34,7 @@ const timer = setInterval(() => {
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "hidden") {
     const payload = {
-      websiteId,
+      id,
       url,
       visitTime,
       screen,

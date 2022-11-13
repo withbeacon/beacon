@@ -1,10 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@spark/db";
 import { getSession } from "~/utils";
+import { getServerSession } from "@spark/auth";
+import { load } from "cheerio";
 import cuid from "cuid";
 
 type BodyParams = {
-  websiteId: string;
+  id: string;
   url: string;
   visitTime: number; // in milliseconds
   screen: string; // screen size (width x height)
@@ -32,6 +34,14 @@ function isExpired(expiredDate: Date) {
   return new Date() > expiredDate;
 }
 
+// what this does currently:
+// gets the website id and creates the session if not exists
+// then does all the tracking stuff, and deletes the sessiona after 24h.
+
+// what we want to do now:
+// get the user id, crate the website if not exists and do all the
+// remaining stuff the same way as before.
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -45,39 +55,49 @@ export default async function handler(
   res.setHeader("Access-Control-Allow-Methods", "POST");
   res.setHeader("Accept", "application/json");
 
-  const {
-    websiteId,
-    url,
-    visitTime,
-    referrer,
-    title,
-    events,
-    ...body
-  }: BodyParams = JSON.parse(req.body);
+  const { id, url, visitTime, referrer, title, events, ...body }: BodyParams =
+    JSON.parse(req.body);
 
-  if (!websiteId) {
+  if (!id) {
     return res.status(400).json("Missing data in the body");
   }
 
   const host = new URL(url).hostname;
-
   let pathname = new URL(url).pathname;
   pathname = pathname.replace("/", "");
 
   const queryParams: QueryParams = Object.fromEntries(
     new URLSearchParams(pathname)
   );
+
   const sessionId = getSession(req, host);
 
-  const website = await prisma.website.findUnique({
+  let website = await prisma.website.findFirst({
     where: {
-      id: websiteId,
+      user: { id },
+      url: host,
     },
   });
 
+  const auth = await getServerSession({ req, res });
+  const name = await getName(url, auth?.user?.name || "");
+  const favicon = await getFavicon(url);
+
   if (website === null) {
-    res.status(404).json("Website not found");
-    return;
+    try {
+      await prisma.website.create({
+        data: {
+          id: cuid(),
+          url: host,
+          user: { connect: { id } },
+          name,
+          favicon
+        },
+      });
+    } catch (err) {
+      res.status(500).json({ error: "Whoops something wen't wrong at our end, sorry!" });
+      return;
+    }
   }
 
   const session = await prisma.userSession.findUnique({
@@ -111,7 +131,7 @@ export default async function handler(
         expires,
         website: {
           connect: {
-            id: websiteId,
+            id: website?.id,
           },
         },
       },
@@ -167,4 +187,36 @@ export default async function handler(
 
   res.json({ message: "Ok" });
   return;
+}
+
+async function getFavicon(url: string): Promise<string | null> {
+  const paths = ["/favicon.svg", "/favicon.ico", "/favicon.png"];
+
+  for (const path of paths) {
+    const faviconUrl = url + path;
+    const resp = await fetch(faviconUrl);
+
+    if (resp.status === 200) {
+      return faviconUrl;
+    }
+  }
+
+  return null;
+}
+
+async function getName(url: string, userName: string): Promise<string> {
+  const resp = await fetch(url);
+  const html = await resp.text();
+  const $ = load(html);
+
+  let title = $("title").text();
+
+  // remove all the seperators
+  let [name, _] = title.split(/[-|:|−|–]/);
+
+  if (!name) {
+    return `${userName}'s website`;
+  }
+
+  return name.trim();
 }
