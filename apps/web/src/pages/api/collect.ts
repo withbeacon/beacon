@@ -80,8 +80,7 @@ export default async function handler(
   });
 
   const auth = await getServerSession({ req, res });
-  const name = await getName(url, auth?.user?.name || "");
-  const favicon = await getFavicon(url);
+  const { name, favicon } = await getPageDetails(url, auth?.user?.name || "");
 
   if (website === null) {
     try {
@@ -91,11 +90,13 @@ export default async function handler(
           url: host,
           user: { connect: { id } },
           name,
-          favicon
+          favicon,
         },
       });
     } catch (err) {
-      res.status(500).json({ error: "Whoops something wen't wrong at our end, sorry!" });
+      res
+        .status(500)
+        .json({ error: "Whoops something wen't wrong at our end, sorry!" });
       return;
     }
   }
@@ -189,34 +190,26 @@ export default async function handler(
   return;
 }
 
-async function getFavicon(url: string): Promise<string | null> {
-  const paths = ["/favicon.svg", "/favicon.ico", "/favicon.png"];
-
-  for (const path of paths) {
-    const faviconUrl = url + path;
-    const resp = await fetch(faviconUrl);
-
-    if (resp.status === 200) {
-      return faviconUrl;
-    }
-  }
-
-  return null;
-}
-
-async function getName(url: string, userName: string): Promise<string> {
+async function getPageDetails(
+  url: string,
+  userName: string
+): Promise<{ name: string; favicon: string | null }> {
   const resp = await fetch(url);
   const html = await resp.text();
   const $ = load(html);
 
+  let favicon = $("link[rel='icon']").attr("href") || null;
   let title = $("title").text();
 
   // remove all the seperators
   let [name, _] = title.split(/[-|:|−|–]/);
 
   if (!name) {
-    return `${userName}'s website`;
+    name = `${userName}'s website`;
   }
 
-  return name.trim();
+  name = name.trim();
+  favicon = favicon ? new URL(favicon, url).href : null;
+
+  return { name, favicon };
 }

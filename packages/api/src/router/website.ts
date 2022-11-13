@@ -15,40 +15,31 @@ export const websiteRouter = router({
     .mutation(async ({ ctx, input }) => {
       const { url } = input;
 
-      async function getFavicon(): Promise<string | null> {
-        const paths = ["/favicon.svg", "/favicon.ico", "/favicon.png"];
-
-        for (const path of paths) {
-          const faviconUrl = `https://${url}${path}`;
-          const resp = await fetch(faviconUrl);
-
-          if (resp.status === 200) {
-            return faviconUrl;
-          }
-        }
-
-        return null;
-      }
-
-      async function getTitle(): Promise<string> {
-        const resp = await fetch("https://" + url);
+      async function getPageDetails(): Promise<{
+        name: string;
+        favicon: string | null;
+      }> {
+        const resp = await fetch(url);
         const html = await resp.text();
         const $ = load(html);
 
+        let favicon = $("link[rel='icon']").attr("href") || null;
         let title = $("title").text();
 
         // remove all the seperators
         let [name, _] = title.split(/[-|:|−|–]/);
 
         if (!name) {
-          return `${ctx.session.user?.name}'s website`;
+          name = `${ctx.session.user?.name}'s website`;
         }
 
-        return name.trim();
+        name = name.trim();
+        favicon = favicon ? new URL(favicon, url).href : null;
+
+        return { name, favicon };
       }
 
-      const favicon = await getFavicon();
-      const name = await getTitle();
+      const { name, favicon } = await getPageDetails();
 
       try {
         return await ctx.prisma.website.create({
