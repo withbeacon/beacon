@@ -8,4 +8,7 @@ export * from "./bar";
 export * from "./menu";
 export * from "./cross";
 export * from "./google";
+export * from "./plus";
+export * from "./clipboard";
+export * from "./clipboardCheck";
 
