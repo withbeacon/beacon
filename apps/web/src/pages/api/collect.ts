@@ -210,6 +210,17 @@ async function getPageDetails(
 
   name = name.trim();
   favicon = favicon ? new URL(favicon, url).href : null;
+  favicon = favicon ? await imageUrl(favicon) : null;
 
   return { name, favicon };
 }
+
+async function imageUrl(url: string) {
+  const resp = await fetch(url);
+  const blob = await resp.blob();
+  const buffer = await blob.arrayBuffer();
+  const base64 = Buffer.from(buffer).toString("base64");
+
+  return `data:${blob.type};base64,${base64}`;
+}
+
