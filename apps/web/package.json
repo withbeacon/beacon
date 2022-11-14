@@ -12,11 +12,12 @@
   "dependencies": {
     "@feedback-fish/react": "^1.2.1",
     "@radix-ui/react-dropdown-menu": "^2.0.1",
+    "@radix-ui/react-select": "^1.1.1",
     "@react-spring/web": "^9.5.5",
     "@spark/api": "*",
+    "@spark/auth": "*",
     "@spark/db": "*",
     "@spark/ui": "*",
-    "@spark/auth": "*",
     "@tanstack/react-query": "^4.7.2",
     "@trpc/client": "10.0.0-proxy-beta.13",
     "@trpc/next": "10.0.0-proxy-beta.13",
