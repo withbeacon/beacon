@@ -156,6 +156,11 @@ export default async function handler(
             id: sessionId,
           },
         },
+        website: {
+          connect: {
+            id: website.id,
+          },
+        },
         url,
         referrer,
         queryParams,
@@ -223,4 +228,3 @@ async function imageUrl(url: string) {
 
   return `data:${blob.type};base64,${base64}`;
 }
-
