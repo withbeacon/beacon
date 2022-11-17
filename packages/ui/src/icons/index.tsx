@@ -15,3 +15,4 @@ export * from "./select";
 export * from "./chevronUp";
 export * from "./chevronDown";
 export * from "./check";
+export * from "./user";
