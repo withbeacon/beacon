@@ -65,6 +65,8 @@ model PageView {
   createdAt     DateTime    @default(now()) @map("created_at")
   sessionId     String      @map("session_id")
   session       UserSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  websiteId     String      @map("website_id")
+  website       Website     @relation(fields: [websiteId], references: [id], onDelete: Cascade)
 }
 
 model UserSession {
@@ -91,6 +93,7 @@ model Website {
   favicon   String?
   name      String
   userId    String
-  sessions  UserSession[]
   user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessions  UserSession[]
+  pageViews PageView[]
 }
