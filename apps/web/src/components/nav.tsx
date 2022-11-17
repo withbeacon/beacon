@@ -37,6 +37,7 @@ export function Nav() {
                 <span>{"/"}</span>
                 <img
                   src={websiteQuery.data.favicon || ""}
+                  alt={websiteQuery.data.name}
                   className="w-5 h-5"
                 />
                 <h2>{websiteQuery.data.name}</h2>
