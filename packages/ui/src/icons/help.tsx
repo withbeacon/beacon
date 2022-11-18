@@ -17,4 +17,3 @@ export function HelpIcon(props: JSX.IntrinsicElements["svg"]) {
     </svg>
   );
 }
-

@@ -30,7 +30,10 @@ export default function SignIn() {
 
   return (
     <div className="h-screen w-screen grid place-items-center">
-      <animated.div className="flex flex-col max-w-lg px-6 md:p-0 items-start gap-6" style={{ ...containerSprings }}>
+      <animated.div
+        className="flex flex-col max-w-lg px-6 md:p-0 items-start gap-6"
+        style={{ ...containerSprings }}
+      >
         <div className="flex items-center text-gray-800">
           <Logo className="-mx-2 -my-4 w-16 h-16" />
           <h2 className="text-2xl md:text-3xl font-bold">Spark</h2>

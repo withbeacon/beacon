@@ -15,4 +15,3 @@ export function Logo(props: JSX.IntrinsicElements["svg"]) {
     </svg>
   );
 }
-

@@ -19,7 +19,7 @@ export const Auth = ({ children }: Props) => {
   }, [session.status]);
 
   if (session.status === "loading") {
-    return <Loading />
+    return <Loading />;
   }
 
   return <>{children}</>;

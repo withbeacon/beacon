@@ -1,9 +1,9 @@
-import { Loading } from '@spark/ui';
-import { Nav, NoWebsite } from '~/components';
+import { Loading } from "@spark/ui";
+import { Nav, NoWebsite } from "~/components";
 
-import { useActiveWebsite } from '~/hooks';
+import { useActiveWebsite } from "~/hooks";
 import { useRouter } from "next/router";
-import { trpc } from '~/utils';
+import { trpc } from "~/utils";
 
 export default function Dashboard() {
   const [id] = useActiveWebsite();
@@ -11,11 +11,11 @@ export default function Dashboard() {
   const router = useRouter();
 
   if (query.isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   if (query.isError) {
-    return <div>Failed to load websites</div>
+    return <div>Failed to load websites</div>;
   }
 
   if (query.data.length === 0) {
@@ -24,17 +24,16 @@ export default function Dashboard() {
         <Nav />
         <NoWebsite />
       </div>
-    )
+    );
   }
 
   if (id) {
     router.push(`/dashboard/${id}`);
     return;
   }
-  
+
   if (query.data[0]?.id) {
     router.push(`/dashboard/${query.data[0].id}`);
     return;
   }
 }
-

@@ -82,7 +82,7 @@ export default function Chart({
                 onClick={() => setMode("sessions")}
                 r
               >
-                Sessions 
+                Sessions
               </ChartButton>
             </div>
           </div>

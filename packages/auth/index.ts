@@ -3,4 +3,3 @@ export * from "./src/authOptions";
 export * from "./src/getSession";
 
 export type { Session } from "next-auth";
-

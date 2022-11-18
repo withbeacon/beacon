@@ -76,7 +76,9 @@ export function Button({
 
   return (
     <button
-      className={buttonStyles({ intent, loading, disabled, ...props }) + " " + className}
+      className={
+        buttonStyles({ intent, loading, disabled, ...props }) + " " + className
+      }
       onClick={() => onClick?.()}
       disabled={disabled || loading}
       type={submit ? "submit" : "button"}

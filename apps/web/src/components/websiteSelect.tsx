@@ -18,7 +18,10 @@ export function WebsiteSelect({ children }: PropsWithChildren) {
   }
 
   return (
-    <SelectPrimitive.Root defaultValue={active || undefined} onValueChange={handleSelectChange}>
+    <SelectPrimitive.Root
+      defaultValue={active || undefined}
+      onValueChange={handleSelectChange}
+    >
       <SelectPrimitive.Trigger asChild aria-label="Websites">
         {children}
       </SelectPrimitive.Trigger>
