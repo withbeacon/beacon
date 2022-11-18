@@ -38,6 +38,7 @@ importers:
       cuid: ^2.1.8
       eslint: 8.22.0
       eslint-config-next: 13.0.2
+      jotai: ^1.10.0
       next: 13.0.2
       next-auth: ^4.15.1
       next-transpile-modules: ^10.0.0
@@ -66,6 +67,7 @@ importers:
       '@trpc/react': 10.0.0-proxy-beta.13_3whvodcar3pdbrhpuez2wm6yzq
       '@trpc/server': 10.0.0-proxy-beta.13
       cuid: 2.1.8
+      jotai: 1.10.0_react@18.2.0
       next: 13.0.2_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.15.1_pknogjuzx4bv7zxtatcb2ahtsq
       react: 18.2.0
@@ -3244,6 +3246,46 @@ packages:
 
   /jose/4.11.0:
     resolution: {integrity: sha512-wLe+lJHeG8Xt6uEubS4x0LVjS/3kXXu9dGoj9BNnlhYq7Kts0Pbb2pvv5KiI0yaKH/eaiR0LUOBhOVo9ktd05A==}
+    dev: false
+
+  /jotai/1.10.0_react@18.2.0:
+    resolution: {integrity: sha512-3Q8kQU3Ktds+80Ku4dVcvnwSXEcK0Fg0b6mC1+4wz3rmF64lOGNUySKXQ4njvYCWodR8bw2HygOKYSYkHxQQmA==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      '@babel/template': '*'
+      jotai-immer: '*'
+      jotai-optics: '*'
+      jotai-redux: '*'
+      jotai-tanstack-query: '*'
+      jotai-urql: '*'
+      jotai-valtio: '*'
+      jotai-xstate: '*'
+      jotai-zustand: '*'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@babel/template':
+        optional: true
+      jotai-immer:
+        optional: true
+      jotai-optics:
+        optional: true
+      jotai-redux:
+        optional: true
+      jotai-tanstack-query:
+        optional: true
+      jotai-urql:
+        optional: true
+      jotai-valtio:
+        optional: true
+      jotai-xstate:
+        optional: true
+      jotai-zustand:
+        optional: true
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /joycon/3.1.1:

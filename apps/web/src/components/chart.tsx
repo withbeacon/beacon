@@ -1,14 +1,14 @@
 import type { VariantProps } from "class-variance-authority";
 import type { PropsWithChildren } from "react";
+import type { Mode } from "~/store";
 import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { EyeIcon, UserIcon } from "@spark/ui";
 
 import { trpc, date, diffInDays, formatDate } from "~/utils";
 import { useActiveWebsite } from "~/hooks";
-import { useState } from "react";
+import { modeAtom } from "~/store";
+import { useAtom } from "jotai";
 import { cva } from "class-variance-authority";
-
-type ChartMode = "pageViews" | "sessions";
 
 interface Props {
   from?: Date;
@@ -20,7 +20,7 @@ export default function Chart({
   to = date(),
 }: Props) {
   const [id] = useActiveWebsite();
-  const [mode, setMode] = useState<ChartMode>("pageViews");
+  const [mode, setMode] = useAtom(modeAtom);
 
   const query = trpc.website[mode].useQuery({
     websiteId: id as string,
@@ -113,7 +113,7 @@ interface BarTooltipProps {
   active?: boolean;
   payload?: { value: number; name: string }[];
   label?: string;
-  mode: ChartMode;
+  mode: Mode;
 }
 
 function BarTooltip({
