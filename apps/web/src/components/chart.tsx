@@ -94,11 +94,13 @@ function BarTooltip({
   label,
 }: BarTooltipProps) {
   if (active && payload && payload.length) {
+    const data = payload[0];
+
     return (
       <div className="bg-white shadow rounded p-2 outline-none border-none flex flex-col gap-2">
         <div className="flex gap-2">
           {mode === "pageViews" ? <EyeIcon /> : <UserIcon />}
-          <span>{payload[0]?.value}</span>
+          <span>{data?.value}</span>
         </div>
         <span>{label}</span>
       </div>
