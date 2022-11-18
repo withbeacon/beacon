@@ -7,7 +7,7 @@ import { useActiveWebsite } from "~/hooks";
 import { useEffect } from "react";
 import dynamic from "next/dynamic";
 
-const StatChart = dynamic(() => import("~/components/chart"), {
+const Chart = dynamic(() => import("~/components/chart"), {
   loading: () => <p>loading</p>,
 });
 
@@ -43,7 +43,7 @@ export default function Analytics() {
     <div className="flex flex-col h-screen">
       <Nav />
       <Stats />
-      <StatChart />
+      <Chart />
     </div>
   );
 }
