@@ -31,13 +31,13 @@ function StatCard({ label, value, growth, description }: StatProps) {
 
 export function Stats() {
   const [websiteId] = useActiveWebsite();
-  const websiteQuery = trpc.website.get.useQuery(websiteId || "");
+  const query = trpc.website.get.useQuery(websiteId || "");
 
   if (!websiteId) {
     return <></>;
   }
 
-  if (websiteQuery.isLoading || !websiteQuery.data) {
+  if (query.isLoading || !query.data) {
     return <></>;
   }
 
@@ -61,21 +61,21 @@ export function Stats() {
   const stats = [
     {
       label: "Page Views",
-      value: websiteQuery.data.pageViews,
+      value: query.data.pageViews,
       growth: 8,
       description:
         "Page views are the number of times a user visits a page on your website.",
     },
     {
       label: "Sessions",
-      value: websiteQuery.data.sessions,
+      value: query.data.sessions,
       growth: 2,
       description:
         "Sessions are the number of users who have visited your website.",
     },
     {
       label: "Avg Session Time",
-      value: millisecondsToStandardTime(websiteQuery.data.avgDuration || 0),
+      value: millisecondsToStandardTime(query.data.avgDuration || 0),
       growth: 5,
       description:
         "Average session time is the average amount of time a user spends on your website.",

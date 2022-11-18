@@ -15,7 +15,7 @@ export function MobileMenu({ children }: PropsWithChildren) {
   const { data } = useSession();
   const { id } = router.query;
   const [open, setOpen] = useState(false);
-  const websiteQuery = trpc.website.get.useQuery(id as string);
+  const query = trpc.website.get.useQuery(id as string);
 
   const parentSprings = useSpring({
     from: {
@@ -68,15 +68,15 @@ export function MobileMenu({ children }: PropsWithChildren) {
               <p>Share Feedback</p>
             </div>
           </Feedback>
-          {websiteQuery.data && (
+          {query.data && (
             <WebsiteSelect>
               <div className="flex text-gray-900 text-lg gap-2 cursor-pointer">
                 <div className="cursor-pointer items-center gap-2 flex">
                   <img
-                    src={websiteQuery.data.favicon || ""}
+                    src={query.data.favicon || ""}
                     className="w-6 h-6"
                   />
-                  <h2>{websiteQuery.data.name}</h2>
+                  <h2>{query.data.name}</h2>
                 </div>
               </div>
             </WebsiteSelect>

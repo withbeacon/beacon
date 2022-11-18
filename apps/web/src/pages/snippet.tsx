@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export default function Onboard() {
   const [copied, setCopied] = useState(false);
-  const idQuery = trpc.user.getId.useQuery();
+  const query = trpc.user.getId.useQuery();
 
   const containerSprings = useSpring({
     from: {
@@ -33,7 +33,7 @@ export default function Onboard() {
     setTimeout(() => setCopied(false), 1500);
   }
 
-  if (idQuery.isLoading) {
+  if (query.isLoading) {
     return <Loading />;
   }
 
@@ -43,7 +43,7 @@ export default function Onboard() {
     snippet = `<script
   defer 
   data-spark
-  data-id="${idQuery.data}"
+  data-id="${query.data}"
   src="${window.location.origin}/track.js"
 ></script>`;
   }

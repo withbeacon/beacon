@@ -7,7 +7,7 @@ import { trpc } from "~/utils";
 
 export function NoWebsite() {
   const [copied, setCopied] = useState(false);
-  const idQuery = trpc.user.getId.useQuery();
+  const query = trpc.user.getId.useQuery();
 
   function handleCopy() {
     navigator.clipboard.writeText(snippet);
@@ -16,7 +16,7 @@ export function NoWebsite() {
     setTimeout(() => setCopied(false), 1500);
   }
 
-  if (idQuery.isLoading) {
+  if (query.isLoading) {
     return <Loading />;
   }
 
@@ -26,7 +26,7 @@ export function NoWebsite() {
     snippet = `<script
   defer 
   data-spark
-  data-id="${idQuery.data}"
+  data-id="${query.data}"
   src="${window.location.origin}/track.js"
 ></script>`;
   }
@@ -40,7 +40,7 @@ export function NoWebsite() {
         </h1>
         <p className="text-gray-700 text-sm md:text-base space-lg">
           No worries, you can connect your website with spark by just embedding
-          the script below in your website.{" "}
+          the script below in your website.
         </p>
 
         <div className="bg-gray-900 text-gray-100 p-4 rounded-2xl font-mono relative text-sm text-left selection:bg-primary-900 md:text-base md:w-full">

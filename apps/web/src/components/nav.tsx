@@ -17,12 +17,12 @@ export function Nav() {
   const router = useRouter();
   const { data } = useSession();
   const { id } = router.query;
-  const websiteQuery = trpc.website.get.useQuery(id as string);
+  const query = trpc.website.get.useQuery(id as string);
 
   const baseIconStyles =
     "w-6 h-6 hover:opacity-90 cursor-pointer text-gray-800";
 
-  if (websiteQuery.isLoading) return <></>;
+  if (query.isLoading) return <></>;
 
   return (
     <nav className="flex items-center bg-gray-50 py-4 px-6 drop-shadow-sm justify-between">
@@ -30,17 +30,17 @@ export function Nav() {
         <Logo className="w-10 h-10" />
         <span>Spark</span>
 
-        {websiteQuery.data && (
+        {query.data && (
           <WebsiteSelect>
             <div className="flex items-center ml-3 gap-3">
               <div className="cursor-pointer items-center gap-3 hidden md:flex">
                 <span>{"/"}</span>
                 <img
-                  src={websiteQuery.data.favicon || ""}
-                  alt={websiteQuery.data.name}
+                  src={query.data.favicon || ""}
+                  alt={query.data.name}
                   className="w-5 h-5"
                 />
-                <h2>{websiteQuery.data.name}</h2>
+                <h2>{query.data.name}</h2>
                 <SelectIcon className="w-5 h-5 -ml-1" />
               </div>
             </div>

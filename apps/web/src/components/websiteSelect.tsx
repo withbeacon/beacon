@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { useActiveWebsite } from "~/hooks";
 
 export function WebsiteSelect({ children }: PropsWithChildren) {
-  const websitesQuery = trpc.website.all.useQuery().data || [];
+  const query = trpc.website.all.useQuery().data || [];
   const router = useRouter();
   const [active, setActive] = useActiveWebsite();
 
@@ -31,7 +31,7 @@ export function WebsiteSelect({ children }: PropsWithChildren) {
         </SelectPrimitive.ScrollUpButton>
         <SelectPrimitive.Viewport className="bg-white p-2 rounded-lg shadow-lg z-50">
           <SelectPrimitive.Group>
-            {websitesQuery?.map((website) => (
+            {query?.map((website) => (
               <SelectPrimitive.Item
                 disabled={website.id === active}
                 key={website.id}
