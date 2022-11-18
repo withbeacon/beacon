@@ -88,6 +88,22 @@ export const websiteRouter = router({
       },
     });
 
+    const sessions = await ctx.prisma.userSession.count({
+      where: {
+        website: {
+          id: input,
+        },
+      },
+    });
+
+    const pageViews = await ctx.prisma.pageView.count({
+      where: {
+        website: {
+          id: input,
+        },
+      },
+    });
+
     if (!website) {
       throw new TRPCError({
         code: "NOT_FOUND",
@@ -95,6 +111,138 @@ export const websiteRouter = router({
       });
     }
 
-    return website;
+    // get average duration of all visits of all pages
+    const avgDuration = await ctx.prisma.pageView.aggregate({
+      where: {
+        website: {
+          id: input,
+        },
+      },
+
+      _avg: {
+        visitDuration: true,
+      },
+    });
+
+    return {
+      sessions: sessions,
+      pageViews: pageViews,
+      avgDuration: avgDuration._avg.visitDuration,
+      ...website,
+    };
   }),
+
+  // return the sessions by the website id and between provided time
+  // if no time is provided, return this week's sessions
+  sessions: protectedProcedure
+    .input(
+      z.object({
+        websiteId: z.string(),
+        from: z.date().optional(),
+        to: z.date().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { websiteId } = input;
+      let { from, to } = input;
+
+      const website = await ctx.prisma.website.findUnique({
+        where: {
+          id: websiteId,
+        },
+      });
+
+      if (!website) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Website not found",
+        });
+      }
+
+      const sessions = await ctx.prisma.userSession.findMany({
+        where: {
+          website: {
+            id: websiteId,
+          },
+
+          createdAt: {
+            gte: from,
+            lte: to,
+          },
+        },
+
+        select: {
+          id: true,
+          createdAt: true,
+        },
+
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+
+      return sessions;
+    }),
+
+  pageViews: protectedProcedure
+    .input(
+      z.object({
+        websiteId: z.string(),
+        from: z.date().optional(),
+        to: z.date().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { websiteId } = input;
+      let { from, to } = input;
+
+      if (!from) {
+        const date = new Date();
+
+        date.setDate(date.getDate() - 7);
+        from = date;
+      }
+
+      if (!to) {
+        to = new Date();
+      }
+
+      const website = await ctx.prisma.website.findUnique({
+        where: {
+          id: websiteId,
+        },
+      });
+
+      if (!website) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Website not found",
+        });
+      }
+
+      // get number of sessions happend by each between the given time period
+      const pageViews = await ctx.prisma.pageView.findMany({
+        where: {
+          website: {
+            id: websiteId,
+          },
+
+          createdAt: {
+            gte: from,
+            lte: to,
+          },
+        },
+
+        select: {
+          id: true,
+          createdAt: true,
+        },
+
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+
+      return pageViews;
+    }),
 });

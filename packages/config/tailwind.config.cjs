@@ -13,6 +13,9 @@ module.exports = {
         gray: colors.neutral,
         primary: colors.orange,
       },
+      shadow: {
+        'soft-base': '0px 4px 46px 1px rgba(17, 18, 21, 0.05)',
+      }
     },
   },
   plugins: [require("tailwindcss-radix")],
