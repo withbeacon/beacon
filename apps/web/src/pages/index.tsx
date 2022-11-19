@@ -1,12 +1,12 @@
 import { Loading } from "@spark/ui";
 import { Nav, NoWebsite } from "~/components";
 
-import { useActiveWebsite } from "~/hooks";
 import { useRouter } from "next/router";
+import { useWebsite } from "~/store";
 import { trpc } from "~/utils";
 
 export default function Dashboard() {
-  const [id] = useActiveWebsite();
+  const [id] = useWebsite();
   const query = trpc.website.all.useQuery();
   const router = useRouter();
 

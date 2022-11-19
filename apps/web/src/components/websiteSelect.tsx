@@ -5,21 +5,21 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { cx } from "class-variance-authority";
 import { trpc } from "~/utils";
 import { useRouter } from "next/router";
-import { useActiveWebsite } from "~/hooks";
+import { useWebsite } from "~/store";
 
 export function WebsiteSelect({ children }: PropsWithChildren) {
   const query = trpc.website.all.useQuery().data || [];
   const router = useRouter();
-  const [active, setActive] = useActiveWebsite();
+  const [id, setId] = useWebsite();
 
   function handleSelectChange(value: string) {
-    setActive(value);
+    setId(value);
     router.push(`/dashboard/${value}`);
   }
 
   return (
     <SelectPrimitive.Root
-      defaultValue={active || undefined}
+      defaultValue={id || undefined}
       onValueChange={handleSelectChange}
     >
       <SelectPrimitive.Trigger asChild aria-label="Websites">
@@ -33,7 +33,7 @@ export function WebsiteSelect({ children }: PropsWithChildren) {
           <SelectPrimitive.Group>
             {query?.map((website) => (
               <SelectPrimitive.Item
-                disabled={website.id === active}
+                disabled={website.id === id}
                 key={website.id}
                 value={website.id}
                 className={cx(

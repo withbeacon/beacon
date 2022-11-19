@@ -2,7 +2,7 @@ import { ArrowUpIcon } from "@spark/ui";
 
 import { cx } from "class-variance-authority";
 import { trpc } from "~/utils";
-import { useActiveWebsite } from "~/hooks";
+import { useWebsite } from "~/store";
 
 interface StatProps {
   label: string;
@@ -30,10 +30,10 @@ function StatCard({ label, value, growth, description }: StatProps) {
 }
 
 export function Stats() {
-  const [websiteId] = useActiveWebsite();
-  const query = trpc.website.get.useQuery(websiteId || "");
+  const [id] = useWebsite();
+  const query = trpc.website.get.useQuery(id || "");
 
-  if (!websiteId) {
+  if (!id) {
     return <></>;
   }
 

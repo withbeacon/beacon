@@ -3,7 +3,7 @@ import { Loading } from "@spark/ui";
 
 import { useRouter } from "next/router";
 import { trpc } from "~/utils";
-import { useActiveWebsite } from "~/hooks";
+import { useWebsite } from "~/store";
 import { useEffect } from "react";
 import dynamic from "next/dynamic";
 
@@ -16,7 +16,7 @@ export default function Analytics() {
   const { id } = router.query;
   const query = trpc.website.get.useQuery(id as string);
 
-  const [, setId] = useActiveWebsite();
+  const [, setId] = useWebsite();
 
   useEffect(() => {
     if (id === null || query.data === null) {
