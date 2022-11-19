@@ -31,20 +31,20 @@ export function Nav() {
         <span>Spark</span>
 
         {query.data && (
-          <WebsiteSelect>
-            <div className="flex items-center ml-3 gap-3">
-              <div className="cursor-pointer items-center gap-3 hidden md:flex">
-                <span>{"/"}</span>
-                <img
-                  src={query.data.favicon || ""}
-                  alt={query.data.name}
-                  className="w-5 h-5"
-                />
-                <h2>{query.data.name}</h2>
+          <div className="flex items-center ml-3 gap-3">
+            <div className="cursor-pointer items-center gap-3 hidden md:flex">
+              <span>{"/"}</span>
+              <img
+                src={query.data.favicon || ""}
+                alt={query.data.name}
+                className="w-5 h-5"
+              />
+              <h2>{query.data.name}</h2>
+              <WebsiteSelect>
                 <SelectIcon className="w-5 h-5 -ml-1" />
-              </div>
+              </WebsiteSelect>
             </div>
-          </WebsiteSelect>
+          </div>
         )}
       </div>
 
