@@ -5,8 +5,7 @@ import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { EyeIcon, UserIcon } from "@spark/ui";
 
 import { trpc, date, diffInDays, formatDate } from "~/utils";
-import { useWebsite, modeAtom } from "~/store";
-import { useAtom } from "jotai";
+import { useWebsite, useMode } from "~/store";
 import { cva } from "class-variance-authority";
 
 interface Props {
@@ -19,7 +18,7 @@ export default function Chart({
   to = date(),
 }: Props) {
   const [id] = useWebsite();
-  const [mode, setMode] = useAtom(modeAtom);
+  const [mode, setMode] = useMode();
 
   const query = trpc.website[mode].useQuery({
     websiteId: id as string,
