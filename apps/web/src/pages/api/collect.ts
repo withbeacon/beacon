@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@spark/db";
 import { getSession, parseAgent } from "~/utils";
 import { getServerSession } from "@spark/auth";
@@ -46,8 +47,16 @@ export default async function handler(
   res.setHeader("Access-Control-Allow-Methods", "POST");
   res.setHeader("Accept", "application/json");
 
-  const { id, url, visitTime, referrer, title, events, userAgent, ...body }: BodyParams =
-    JSON.parse(req.body);
+  const {
+    id,
+    url,
+    visitTime,
+    referrer,
+    title,
+    events,
+    userAgent,
+    ...body
+  }: BodyParams = JSON.parse(req.body);
 
   if (!id) {
     return res.status(400).json("Missing data in the body");
@@ -86,9 +95,17 @@ export default async function handler(
         },
       });
     } catch (err) {
+      if (err instanceof Prisma.PrismaClientKnownRequestError) {
+        if (err.code === "P2025") {
+          res.status(400).json({ error: "Invalid user id" });
+          return;
+        }
+      }
+
       res
         .status(500)
         .json({ error: "Whoops something wen't wrong at our end, sorry!" });
+
       return;
     }
   }
