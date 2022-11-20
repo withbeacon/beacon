@@ -4,13 +4,13 @@ export const { userAgent } = navigator;
 export const { referrer } = document;
 export const screen = `${width}x${height}`;
 
-const { currentScript } = document;
+export const { currentScript: script } = document;
 
-if (!currentScript) {
+if (!script) {
   throw new Error("Unable to get the spark script");
 }
 
-export const id = currentScript.getAttribute("data-id");
+export const id = script.getAttribute("data-id");
 export const title =
-  currentScript.getAttribute("data-website-name") ?? document.title;
+  script.getAttribute("data-website-name") ?? document.title;
 
