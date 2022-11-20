@@ -2,11 +2,9 @@ import {
   url,
   id,
   screen,
-  device,
-  os,
   referrer,
   title,
-  browser,
+  userAgent,
 } from "./client";
 import { COLLECT_API } from "./constants";
 
@@ -38,11 +36,9 @@ document.addEventListener("visibilitychange", () => {
       url,
       visitTime,
       screen,
-      device,
-      os,
       referrer,
+      userAgent,
       title,
-      browser,
       events,
     };
 
@@ -81,7 +77,6 @@ eventElems.forEach((evt) => {
 });
 
 window.addEventListener("blur", async () => {
-  console.log({ events });
   paused = true;
 });
 

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@spark/db";
-import { getSession } from "~/utils";
+import { getSession, parseAgent } from "~/utils";
 import { getServerSession } from "@spark/auth";
 import { load } from "cheerio";
 import cuid from "cuid";
@@ -11,10 +11,9 @@ type BodyParams = {
   visitTime: number; // in milliseconds
   screen: string; // screen size (width x height)
   device: string; // mobile or desktop
-  os: string;
+  userAgent: string;
   referrer: string;
   title: string;
-  browser?: string;
   events?: Events;
 };
 
@@ -34,14 +33,6 @@ function isExpired(expiredDate: Date) {
   return new Date() > expiredDate;
 }
 
-// what this does currently:
-// gets the website id and creates the session if not exists
-// then does all the tracking stuff, and deletes the sessiona after 24h.
-
-// what we want to do now:
-// get the user id, crate the website if not exists and do all the
-// remaining stuff the same way as before.
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -55,7 +46,7 @@ export default async function handler(
   res.setHeader("Access-Control-Allow-Methods", "POST");
   res.setHeader("Accept", "application/json");
 
-  const { id, url, visitTime, referrer, title, events, ...body }: BodyParams =
+  const { id, url, visitTime, referrer, title, events, userAgent, ...body }: BodyParams =
     JSON.parse(req.body);
 
   if (!id) {
@@ -81,6 +72,7 @@ export default async function handler(
 
   const auth = await getServerSession({ req, res });
   const { name, favicon } = await getPageDetails(url, auth?.user?.name || "");
+  const { os, browser, device } = parseAgent(userAgent);
 
   if (website === null) {
     try {
@@ -127,8 +119,11 @@ export default async function handler(
 
     await prisma.userSession.create({
       data: {
-        id: sessionId,
         ...body,
+        id: sessionId,
+        os,
+        browser,
+        device,
         expires,
         website: {
           connect: {
