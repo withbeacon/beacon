@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import type { PropsWithChildren } from "react";
 import type { Mode } from "~/store";
-import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { Bar, XAxis, Tooltip, ResponsiveContainer, BarChart } from "recharts";
 import { EyeIcon, UserIcon } from "@spark/ui";
 
 import { trpc, date, diffInDays, formatDate } from "~/utils";
@@ -64,10 +64,10 @@ export default function Chart({
 
   return (
     <div className="w-full h-full px-6 mb-6">
-      <div className="relative w-full h-full pt-4 px-4 rounded-2xl bg-gray-50 border border-gray-200 shadow-soft-base">
-        <>
-          <div className="absolute top-5 right-6 flex gap-4 z-[2]">
-            <div className="flex items-center rounded-lg">
+      <div className="relative h-96 w-full pt-4 px-4 rounded-2xl bg-gray-50 border border-gray-200 shadow-soft-base">
+        <div className="h-full w-full">
+          <>
+            <div className="flex justify-end items-center rounded-lg">
               <ChartButton
                 active={mode === "pageViews"}
                 onClick={() => setMode("pageViews")}
@@ -83,21 +83,63 @@ export default function Chart({
                 Sessions
               </ChartButton>
             </div>
-          </div>
-          <div className="h-full w-full">
-            <ResponsiveContainer height="100%" width="100%">
-              <BarChart width={500} height={200} data={data}>
-                <XAxis axisLine={false} tickLine={false} dataKey="name" />
+            <ResponsiveContainer height={320} width="100%">
+              <BarChart width={50} height={200} data={data}>
+                <defs>
+                  <linearGradient
+                    id="bar-background"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop offset="5%" stopColor="#F97316" stopOpacity={0.2} />
+                    <stop offset="95%" stopColor="#F97316" stopOpacity={0.05} />
+                  </linearGradient>
+
+                  <linearGradient
+                    id="bar-stroke"
+                    x1="50%"
+                    y1="100%"
+                    x2="50%"
+                    y2="0%"
+                  >
+                    <stop
+                      offset="1.5%"
+                      style={{
+                        stopColor: "rgba(249, 115, 22)",
+                        stopOpacity: 0,
+                      }}
+                    />
+                    <stop
+                      offset="0%"
+                      style={{
+                        stopColor: "rgba(249, 115, 22)",
+                        stopOpacity: 1,
+                      }}
+                    />
+                  </linearGradient>
+                </defs>
+                <XAxis
+                  axisLine={{ stroke: "hsl(0, 0%, 90%)" }}
+                  dataKey="name"
+                  tickLine={false}
+                />
                 <Tooltip
                   content={<BarTooltip mode={mode} />}
                   wrapperStyle={{ outline: "none", zIndex: 1 }}
                   cursor={{ fill: "transparent" }}
                 />
-                <Bar radius={8} dataKey="value" fill="hsl(32, 100%, 75%)" />
+                <Bar
+                  radius={[8, 8, 0, 0]}
+                  dataKey="value"
+                  fill="url(#bar-background)"
+                  stroke="url(#bar-stroke)"
+                />
               </BarChart>
             </ResponsiveContainer>
-          </div>
-        </>
+          </>
+        </div>
       </div>
     </div>
   );
