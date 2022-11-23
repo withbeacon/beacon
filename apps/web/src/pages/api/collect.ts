@@ -49,7 +49,7 @@ export default async function handler(
 
   const {
     id,
-    url,
+    url: href,
     visitTime,
     referrer,
     title,
@@ -62,8 +62,9 @@ export default async function handler(
     return res.status(400).json("Missing data in the body");
   }
 
-  const host = new URL(url).hostname;
-  let pathname = new URL(url).pathname;
+  const url = new URL(href).origin + new URL(href).pathname;
+  const host = new URL(href).hostname;
+  let pathname = new URL(href).pathname;
   pathname = pathname.replace("/", "");
 
   const queryParams: QueryParams = Object.fromEntries(
@@ -80,7 +81,7 @@ export default async function handler(
   });
 
   const auth = await getServerSession({ req, res });
-  const { name, favicon } = await getPageDetails(url, auth?.user?.name || "");
+  const { name, favicon } = await getPageDetails(href, auth?.user?.name || "");
   const { os, browser, device } = parseAgent(userAgent);
 
   if (website === null) {
