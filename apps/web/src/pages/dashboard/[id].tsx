@@ -1,4 +1,4 @@
-import { Nav, Stats } from "~/components";
+import { Nav, Stats, Metrics } from "~/components";
 import { Loading } from "@spark/ui";
 
 import { useRouter } from "next/router";
@@ -14,24 +14,24 @@ const Chart = dynamic(() => import("~/components/chart"), {
 export default function Analytics() {
   const router = useRouter();
   const { id } = router.query;
-  const query = trpc.website.get.useQuery(id as string);
+  const { isLoading, isError, data, error } = trpc.website.get.useQuery(id as string);
 
-  const [, setId] = useWebsite();
+  const [_, setId] = useWebsite();
 
   useEffect(() => {
-    if (id === null || query.data === null) {
+    if (id === null || data === null) {
       return;
     }
 
     setId(id as string);
   }, [id]);
 
-  if (query.isLoading) {
+  if (isLoading) {
     return <Loading />;
   }
 
-  if (query.isError) {
-    if (query.error.data?.code === "NOT_FOUND") {
+  if (isError) {
+    if (error.data?.code === "NOT_FOUND") {
       router.push("/");
       return <></>;
     }
@@ -40,10 +40,11 @@ export default function Analytics() {
   }
 
   return (
-    <div className="flex flex-col h-screen">
+    <div>
       <Nav />
       <Stats />
       <Chart />
+      <Metrics />
     </div>
   );
 }
