@@ -7,7 +7,7 @@ import { trpc } from "~/utils";
 export function PagesMetrics() {
   const [id] = useWebsite();
 
-  const query = trpc.website.topPages.useQuery({
+  const query = trpc.website.pages.useQuery({
     websiteId: id as string,
   });
 
