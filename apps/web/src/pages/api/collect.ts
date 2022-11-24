@@ -18,17 +18,9 @@ type BodyParams = {
   events?: Events;
 };
 
-type KeyValuePairs = {
-  [key: string]: string;
-};
+type Events = Record<string, Record<string, boolean>>;
 
-type Events = {
-  [key: string]: {
-    [key: string]: boolean;
-  };
-};
-
-type QueryParams = KeyValuePairs;
+type QueryParams = Record<string, string>;
 
 function isExpired(expiredDate: Date) {
   return new Date() > expiredDate;
@@ -62,14 +54,9 @@ export default async function handler(
     return res.status(400).json("Missing data in the body");
   }
 
-  const url = new URL(href).origin + new URL(href).pathname;
-  const host = new URL(href).hostname;
-  let pathname = new URL(href).pathname;
-  pathname = pathname.replace("/", "");
-
-  const queryParams: QueryParams = Object.fromEntries(
-    new URLSearchParams(pathname)
-  );
+  const { origin, pathname, hostname: host, searchParams } = new URL(href);
+  const url = origin + pathname;
+  const queryParams: QueryParams = Object.fromEntries(searchParams);
 
   const sessionId = getSession(req, host);
 
