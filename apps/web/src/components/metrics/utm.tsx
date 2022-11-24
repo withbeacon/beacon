@@ -40,7 +40,7 @@ export function UtmMetrics() {
 
   return (
     <MetricsContainer>
-      <MetricsHeader title="Sources" options={options} />
+      <MetricsHeader title="UTM" options={options} />
       <table>
         <tbody className="relative flex flex-col gap-4 w-full h-full">
           {Object.entries(query.data)
