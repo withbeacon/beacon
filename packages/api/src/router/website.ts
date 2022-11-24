@@ -381,4 +381,83 @@ export const websiteRouter = router({
 
       return params || {};
     }),
+
+  events: protectedProcedure
+    .input(
+      z.object({
+        websiteId: z.string(),
+        from: z.date().optional(),
+        to: z.date().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { websiteId } = input;
+      let { from, to } = input;
+
+      if (!from) {
+        const date = new Date();
+
+        date.setDate(date.getDate() - 7);
+        from = date;
+      }
+
+      if (!to) {
+        to = new Date();
+      }
+
+      const website = await ctx.prisma.website.findUnique({
+        where: {
+          id: websiteId,
+        },
+      });
+
+      if (!website) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Website not found",
+        });
+      }
+
+      const group = await ctx.prisma.pageView.findMany({
+        where: {
+          website: {
+            id: websiteId,
+          },
+
+          createdAt: {
+            gte: from,
+            lte: to,
+          },
+        },
+
+        select: {
+          events: true,
+        },
+      });
+
+      let evts: Record<string, { eventType: string; times: number }> = {};
+
+      for (const page of group) {
+        const { events } = page;
+
+        if (events === null || typeof events !== "object") {
+          break;
+        }
+
+        Object.entries(events).forEach(([key, value]) => {
+          if (!value || typeof value !== "object") {
+            return;
+          }
+
+          const times = (evts[key]?.times || 0) + 1;
+
+          evts[key] = {
+            eventType: Object.keys(value)[0] as string,
+            times,
+          };
+        });
+      }
+
+      return evts || {};
+    }),
 });
