@@ -46,7 +46,7 @@ export function UtmMetrics() {
           {Object.entries(query.data)
             .sort(([, a], [, b]) => b - a)
             .map(([key, value]) => (
-              <tr className="relative flex justify-between text-lg px-4 py-2 rounded-xl overflow-hidden">
+              <tr className="relative flex justify-between text-lg px-4 py-2 rounded-xl overflow-hidden" key={key}>
                 <td className="z-[1]">{key}</td>
                 <td className="z-[1]">{value}</td>
                 <div

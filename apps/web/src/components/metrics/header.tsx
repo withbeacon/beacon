@@ -18,6 +18,7 @@ export function MetricsHeader({ title, options }: Props) {
       <div className="ml-auto flex gap-4 text-base font-medium">
         {options && options.map(({ active, title, onClick }) => (
           <button
+            key={title}
             onClick={() => onClick()}
             className={cx(
               active ? "text-gray-800" : "text-gray-600 font-normal",
