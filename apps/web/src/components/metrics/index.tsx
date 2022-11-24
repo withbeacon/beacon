@@ -1,6 +1,7 @@
 import { PagesMetrics } from "./pages";
 import { UtmMetrics } from "./utm";
 import { EventsMetrics } from "./events";
+import { CountriesMetrics } from "./countries";
 import { BrowsersMetrics } from "./browsers";
 import { DevicesMetrics } from "./devices";
 
@@ -10,6 +11,8 @@ export function Metrics() {
       <PagesMetrics />
       <UtmMetrics />
       <EventsMetrics />
+      <CountriesMetrics />
+      <BrowsersMetrics />
       <DevicesMetrics />
     </div>
   )
