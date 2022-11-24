@@ -1,5 +1,3 @@
-import type { PropsWithChildren } from "react";
-
 import { cx } from "class-variance-authority";
 
 interface Option {
@@ -13,7 +11,7 @@ interface Props {
   options?: Option[];
 }
 
-export function MetricsHeader({ children, title, options }: PropsWithChildren) {
+export function MetricsHeader({ title, options }: Props) {
   return (
     <div className="flex items-center w-full">
       <h2 className="text-lg md:text-xl font-semibold text-gray-800">{title}</h2>
