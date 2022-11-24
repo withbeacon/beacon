@@ -246,7 +246,7 @@ export const websiteRouter = router({
       return pageViews;
     }),
 
-  topPages: protectedProcedure
+  pages: protectedProcedure
     .input(
       z.object({
         websiteId: z.string(),
@@ -301,14 +301,84 @@ export const websiteRouter = router({
 
       let views: Record<string, number> = {};
 
-      for (const item of group) {
-        if (!views[item.url]) {
-          views[item.url] = 0;
-        }
-
-        views[item.url] += 1;
+      for (let item of group) {
+        item.url = new URL(item.url).pathname;
+        item.url in views ? views[item.url]++ : (views[item.url] = 1);
       }
 
       return views;
+    }),
+
+  sources: protectedProcedure
+    .input(
+      z.object({
+        websiteId: z.string(),
+        utmParam: z.string(),
+        from: z.date().optional(),
+        to: z.date().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { websiteId } = input;
+      let { from, to, utmParam } = input;
+
+      if (!from) {
+        const date = new Date();
+
+        date.setDate(date.getDate() - 7);
+        from = date;
+      }
+
+      if (!to) {
+        to = new Date();
+      }
+
+      const website = await ctx.prisma.website.findUnique({
+        where: {
+          id: websiteId,
+        },
+      });
+
+      if (!website) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Website not found",
+        });
+      }
+
+      const group = await ctx.prisma.pageView.findMany({
+        where: {
+          website: {
+            id: websiteId,
+          },
+
+          createdAt: {
+            gte: from,
+            lte: to,
+          },
+        },
+
+        select: {
+          queryParams: true,
+        },
+      });
+
+      let params: Record<string, number> = {};
+
+      for (const page of group) {
+        const { queryParams } = page;
+
+        if (queryParams === null) {
+          return;
+        }
+
+        Object.entries(queryParams).forEach(([param, value]) => {
+          if (param === utmParam) {
+            !params[value] ? (params[value] = 1) : (params[value] += 1);
+          }
+        });
+      }
+
+      return params || {};
     }),
 });
