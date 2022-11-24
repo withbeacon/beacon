@@ -1,6 +1,7 @@
 import { PagesMetrics } from "./pages";
 import { UtmMetrics } from "./utm";
 import { EventsMetrics } from "./events";
+import { BrowsersMetrics } from "./browsers";
 
 export function Metrics() {
   return (
