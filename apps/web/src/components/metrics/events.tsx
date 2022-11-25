@@ -30,10 +30,10 @@ export function EventsMetrics() {
               >
                 <td className="z-[1]">{key}</td>
                 <td className="z-[1]">{value.times}</td>
-                <div
+                <td
                   className="absolute top-0 left-0 bg-primary-200 z-0 h-full"
                   style={{ width: `${percent(value.times)}%` }}
-                ></div>
+                ></td>
               </tr>
             ))}
         </tbody>

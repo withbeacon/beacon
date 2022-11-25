@@ -27,11 +27,11 @@ export function BrowsersMetrics() {
               <tr className="relative flex justify-between text-lg px-4 py-2 rounded-xl overflow-hidden" key={key}>
                 <td className="z-[1]">{key}</td>
                 <td className="z-[1]">{value}</td>
-                <div
+                <td
                   className="absolute top-0 left-0 bg-primary-200 z-0 h-full"
                   style={{ width: `${percent(value)}%` }}
-                ></div>
-              </tr>
+                ></td>
+             </tr>
             ))}
         </tbody>
       </table>
