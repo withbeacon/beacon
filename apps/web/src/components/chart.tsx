@@ -20,7 +20,7 @@ export default function Chart({
   const [id] = useWebsite();
   const [mode, setMode] = useMode();
 
-  const query = trpc.website[mode].useQuery({
+  const query = trpc.website.metrics.useQuery({
     websiteId: id as string,
     from,
     to,
@@ -34,7 +34,7 @@ export default function Chart({
     )
   );
 
-  const days = query.data?.reduce((rest, session) => {
+  const days = query.data?.[mode].reduce((rest, session) => {
     const date = new Date(session.createdAt);
     const day = formatDate(date);
 
@@ -189,7 +189,7 @@ const buttonStyles = cva("flex items-center gap-2 px-4 py-2", {
     },
     active: {
       true: "bg-gray-800 text-gray-100",
-      false: "bg-gray-100 text-gray-800",
+      false: "text-gray-800",
     },
   },
 });
