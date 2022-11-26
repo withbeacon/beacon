@@ -12,6 +12,7 @@ Spark is an analytics tool that you always wanted to use, it's minimal, fast and
 # Monorepo
 
 ## /apps
+
 - `web`: The spark web app.
 
 ## /packages
@@ -19,6 +20,6 @@ Spark is an analytics tool that you always wanted to use, it's minimal, fast and
 - `ui`: Reusable components for react
 - `config`: Config for tailwind, postcss, etc for whole project.
 - `auth`: Next auth related configs and util functions
-- `db`: Prisma config and client 
+- `db`: Prisma config and client
 - `tracker`: The source code for tracker script
 - `api`: TRPC api routes

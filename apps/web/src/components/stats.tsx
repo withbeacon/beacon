@@ -14,14 +14,14 @@ interface StatProps {
 function StatCard({ label, value, growth, description }: StatProps) {
   return (
     <div className="flex flex-col p-4">
-      <span className="text-sm md:text-base text-gray-500">{label}</span>
+      <span className="text-sm text-gray-500 md:text-base">{label}</span>
 
-      <div className="flex justify-between w-full" title={description}>
-        <h2 className="text-3xl font-bold mb-2 md:text-4xl">{value}</h2>
-        <div className="flex items-center gap-2 px-3  border border-gray-900 rounded-full h-8 max-w-fit">
+      <div className="flex w-full justify-between" title={description}>
+        <h2 className="mb-2 text-3xl font-bold md:text-4xl">{value}</h2>
+        <div className="flex h-8 max-w-fit items-center  gap-2 rounded-full border border-gray-900 px-3">
           <span className="text-sm md:text-base">{growth}%</span>
           <ArrowUpIcon
-            className={cx("w-4 h-4", growth < 0 ? "rotate-180" : "rotate-0")}
+            className={cx("h-4 w-4", growth < 0 ? "rotate-180" : "rotate-0")}
           />
         </div>
       </div>
@@ -83,7 +83,7 @@ export function Stats() {
   ];
 
   return (
-    <div className="w-full grid grid-cols-1 grid-rows-3 md:grid-cols-3 md:grid-rows-1 py-2 px-4 text-gray-900 gap-4">
+    <div className="grid w-full grid-cols-1 grid-rows-3 gap-4 py-2 px-4 text-gray-900 md:grid-cols-3 md:grid-rows-1">
       {stats.map((stat) => (
         <StatCard {...stat} key={stat.label} />
       ))}

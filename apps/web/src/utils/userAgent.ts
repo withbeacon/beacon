@@ -11,17 +11,17 @@ export function parseAgent(agent: string): ParsedAgent {
     os: getOs(agent),
     browser: getBrowser(agent),
     device: getDevice(agent),
-  }
+  };
 }
 
 function getOs(agent: string): string {
   const indexOf = (os: string): boolean => agent.indexOf(os) > -1;
 
   const operatingSystems = {
-    "Windows": "Windows",
-    "Mac": "MacOS",
-    "X11": "Linux",
-  }
+    Windows: "Windows",
+    Mac: "MacOS",
+    X11: "Linux",
+  };
 
   for (const [os, name] of Object.entries(operatingSystems)) {
     if (indexOf(os)) {

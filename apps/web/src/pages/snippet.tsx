@@ -49,34 +49,34 @@ export default function Onboard() {
   }
 
   return (
-    <div className="h-screen w-screen grid place-items-center">
+    <div className="grid h-screen w-screen place-items-center">
       <animated.div
-        className="flex flex-col max-w-lg px-6 md:p-0 items-start gap-6"
+        className="flex max-w-lg flex-col items-start gap-6 px-6 md:p-0"
         style={{ ...containerSprings }}
       >
         <div className="flex items-center text-gray-800">
-          <Logo className="-mx-2 -my-4 w-16 h-16" />
-          <h2 className="text-2xl md:text-3xl font-bold">Spark</h2>
+          <Logo className="-mx-2 -my-4 h-16 w-16" />
+          <h2 className="text-2xl font-bold md:text-3xl">Spark</h2>
         </div>
 
-        <h1 className="text-xl text-gray-600 font-semibold md:text-2xl">
+        <h1 className="text-xl font-semibold text-gray-600 md:text-2xl">
           Just copy and paste this snippet to any of your website{" "}
           <span className="text-gray-800">and that&apos;s it!</span>
         </h1>
 
-        <pre className="bg-gray-900 text-gray-100 w-full p-4 rounded-2xl font-mono relative selection:bg-primary-900 text-sm md:text-base">
+        <pre className="relative w-full rounded-2xl bg-gray-900 p-4 font-mono text-sm text-gray-100 selection:bg-primary-900 md:text-base">
           <Button className="absolute right-4 top-4" onClick={handleCopy}>
             {copied ? (
               <ClipboardCheckIcon
                 className={cx(
-                  "w-5 h-5 md:w-6 w-6",
+                  "h-5 w-5 w-6 md:w-6",
                   copied ? "text-green-300" : "text-gray-100"
                 )}
               />
             ) : (
               <ClipboardIcon
                 className={cx(
-                  "w-5 h-5 md:w-6 w-6",
+                  "h-5 w-5 w-6 md:w-6",
                   copied ? "text-green-300" : "text-gray-100"
                 )}
               />

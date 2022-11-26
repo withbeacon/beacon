@@ -39,52 +39,49 @@ export function MobileMenu({ children }: PropsWithChildren) {
 
       <animated.div
         className={cx(
-          "absolute top-0 left-0 w-screen h-screen overflow-hidden block md:hidden",
+          "absolute top-0 left-0 block h-screen w-screen overflow-hidden md:hidden",
           open ? "bg-gray-900/30" : ""
         )}
         style={{ ...parentSprings }}
       >
         <div
           className={cx(
-            "absolute bottom-0 w-screen left-0 p-6 bg-gray-50 rounded-t-2xl flex flex-col gap-6 transition duration-500 drop-shadow-md",
+            "absolute bottom-0 left-0 flex w-screen flex-col gap-6 rounded-t-2xl bg-gray-50 p-6 drop-shadow-md transition duration-500",
             open ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
           )}
         >
           <div className="relative">
             <button
-              className="grid pt-2 place-items-center outline-none"
+              className="grid place-items-center pt-2 outline-none"
               onClick={() => setOpen(false)}
             >
-              <CrossIcon className="text-gray-500 absolute right-0 w-6 h-6" />
+              <CrossIcon className="absolute right-0 h-6 w-6 text-gray-500" />
             </button>
           </div>
-          <div className="flex text-gray-900 text-lg gap-2 cursor-pointer">
+          <div className="flex cursor-pointer gap-2 text-lg text-gray-900">
             <SearchIcon />
             <p>Search Analytics</p>
           </div>
           <Feedback>
-            <div className="flex text-gray-900 text-lg gap-2 cursor-pointer">
+            <div className="flex cursor-pointer gap-2 text-lg text-gray-900">
               <HelpIcon />
               <p>Share Feedback</p>
             </div>
           </Feedback>
           {query.data && (
             <WebsiteSelect>
-              <div className="flex text-gray-900 text-lg gap-2 cursor-pointer">
-                <div className="cursor-pointer items-center gap-2 flex">
-                  <img
-                    src={query.data.favicon || ""}
-                    className="w-6 h-6"
-                  />
+              <div className="flex cursor-pointer gap-2 text-lg text-gray-900">
+                <div className="flex cursor-pointer items-center gap-2">
+                  <img src={query.data.favicon || ""} className="h-6 w-6" />
                   <h2>{query.data.name}</h2>
                 </div>
               </div>
             </WebsiteSelect>
           )}
-          <div className="flex text-gray-900 text-lg gap-2 cursor-pointer">
+          <div className="flex cursor-pointer gap-2 text-lg text-gray-900">
             {data?.user && (
               <img
-                className="rounded-full w-7 h-7"
+                className="h-7 w-7 rounded-full"
                 src={data?.user?.image || ""}
                 alt={data?.user?.name || "Spark User"}
               />

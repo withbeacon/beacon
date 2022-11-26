@@ -14,7 +14,9 @@ const Chart = dynamic(() => import("~/components/chart"), {
 export default function Analytics() {
   const router = useRouter();
   const { id } = router.query;
-  const { isLoading, isError, data, error } = trpc.website.get.useQuery(id as string);
+  const { isLoading, isError, data, error } = trpc.website.get.useQuery(
+    id as string
+  );
 
   const [_, setId] = useWebsite();
 

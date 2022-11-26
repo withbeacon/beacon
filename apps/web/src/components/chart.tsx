@@ -63,11 +63,11 @@ export default function Chart({
   if (!query.data) return null;
 
   return (
-    <div className="w-full h-full px-6 mb-6">
-      <div className="relative h-96 w-full pt-4 px-4 rounded-2xl bg-gray-50 border border-gray-200 shadow-soft-base">
+    <div className="mb-6 h-full w-full px-6">
+      <div className="shadow-soft-base relative h-96 w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 pt-4">
         <div className="h-full w-full">
           <>
-            <div className="flex justify-end items-center rounded-lg">
+            <div className="flex items-center justify-end rounded-lg">
               <ChartButton
                 active={mode === "pageViews"}
                 onClick={() => setMode("pageViews")}
@@ -166,7 +166,7 @@ function BarTooltip({
     const data = payload[0];
 
     return (
-      <div className="bg-white shadow rounded p-2 outline-none border-none flex flex-col gap-2">
+      <div className="flex flex-col gap-2 rounded border-none bg-white p-2 shadow outline-none">
         <div className="flex gap-2">
           {mode === "pageViews" ? <EyeIcon /> : <UserIcon />}
           <span>{data?.value}</span>

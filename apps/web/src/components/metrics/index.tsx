@@ -26,7 +26,7 @@ export function Metrics() {
   const { pages, events, countries, browsers, devices, queryParams } = data;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 auto-rows-auto wrap gap-4 mx-6">
+    <div className="wrap mx-6 grid auto-rows-auto grid-cols-1 gap-4 md:grid-cols-2">
       {pages && <PagesMetrics data={pages} />}
       {queryParams && <UtmMetrics data={queryParams} />}
       {countries && <CountriesMetrics data={countries} />}

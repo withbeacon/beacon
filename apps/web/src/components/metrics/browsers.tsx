@@ -13,24 +13,24 @@ export function BrowsersMetrics({ data }: Props) {
     <MetricsContainer>
       <MetricsHeader title="Top Browsers" />
       <table>
-        <tbody className="relative flex flex-col gap-4 w-full h-full">
+        <tbody className="relative flex h-full w-full flex-col gap-4">
           {Object.entries(data)
             .sort(([, a], [, b]) => b - a)
             .map(([key, value]) => (
-              <tr className="relative flex justify-between text-lg px-4 py-2 rounded-xl overflow-hidden" key={key}>
+              <tr
+                className="relative flex justify-between overflow-hidden rounded-xl px-4 py-2 text-lg"
+                key={key}
+              >
                 <td className="z-[1]">{key}</td>
                 <td className="z-[1]">{value}</td>
                 <td
-                  className="absolute top-0 left-0 bg-primary-200 z-0 h-full"
+                  className="absolute top-0 left-0 z-0 h-full bg-primary-200"
                   style={{ width: `${percent(value)}%` }}
                 ></td>
-             </tr>
+              </tr>
             ))}
         </tbody>
       </table>
     </MetricsContainer>
   );
 }
-
-
-

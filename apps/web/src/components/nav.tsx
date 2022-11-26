@@ -25,30 +25,30 @@ export function Nav() {
   if (query.isLoading) return <></>;
 
   return (
-    <nav className="flex items-center bg-gray-50 py-4 px-6 drop-shadow-sm justify-between">
-      <div className="flex items-center text-gray-800 text-xl font-medium">
-        <Logo className="w-10 h-10" />
+    <nav className="flex items-center justify-between bg-gray-50 py-4 px-6 drop-shadow-sm">
+      <div className="flex items-center text-xl font-medium text-gray-800">
+        <Logo className="h-10 w-10" />
         <span>Spark</span>
 
         {query.data && (
-          <div className="flex items-center ml-3 gap-3">
-            <div className="cursor-pointer items-center gap-3 hidden md:flex">
+          <div className="ml-3 flex items-center gap-3">
+            <div className="hidden cursor-pointer items-center gap-3 md:flex">
               <span>{"/"}</span>
               <img
                 src={query.data.favicon || ""}
                 alt={query.data.name}
-                className="w-5 h-5"
+                className="h-5 w-5"
               />
               <h2>{query.data.name}</h2>
               <WebsiteSelect>
-                <SelectIcon className="w-5 h-5 -ml-1" />
+                <SelectIcon className="-ml-1 h-5 w-5" />
               </WebsiteSelect>
             </div>
           </div>
         )}
       </div>
 
-      <div className="hidden md:flex items-center gap-5">
+      <div className="hidden items-center gap-5 md:flex">
         <SearchIcon aria-label="Search" className={baseIconStyles} />
         <SettingsIcon aria-label="Settings" className={baseIconStyles} />
         <Feedback>
@@ -56,7 +56,7 @@ export function Nav() {
         </Feedback>
         {data?.user && (
           <img
-            className="rounded-full w-7 h-7"
+            className="h-7 w-7 rounded-full"
             src={data?.user?.image || ""}
             alt={data?.user?.name || "Spark User"}
           />

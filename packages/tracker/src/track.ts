@@ -1,11 +1,4 @@
-import {
-  url,
-  id,
-  screen,
-  referrer,
-  title,
-  userAgent,
-} from "./client";
+import { url, id, screen, referrer, title, userAgent } from "./client";
 import { COLLECT_API } from "./constants";
 
 if (!id) {

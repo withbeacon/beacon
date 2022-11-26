@@ -20,7 +20,7 @@ export default function Dashboard() {
 
   if (query.data.length === 0) {
     return (
-      <div className="flex flex-col h-screen">
+      <div className="flex h-screen flex-col">
         <Nav />
         <NoWebsite />
       </div>

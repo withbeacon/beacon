@@ -11,6 +11,4 @@ if (!script) {
 }
 
 export const id = script.getAttribute("data-id");
-export const title =
-  script.getAttribute("data-website-name") ?? document.title;
-
+export const title = script.getAttribute("data-website-name") ?? document.title;
