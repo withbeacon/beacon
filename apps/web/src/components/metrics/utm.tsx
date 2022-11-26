@@ -4,7 +4,7 @@ import { MetricsHeader } from "./header";
 import { useState } from "react";
 
 interface Props {
-  data: Record<string, number>;
+  data: Record<string, Record<string, number>>;
 }
 
 export function UtmMetrics({ data }: Props) {
