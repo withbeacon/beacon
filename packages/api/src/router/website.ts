@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { Prisma } from "@prisma/client";
 
 import { router, protectedProcedure } from "../trpc";
 import { load } from "cheerio";
