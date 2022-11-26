@@ -207,7 +207,7 @@ export const websiteRouter = router({
       let countries: Record<string, number> = {};
       let pages: Record<string, number> = {};
       let events: Record<string, number> = {};
-      let queryParams: Record<string, number> = {};
+      let queryParams: Record<string, Record<string, number>> = {};
 
       sessions.forEach((session) => {
         const { device, browser, country } = session;
@@ -243,10 +243,15 @@ export const websiteRouter = router({
         }
 
         if (typeof params === "object" && params !== null) {
-          Object.keys(params).forEach((param) => {
-            queryParams[param]
-              ? (queryParams[param] += 1)
-              : (queryParams[param] = 1);
+          Object.entries(params).forEach(([param, val]) => {
+            if (val && typeof val === "string") {
+              queryParams[param] = queryParams[param] || {};
+
+              // avoid typechecking the following line as it just works, maybe
+              // will look for better solution later..
+              // @ts-ignore
+              queryParams[param][val] = queryParams[param][val] + 1 || 1;
+            }
           });
         }
       });
