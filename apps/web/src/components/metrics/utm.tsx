@@ -2,22 +2,16 @@ import { MetricsContainer } from "./container";
 import { MetricsHeader } from "./header";
 
 import { useState } from "react";
-import { useWebsite } from "~/store";
-import { trpc } from "~/utils";
 
-export function UtmMetrics() {
-  const [id] = useWebsite();
+interface Props {
+  data: Record<string, Record<string, number>>;
+}
+
+export function UtmMetrics({ data }: Props) {
   const [utmParam, setUtmParam] = useState("utm_source");
 
-  const query = trpc.website.sources.useQuery({
-    websiteId: id as string,
-    utmParam,
-  });
-
-  if (!query.data) return <></>;
-
-  const total = Object.values(query.data).reduce((a, b) => a + b, 0);
-  const percent = (v: number): number => (v * 100) / total;
+  const total = Object.values(data[utmParam] || {}).reduce((a, b) => a + b, 0);
+  const percent = (val: number): number => (val * 100) / total;
   const isActive = (val: string): boolean => utmParam === val;
 
   const options = [
@@ -35,18 +29,21 @@ export function UtmMetrics() {
       title: "Medium",
       active: isActive("utm_medium"),
       onClick: () => setUtmParam("utm_medium"),
-    }
-  ]
+    },
+  ];
 
   return (
     <MetricsContainer>
       <MetricsHeader title="UTM" options={options} />
       <table>
         <tbody className="relative flex flex-col gap-4 w-full h-full">
-          {Object.entries(query.data)
-            .sort(([, a], [, b]) => b - a)
+          {Object.entries(data[utmParam] || {})
+            .sort(([_, a], [__, b]) => b - a)
             .map(([key, value]) => (
-              <tr className="relative flex justify-between text-lg px-4 py-2 rounded-xl overflow-hidden" key={key}>
+              <tr
+                className="relative flex justify-between text-lg px-4 py-2 rounded-xl overflow-hidden"
+                key={key}
+              >
                 <td className="z-[1]">{key}</td>
                 <td className="z-[1]">{value}</td>
                 <td
@@ -60,4 +57,3 @@ export function UtmMetrics() {
     </MetricsContainer>
   );
 }
-

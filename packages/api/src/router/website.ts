@@ -1,5 +1,5 @@
-import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
+import { Prisma } from "@prisma/client";
 
 import { router, protectedProcedure } from "../trpc";
 import { load } from "cheerio";
@@ -132,9 +132,7 @@ export const websiteRouter = router({
     };
   }),
 
-  // return the sessions by the website id and between provided time
-  // if no time is provided, return this week's sessions
-  sessions: protectedProcedure
+  metrics: protectedProcedure
     .input(
       z.object({
         websiteId: z.string(),
@@ -174,6 +172,9 @@ export const websiteRouter = router({
         select: {
           id: true,
           createdAt: true,
+          device: true,
+          browser: true,
+          country: true,
         },
 
         orderBy: {
@@ -181,46 +182,6 @@ export const websiteRouter = router({
         },
       });
 
-      return sessions;
-    }),
-
-  pageViews: protectedProcedure
-    .input(
-      z.object({
-        websiteId: z.string(),
-        from: z.date().optional(),
-        to: z.date().optional(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      const { websiteId } = input;
-      let { from, to } = input;
-
-      if (!from) {
-        const date = new Date();
-
-        date.setDate(date.getDate() - 7);
-        from = date;
-      }
-
-      if (!to) {
-        to = new Date();
-      }
-
-      const website = await ctx.prisma.website.findUnique({
-        where: {
-          id: websiteId,
-        },
-      });
-
-      if (!website) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Website not found",
-        });
-      }
-
-      // get number of sessions happend by each between the given time period
       const pageViews = await ctx.prisma.pageView.findMany({
         where: {
           website: {
@@ -236,434 +197,75 @@ export const websiteRouter = router({
         select: {
           id: true,
           createdAt: true,
-        },
-
-        orderBy: {
-          createdAt: "desc",
-        },
-      });
-
-      return pageViews;
-    }),
-
-  pages: protectedProcedure
-    .input(
-      z.object({
-        websiteId: z.string(),
-        from: z.date().optional(),
-        to: z.date().optional(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      const { websiteId } = input;
-      let { from, to } = input;
-
-      if (!from) {
-        const date = new Date();
-
-        date.setDate(date.getDate() - 7);
-        from = date;
-      }
-
-      if (!to) {
-        to = new Date();
-      }
-
-      const website = await ctx.prisma.website.findUnique({
-        where: {
-          id: websiteId,
-        },
-      });
-
-      if (!website) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Website not found",
-        });
-      }
-
-      const group = await ctx.prisma.pageView.findMany({
-        where: {
-          website: {
-            id: websiteId,
-          },
-
-          createdAt: {
-            gte: from,
-            lte: to,
-          },
-        },
-
-        select: {
+          events: true,
           url: true,
-        },
-      });
-
-      let views: Record<string, number> = {};
-
-      for (let item of group) {
-        item.url = new URL(item.url).pathname;
-        item.url in views ? views[item.url]++ : (views[item.url] = 1);
-      }
-
-      return views;
-    }),
-
-  sources: protectedProcedure
-    .input(
-      z.object({
-        websiteId: z.string(),
-        utmParam: z.string(),
-        from: z.date().optional(),
-        to: z.date().optional(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      const { websiteId } = input;
-      let { from, to, utmParam } = input;
-
-      if (!from) {
-        const date = new Date();
-
-        date.setDate(date.getDate() - 7);
-        from = date;
-      }
-
-      if (!to) {
-        to = new Date();
-      }
-
-      const website = await ctx.prisma.website.findUnique({
-        where: {
-          id: websiteId,
-        },
-      });
-
-      if (!website) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Website not found",
-        });
-      }
-
-      const group = await ctx.prisma.pageView.findMany({
-        where: {
-          website: {
-            id: websiteId,
-          },
-
-          createdAt: {
-            gte: from,
-            lte: to,
-          },
-        },
-
-        select: {
           queryParams: true,
         },
       });
 
-      let params: Record<string, number> = {};
-
-      for (const page of group) {
-        const { queryParams } = page;
-
-        if (queryParams === null) {
-          return;
-        }
-
-        Object.entries(queryParams).forEach(([param, value]) => {
-          if (param === utmParam) {
-            !params[value] ? (params[value] = 1) : (params[value] += 1);
-          }
-        });
-      }
-
-      return params || {};
-    }),
-
-  events: protectedProcedure
-    .input(
-      z.object({
-        websiteId: z.string(),
-        from: z.date().optional(),
-        to: z.date().optional(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      const { websiteId } = input;
-      let { from, to } = input;
-
-      if (!from) {
-        const date = new Date();
-
-        date.setDate(date.getDate() - 7);
-        from = date;
-      }
-
-      if (!to) {
-        to = new Date();
-      }
-
-      const website = await ctx.prisma.website.findUnique({
-        where: {
-          id: websiteId,
-        },
-      });
-
-      if (!website) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Website not found",
-        });
-      }
-
-      const group = await ctx.prisma.pageView.findMany({
-        where: {
-          website: {
-            id: websiteId,
-          },
-
-          createdAt: {
-            gte: from,
-            lte: to,
-          },
-        },
-
-        select: {
-          events: true,
-        },
-      });
-
-      let evts: Record<string, { eventType: string; times: number }> = {};
-
-      for (const page of group) {
-        const { events } = page;
-
-        if (events === null || typeof events !== "object") {
-          break;
-        }
-
-        Object.entries(events).forEach(([key, value]) => {
-          if (!value || typeof value !== "object") {
-            return;
-          }
-
-          const times = (evts[key]?.times || 0) + 1;
-
-          evts[key] = {
-            eventType: Object.keys(value)[0] as string,
-            times,
-          };
-        });
-      }
-
-      return evts || {};
-    }),
-
-  countries: protectedProcedure
-    .input(
-      z.object({
-        websiteId: z.string(),
-        from: z.date().optional(),
-        to: z.date().optional(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      const { websiteId } = input;
-      let { from, to } = input;
-
-      if (!from) {
-        const date = new Date();
-
-        date.setDate(date.getDate() - 7);
-        from = date;
-      }
-
-      if (!to) {
-        to = new Date();
-      }
-
-      const website = await ctx.prisma.website.findUnique({
-        where: {
-          id: websiteId,
-        },
-      });
-
-      if (!website) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Website not found",
-        });
-      }
-
-      const group = await ctx.prisma.userSession.findMany({
-        where: {
-          website: {
-            id: websiteId,
-          },
-
-          createdAt: {
-            gte: from,
-            lte: to,
-          },
-        },
-
-        select: {
-          country: true,
-        },
-      });
-
-      let countries: Record<string, number> = {};
-
-      for (const page of group) {
-        const { country } = page;
-
-        if (country === null) {
-          return;
-        }
-
-        !countries[country]
-          ? (countries[country] = 1)
-          : (countries[country] += 1);
-      }
-
-      return countries || {};
-    }),
-
-  browsers: protectedProcedure
-    .input(
-      z.object({
-        websiteId: z.string(),
-        from: z.date().optional(),
-        to: z.date().optional(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      const { websiteId } = input;
-      let { from, to } = input;
-
-      if (!from) {
-        const date = new Date();
-
-        date.setDate(date.getDate() - 7);
-        from = date;
-      }
-
-      if (!to) {
-        to = new Date();
-      }
-
-      const website = await ctx.prisma.website.findUnique({
-        where: {
-          id: websiteId,
-        },
-      });
-
-      if (!website) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Website not found",
-        });
-      }
-
-      const group = await ctx.prisma.userSession.findMany({
-        where: {
-          website: {
-            id: websiteId,
-          },
-
-          createdAt: {
-            gte: from,
-            lte: to,
-          },
-        },
-
-        select: {
-          browser: true,
-        },
-      });
-
-      let browsers: Record<string, number> = {};
-
-      for (const page of group) {
-        const { browser } = page;
-
-        if (browser === null) {
-          return;
-        }
-
-        !browsers[browser] ? (browsers[browser] = 1) : (browsers[browser] += 1);
-      }
-
-      return browsers || {};
-    }),
-
-  devices: protectedProcedure
-    .input(
-      z.object({
-        websiteId: z.string(),
-        from: z.date().optional(),
-        to: z.date().optional(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      const { websiteId } = input;
-      let { from, to } = input;
-
-      if (!from) {
-        const date = new Date();
-
-        date.setDate(date.getDate() - 7);
-        from = date;
-      }
-
-      if (!to) {
-        to = new Date();
-      }
-
-      const website = await ctx.prisma.website.findUnique({
-        where: {
-          id: websiteId,
-        },
-      });
-
-      if (!website) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Website not found",
-        });
-      }
-
-      const group = await ctx.prisma.userSession.findMany({
-        where: {
-          website: {
-            id: websiteId,
-          },
-
-          createdAt: {
-            gte: from,
-            lte: to,
-          },
-        },
-
-        select: {
-          device: true,
-        },
-      });
-
       let devices: Record<string, number> = {};
+      let browsers: Record<string, number> = {};
+      let countries: Record<string, number> = {};
+      let pages: Record<string, number> = {};
+      let events: Record<string, number> = {};
+      let queryParams: Record<string, Record<string, number>> = {};
 
-      for (const page of group) {
-        const { device } = page;
+      sessions.forEach((session) => {
+        const { device, browser, country } = session;
 
-        if (device === null) {
-          return;
+        if (device) {
+          devices[device] ? (devices[device] += 1) : (devices[device] = 1);
         }
 
-        !devices[device] ? (devices[device] = 1) : (devices[device] += 1);
-      }
+        if (browser) {
+          browsers[browser]
+            ? (browsers[browser] += 1)
+            : (browsers[browser] = 1);
+        }
 
-      return devices || {};
+        if (country) {
+          countries[country]
+            ? (countries[country] += 1)
+            : (countries[country] = 1);
+        }
+      });
+
+      pageViews.forEach((pageView) => {
+        const { url, queryParams: params, events: pageEvents } = pageView;
+
+        if (url) {
+          pages[url] ? (pages[url] += 1) : (pages[url] = 1);
+        }
+
+        if (typeof pageEvents === "object" && pageEvents !== null) {
+          Object.keys(pageEvents).forEach((event) => {
+            events[event] ? (events[event] += 1) : (events[event] = 1);
+          });
+        }
+
+        if (typeof params === "object" && params !== null) {
+          Object.entries(params).forEach(([param, val]) => {
+            if (val && typeof val === "string") {
+              queryParams[param] = queryParams[param] || {};
+
+              // avoid typechecking the following line as it just works, maybe
+              // will look for better solution later..
+              // @ts-ignore
+              queryParams[param][val] = queryParams[param][val] + 1 || 1;
+            }
+          });
+        }
+      });
+
+      return {
+        devices,
+        browsers,
+        countries,
+        pages,
+        events,
+        queryParams,
+        sessions: sessions.map(({ createdAt, id }) => ({ createdAt, id })),
+        pageViews: pageViews.map(({ createdAt, id }) => ({ createdAt, id })),
+      };
     }),
 });
