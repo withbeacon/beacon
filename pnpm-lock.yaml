@@ -6,11 +6,14 @@ importers:
     specifiers:
       '@manypkg/cli': ^0.19.2
       prettier: ^2.7.1
+      prettier-plugin-tailwindcss: ^0.2.0
       turbo: ^1.5.5
     dependencies:
       '@manypkg/cli': 0.19.2
       prettier: 2.7.1
       turbo: 1.5.5
+    devDependencies:
+      prettier-plugin-tailwindcss: 0.2.0_prettier@2.7.1
 
   apps/web:
     specifiers:
@@ -4169,11 +4172,19 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
+  /prettier-plugin-tailwindcss/0.2.0_prettier@2.7.1:
+    resolution: {integrity: sha512-Ruqig/mdWCSpqdq9WK44nrmqM4BFWTzBPhPGwC5NK3coV9eZntEQPB84MGZbjAg0XQU02jVRHXNRPREBzxvM+A==}
+    engines: {node: '>=12.17.0'}
+    peerDependencies:
+      prettier: '>=2.2.0'
+    dependencies:
+      prettier: 2.7.1
+    dev: true
+
   /prettier/2.7.1:
     resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
     engines: {node: '>=10.13.0'}
     hasBin: true
-    dev: false
 
   /pretty-format/3.8.0:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
