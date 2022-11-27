@@ -27,10 +27,12 @@
     "jotai": "^1.10.0",
     "next": "13.0.2",
     "next-auth": "^4.15.1",
+    "prisma-redis-middleware": "^4.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.3",
     "recharts": "^2.1.16",
+    "redis": "^4.5.1",
     "request-ip": "^3.3.0",
     "sharp": "^0.31.1",
     "zod": "^3.18.0"
