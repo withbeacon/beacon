@@ -35,7 +35,7 @@ export default function SignIn() {
         style={{ ...containerSprings }}
       >
         <div className="flex items-center text-gray-800">
-          <Logo className="-mx-2 -my-4 h-16 w-16" />
+          <Logo className="mr-2 h-12 w-12" />
           <h2 className="text-2xl font-bold md:text-3xl">Spark</h2>
         </div>
 

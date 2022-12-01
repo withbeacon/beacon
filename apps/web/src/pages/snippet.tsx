@@ -55,7 +55,7 @@ export default function Onboard() {
         style={{ ...containerSprings }}
       >
         <div className="flex items-center text-gray-800">
-          <Logo className="-mx-2 -my-4 h-16 w-16" />
+          <Logo className="mr-2 h-12 w-12" />
           <h2 className="text-2xl font-bold md:text-3xl">Spark</h2>
         </div>
 
@@ -69,14 +69,14 @@ export default function Onboard() {
             {copied ? (
               <ClipboardCheckIcon
                 className={cx(
-                  "h-5 w-5 w-6 md:w-6",
+                  "h-5 w-5 md:w-6",
                   copied ? "text-green-300" : "text-gray-100"
                 )}
               />
             ) : (
               <ClipboardIcon
                 className={cx(
-                  "h-5 w-5 w-6 md:w-6",
+                  "h-5 md:w-6",
                   copied ? "text-green-300" : "text-gray-100"
                 )}
               />
