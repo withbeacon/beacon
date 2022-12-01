@@ -1,5 +1,5 @@
-import { Logo, Button, Loading } from "@spark/ui";
-import { ClipboardIcon, ClipboardCheckIcon } from "@spark/ui";
+import { Logo, Button, Loading } from "@bud/ui";
+import { ClipboardIcon, ClipboardCheckIcon } from "@bud/ui";
 import Link from "next/link";
 
 import { config, animated, useSpring } from "@react-spring/web";
@@ -42,7 +42,7 @@ export default function Onboard() {
   if (typeof window !== "undefined") {
     snippet = `<script
   defer 
-  data-spark
+  data-bud
   data-id="${query.data}"
   src="${window.location.origin}/track.js"
 ></script>`;
@@ -56,7 +56,7 @@ export default function Onboard() {
       >
         <div className="flex items-center text-gray-800">
           <Logo className="mr-2 h-12 w-12" />
-          <h2 className="text-2xl font-bold md:text-3xl">Spark</h2>
+          <h2 className="text-2xl font-bold md:text-3xl">Bud</h2>
         </div>
 
         <h1 className="text-xl font-semibold text-gray-600 md:text-2xl">

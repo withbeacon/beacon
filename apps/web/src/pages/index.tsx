@@ -1,4 +1,4 @@
-import { Loading } from "@spark/ui";
+import { Loading } from "@bud/ui";
 import { Nav, NoWebsite } from "~/components";
 
 import { useRouter } from "next/router";

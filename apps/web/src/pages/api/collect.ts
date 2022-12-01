@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma } from "@prisma/client";
-import { prisma } from "@spark/db";
+import { prisma } from "@bud/db";
 import { getSession, parseAgent } from "~/utils";
-import { getServerSession } from "@spark/auth";
+import { getServerSession } from "@bud/auth";
 import { load } from "cheerio";
 import cuid from "cuid";
 

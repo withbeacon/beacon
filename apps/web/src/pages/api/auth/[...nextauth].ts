@@ -1,2 +1,2 @@
-import { Auth } from "@spark/auth";
+import { Auth } from "@bud/auth";
 export default Auth;

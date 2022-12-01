@@ -1,11 +1,11 @@
-import { Logo } from "@spark/ui";
+import { Logo } from "@bud/ui";
 import {
   SearchIcon,
   HelpIcon,
   MenuIcon,
   SelectIcon,
   SettingsIcon,
-} from "@spark/ui";
+} from "@bud/ui";
 import { MobileMenu, WebsiteSelect } from "~/components";
 import { Feedback } from "~/components/widgets";
 
@@ -28,7 +28,7 @@ export function Nav() {
     <nav className="flex items-center justify-between bg-gray-50 py-4 px-6 drop-shadow-sm">
       <div className="flex items-center text-xl font-medium text-gray-800">
         <Logo className="h-10 w-10" />
-        <span>Spark</span>
+        <span>Bud</span>
 
         {query.data && (
           <div className="ml-3 flex items-center gap-3">
@@ -58,7 +58,7 @@ export function Nav() {
           <img
             className="h-7 w-7 rounded-full"
             src={data?.user?.image || ""}
-            alt={data?.user?.name || "Spark User"}
+            alt={data?.user?.name || "Bud User"}
           />
         )}
       </div>

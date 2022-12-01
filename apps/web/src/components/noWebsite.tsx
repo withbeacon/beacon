@@ -1,5 +1,5 @@
-import { Button, Loading } from "@spark/ui";
-import { ClipboardCheckIcon, ClipboardIcon, BarIcon } from "@spark/ui";
+import { Button, Loading } from "@bud/ui";
+import { ClipboardCheckIcon, ClipboardIcon, BarIcon } from "@bud/ui";
 
 import { cx } from "class-variance-authority";
 import { useState } from "react";
@@ -25,7 +25,7 @@ export function NoWebsite() {
   if (typeof window !== "undefined") {
     snippet = `<script
   defer 
-  data-spark
+  data-bud
   data-id="${query.data}"
   src="${window.location.origin}/track.js"
 ></script>`;
@@ -39,7 +39,7 @@ export function NoWebsite() {
           Looks like you have not linked any of your website yet..
         </h1>
         <p className="space-lg text-sm text-gray-700 md:text-base">
-          No worries, you can connect your website with spark by just embedding
+          No worries, you can connect your website with bud by just embedding
           the script below in your website.
         </p>
 

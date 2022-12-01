@@ -1,5 +1,5 @@
-import { Logo, Button } from "@spark/ui";
-import { GoogleIcon } from "@spark/ui";
+import { Logo, Button } from "@bud/ui";
+import { GoogleIcon } from "@bud/ui";
 
 import { config, animated, useSpring } from "@react-spring/web";
 import { useState } from "react";
@@ -36,7 +36,7 @@ export default function SignIn() {
       >
         <div className="flex items-center text-gray-800">
           <Logo className="mr-2 h-12 w-12" />
-          <h2 className="text-2xl font-bold md:text-3xl">Spark</h2>
+          <h2 className="text-2xl font-bold md:text-3xl">Bud</h2>
         </div>
 
         <h1 className="text-xl font-semibold text-gray-600 md:text-2xl">
@@ -55,7 +55,7 @@ export default function SignIn() {
           <GoogleIcon /> Sign In
         </Button>
         <p className="text-sm text-gray-500 md:text-base">
-          By signing in to Spark, you agree to our terms of service and privacy
+          By signing in to Bud, you agree to our terms of service and privacy
           policy.
         </p>
       </animated.div>

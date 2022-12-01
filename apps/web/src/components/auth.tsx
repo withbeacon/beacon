@@ -1,4 +1,4 @@
-import { Loading } from "@spark/ui";
+import { Loading } from "@bud/ui";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
