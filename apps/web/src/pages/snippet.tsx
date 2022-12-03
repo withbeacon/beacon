@@ -7,7 +7,7 @@ import { cx } from "class-variance-authority";
 import { trpc } from "~/utils";
 import { useState } from "react";
 
-export default function Onboard() {
+export default function Snippet() {
   const [copied, setCopied] = useState(false);
   const query = trpc.user.getId.useQuery();
 
@@ -49,22 +49,22 @@ export default function Onboard() {
   }
 
   return (
-    <div className="grid h-screen w-screen place-items-center">
+    <div className="grid h-screen w-screen place-items-center bg-gray-100 py-6 dark:bg-gray-900">
       <animated.div
         className="flex max-w-lg flex-col items-start gap-6 px-6 md:p-0"
         style={{ ...containerSprings }}
       >
-        <div className="flex items-center text-gray-800">
-          <Logo className="mr-2 h-12 w-12" />
+        <div className="flex items-center text-gray-800 dark:text-gray-200">
+          <Logo className="mr-2 h-10 w-10" />
           <h2 className="text-2xl font-bold md:text-3xl">Bud</h2>
         </div>
 
-        <h1 className="text-xl font-semibold text-gray-600 md:text-2xl">
+        <h1 className="text-xl font-semibold text-gray-600 dark:text-gray-400 md:text-2xl">
           Just copy and paste this snippet to any of your website{" "}
-          <span className="text-gray-800">and that&apos;s it!</span>
+          <span className="text-gray-800 dark:text-gray-200">and that&apos;s it!</span>
         </h1>
 
-        <pre className="relative w-full rounded-2xl bg-gray-900 p-4 font-mono text-sm text-gray-100 selection:bg-primary-900 md:text-base">
+        <pre className="relative w-full rounded-2xl bg-gray-900 p-4 font-mono text-sm text-gray-100 selection:bg-primary-900 md:text-base dark:border dark:border-gray-800">
           <Button className="absolute right-4 top-4" onClick={handleCopy}>
             {copied ? (
               <ClipboardCheckIcon
