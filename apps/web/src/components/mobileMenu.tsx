@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { CrossIcon, HelpIcon, SearchIcon, SelectIcon } from "@spark/ui";
+import { CrossIcon, HelpIcon, SearchIcon, SelectIcon } from "@bud/ui";
 import { WebsiteSelect } from "~/components";
 import { Feedback } from "~/components/widgets";
 
@@ -83,7 +83,7 @@ export function MobileMenu({ children }: PropsWithChildren) {
               <img
                 className="h-7 w-7 rounded-full"
                 src={data?.user?.image || ""}
-                alt={data?.user?.name || "Spark User"}
+                alt={data?.user?.name || "Bud User"}
               />
             )}
             <p>Settings</p>

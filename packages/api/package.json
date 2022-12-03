@@ -1,5 +1,5 @@
 {
-  "name": "@spark/api",
+  "name": "@bud/api",
   "version": "0.1.0",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -8,8 +8,8 @@
     "clean": "rm -rf .turbo node_modules"
   },
   "dependencies": {
-    "@spark/auth": "*",
-    "@spark/db": "*",
+    "@bud/auth": "*",
+    "@bud/db": "*",
     "@trpc/client": "10.0.0-proxy-beta.13",
     "@trpc/server": "10.0.0-proxy-beta.13",
     "cheerio": "1.0.0-rc.12",

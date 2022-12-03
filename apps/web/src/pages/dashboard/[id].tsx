@@ -1,5 +1,5 @@
 import { Nav, Stats, Metrics } from "~/components";
-import { Loading } from "@spark/ui";
+import { Loading } from "@bud/ui";
 
 import { useRouter } from "next/router";
 import { trpc } from "~/utils";

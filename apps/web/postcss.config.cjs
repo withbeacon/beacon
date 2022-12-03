@@ -1,2 +1,2 @@
-module.exports = require("@spark/config/postcss.config.cjs");
+module.exports = require("@bud/config/postcss.config.cjs");
 

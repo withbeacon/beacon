@@ -1,4 +1,4 @@
-import { ArrowUpIcon } from "@spark/ui";
+import { ArrowUpIcon } from "@bud/ui";
 
 import { cx } from "class-variance-authority";
 import { trpc } from "~/utils";

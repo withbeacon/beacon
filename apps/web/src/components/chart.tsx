@@ -2,7 +2,7 @@ import type { VariantProps } from "class-variance-authority";
 import type { PropsWithChildren } from "react";
 import type { Mode } from "~/store";
 import { Bar, XAxis, Tooltip, ResponsiveContainer, BarChart } from "recharts";
-import { EyeIcon, UserIcon } from "@spark/ui";
+import { EyeIcon, UserIcon } from "@bud/ui";
 
 import { trpc, date, diffInDays, formatDate } from "~/utils";
 import { useWebsite, useMode } from "~/store";

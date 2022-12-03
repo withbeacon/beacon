@@ -1,5 +1,5 @@
 {
-  "name": "@spark/ui",
+  "name": "@bud/ui",
   "version": "0.0.0",
   "main": "./src/index.ts",
   "types": "./src/index.ts",

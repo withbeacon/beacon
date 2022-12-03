@@ -7,7 +7,7 @@ export const screen = `${width}x${height}`;
 export const { currentScript: script } = document;
 
 if (!script) {
-  throw new Error("Unable to get the spark script");
+  throw new Error("Unable to get the bud script");
 }
 
 export const id = script.getAttribute("data-id");

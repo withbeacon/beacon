@@ -1,19 +1,19 @@
 ![](https://user-images.githubusercontent.com/70624701/199798229-e1b576ca-a1ba-4f1c-8f4e-2686d96e8162.svg)
 
 <p align="center">
-    <img src="https://img.shields.io/tokei/lines/github/vedantnn71/spark">
-    <img src="https://img.shields.io/github/languages/top/vedantnn71/spark">
+    <img src="https://img.shields.io/tokei/lines/github/vedantnn71/bud">
+    <img src="https://img.shields.io/github/languages/top/vedantnn71/bud">
 </p>
 
-Spark is an analytics tool that you always wanted to use, it's minimal, fast and privacy focused. It's script is < 1.5kb and doesn't affect your page load times at all.
+Bud is an analytics tool that you always wanted to use, it's minimal, fast and privacy focused. It's script is < 1.5kb and doesn't affect your page load times at all.
 
-> NOTE: Spark is highly under development and not in condition to use right now.
+> NOTE: Bud is highly under development and not in condition to use right now.
 
 # Monorepo
 
 ## /apps
 
-- `web`: The spark web app.
+- `web`: The bud web app.
 
 ## /packages
 

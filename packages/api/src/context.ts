@@ -1,9 +1,9 @@
 import type { inferAsyncReturnType } from "@trpc/server";
 import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
-import type { Session } from "@spark/auth";
+import type { Session } from "@bud/auth";
 
-import { getServerSession } from "@spark/auth";
-import { prisma } from "@spark/db";
+import { getServerSession } from "@bud/auth";
+import { prisma } from "@bud/db";
 
 /**
  * session does not work quite yet, but will be fixed later on..

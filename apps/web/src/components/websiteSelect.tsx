@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { ChevronUpIcon, ChevronDownIcon } from "@spark/ui";
+import { ChevronUpIcon, ChevronDownIcon } from "@bud/ui";
 import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { cx } from "class-variance-authority";
