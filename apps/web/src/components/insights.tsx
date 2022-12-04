@@ -4,14 +4,14 @@ import { cx } from "class-variance-authority";
 import { trpc } from "~/utils";
 import { useWebsite } from "~/store";
 
-interface StatProps {
+interface Props {
   label: string;
   value: number | string;
   growth: number;
   description: string;
 }
 
-function StatCard({ label, value, growth, description }: StatProps) {
+function InsightCard({ label, value, growth, description }: Props) {
   return (
     <div className="flex flex-col p-4">
       <span className="text-sm text-gray-500 dark:text-gray-400 md:text-base">{label}</span>
@@ -32,7 +32,7 @@ function StatCard({ label, value, growth, description }: StatProps) {
   );
 }
 
-export function Stats() {
+export function Insights() {
   const [id] = useWebsite();
   const query = trpc.website.get.useQuery(id || "");
 
@@ -44,7 +44,6 @@ export function Stats() {
     return <></>;
   }
 
-  // convert milliseconds to standard time
   function millisecondsToStandardTime(ms: number) {
     const seconds = Math.floor((ms / 1000) % 60);
     const minutes = Math.floor((ms / (1000 * 60)) % 60);
@@ -88,7 +87,7 @@ export function Stats() {
   return (
     <div className="grid w-full grid-cols-1 grid-rows-3 gap-4 py-2 px-4 text-gray-900 dark:text-gray-100 md:grid-cols-3 md:grid-rows-1">
       {stats.map((stat) => (
-        <StatCard {...stat} key={stat.label} />
+        <InsightCard {...stat} key={stat.label} />
       ))}
     </div>
   );
