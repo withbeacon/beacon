@@ -103,7 +103,6 @@ function sortDays(arr: string[]): string[] {
 interface BarTooltipProps {
   active?: boolean;
   payload?: { value: number; name: string }[];
-  label?: string;
   mode: Mode;
 }
 
@@ -111,18 +110,16 @@ function BarTooltip({
   active = false,
   mode = "pageViews",
   payload,
-  label,
 }: BarTooltipProps) {
   if (active && payload && payload.length) {
     const data = payload[0];
 
     return (
-      <div className="flex flex-col gap-2 rounded border-none bg-white p-2 shadow outline-none">
+      <div className="flex flex-col gap-2 rounded border-none bg-white dark:bg-gray-900 p-2 shadow outline-none">
         <div className="flex gap-2">
           {mode === "pageViews" ? <EyeIcon /> : <UserIcon />}
           <span>{data?.value}</span>
         </div>
-        <span>{label}</span>
       </div>
     );
   }
