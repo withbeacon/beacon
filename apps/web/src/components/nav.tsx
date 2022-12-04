@@ -1,13 +1,13 @@
-import { Logo } from "@bud/ui";
 import {
   SearchIcon,
   HelpIcon,
   MenuIcon,
   UserIcon,
   SelectIcon,
-  SettingsIcon,
+  CalendarIcon,
 } from "@bud/ui";
-import { MobileMenu, WebsiteSelect } from "~/components";
+import { Button, Logo } from "@bud/ui";
+import { MobileMenu, DateSelect, WebsiteSelect } from "~/components";
 import { Feedback } from "~/components/widgets";
 
 import { useSession } from "next-auth/react";
@@ -26,7 +26,7 @@ export function Nav() {
   if (query.isLoading) return <></>;
 
   return (
-    <nav className="flex items-center justify-between py-4 mx-6 border-b border-gray-200 dark:border-gray-800 dark:bg-gray-900">
+    <nav className="mx-6 flex items-center justify-between border-b border-gray-200 py-4 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex items-center gap-2 text-xl font-medium text-gray-800 dark:text-gray-200">
         <Logo className="h-6 w-6" />
         <span>Bud</span>
@@ -51,18 +51,20 @@ export function Nav() {
         )}
       </div>
 
-      <div className="hidden items-center gap-5 md:flex">
+      <div className="hidden items-center gap-4 md:flex">
+        <DateSelect />
         <SearchIcon aria-label="Search" className={baseIconStyles} />
-        <SettingsIcon aria-label="Settings" className={baseIconStyles} />
         <Feedback>
           <HelpIcon aria-label="Help" className={baseIconStyles} />
         </Feedback>
         <picture>
           <source srcSet={data?.user?.image || ""} />
-          <UserIcon aria-label="Settings" className={baseIconStyles + " -ml-1"} />
+          <UserIcon
+            aria-label="Settings"
+            className={baseIconStyles + " -ml-1"}
+          />
         </picture>
       </div>
-
       <MobileMenu>
         <MenuIcon className={baseIconStyles} />
       </MobileMenu>
