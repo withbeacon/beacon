@@ -46,7 +46,7 @@ export function MobileMenu({ children }: PropsWithChildren) {
       >
         <div
           className={cx(
-            "absolute bottom-0 left-0 flex w-screen flex-col gap-6 rounded-t-2xl bg-gray-50 p-6 drop-shadow-md transition duration-500",
+            "absolute bottom-0 left-0 flex w-screen flex-col gap-6 rounded-t-2xl bg-gray-50 dark:bg-gray-800 p-6 transition duration-500",
             open ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
           )}
         >
@@ -55,22 +55,22 @@ export function MobileMenu({ children }: PropsWithChildren) {
               className="grid place-items-center pt-2 outline-none"
               onClick={() => setOpen(false)}
             >
-              <CrossIcon className="absolute right-0 h-6 w-6 text-gray-500" />
+              <CrossIcon className="absolute right-0 h-6 w-6 text-gray-500 dark:text-gray-400" />
             </button>
           </div>
-          <div className="flex cursor-pointer gap-2 text-lg text-gray-900">
+          <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
             <SearchIcon />
             <p>Search Analytics</p>
           </div>
           <Feedback>
-            <div className="flex cursor-pointer gap-2 text-lg text-gray-900">
+            <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
               <HelpIcon />
               <p>Share Feedback</p>
             </div>
           </Feedback>
           {query.data && (
             <WebsiteSelect>
-              <div className="flex cursor-pointer gap-2 text-lg text-gray-900">
+              <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
                 <div className="flex cursor-pointer items-center gap-2">
                   <img src={query.data.favicon || ""} className="h-6 w-6" />
                   <h2>{query.data.name}</h2>
@@ -78,7 +78,7 @@ export function MobileMenu({ children }: PropsWithChildren) {
               </div>
             </WebsiteSelect>
           )}
-          <div className="flex cursor-pointer gap-2 text-lg text-gray-900">
+          <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
             {data?.user && (
               <img
                 className="h-7 w-7 rounded-full"
