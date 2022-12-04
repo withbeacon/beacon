@@ -29,7 +29,7 @@ export function WebsiteSelect({ children }: PropsWithChildren) {
         <SelectPrimitive.ScrollUpButton className="flex items-center justify-center text-gray-700">
           <ChevronUpIcon />
         </SelectPrimitive.ScrollUpButton>
-        <SelectPrimitive.Viewport className="z-50 rounded-lg bg-white p-2 shadow-xl">
+        <SelectPrimitive.Viewport className="z-50 rounded-lg bg-white dark:bg-gray-900 p-2 shadow-xl">
           <SelectPrimitive.Group>
             {query?.map((website) => (
               <SelectPrimitive.Item
@@ -37,8 +37,8 @@ export function WebsiteSelect({ children }: PropsWithChildren) {
                 key={website.id}
                 value={website.id}
                 className={cx(
-                  "relative flex items-center rounded-md px-8 py-2 text-lg font-medium text-gray-700 focus:bg-gray-100",
-                  "radix-state-checked:bg-gray-200",
+                  "relative flex items-center rounded-md px-6 py-2 text-lg font-medium text-gray-700 dark:text-gray-300 focus:bg-gray-100 dark:focus:bg-gray-900",
+                  "radix-state-checked:bg-gray-200 dark:radix-state-checked:bg-gray-800",
                   "select-none focus:outline-none"
                 )}
               >
