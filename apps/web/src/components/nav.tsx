@@ -26,7 +26,7 @@ export function Nav() {
   if (query.isLoading) return <></>;
 
   return (
-    <nav className="flex items-center justify-between bg-gray-50 py-4 px-6 drop-shadow-sm dark:bg-gray-900">
+    <nav className="flex items-center justify-between py-4 mx-6 border-b border-gray-200 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex items-center gap-2 text-xl font-medium text-gray-800 dark:text-gray-200">
         <Logo className="h-6 w-6" />
         <span>Bud</span>
@@ -34,7 +34,7 @@ export function Nav() {
         {query.data && (
           <div className="ml-2 flex items-center gap-2 text-gray-800 dark:text-gray-200">
             <div className="hidden cursor-pointer items-center gap-2 md:flex">
-              <span className="mr-2 text-gray-500 dark:text-gray-600">
+              <span className="mr-2 text-gray-500 dark:text-gray-700">
                 {"/"}
               </span>
               <img
