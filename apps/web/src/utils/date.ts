@@ -19,3 +19,8 @@ export function diffInDays(a: Date, b: Date): number {
 
   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
+
+export function fromNow(days?: number) {
+  return new Date(new Date().setDate(new Date().getDate() - (days || 0)));
+}
+
