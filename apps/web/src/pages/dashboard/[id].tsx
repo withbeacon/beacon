@@ -1,4 +1,4 @@
-import { Nav, Stats, Metrics } from "~/components";
+import { Nav, Insights, Metrics } from "~/components";
 import { Loading } from "@bud/ui";
 
 import { useRouter } from "next/router";
