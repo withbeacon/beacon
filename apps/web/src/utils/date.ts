@@ -1,9 +1,6 @@
 export function formatDate(date: Date): string {
-  return [
-    date.getDate() +
-      ", " +
-      date.toLocaleDateString("en-US", { weekday: "short" }),
-  ].join();
+  const d = date.getDate();
+  return d < 10 ? `0${d}` : `${d}`;
 }
 
 export function date(): Date {
