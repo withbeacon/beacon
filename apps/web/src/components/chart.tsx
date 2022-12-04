@@ -73,29 +73,12 @@ export default function Chart({
               <stop offset="5%" stopColor="#4178E1" stopOpacity={0.2} />
               <stop offset="95%" stopColor="#4178E1" stopOpacity={0.05} />
             </linearGradient>
-
-            <linearGradient id="bar-stroke" x1="50%" y1="100%" x2="50%" y2="0%">
-              <stop
-                offset="1.5%"
-                style={{
-                  stopColor: "#4178E1",
-                  stopOpacity: 1,
-                }}
-              />
-              <stop
-                offset="0%"
-                style={{
-                  stopColor: "#4178E1",
-                  stopOpacity: 1,
-                }}
-              />
-            </linearGradient>
           </defs>
           <Bar
             radius={[8, 8, 0, 0]}
             dataKey="value"
             fill="url(#bar-background)"
-            stroke="url(#bar-stroke)"
+            stroke="#4178E1"
           />
           <XAxis
             dataKey="name"
