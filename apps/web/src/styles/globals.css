@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 ::selection {
-  @apply bg-primary-200;
+  @apply bg-primary-200 dark:bg-primary-900;
 }
 
 body {
-  @apply bg-gray-100 overflow-x-hidden;
+  @apply bg-gray-100 dark:bg-gray-900 overflow-x-hidden;
 }
 
 @layer utilities {
