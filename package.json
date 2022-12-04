@@ -5,6 +5,7 @@
   "scripts": {
     "db:generate": "turbo db:generate",
     "db:push": "turbo db:push",
+    "tracker:build": "cd packages/tracker && pnpm build",
     "build": "turbo build",
     "dev": "turbo dev --parallel",
     "clean:workspaces": "turbo clean",
