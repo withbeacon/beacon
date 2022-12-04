@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 
 const Chart = dynamic(() => import("~/components/chart"), {
-  loading: () => <p>loading</p>,
+  loading: () => null,
 });
 
 export default function Analytics() {
