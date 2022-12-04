@@ -8,6 +8,10 @@ import { DevicesMetrics } from "./devices";
 import { useWebsite } from "~/store";
 import { trpc } from "~/utils";
 
+function hasData<T>(data: T): boolean {
+  return JSON.stringify(data) !== "{}";
+}
+
 export function Metrics() {
   const [id] = useWebsite();
 
@@ -27,12 +31,12 @@ export function Metrics() {
 
   return (
     <div className="wrap mx-6 grid auto-rows-auto grid-cols-1 gap-4 md:grid-cols-2">
-      {pages && <PagesMetrics data={pages} />}
-      {queryParams && <UtmMetrics data={queryParams} />}
-      {countries && <CountriesMetrics data={countries} />}
-      {browsers && <BrowsersMetrics data={browsers} />}
-      {devices && <DevicesMetrics data={devices} />}
-      {events && <EventsMetrics data={events} />}
+      {hasData(pages) && <PagesMetrics data={pages} />}
+      {hasData(queryParams) && <UtmMetrics data={queryParams} />}
+      {hasData(countries) && <CountriesMetrics data={countries} />}
+      {hasData(browsers) && <BrowsersMetrics data={browsers} />}
+      {hasData(devices) && <DevicesMetrics data={devices} />}
+      {hasData(events) && <EventsMetrics data={events} />}
     </div>
   );
 }
