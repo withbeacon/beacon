@@ -1,4 +1,5 @@
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "next-themes";
 import { Auth } from "~/components";
 import { trpc } from "~/utils/trpc";
 import "~/styles/globals.css";
@@ -14,7 +15,9 @@ function App({
   return (
     <SessionProvider session={session}>
       <Auth>
-        <Component {...pageProps} />
+        <ThemeProvider attribute="class">
+          <Component {...pageProps} />
+        </ThemeProvider>
       </Auth>
     </SessionProvider>
   );
