@@ -6,6 +6,7 @@ import { EyeIcon, UserIcon } from "@bud/ui";
 
 import { trpc, date, diffInDays, formatDate } from "~/utils";
 import { useWebsite, useMode } from "~/store";
+import { useTheme } from "next-themes";
 import { cva } from "class-variance-authority";
 
 interface Props {
@@ -19,6 +20,7 @@ export default function Chart({
 }: Props) {
   const [id] = useWebsite();
   const [mode, setMode] = useMode();
+  const { resolvedTheme } = useTheme();
 
   const query = trpc.website.metrics.useQuery({
     websiteId: id as string,
@@ -64,83 +66,49 @@ export default function Chart({
 
   return (
     <div className="mb-6 h-full w-full px-6">
-      <div className="shadow-soft-base relative h-96 w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 pt-4">
-        <div className="h-full w-full">
-          <>
-            <div className="flex items-center justify-end rounded-lg">
-              <ChartButton
-                active={mode === "pageViews"}
-                onClick={() => setMode("pageViews")}
-                l
-              >
-                Page Visits
-              </ChartButton>
-              <ChartButton
-                active={mode === "sessions"}
-                onClick={() => setMode("sessions")}
-                r
-              >
-                Sessions
-              </ChartButton>
-            </div>
-            <ResponsiveContainer height={320} width="100%">
-              <BarChart width={50} height={200} data={data}>
-                <defs>
-                  <linearGradient
-                    id="bar-background"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-                    <stop offset="5%" stopColor="#F97316" stopOpacity={0.2} />
-                    <stop offset="95%" stopColor="#F97316" stopOpacity={0.05} />
-                  </linearGradient>
+      <ResponsiveContainer height={320} width="100%">
+        <BarChart width={50} height={200} data={data}>
+          <defs>
+            <linearGradient id="bar-background" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#4178E1" stopOpacity={0.2} />
+              <stop offset="95%" stopColor="#4178E1" stopOpacity={0.05} />
+            </linearGradient>
 
-                  <linearGradient
-                    id="bar-stroke"
-                    x1="50%"
-                    y1="100%"
-                    x2="50%"
-                    y2="0%"
-                  >
-                    <stop
-                      offset="1.5%"
-                      style={{
-                        stopColor: "rgba(249, 115, 22)",
-                        stopOpacity: 0,
-                      }}
-                    />
-                    <stop
-                      offset="0%"
-                      style={{
-                        stopColor: "rgba(249, 115, 22)",
-                        stopOpacity: 1,
-                      }}
-                    />
-                  </linearGradient>
-                </defs>
-                <XAxis
-                  axisLine={{ stroke: "hsl(0, 0%, 90%)" }}
-                  dataKey="name"
-                  tickLine={false}
-                />
-                <Tooltip
-                  content={<BarTooltip mode={mode} />}
-                  wrapperStyle={{ outline: "none", zIndex: 1 }}
-                  cursor={{ fill: "transparent" }}
-                />
-                <Bar
-                  radius={[8, 8, 0, 0]}
-                  dataKey="value"
-                  fill="url(#bar-background)"
-                  stroke="url(#bar-stroke)"
-                />
-              </BarChart>
-            </ResponsiveContainer>
-          </>
-        </div>
-      </div>
+            <linearGradient id="bar-stroke" x1="50%" y1="100%" x2="50%" y2="0%">
+              <stop
+                offset="1.5%"
+                style={{
+                  stopColor: "#4178E1",
+                  stopOpacity: 1,
+                }}
+              />
+              <stop
+                offset="0%"
+                style={{
+                  stopColor: "#4178E1",
+                  stopOpacity: 1,
+                }}
+              />
+            </linearGradient>
+          </defs>
+          <Bar
+            radius={[8, 8, 0, 0]}
+            dataKey="value"
+            fill="url(#bar-background)"
+            stroke="url(#bar-stroke)"
+          />
+          <XAxis
+            dataKey="name"
+            axisLine={{ stroke: resolvedTheme === "dark" ? "#1C1D27" : "E5E6EB", strokeWidth: 1 }}
+            tickLine={false}
+          />
+          <Tooltip
+            content={<BarTooltip mode={mode} />}
+            wrapperStyle={{ outline: "none", zIndex: 1 }}
+            cursor={{ fill: "transparent" }}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 }
