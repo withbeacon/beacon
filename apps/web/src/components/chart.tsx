@@ -99,7 +99,7 @@ export default function Chart({
           />
           <XAxis
             dataKey="name"
-            axisLine={{ stroke: resolvedTheme === "dark" ? "#1C1D27" : "E5E6EB", strokeWidth: 1 }}
+            axisLine={{ stroke: resolvedTheme === "dark" ? "#1C1D27" : "#E5E6EB", strokeWidth: 1 }}
             tickLine={false}
           />
           <Tooltip
