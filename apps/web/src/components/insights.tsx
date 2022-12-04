@@ -19,7 +19,7 @@ function InsightCard({ label, value, growth, description }: Props) {
       <div className="flex w-full justify-between" title={description}>
         <h2 className="mb-2 text-3xl font-bold md:text-4xl">{value}</h2>
         <div className={cx(
-          "flex h-8 max-w-fit items-center gap-2 rounded-full dark px-3",
+          "flex h-8 max-w-fit items-center gap-2 rounded-full",
           growth < 0 ? "text-red-600 dark:text-red-200" : "text-green-600 dark:text-green-200"
         )}>
           <span className="text-sm md:text-base">{growth}%</span>
