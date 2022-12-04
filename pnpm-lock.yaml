@@ -44,6 +44,7 @@ importers:
       jotai: ^1.10.0
       next: 13.0.2
       next-auth: ^4.15.1
+      next-themes: ^0.2.1
       next-transpile-modules: ^10.0.0
       postcss: ^8.4.14
       react: 18.2.0
@@ -73,6 +74,7 @@ importers:
       jotai: 1.10.0_react@18.2.0
       next: 13.0.2_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.15.1_pknogjuzx4bv7zxtatcb2ahtsq
+      next-themes: 0.2.1_pknogjuzx4bv7zxtatcb2ahtsq
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-hook-form: 7.39.3_react@18.2.0
@@ -3463,6 +3465,18 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       uuid: 8.3.2
+    dev: false
+
+  /next-themes/0.2.1_pknogjuzx4bv7zxtatcb2ahtsq:
+    resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      next: 13.0.2_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /next-transpile-modules/10.0.0:

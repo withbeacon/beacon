@@ -42,7 +42,7 @@ export default function Analytics() {
   }
 
   return (
-    <div>
+    <div className="bg-gray-100 dark:bg-gray-900">
       <Nav />
       <Stats />
       <Chart />

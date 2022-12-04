@@ -14,11 +14,14 @@ interface StatProps {
 function StatCard({ label, value, growth, description }: StatProps) {
   return (
     <div className="flex flex-col p-4">
-      <span className="text-sm text-gray-500 md:text-base">{label}</span>
+      <span className="text-sm text-gray-500 dark:text-gray-400 md:text-base">{label}</span>
 
       <div className="flex w-full justify-between" title={description}>
         <h2 className="mb-2 text-3xl font-bold md:text-4xl">{value}</h2>
-        <div className="flex h-8 max-w-fit items-center  gap-2 rounded-full border border-gray-900 px-3">
+        <div className={cx(
+          "flex h-8 max-w-fit items-center gap-2 rounded-full dark px-3",
+          growth < 0 ? "text-red-600 dark:text-red-200" : "text-green-600 dark:text-green-200"
+        )}>
           <span className="text-sm md:text-base">{growth}%</span>
           <ArrowUpIcon
             className={cx("h-4 w-4", growth < 0 ? "rotate-180" : "rotate-0")}
@@ -83,7 +86,7 @@ export function Stats() {
   ];
 
   return (
-    <div className="grid w-full grid-cols-1 grid-rows-3 gap-4 py-2 px-4 text-gray-900 md:grid-cols-3 md:grid-rows-1">
+    <div className="grid w-full grid-cols-1 grid-rows-3 gap-4 py-2 px-4 text-gray-900 dark:text-gray-100 md:grid-cols-3 md:grid-rows-1">
       {stats.map((stat) => (
         <StatCard {...stat} key={stat.label} />
       ))}

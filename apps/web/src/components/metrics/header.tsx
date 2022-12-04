@@ -19,17 +19,17 @@ export function MetricsHeader({ title, options }: Props) {
         options && "hide-scrollbar overflow-scroll"
       )}
     >
-      <h2 className="text-lg font-semibold text-gray-800 md:text-xl">
+      <h2 className="text-lg font-semibold md:text-xl">
         {title}
       </h2>
       {options && (
-        <div className="ml-6 flex gap-4 text-base font-medium md:ml-auto">
+        <div className="ml-6 flex gap-4 text-base font-normal md:ml-auto">
           {options.map(({ active, title, onClick }) => (
             <button
               key={title}
               onClick={() => onClick()}
               className={cx(
-                active ? "text-gray-800" : "font-normal text-gray-600",
+                active ? "text-gray-800 dark:text-gray-200" : "text-gray-600 dark:text-gray-400",
                 "outline-none transition-colors duration-200 hover:text-gray-800"
               )}
             >

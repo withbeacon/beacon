@@ -3,6 +3,7 @@ module.exports = {
   content: ["../../apps/web/src/**/*.tsx", "../../packages/*/src/**/*.tsx"],
   theme: {
     extend: {
+      darkMode: "class",
       fontFamily: {
         sans: ["Inter", "sans-serif"],
         mono: ['"Jetbrains Mono"', "monospace"],

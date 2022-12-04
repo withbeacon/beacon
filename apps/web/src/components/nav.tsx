@@ -3,6 +3,7 @@ import {
   SearchIcon,
   HelpIcon,
   MenuIcon,
+  UserIcon,
   SelectIcon,
   SettingsIcon,
 } from "@bud/ui";
@@ -20,20 +21,22 @@ export function Nav() {
   const query = trpc.website.get.useQuery(id as string);
 
   const baseIconStyles =
-    "w-6 h-6 hover:opacity-90 cursor-pointer text-gray-800";
+    "w-6 h-6 hover:opacity-90 cursor-pointer text-gray-800 dark:text-gray-200";
 
   if (query.isLoading) return <></>;
 
   return (
-    <nav className="flex items-center justify-between bg-gray-50 py-4 px-6 drop-shadow-sm">
-      <div className="flex items-center text-xl font-medium text-gray-800">
-        <Logo className="h-10 w-10" />
+    <nav className="flex items-center justify-between py-4 mx-6 border-b border-gray-200 dark:border-gray-800 dark:bg-gray-900">
+      <div className="flex items-center gap-2 text-xl font-medium text-gray-800 dark:text-gray-200">
+        <Logo className="h-6 w-6" />
         <span>Bud</span>
 
         {query.data && (
-          <div className="ml-3 flex items-center gap-3">
-            <div className="hidden cursor-pointer items-center gap-3 md:flex">
-              <span>{"/"}</span>
+          <div className="ml-2 flex items-center gap-2 text-gray-800 dark:text-gray-200">
+            <div className="hidden cursor-pointer items-center gap-2 md:flex">
+              <span className="mr-2 text-gray-500 dark:text-gray-700">
+                {"/"}
+              </span>
               <img
                 src={query.data.favicon || ""}
                 alt={query.data.name}
@@ -54,13 +57,10 @@ export function Nav() {
         <Feedback>
           <HelpIcon aria-label="Help" className={baseIconStyles} />
         </Feedback>
-        {data?.user && (
-          <img
-            className="h-7 w-7 rounded-full"
-            src={data?.user?.image || ""}
-            alt={data?.user?.name || "Bud User"}
-          />
-        )}
+        <picture>
+          <source srcSet={data?.user?.image || ""} />
+          <UserIcon aria-label="Settings" className={baseIconStyles + " -ml-1"} />
+        </picture>
       </div>
 
       <MobileMenu>

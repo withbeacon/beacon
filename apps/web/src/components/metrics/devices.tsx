@@ -24,7 +24,7 @@ export function DevicesMetrics({ data }: Props) {
                 <td className="z-[1]">{key}</td>
                 <td className="z-[1]">{value}</td>
                 <td
-                  className="absolute top-0 left-0 z-0 h-full bg-primary-200"
+                  className="absolute top-0 left-0 z-0 h-full bg-gray-200 dark:bg-gray-700"
                   style={{ width: `${percent(value)}%` }}
                 ></td>
               </tr>
