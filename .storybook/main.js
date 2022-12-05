@@ -1,13 +1,14 @@
 module.exports = {
   stories: [
-    "../apps/web/src/components/**/*.stories.mdx",
-    "../apps/web/src/components/**/*.stories.@(ts|tsx)",
+    "../apps/web/src/**/*.stories.mdx",
+    "../apps/web/src/**/*.stories.@(ts|tsx)",
 
-    "../packages/ui/src/**/*.stories.mdx",
-    "../packages/ui/src/**/*.stories.@(ts|tsx)",
+    "../packages/ui/**/*.stories.mdx",
+    "../packages/ui/**/*.stories.@(ts|tsx)",
   ],
   addons: [
     "@storybook/addon-links",
+    "@storybook/addon-controls",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     {
