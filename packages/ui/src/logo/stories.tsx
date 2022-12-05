@@ -5,6 +5,8 @@ import { expect } from "@storybook/jest";
 
 export default {
   title: "Logo",
+  height: 100,
+  width: 100,
   component: Logo,
 } as ComponentMeta<typeof Logo>;
 
