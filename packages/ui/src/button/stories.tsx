@@ -1,5 +1,5 @@
-import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Button } from "./button";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Button } from ".";
 
 import { within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
