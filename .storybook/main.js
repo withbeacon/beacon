@@ -7,6 +7,7 @@ module.exports = {
     "../packages/ui/**/*.stories.@(ts|tsx)",
   ],
   addons: [
+    "@storybook/addon-a11y",
     "@storybook/addon-links",
     "@storybook/addon-controls",
     "@storybook/addon-essentials",
@@ -28,4 +29,7 @@ module.exports = {
   core: {
     builder: "webpack5",
   },
+  features: {
+    interactionsDebugger: true,
+  }
 };
