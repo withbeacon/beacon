@@ -21,6 +21,7 @@
     "turbo": "^1.5.5"
   },
   "devDependencies": {
+    "@bud/config": "*",
     "@storybook/addon-actions": "^6.5.14",
     "@storybook/addon-controls": "^6.5.14",
     "@storybook/addon-docs": "^6.5.14",
@@ -32,8 +33,12 @@
     "@storybook/react": "^6.5.14",
     "@storybook/testing-library": "^0.0.13",
     "eslint-plugin-storybook": "^0.6.7",
+    "postcss": "^8.4.19",
+    "postcss-import": "^15.0.1",
+    "postcss-loader": "^7.0.2",
     "prettier-plugin-tailwindcss": "^0.2.0",
     "storybook": "^6.5.14",
+    "tailwindcss": "^3.1.8",
     "webpack": "^5.75.0"
   }
 }
