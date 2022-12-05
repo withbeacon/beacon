@@ -11,7 +11,10 @@
     "clean:workspaces": "turbo clean",
     "clean": "rm -rf node_modules .turbo .vercel",
     "lint": "turbo lint && manypkg check",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "test-storybook": "test-storybook"
   },
   "dependencies": {
     "@manypkg/cli": "^0.19.2",
@@ -19,6 +22,28 @@
     "turbo": "^1.5.5"
   },
   "devDependencies": {
-    "prettier-plugin-tailwindcss": "^0.2.0"
+    "@bud/config": "*",
+    "@storybook/addon-a11y": "^6.5.14",
+    "@storybook/addon-actions": "^6.5.14",
+    "@storybook/addon-controls": "^6.5.14",
+    "@storybook/addon-docs": "^6.5.14",
+    "@storybook/addon-interactions": "^6.5.14",
+    "@storybook/addon-links": "^6.5.14",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/addon-storysource": "^6.5.14",
+    "@storybook/builder-webpack5": "^6.5.14",
+    "@storybook/jest": "^0.0.10",
+    "@storybook/manager-webpack5": "^6.5.14",
+    "@storybook/react": "^6.5.14",
+    "@storybook/test-runner": "^0.9.1",
+    "@storybook/testing-library": "^0.0.13",
+    "eslint-plugin-storybook": "^0.6.7",
+    "postcss": "^8.4.19",
+    "postcss-import": "^15.0.1",
+    "postcss-loader": "^7.0.2",
+    "prettier-plugin-tailwindcss": "^0.2.0",
+    "storybook": "^6.5.14",
+    "tailwindcss": "^3.1.8",
+    "webpack": "^5.75.0"
   }
 }
