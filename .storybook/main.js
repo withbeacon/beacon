@@ -5,6 +5,12 @@ module.exports = {
 
     "../packages/ui/**/*.stories.mdx",
     "../packages/ui/**/*.stories.@(ts|tsx)",
+
+    "../apps/web/src/**/stories.mdx",
+    "../apps/web/src/**/stories.@(ts|tsx)",
+
+    "../packages/ui/**/stories.mdx",
+    "../packages/ui/**/stories.@(ts|tsx)",
   ],
   addons: [
     "@storybook/addon-a11y",
