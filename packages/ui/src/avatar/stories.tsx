@@ -1,5 +1,5 @@
-import type { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Avatar } from "./avatar";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Avatar } from ".";
 
 import { expect } from "@storybook/jest";
 
