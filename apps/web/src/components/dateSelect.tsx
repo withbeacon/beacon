@@ -51,7 +51,7 @@ export function DateSelect() {
     >
       <SelectPrimitive.Trigger asChild aria-label="Date Picker">
         <div>
-          <Button filled onClick={() => {}} intent="normal" size="sm">
+          <Button filled intent="normal" size="sm">
             <CalendarIcon />
             {active}
           </Button>
