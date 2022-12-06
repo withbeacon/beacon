@@ -2,7 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { Prisma } from "@prisma/client";
 
 import { router, protectedProcedure } from "../trpc";
-import { load } from "cheerio";
+import { pageMetadata } from "../utils";
 import { z } from "zod";
 
 export const websiteRouter = router({
@@ -14,39 +14,7 @@ export const websiteRouter = router({
     )
     .mutation(async ({ ctx, input }) => {
       const { url } = input;
-
-      async function getPageDetails(): Promise<{
-        name: string;
-        favicon: string | null;
-      }> {
-        const resp = await fetch(url);
-        const html = await resp.text();
-        const $ = load(html);
-
-        let favicon = $("link[rel='icon']").attr("href") || null;
-        let title = $("title").text();
-
-        // remove all the seperators
-        let [name, _] = title.split(/[-|:|−|–]/);
-
-        if (!name) {
-          name = `${ctx.session.user?.name}'s website`;
-        }
-
-        name = name.trim();
-        favicon = favicon ? new URL(favicon, url).href : null;
-        favicon = favicon ? await imageUrl(favicon) : null;
-
-        return { name, favicon };
-      }
-
-      async function imageUrl(url: string) {
-        const resp = await fetch(url);
-        const blob = await resp.blob();
-        return URL.createObjectURL(blob);
-      }
-
-      const { name, favicon } = await getPageDetails();
+      const { name, favicon } = await pageMetadata(url, ctx.session.user?.name);
 
       try {
         return await ctx.prisma.website.create({
