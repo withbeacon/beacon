@@ -1,46 +1,9 @@
 import { TRPCError } from "@trpc/server";
-import { Prisma } from "@prisma/client";
 
 import { router, protectedProcedure } from "../trpc";
-import { pageMetadata } from "../utils";
 import { z } from "zod";
 
 export const websiteRouter = router({
-  add: protectedProcedure
-    .input(
-      z.object({
-        url: z.string(),
-      })
-    )
-    .mutation(async ({ ctx, input }) => {
-      const { url } = input;
-      const { name, favicon } = await pageMetadata(url, ctx.session.user?.name);
-
-      try {
-        return await ctx.prisma.website.create({
-          data: {
-            url,
-            name,
-            favicon,
-            user: {
-              connect: {
-                id: ctx.userId,
-              },
-            },
-          },
-        });
-      } catch (err) {
-        if (err instanceof Prisma.PrismaClientKnownRequestError) {
-          if (err.code === "P2002") {
-            throw new TRPCError({
-              code: "CONFLICT",
-              message: "Website already exists",
-            });
-          }
-        }
-      }
-    }),
-
   all: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.website.findMany({
       where: {
