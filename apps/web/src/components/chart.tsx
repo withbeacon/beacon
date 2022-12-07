@@ -5,7 +5,7 @@ import { Bar, XAxis, Tooltip, ResponsiveContainer, BarChart } from "recharts";
 import { EyeIcon, UserIcon } from "@bud/ui";
 
 import { trpc, date, diffInDays, formatDate } from "~/utils";
-import { primaryColors } from "@bud/config/colors";
+import { primary, gray } from "@bud/config/colors";
 import { useWebsite, useMode } from "~/store";
 import { useTheme } from "next-themes";
 import { cva } from "class-variance-authority";
@@ -71,14 +71,10 @@ export default function Chart({
         <BarChart width={50} height={200} data={data}>
           <defs>
             <linearGradient id="bar-background" x1="0" y1="0" x2="0" y2="1">
-              <stop
-                offset="5%"
-                stopColor={primaryColors["500"]}
-                stopOpacity={0.2}
-              />
+              <stop offset="5%" stopColor={primary["500"]} stopOpacity={0.2} />
               <stop
                 offset="95%"
-                stopColor={primaryColors["500"]}
+                stopColor={primary["500"]}
                 stopOpacity={0.05}
               />
             </linearGradient>
@@ -87,15 +83,12 @@ export default function Chart({
             radius={[8, 8, 0, 0]}
             dataKey="value"
             fill="url(#bar-background)"
-            stroke={primaryColors["500"]}
+            stroke={primary["500"]}
           />
           <XAxis
             dataKey="name"
             axisLine={{
-              stroke:
-                resolvedTheme === "dark"
-                  ? primaryColors["800"]
-                  : primaryColors["200"],
+              stroke: resolvedTheme === "dark" ? gray["800"] : gray["200"],
               strokeWidth: 1,
             }}
             tickLine={false}

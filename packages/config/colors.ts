@@ -1,4 +1,4 @@
-export const primaryColors = {
+export const primary = {
   100: "#C1D3F5",
   200: "#95B4EE",
   300: "#8CADED",
@@ -8,4 +8,17 @@ export const primaryColors = {
   700: "#1F58C6",
   800: "#18449A",
   900: "#0E2758",
+};
+
+export const gray = {
+  50: "#F9F9FB",
+  100: "#F3F3F6",
+  200: "#E5E6EB",
+  300: "#D1D2DB",
+  400: "#9B9DB0",
+  500: "#646787",
+  600: "#484B66",
+  700: "#242632",
+  800: "#1C1D27",
+  900: "#13141B",
 };
