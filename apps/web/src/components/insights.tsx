@@ -2,7 +2,7 @@ import { ArrowUpIcon } from "@bud/ui";
 
 import { cx } from "class-variance-authority";
 import { trpc } from "~/utils";
-import { useWebsite } from "~/store";
+import { useWebsite, useDate } from "~/store";
 
 interface Props {
   label: string;
@@ -13,7 +13,7 @@ interface Props {
 
 function InsightCard({ label, value, growth, description }: Props) {
   return (
-    <div className="flex flex-col p-4">
+    <div className="flex flex-col p-4 min-w-[75%] md:min-w-0 md:w-full">
       <span className="text-sm text-gray-500 dark:text-gray-400 md:text-base">{label}</span>
 
       <div className="flex w-full justify-between" title={description}>
@@ -34,7 +34,12 @@ function InsightCard({ label, value, growth, description }: Props) {
 
 export function Insights() {
   const [id] = useWebsite();
-  const query = trpc.website.get.useQuery(id || "");
+  const [date] = useDate();
+  const query = trpc.website.get.useQuery({
+    id: id as string,
+    from: date.from,
+    to: date.to,
+  });
 
   if (!id) {
     return <></>;
@@ -85,7 +90,7 @@ export function Insights() {
   ];
 
   return (
-    <div className="grid w-full grid-cols-1 grid-rows-3 gap-4 py-2 px-4 text-gray-900 dark:text-gray-100 md:grid-cols-3 md:grid-rows-1">
+    <div className="flex flex-row gap-4 py-2 px-4 text-gray-900 dark:text-gray-100 overflow-scroll hide-scrollbar">
       {stats.map((stat) => (
         <InsightCard {...stat} key={stat.label} />
       ))}
