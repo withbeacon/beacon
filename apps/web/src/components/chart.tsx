@@ -66,7 +66,7 @@ export default function Chart({
   if (!query.data) return null;
 
   return (
-    <div className="mb-6 h-full w-full px-6">
+    <div className="mb-6 h-full w-full px-6 hidden sm:block">
       <ResponsiveContainer height={320} width="100%">
         <BarChart width={50} height={200} data={data}>
           <defs>
