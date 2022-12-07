@@ -22,23 +22,27 @@ const timer = setInterval(() => {
   }
 }, 500);
 
+function send() {
+  const payload = {
+    id,
+    url,
+    visitTime,
+    screen,
+    referrer,
+    userAgent,
+    title,
+    events,
+  };
+
+  fetch(COLLECT_API, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "hidden") {
-    const payload = {
-      id,
-      url,
-      visitTime,
-      screen,
-      referrer,
-      userAgent,
-      title,
-      events,
-    };
-
-    fetch(COLLECT_API, {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
+    send();
   }
 });
 
@@ -80,3 +84,14 @@ window.addEventListener("focus", async () => {
 window.addEventListener("beforeunload", async () => {
   clearInterval(timer);
 });
+
+let previousUrl = "";
+
+window.addEventListener('popstate', function() {
+  if (previousUrl !== window.location.href) {
+    send();
+  }
+
+  previousUrl = window.location.href;
+});
+
