@@ -5,6 +5,7 @@ import { Bar, XAxis, Tooltip, ResponsiveContainer, BarChart } from "recharts";
 import { EyeIcon, UserIcon } from "@bud/ui";
 
 import { trpc, date, diffInDays, formatDate } from "~/utils";
+import { primaryColors } from "@bud/config/colors";
 import { useWebsite, useMode } from "~/store";
 import { useTheme } from "next-themes";
 import { cva } from "class-variance-authority";
@@ -70,19 +71,33 @@ export default function Chart({
         <BarChart width={50} height={200} data={data}>
           <defs>
             <linearGradient id="bar-background" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#4178E1" stopOpacity={0.2} />
-              <stop offset="95%" stopColor="#4178E1" stopOpacity={0.05} />
+              <stop
+                offset="5%"
+                stopColor={primaryColors["500"]}
+                stopOpacity={0.2}
+              />
+              <stop
+                offset="95%"
+                stopColor={primaryColors["500"]}
+                stopOpacity={0.05}
+              />
             </linearGradient>
           </defs>
           <Bar
             radius={[8, 8, 0, 0]}
             dataKey="value"
             fill="url(#bar-background)"
-            stroke="#4178E1"
+            stroke={primaryColors["500"]}
           />
           <XAxis
             dataKey="name"
-            axisLine={{ stroke: resolvedTheme === "dark" ? "#1C1D27" : "#E5E6EB", strokeWidth: 1 }}
+            axisLine={{
+              stroke:
+                resolvedTheme === "dark"
+                  ? primaryColors["800"]
+                  : primaryColors["200"],
+              strokeWidth: 1,
+            }}
             tickLine={false}
           />
           <Tooltip
@@ -115,7 +130,7 @@ function BarTooltip({
     const data = payload[0];
 
     return (
-      <div className="flex flex-col gap-2 rounded border-none bg-white dark:bg-gray-900 p-2 shadow outline-none">
+      <div className="flex flex-col gap-2 rounded border-none bg-white p-2 shadow outline-none dark:bg-gray-900">
         <div className="flex gap-2">
           {mode === "pageViews" ? <EyeIcon /> : <UserIcon />}
           <span>{data?.value}</span>
