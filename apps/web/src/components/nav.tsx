@@ -12,13 +12,19 @@ import { Feedback } from "~/components/widgets";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useDate } from "~/store";
 import { trpc } from "~/utils";
 
 export function Nav() {
   const router = useRouter();
   const { data } = useSession();
   const { id } = router.query;
-  const query = trpc.website.get.useQuery(id as string);
+  const [date] = useDate();
+  const query = trpc.website.get.useQuery({
+    id: id as string,
+    from: date.from,
+    to: date.to,
+  });
 
   const baseIconStyles =
     "w-6 h-6 hover:opacity-90 cursor-pointer text-gray-800 dark:text-gray-200";

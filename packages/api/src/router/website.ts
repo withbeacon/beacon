@@ -12,56 +12,81 @@ export const websiteRouter = router({
     });
   }),
 
-  get: protectedProcedure.input(z.string()).query(async ({ ctx, input }) => {
-    const website = await ctx.prisma.website.findUnique({
-      where: {
-        id: input,
-      },
-    });
+  get: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        from: z.date(),
+        to: z.date(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { id, from, to } = input;
 
-    const sessions = await ctx.prisma.userSession.count({
-      where: {
-        website: {
-          id: input,
+      const website = await ctx.prisma.website.findUnique({
+        where: {
+          id,
         },
-      },
-    });
-
-    const pageViews = await ctx.prisma.pageView.count({
-      where: {
-        website: {
-          id: input,
-        },
-      },
-    });
-
-    if (!website) {
-      throw new TRPCError({
-        code: "NOT_FOUND",
-        message: "Website not found",
       });
-    }
 
-    // get average duration of all visits of all pages
-    const avgDuration = await ctx.prisma.pageView.aggregate({
-      where: {
-        website: {
-          id: input,
+      const sessions = await ctx.prisma.userSession.count({
+        where: {
+          website: {
+            id,
+          },
+
+          createdAt: {
+            gte: from,
+            lte: to,
+          },
         },
-      },
+      });
 
-      _avg: {
-        visitDuration: true,
-      },
-    });
+      const pageViews = await ctx.prisma.pageView.count({
+        where: {
+          website: {
+            id,
+          },
 
-    return {
-      sessions: sessions,
-      pageViews: pageViews,
-      avgDuration: avgDuration._avg.visitDuration,
-      ...website,
-    };
-  }),
+          createdAt: {
+            gte: from,
+            lte: to,
+          },
+        },
+      });
+
+      if (!website) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Website not found",
+        });
+      }
+
+      // get average duration of all visits of all pages
+      const avgDuration = await ctx.prisma.pageView.aggregate({
+        where: {
+          website: {
+            id,
+          },
+
+          createdAt: {
+            gte: from,
+            lte: to,
+          },
+        },
+
+        _avg: {
+          visitDuration: true,
+        },
+      });
+
+      return {
+        sessions: sessions,
+        pageViews: pageViews,
+        avgDuration: avgDuration._avg.visitDuration,
+        ...website,
+      };
+    }),
 
   metrics: protectedProcedure
     .input(

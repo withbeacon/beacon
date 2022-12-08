@@ -1,21 +1,27 @@
 import type { PropsWithChildren } from "react";
-import { CrossIcon, HelpIcon, SearchIcon, SelectIcon } from "@bud/ui";
+import { CrossIcon, HelpIcon, SearchIcon } from "@bud/ui";
 import { WebsiteSelect } from "~/components";
 import { Feedback } from "~/components/widgets";
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useDate } from "~/store";
+import { useRouter } from "next/router";
 import { useSpring, animated } from "@react-spring/web";
 import { trpc } from "~/utils";
 import { cx } from "class-variance-authority";
-import { useRouter } from "next/router";
 
 export function MobileMenu({ children }: PropsWithChildren) {
   const router = useRouter();
   const { data } = useSession();
   const { id } = router.query;
+  const [date] = useDate();
   const [open, setOpen] = useState(false);
-  const query = trpc.website.get.useQuery(id as string);
+  const query = trpc.website.get.useQuery({
+    id: id as string,
+    from: date.from,
+    to: date.to,
+  });
 
   const parentSprings = useSpring({
     from: {
@@ -46,7 +52,7 @@ export function MobileMenu({ children }: PropsWithChildren) {
       >
         <div
           className={cx(
-            "absolute bottom-0 left-0 flex w-screen flex-col gap-6 rounded-t-2xl bg-gray-50 dark:bg-gray-800 p-6 transition duration-500",
+            "absolute bottom-0 left-0 flex w-screen flex-col gap-6 rounded-t-2xl bg-gray-50 p-6 transition duration-500 dark:bg-gray-800",
             open ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
           )}
         >
