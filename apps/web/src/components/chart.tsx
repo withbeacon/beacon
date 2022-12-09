@@ -99,33 +99,3 @@ function BarTooltip({
   return null;
 }
 
-const buttonStyles = cva("flex items-center gap-2 px-4 py-2", {
-  variants: {
-    l: {
-      true: "rounded-l-lg",
-    },
-    r: {
-      true: "rounded-r-lg",
-    },
-    active: {
-      true: "bg-gray-800 text-gray-100",
-      false: "text-gray-800",
-    },
-  },
-});
-
-interface ChartButtonProps extends VariantProps<typeof buttonStyles> {
-  onClick?: () => void;
-}
-
-function ChartButton({
-  onClick,
-  children,
-  ...props
-}: PropsWithChildren<ChartButtonProps>) {
-  return (
-    <button onClick={() => onClick?.()} className={buttonStyles(props)}>
-      {children}
-    </button>
-  );
-}
