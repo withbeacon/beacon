@@ -5,7 +5,7 @@ import { CountriesMetrics } from "./countries";
 import { BrowsersMetrics } from "./browsers";
 import { DevicesMetrics } from "./devices";
 
-import { useWebsite } from "~/store";
+import { useDate, useWebsite } from "~/store";
 import { trpc } from "~/utils";
 
 function hasData<T>(data: T): boolean {
@@ -14,9 +14,12 @@ function hasData<T>(data: T): boolean {
 
 export function Metrics() {
   const [id] = useWebsite();
+  const [date] = useDate();
 
   const { data, error, isLoading, isError } = trpc.website.metrics.useQuery({
     websiteId: id as string,
+    from: date.from,
+    to: date.to,
   });
 
   if (isLoading) {
