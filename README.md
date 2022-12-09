@@ -26,3 +26,4 @@ Bud is an analytics tool that you always wanted to use, it's minimal, fast and p
 - `db`: Prisma config and client
 - `tracker`: The source code for tracker script
 - `api`: TRPC api routes
+- `basics`: Framework & runtime agnostic utility functions.
