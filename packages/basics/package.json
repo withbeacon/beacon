@@ -1,0 +1,8 @@
+{
+  "name": "@bud/basics",
+  "version": "0.0.1",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "author": "Vedant Nandwana",
+  "license": "AGPL-3.0"
+}
