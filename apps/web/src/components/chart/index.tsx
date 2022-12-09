@@ -1,14 +1,9 @@
-import type { VariantProps } from "class-variance-authority";
-import type { PropsWithChildren } from "react";
-import type { Mode } from "~/store";
-
 import { Bar, XAxis, Tooltip, ResponsiveContainer, BarChart } from "recharts";
-import { EyeIcon, UserIcon } from "@bud/ui";
+import { BarTooltip } from "./tooltip";
 
 import { trpc } from "~/utils";
 import { formatDate } from "@bud/basics";
 import { primary, gray } from "@bud/config/colors";
-import { cva } from "class-variance-authority";
 import { useWebsite, useDate, useMode } from "~/store";
 import { useTheme } from "next-themes";
 
@@ -70,32 +65,5 @@ export default function Chart() {
       </ResponsiveContainer>
     </div>
   );
-}
-
-interface BarTooltipProps {
-  active?: boolean;
-  payload?: { value: number; name: string }[];
-  mode: Mode;
-}
-
-function BarTooltip({
-  active = false,
-  mode = "pageViews",
-  payload,
-}: BarTooltipProps) {
-  if (active && payload && payload.length) {
-    const data = payload[0];
-
-    return (
-      <div className="flex flex-col gap-2 rounded border-none bg-white p-2 shadow outline-none dark:bg-gray-900">
-        <div className="flex gap-2">
-          {mode === "pageViews" ? <EyeIcon /> : <UserIcon />}
-          <span>{data?.value}</span>
-        </div>
-      </div>
-    );
-  }
-
-  return null;
 }
 
