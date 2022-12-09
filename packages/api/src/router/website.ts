@@ -1,5 +1,17 @@
 import { TRPCError } from "@trpc/server";
 
+import {
+  getDaysBetween,
+  getWeeksBetween,
+  getMonthsBetween,
+  getDateFormat,
+  addDays,
+  addWeeks,
+  addMonths,
+  toDay,
+  toWeek,
+  toMonth,
+} from "../utils";
 import { router, protectedProcedure } from "../trpc";
 import { z } from "zod";
 
@@ -92,8 +104,8 @@ export const websiteRouter = router({
     .input(
       z.object({
         websiteId: z.string(),
-        from: z.date().optional(),
-        to: z.date().optional(),
+        from: z.date(),
+        to: z.date(),
       })
     )
     .query(async ({ ctx, input }) => {
@@ -213,6 +225,111 @@ export const websiteRouter = router({
         }
       });
 
+      const format = getDateFormat(from);
+      let sessionMetrics: Record<number | string, number> = {};
+      let pageViewMetrics: Record<number | string, number> = {};
+
+      switch (format) {
+        case "daily": {
+          const days = getDaysBetween(from, to);
+
+          for (let i = 0; i < days; i++) {
+            const date = addDays(from, i);
+
+            sessionMetrics[date.getTime()] = 0;
+            pageViewMetrics[date.getTime()] = 0;
+          }
+
+          sessions.forEach((session) => {
+            const date = toDay(session.createdAt);
+
+            if (!sessionMetrics[date.getTime()]) {
+              sessionMetrics[date.getTime()] = 0;
+            }
+
+            sessionMetrics[date.getTime()] += 1;
+          });
+
+          pageViews.forEach((pageView) => {
+            const date = toDay(pageView.createdAt);
+
+            if (!pageViewMetrics[date.getTime()]) {
+              pageViewMetrics[date.getTime()] = 0;
+            }
+
+            pageViewMetrics[date.getTime()] += 1;
+          });
+
+          break;
+        }
+
+        case "weekly": {
+          const weeks = getWeeksBetween(from, to);
+
+          for (let i = 0; i < weeks; i++) {
+            const date = addWeeks(from, i);
+
+            sessionMetrics[date.getTime()] = 0;
+            pageViewMetrics[date.getTime()] = 0;
+          }
+
+          sessions.forEach((session) => {
+            const date = toWeek(session.createdAt);
+
+            if (sessionMetrics[date.getTime()]) {
+              sessionMetrics[date.getTime()] += 1;
+            }
+
+            sessionMetrics[date.getTime()] = 0;
+          });
+
+          pageViews.forEach((pageView) => {
+            const date = toWeek(pageView.createdAt);
+
+            if (!pageViewMetrics[date.getTime()]) {
+              pageViewMetrics[date.getTime()] = 0;
+            }
+
+            pageViewMetrics[date.getTime()] += 1;
+          });
+
+          break;
+        }
+
+        case "monthly": {
+          const months = getMonthsBetween(from, to);
+
+          for (let i = 0; i < months; i++) {
+            const date = addMonths(from, i);
+
+            sessionMetrics[date.getTime()] = 0;
+            pageViewMetrics[date.getTime()] = 0;
+          }
+
+          sessions.forEach((session) => {
+            const date = toMonth(session.createdAt);
+
+            if (sessionMetrics[date.getTime()]) {
+              sessionMetrics[date.getTime()] += 1;
+            }
+
+            sessionMetrics[date.getTime()] = 0;
+          });
+
+          pageViews.forEach((pageView) => {
+            const date = toMonth(pageView.createdAt);
+
+            if (!pageViewMetrics[date.getTime()]) {
+              pageViewMetrics[date.getTime()] = 0;
+            }
+
+            pageViewMetrics[date.getTime()] += 1;
+          });
+
+          break;
+        }
+      }
+
       return {
         devices,
         browsers,
@@ -220,8 +337,9 @@ export const websiteRouter = router({
         pages,
         events,
         queryParams,
-        sessions: sessions.map(({ createdAt, id }) => ({ createdAt, id })),
-        pageViews: pageViews.map(({ createdAt, id }) => ({ createdAt, id })),
+        sessions: sessionMetrics,
+        pageViews: pageViewMetrics,
+        timeFormat: format,
       };
     }),
 });
