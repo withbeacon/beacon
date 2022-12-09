@@ -1,72 +1,39 @@
 import type { VariantProps } from "class-variance-authority";
 import type { PropsWithChildren } from "react";
 import type { Mode } from "~/store";
+
 import { Bar, XAxis, Tooltip, ResponsiveContainer, BarChart } from "recharts";
 import { EyeIcon, UserIcon } from "@bud/ui";
 
-import { trpc, date, diffInDays, formatDate } from "~/utils";
+import { trpc, formatDate } from "~/utils";
 import { primary, gray } from "@bud/config/colors";
-import { useWebsite, useMode } from "~/store";
-import { useTheme } from "next-themes";
 import { cva } from "class-variance-authority";
+import { useWebsite, useDate, useMode } from "~/store";
+import { useTheme } from "next-themes";
 
-interface Props {
-  from?: Date;
-  to?: Date;
-}
-
-export default function Chart({
-  from = new Date(date().setDate(date().getDate() - 7)),
-  to = date(),
-}: Props) {
+export default function Chart() {
   const [id] = useWebsite();
-  const [mode, setMode] = useMode();
+  const [mode] = useMode();
+  const [date] = useDate();
   const { resolvedTheme } = useTheme();
-
-  const query = trpc.website.metrics.useQuery({
+  const { data: query } = trpc.website.metrics.useQuery({
     websiteId: id as string,
-    from,
-    to,
+    from: date.from,
+    to: date.to,
   });
 
-  const diff = diffInDays(from, to);
+  if (!query) {
+    return null;
+  }
 
-  const labels = sortDays(
-    Array.from({ length: diff }, (_, i) =>
-      new Date(new Date().setDate(to.getDate() - diff + i + 1)).toString()
-    )
-  );
-
-  const days = query.data?.[mode].reduce((rest, session) => {
-    const date = new Date(session.createdAt);
-    const day = formatDate(date);
-
-    if (rest[day]) {
-      rest[day] += 1;
-    } else {
-      rest[day] = 1;
-    }
-
-    return rest;
-  }, {} as Record<string, number>);
-
-  const sortedLabels = labels.map((label) => {
-    if (days?.[label]) {
-      return days?.[label];
-    } else {
-      return 0;
-    }
-  });
-
-  const data = sortedLabels.map((value, index) => ({
-    name: labels[index],
+  const data = Object.entries(query[mode]).map(([timestamp, value]) => ({
+    name: formatDate(new Date(+timestamp), query.timeFormat),
+    timestamp,
     value,
   }));
 
-  if (!query.data) return null;
-
   return (
-    <div className="mb-6 h-full w-full px-6 hidden sm:block">
+    <div className="mb-6 hidden h-full w-full px-6 sm:block">
       <ResponsiveContainer height={320} width="100%">
         <BarChart width={50} height={200} data={data}>
           <defs>
@@ -102,10 +69,6 @@ export default function Chart({
       </ResponsiveContainer>
     </div>
   );
-}
-
-function sortDays(arr: string[]): string[] {
-  return arr.map((a) => formatDate(new Date(a)));
 }
 
 interface BarTooltipProps {
