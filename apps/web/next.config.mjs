@@ -14,7 +14,7 @@ function defineNextConfig(config) {
   return config;
 }
 
-export default withTM(["@bud/api", "@bud/db", "@bud/ui", "@bud/auth"])(
+export default withTM(["@bud/api", "@bud/db", "@bud/ui", "@bud/auth", "@bud/basics"])(
   defineNextConfig({
     reactStrictMode: true,
     swcMinify: true,
