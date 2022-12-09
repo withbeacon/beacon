@@ -1,8 +1,25 @@
-export function formatDate(date: Date): string {
-  const d = date.getDate();
-  return d < 10 ? `0${d}` : `${d}`;
-}
+type FormatType = "monthly" | "weekly" | "daily";
 
+export function formatDate(date: Date, formatType: FormatType): string {
+  switch (formatType) {
+    case "monthly": {
+      return date.toLocaleString("en-US", {
+        month: "short",
+      });
+    }
+
+    case "weekly": {
+      return date.toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
+      });
+    }
+
+    case "daily": {
+      return `${date.getDate() === 1 ? "" : "0"}${date.getDate()}`;
+    }
+  }
+}
 export function date(): Date {
   const d = new Date();
   d.setHours(d.getHours() + 1, 0, 0, 0);
