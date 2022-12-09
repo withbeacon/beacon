@@ -63,6 +63,7 @@ importers:
     specifiers:
       '@bud/api': '*'
       '@bud/auth': '*'
+      '@bud/basics': '*'
       '@bud/config': '*'
       '@bud/db': '*'
       '@bud/ui': '*'
@@ -103,6 +104,7 @@ importers:
     dependencies:
       '@bud/api': link:../../packages/api
       '@bud/auth': link:../../packages/auth
+      '@bud/basics': link:../../packages/basics
       '@bud/db': link:../../packages/db
       '@bud/ui': link:../../packages/ui
       '@feedback-fish/react': 1.2.1_react@18.2.0
@@ -145,6 +147,7 @@ importers:
   packages/api:
     specifiers:
       '@bud/auth': '*'
+      '@bud/basics': '*'
       '@bud/db': '*'
       '@trpc/client': 10.0.0-proxy-beta.13
       '@trpc/server': 10.0.0-proxy-beta.13
@@ -154,6 +157,7 @@ importers:
       zod: ^3.18.0
     dependencies:
       '@bud/auth': link:../auth
+      '@bud/basics': link:../basics
       '@bud/db': link:../db
       '@trpc/client': 10.0.0-proxy-beta.13_itipy43llokwyezwccgik4t2sm
       '@trpc/server': 10.0.0-proxy-beta.13
@@ -174,13 +178,16 @@ importers:
       typescript: ^4.8.3
     dependencies:
       '@bud/db': link:../db
-      '@next-auth/prisma-adapter': 1.0.5_2pl3b2nwmjya7el2zbe6cwkney
+      '@next-auth/prisma-adapter': 1.0.5_fqcup64xctiq4xx7sryvppsluq
       next: 13.0.2_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.16.4_pknogjuzx4bv7zxtatcb2ahtsq
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
       typescript: 4.8.4
+
+  packages/basics:
+    specifiers: {}
 
   packages/config:
     specifiers:
@@ -2365,13 +2372,13 @@ packages:
       glob-to-regexp: 0.3.0
     dev: true
 
-  /@next-auth/prisma-adapter/1.0.5_2pl3b2nwmjya7el2zbe6cwkney:
+  /@next-auth/prisma-adapter/1.0.5_fqcup64xctiq4xx7sryvppsluq:
     resolution: {integrity: sha512-VqMS11IxPXrPGXw6Oul6jcyS/n8GLOWzRMrPr3EMdtD6eOalM6zz05j08PcNiis8QzkfuYnCv49OvufTuaEwYQ==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3'
       next-auth: ^4
     dependencies:
-      '@prisma/client': 4.6.1
+      '@prisma/client': 4.7.1
       next-auth: 4.16.4_pknogjuzx4bv7zxtatcb2ahtsq
     dev: false
 
@@ -2715,8 +2722,8 @@ packages:
       webpack: 5.75.0
     dev: true
 
-  /@prisma/client/4.6.1:
-    resolution: {integrity: sha512-M1+NNrMzqaOIxT7PBGcTs3IZo7d1EW/+gVQd4C4gUgWBDGgD9AcIeZnUSidgWClmpMSgVUdnVORjsWWGUameYA==}
+  /@prisma/client/4.7.1:
+    resolution: {integrity: sha512-/GbnOwIPtjiveZNUzGXOdp7RxTEkHL4DZP3vBaFNadfr6Sf0RshU5EULFzVaSi9i9PIK9PYd+1Rn7z2B2npb9w==}
     engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
@@ -2725,7 +2732,7 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32
+      '@prisma/engines-version': 4.7.1-1.272861e07ab64f234d3ffc4094e32bd61775599c
     dev: false
 
   /@prisma/client/4.7.1_prisma@4.7.1:
@@ -2740,10 +2747,6 @@ packages:
     dependencies:
       '@prisma/engines-version': 4.7.1-1.272861e07ab64f234d3ffc4094e32bd61775599c
       prisma: 4.7.1
-    dev: false
-
-  /@prisma/engines-version/4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32:
-    resolution: {integrity: sha512-HUCmkXAU2jqp2O1RvNtbE+seLGLyJGEABZS/R38rZjSAafAy0WzBuHq+tbZMnD+b5OSCsTVtIPVcuvx1ySxcWQ==}
     dev: false
 
   /@prisma/engines-version/4.7.1-1.272861e07ab64f234d3ffc4094e32bd61775599c:
@@ -7105,7 +7108,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -14453,6 +14456,17 @@ packages:
     peerDependenciesMeta:
       bluebird:
         optional: true
+    dev: true
+
+  /promise-inflight/1.0.1_bluebird@3.7.2:
+    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
+    dependencies:
+      bluebird: 3.7.2
     dev: true
 
   /promise.allsettled/1.0.6:
