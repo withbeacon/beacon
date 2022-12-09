@@ -1,6 +1,7 @@
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
-import { Auth } from "~/components";
+import { Auth, Seo } from "~/components";
+
 import { trpc } from "~/utils/trpc";
 import "~/styles/globals.css";
 import "~/styles/fonts.css";
@@ -16,6 +17,7 @@ function App({
     <SessionProvider session={session}>
       <Auth>
         <ThemeProvider attribute="class">
+          <Seo />
           <Component {...pageProps} />
         </ThemeProvider>
       </Auth>
