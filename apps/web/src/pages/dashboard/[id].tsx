@@ -1,5 +1,6 @@
 import { Nav, Insights, Metrics } from "~/components";
 import { Loading } from "@bud/ui";
+import Head from "next/head";
 
 import { useWebsite, useDate } from "~/store";
 import { useRouter } from "next/router";
@@ -45,11 +46,17 @@ export default function Analytics() {
   }
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900">
-      <Nav />
-      <Insights />
-      <Chart />
-      <Metrics />
-    </div>
+    <>
+      <Head>
+        <title>Bud – {data.name}</title>
+      </Head>
+
+      <div className="bg-gray-100 dark:bg-gray-900">
+        <Nav />
+        <Insights />
+        <Chart />
+        <Metrics />
+      </div>
+    </>
   );
 }
