@@ -16,7 +16,7 @@ export function formatDate(date: Date, formatType: FormatType): string {
     }
 
     case "daily": {
-      return `${date.getDate() === 1 ? "" : "0"}${date.getDate()}`;
+      return `${date.getDate() > 9 ? "" : "0"}${date.getDate()}`;
     }
   }
 }
