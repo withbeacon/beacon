@@ -1,5 +1,5 @@
 import { atom, useAtom } from "jotai";
-import { fromNow } from "~/utils";
+import { fromNow } from "@bud/basics";
 
 interface DateAtom {
   from: Date;

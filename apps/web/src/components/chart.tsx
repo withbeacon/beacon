@@ -5,7 +5,8 @@ import type { Mode } from "~/store";
 import { Bar, XAxis, Tooltip, ResponsiveContainer, BarChart } from "recharts";
 import { EyeIcon, UserIcon } from "@bud/ui";
 
-import { trpc, formatDate } from "~/utils";
+import { trpc } from "~/utils";
+import { formatDate } from "@bud/basics";
 import { primary, gray } from "@bud/config/colors";
 import { cva } from "class-variance-authority";
 import { useWebsite, useDate, useMode } from "~/store";

@@ -8,7 +8,7 @@ import { Button } from "@bud/ui";
 import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { cx } from "class-variance-authority";
-import { fromNow } from "~/utils";
+import { fromNow } from "@bud/basics";
 import { useState } from "react";
 import { useDate } from "~/store";
 
