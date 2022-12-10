@@ -33,8 +33,11 @@ module.exports = {
           900: "#0E2758",
         },
       },
-      shadow: {
-        'soft-base': '0px 4px 46px 1px rgba(17, 18, 21, 0.05)',
+      backgroundImage: {
+        "insight-card": "linear-gradient(180deg, #1C1D27 0%, rgba(28, 29, 39, 0) 116.07%)",
+      },
+      dropShadow: {
+        "insight-card": "2px 2px 48px rgba(194, 194, 194, 0.00)",
       }
     },
   },
