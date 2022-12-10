@@ -1,13 +1,8 @@
-import {
-  SearchIcon,
-  HelpIcon,
-  MenuIcon,
-  UserIcon,
-  SelectIcon,
-} from "@bud/ui";
-import { Logo } from "@bud/ui";
+import { SearchIcon, HelpIcon, MenuIcon, UserIcon, SelectIcon } from "@bud/ui";
 import { MobileMenu, DateSelect, WebsiteSelect } from "~/components";
+import { SettingsDropdown } from "./settingsDropdown";
 import { Feedback } from "~/components/widgets";
+import { Logo } from "@bud/ui";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -62,14 +57,17 @@ export function Nav() {
         <Feedback>
           <HelpIcon aria-label="Help" className={baseIconStyles} />
         </Feedback>
-        <picture>
-          <source srcSet={data?.user?.image || ""} />
-          <UserIcon
-            aria-label="Settings"
-            className={baseIconStyles + " -ml-1"}
-          />
-        </picture>
+        <SettingsDropdown>
+          <picture>
+            <source srcSet={data?.user?.image || ""} />
+            <UserIcon
+              aria-label="Settings"
+              className={baseIconStyles + " -ml-1"}
+            />
+          </picture>
+        </SettingsDropdown>
       </div>
+
       <MobileMenu>
         <MenuIcon className={baseIconStyles} />
       </MobileMenu>

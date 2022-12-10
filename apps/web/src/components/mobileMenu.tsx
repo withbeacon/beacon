@@ -2,6 +2,7 @@ import type { PropsWithChildren } from "react";
 import { CrossIcon, HelpIcon, SearchIcon } from "@bud/ui";
 import { WebsiteSelect } from "~/components";
 import { Feedback } from "~/components/widgets";
+import { SettingsDropdown } from "./settingsDropdown";
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
@@ -84,16 +85,18 @@ export function MobileMenu({ children }: PropsWithChildren) {
               </div>
             </WebsiteSelect>
           )}
-          <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
-            {data?.user && (
-              <img
-                className="h-7 w-7 rounded-full"
-                src={data?.user?.image || ""}
-                alt={data?.user?.name || "Bud User"}
-              />
-            )}
-            <p>Settings</p>
-          </div>
+          <SettingsDropdown>
+            <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
+              {data?.user && (
+                <img
+                  className="h-7 w-7 rounded-full"
+                  src={data?.user?.image || ""}
+                  alt={data?.user?.name || "Bud User"}
+                />
+              )}
+              <p>Settings</p>
+            </div>
+          </SettingsDropdown>
         </div>
       </animated.div>
     </>
