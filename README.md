@@ -12,6 +12,16 @@ Bud is an analytics tool that you always wanted to use, it's minimal, fast and p
 
 > NOTE: Bud is highly under development and not in condition to use right now.
 
+# Features
+- [x] ⚡ Blazing fast tracking script (1.2kb)
+- [x] ☘️ Simple and minimal ui, no bs
+- [x] 🔒 Privacy friendly; no one tracked is identifiable, you own your data 
+- [ ] 🚀 Command + K Launcher to get things done blazingly fast
+- [x] ✨ Just add the script snippet to your site and you're good to go! Dashboard will get automatically created for you!
+- [ ] 🌠 Share screenshots for your analytics in one click!
+- [ ] 📈 Get sharable links and share your dashboard with other people
+- [ ] 🤟 Framework agnostic tracking packages
+
 # Monorepo
 
 ## /apps
