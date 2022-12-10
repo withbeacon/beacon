@@ -1,34 +1,58 @@
+import type { Mode } from "~/store";
 import { ArrowUpIcon } from "@bud/ui";
 
 import { cx } from "class-variance-authority";
 import { trpc } from "~/utils";
-import { useWebsite, useDate } from "~/store";
+import { useWebsite, useMode, useDate } from "~/store";
 
 interface Props {
+  mode: Mode;
   label: string;
   value: number | string;
   growth: number;
   description: string;
 }
 
-function InsightCard({ label, value, growth, description }: Props) {
+function InsightCard({ mode, label, value, growth, description }: Props) {
+  const [currMode, setMode] = useMode();
+
+  function handleClick() {
+    if (mode === "viewDuration") {
+      return;
+    }
+
+    setMode(mode);
+  }
+
   return (
-    <div className="flex flex-col p-4 min-w-[75%] md:min-w-0 md:w-full">
-      <span className="text-sm text-gray-500 dark:text-gray-400 md:text-base">{label}</span>
+    <button
+      className={cx(
+        "flex min-w-[75%] flex-col px-4 py-3 outline-none rounded-2xl md:py-4 md:w-full md:min-w-0",
+        currMode === mode ? "bg-insight-card drop-shadow-insight-card" : null,
+      )}
+      onClick={handleClick}
+    >
+      <span className="text-sm text-gray-500 dark:text-gray-400 md:text-base">
+        {label}
+      </span>
 
       <div className="flex w-full justify-between" title={description}>
         <h2 className="mb-2 text-3xl font-bold md:text-4xl">{value}</h2>
-        <div className={cx(
-          "flex h-8 max-w-fit items-center gap-2 rounded-full",
-          growth < 0 ? "text-red-600 dark:text-red-200" : "text-green-600 dark:text-green-200"
-        )}>
+        <div
+          className={cx(
+            "flex h-8 max-w-fit items-center gap-2 rounded-full",
+            growth < 0
+              ? "text-red-600 dark:text-red-200"
+              : "text-green-600 dark:text-green-200"
+          )}
+        >
           <span className="text-sm md:text-base">{growth}%</span>
           <ArrowUpIcon
             className={cx("h-4 w-4", growth < 0 ? "rotate-180" : "rotate-0")}
           />
         </div>
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -67,6 +91,7 @@ export function Insights() {
 
   const stats = [
     {
+      mode: "pageViews" as Mode,
       label: "Page Views",
       value: query.data.pageViews,
       growth: 8,
@@ -74,6 +99,7 @@ export function Insights() {
         "Page views are the number of times a user visits a page on your website.",
     },
     {
+      mode: "sessions" as Mode,
       label: "Sessions",
       value: query.data.sessions,
       growth: 2,
@@ -81,6 +107,7 @@ export function Insights() {
         "Sessions are the number of users who have visited your website.",
     },
     {
+      mode: "viewDuration" as Mode,
       label: "Avg Session Time",
       value: millisecondsToStandardTime(query.data.avgDuration || 0),
       growth: 5,
@@ -90,7 +117,7 @@ export function Insights() {
   ];
 
   return (
-    <div className="flex flex-row gap-4 py-2 px-4 text-gray-900 dark:text-gray-100 overflow-scroll hide-scrollbar">
+    <div className="hide-scrollbar flex flex-row gap-4 overflow-scroll py-2 px-4 text-gray-900 dark:text-gray-100">
       {stats.map((stat) => (
         <InsightCard {...stat} key={stat.label} />
       ))}
