@@ -199,7 +199,8 @@ export const websiteRouter = router({
       });
 
       pageViews.forEach((pageView) => {
-        const { url, queryParams: params, events: pageEvents } = pageView;
+        const { queryParams: params, events: pageEvents } = pageView;
+        const url = new URL(pageView.url).pathname;
 
         if (url) {
           pages[url] ? (pages[url] += 1) : (pages[url] = 1);
