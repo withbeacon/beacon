@@ -9,7 +9,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { cx } from "class-variance-authority";
 import { fromNow } from "@bud/basics";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDate } from "~/store";
 
 type Option = "Past Week" | "Past Month" | "Past 6 Months" | "Past Year";
@@ -37,18 +37,38 @@ export function DateSelect() {
   const [active, setActive] = useState<Option>("Past Week");
   const [date, setDate] = useDate();
 
-  function handleSelectChange(val: string) {
-    console.log(val);
-
+  function handleSelect(val: string) {
+    setDate(options[val as Option]);
     setActive(val as Option);
-    setDate(options[active]);
   }
 
+  const keybindings: Record<string, () => void> = {
+    w: () => handleSelect("Past Week"),
+    m: () => handleSelect("Past Month"),
+    h: () => handleSelect("Past 6 Months"),
+    y: () => handleSelect("Past Year"),
+  };
+
+  useEffect(() => {
+    function keydown(evt: KeyboardEvent) {
+      const key = evt.key;
+
+      const fn = keybindings[key];
+
+      if (typeof fn !== "undefined") {
+        fn();
+      }
+    }
+
+    window.addEventListener("keydown", keydown);
+
+    return () => {
+      window.removeEventListener("keydown", keydown);
+    };
+  }, [active]);
+
   return (
-    <SelectPrimitive.Root
-      defaultValue={active}
-      onValueChange={handleSelectChange}
-    >
+    <SelectPrimitive.Root value={active} onValueChange={handleSelect}>
       <SelectPrimitive.Trigger asChild aria-label="Date Picker">
         <div>
           <Button filled intent="normal" size="sm">
