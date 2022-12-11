@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma } from "@prisma/client";
+import Hashids from "hashids";
+
 import { prisma } from "@bud/db";
 import { isExpired } from "@bud/basics";
 import { getSession, parseAgent } from "~/utils";
@@ -20,8 +22,9 @@ type BodyParams = {
 };
 
 type Events = Record<string, Record<string, boolean>>;
-
 type QueryParams = Record<string, string>;
+
+const hashid = new Hashids("bud", 8);
 
 export default async function handler(
   req: NextApiRequest,
@@ -51,7 +54,7 @@ export default async function handler(
     return res.status(400).json("Missing data in the body");
   }
 
-  const { origin, pathname, hostname: host, searchParams } = new URL(href);
+  const { origin, pathname, host, searchParams } = new URL(href);
   const url = origin + pathname;
   const queryParams: QueryParams = Object.fromEntries(searchParams);
 
@@ -72,7 +75,7 @@ export default async function handler(
     try {
       website = await prisma.website.create({
         data: {
-          id: cuid(),
+          id: hashid.encode(1, 2, 3),
           url: host,
           user: { connect: { id } },
           name,

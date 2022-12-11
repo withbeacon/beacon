@@ -86,6 +86,7 @@ importers:
       cuid: ^2.1.8
       eslint: 8.22.0
       eslint-config-next: 13.0.2
+      hashids: ^2.2.10
       jotai: ^1.10.0
       next: 13.0.2
       next-auth: ^4.15.1
@@ -117,6 +118,7 @@ importers:
       '@trpc/react': 10.0.0-proxy-beta.13_3whvodcar3pdbrhpuez2wm6yzq
       '@trpc/server': 10.0.0-proxy-beta.13
       cuid: 2.1.8
+      hashids: 2.2.10
       jotai: 1.10.0_react@18.2.0
       next: 13.0.2_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.15.1_pknogjuzx4bv7zxtatcb2ahtsq
@@ -10452,6 +10454,10 @@ packages:
       is-stream: 2.0.1
       type-fest: 0.8.1
     dev: true
+
+  /hashids/2.2.10:
+    resolution: {integrity: sha512-nXnYums7F8B5Y+GSThutLPlKMaamW1yjWNZVt0WModiJfdjaDZHnhYTWblS+h1OoBx3yjwiBwxldPP3nIbFSSA==}
+    dev: false
 
   /hast-to-hyperscript/9.0.1:
     resolution: {integrity: sha512-zQgLKqF+O2F72S1aa4y2ivxzSlko3MAvxkwG8ehGmNiqd98BIN3JM1rAJPmplEyLmGLO2QZYJtIneOSZ2YbJuA==}
