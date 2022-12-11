@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@bud/db";
+import { isExpired } from "@bud/basics";
 import { getSession, parseAgent } from "~/utils";
 import { getServerSession } from "@bud/auth";
 import { load } from "cheerio";
@@ -21,10 +22,6 @@ type BodyParams = {
 type Events = Record<string, Record<string, boolean>>;
 
 type QueryParams = Record<string, string>;
-
-function isExpired(expiredDate: Date) {
-  return new Date() > expiredDate;
-}
 
 export default async function handler(
   req: NextApiRequest,
