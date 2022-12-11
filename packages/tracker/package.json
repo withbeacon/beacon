@@ -1,12 +1,11 @@
 {
   "name": "@bud/tracker",
   "version": "0.0.0",
-  "description": "",
   "type": "module",
   "main": "./src/track.ts",
   "scripts": {
     "dev": "tsup --watch",
-    "build": "rm ../../apps/web/public/track.js && pnpm tsup",
+    "build": "tsup",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
