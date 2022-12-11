@@ -1,0 +1,14 @@
+name: Expire Sessions
+
+on:
+  schedule:
+    - cron: "0 0 */2 * *"
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check and expire sessions in every 2 days
+        run: |
+          curl --request POST \
+          --url '${{ secrets.APP_URL }}' \
+          --header 'Authorization: Bearer ${{ secrets.ACTION_KEY }}'
