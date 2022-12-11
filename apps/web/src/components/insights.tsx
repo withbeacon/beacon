@@ -17,7 +17,7 @@ function InsightCard({ mode, label, value, growth, description }: Props) {
   const [currMode, setMode] = useMode();
 
   function handleClick() {
-    if (mode === "viewDuration") {
+    if ((mode as string) === "viewDuration") {
       return;
     }
 
