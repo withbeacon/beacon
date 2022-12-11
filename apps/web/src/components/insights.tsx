@@ -27,7 +27,7 @@ function InsightCard({ mode, label, value, growth, description }: Props) {
   return (
     <button
       className={cx(
-        "flex min-w-[75%] flex-col px-4 py-3 outline-none rounded-2xl md:py-4 md:w-full md:min-w-0",
+        "flex min-w-[75%] flex-col p-4 py-3 outline-none rounded-2xl md:py-4 md:w-full md:min-w-0",
         currMode === mode ? "bg-insight-card drop-shadow-insight-card" : null,
       )}
       onClick={handleClick}
@@ -117,7 +117,7 @@ export function Insights() {
   ];
 
   return (
-    <div className="hide-scrollbar flex flex-row gap-4 overflow-scroll py-2 px-4 text-gray-900 dark:text-gray-100">
+    <div className="hide-scrollbar flex flex-row gap-4 overflow-scroll p-4 text-gray-900 dark:text-gray-100">
       {stats.map((stat) => (
         <InsightCard {...stat} key={stat.label} />
       ))}
