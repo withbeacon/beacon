@@ -30,7 +30,7 @@ export default async function handler(
 
   const ids = sessions.map(({ id }) => id);
 
-  for (let id of ids) {
+  for (const id of ids) {
     await prisma.userSession.update({
       where: {
         id
