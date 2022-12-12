@@ -1,5 +1,5 @@
 if (!(typeof window !== "undefined" && window.document)) {
-  throw new Error("Not in browser");
+  throw new Error("[bud] stopping the execution as not currently on client side")
 }
 
 import {
@@ -14,12 +14,11 @@ import {
 import { COLLECT_API } from "./constants";
 
 if (isDoNotTrackEnabled) {
-  // @ts-ignore
-  return;
+  throw new Error("[bud] not tracking as do not track is enabled")
 }
 
 if (!id) {
-  throw new Error("Missing tracking id");
+  throw new Error("[bud] missing tracker id")
 }
 
 type Events = Record<string, Record<string, boolean>>;

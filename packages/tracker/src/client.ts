@@ -8,7 +8,7 @@ export const isDoNotTrackEnabled = doNotTrack === '1';
 export const { currentScript: script } = document;
 
 if (!script) {
-  throw new Error("Unable to get the bud script");
+  throw new Error("[bud] unable to get the script for bud analytics")
 }
 
 export const id = script.getAttribute("data-id");
