@@ -5,13 +5,7 @@ if (!id) {
   throw new Error("Missing tracking id");
 }
 
-type Events = {
-  [key: string]: EventData;
-};
-
-type EventData = {
-  [key: string]: boolean;
-};
+type Events = Record<string, Record<string, boolean>>;
 
 let visitTime = 0;
 let paused = false;
@@ -49,7 +43,7 @@ document.addEventListener("visibilitychange", () => {
 const eventElems = document.querySelectorAll("[data-event]");
 let events: Events = {};
 
-function listenEvt(data: EventData, name: string, event: string) {
+function listenEvt(data: Record<string, boolean>, name: string, event: string) {
   data = {
     ...data,
     [event + "ed"]: true,
@@ -64,7 +58,7 @@ function listenEvt(data: EventData, name: string, event: string) {
 eventElems.forEach((evt) => {
   const name = evt.getAttribute("data-event-name");
   const event = evt.getAttribute("data-event");
-  let data: EventData = {};
+  let data: Record<string, boolean> = {};
 
   if (!name || !event) {
     return;
