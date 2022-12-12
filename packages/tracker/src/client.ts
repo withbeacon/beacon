@@ -1,8 +1,9 @@
 export const { href: url } = window.location;
 export const { width, height } = window.screen;
-export const { userAgent } = navigator;
+export const { userAgent, doNotTrack } = navigator;
 export const { referrer } = document;
 export const screen = `${width}x${height}`;
+export const isDoNotTrackEnabled = doNotTrack === '1';
 
 export const { currentScript: script } = document;
 

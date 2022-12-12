@@ -2,8 +2,21 @@ if (!(typeof window !== "undefined" && window.document)) {
   throw new Error("Not in browser");
 }
 
-import { url, id, screen, referrer, title, userAgent } from "./client";
+import {
+  url,
+  id,
+  screen,
+  referrer,
+  title,
+  userAgent,
+  isDoNotTrackEnabled,
+} from "./client";
 import { COLLECT_API } from "./constants";
+
+if (isDoNotTrackEnabled) {
+  // @ts-ignore
+  return;
+}
 
 if (!id) {
   throw new Error("Missing tracking id");
