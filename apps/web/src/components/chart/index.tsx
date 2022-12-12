@@ -29,7 +29,7 @@ export default function Chart() {
   }));
 
   return (
-    <div className="mb-6 hidden h-full w-full px-6 sm:block">
+    <div className="my-4 hidden h-full w-full px-6 sm:block">
       <ResponsiveContainer height={320} width="100%">
         <BarChart width={50} height={200} data={data}>
           <defs>
