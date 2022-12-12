@@ -1,3 +1,7 @@
+if (!(typeof window !== "undefined" && window.document)) {
+  throw new Error("Not in browser");
+}
+
 import { url, id, screen, referrer, title, userAgent } from "./client";
 import { COLLECT_API } from "./constants";
 
@@ -81,11 +85,10 @@ window.addEventListener("beforeunload", async () => {
 
 let previousUrl = "";
 
-window.addEventListener('popstate', function() {
+window.addEventListener("popstate", function () {
   if (previousUrl !== window.location.href) {
     send();
   }
 
   previousUrl = window.location.href;
 });
-
