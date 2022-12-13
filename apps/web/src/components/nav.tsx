@@ -2,14 +2,18 @@ import { SearchIcon, HelpIcon, MenuIcon, UserIcon, SelectIcon } from "@bud/ui";
 import { MobileMenu, DateSelect, WebsiteSelect } from "~/components";
 import { SettingsDropdown } from "./settingsDropdown";
 import { Feedback } from "~/components/widgets";
-import { Logo } from "@bud/ui";
+import { Button, Logo } from "@bud/ui";
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useDate } from "~/store";
 import { trpc } from "~/utils";
 
-export function Nav() {
+interface Props {
+  shared?: boolean;
+}
+
+export function Nav({ shared = false }: Props) {
   const router = useRouter();
   const { data } = useSession();
   const { id } = router.query;
@@ -57,18 +61,31 @@ export function Nav() {
         <Feedback>
           <HelpIcon aria-label="Help" className={baseIconStyles} />
         </Feedback>
-        <SettingsDropdown>
-          <picture>
-            <source srcSet={data?.user?.image || ""} />
-            <UserIcon
-              aria-label="Settings"
-              className={baseIconStyles + " -ml-1"}
-            />
-          </picture>
-        </SettingsDropdown>
+        {shared && (
+          <Button
+            onClick={() => router.push("/sign-in")}
+            intent="primary"
+            size="sm"
+            className="!px-6"
+            filled
+          >
+            Sign In
+          </Button>
+        )}
+        {!shared && (
+          <SettingsDropdown>
+            <picture>
+              <source srcSet={data?.user?.image || ""} />
+              <UserIcon
+                aria-label="Settings"
+                className={baseIconStyles + " -ml-1"}
+              />
+            </picture>
+          </SettingsDropdown>
+        )}
       </div>
 
-      <MobileMenu>
+      <MobileMenu shared>
         <MenuIcon className={baseIconStyles} />
       </MobileMenu>
     </nav>

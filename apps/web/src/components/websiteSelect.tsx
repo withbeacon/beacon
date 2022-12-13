@@ -8,9 +8,13 @@ import { useRouter } from "next/router";
 import { useWebsite } from "~/store";
 
 export function WebsiteSelect({ children }: PropsWithChildren) {
-  const query = trpc.website.all.useQuery().data || [];
-  const router = useRouter();
   const [id, setId] = useWebsite();
+  const router = useRouter();
+  const query = trpc.website.all.useQuery().data || [];
+
+  if (query.length === 0 || !query) {
+    return null;
+  }
 
   function handleSelectChange(value: string) {
     setId(value);
@@ -29,7 +33,7 @@ export function WebsiteSelect({ children }: PropsWithChildren) {
         <SelectPrimitive.ScrollUpButton className="flex items-center justify-center text-gray-700">
           <ChevronUpIcon />
         </SelectPrimitive.ScrollUpButton>
-        <SelectPrimitive.Viewport className="z-50 rounded-lg bg-white dark:bg-gray-900 p-2 shadow-xl">
+        <SelectPrimitive.Viewport className="z-50 rounded-lg bg-white p-2 shadow-xl dark:bg-gray-900">
           <SelectPrimitive.Group>
             {query?.map((website) => (
               <SelectPrimitive.Item
@@ -37,7 +41,7 @@ export function WebsiteSelect({ children }: PropsWithChildren) {
                 key={website.id}
                 value={website.id}
                 className={cx(
-                  "relative flex items-center rounded-md px-6 py-2 text-lg font-medium text-gray-700 dark:text-gray-300 focus:bg-gray-100 dark:focus:bg-gray-900",
+                  "relative flex items-center rounded-md px-6 py-2 text-lg font-medium text-gray-700 focus:bg-gray-100 dark:text-gray-300 dark:focus:bg-gray-900",
                   "radix-state-checked:bg-gray-200 dark:radix-state-checked:bg-gray-800",
                   "select-none focus:outline-none"
                 )}
