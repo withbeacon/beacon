@@ -12,7 +12,7 @@ import {
   toWeek,
   toMonth,
 } from "@bud/basics";
-import { router, protectedProcedure } from "../trpc";
+import { router, publicProcedure, protectedProcedure } from "../trpc";
 import { z } from "zod";
 
 export const websiteRouter = router({
@@ -24,7 +24,7 @@ export const websiteRouter = router({
     });
   }),
 
-  get: protectedProcedure
+  get: publicProcedure
     .input(
       z.object({
         id: z.string(),
@@ -100,7 +100,7 @@ export const websiteRouter = router({
       };
     }),
 
-  metrics: protectedProcedure
+  metrics: publicProcedure
     .input(
       z.object({
         websiteId: z.string(),
