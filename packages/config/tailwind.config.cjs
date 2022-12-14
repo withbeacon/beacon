@@ -34,12 +34,13 @@ module.exports = {
         },
       },
       backgroundImage: {
-        "insight-card": "linear-gradient(180deg, #1C1D27 0%, rgba(28, 29, 39, 0) 116.07%)",
+        "insight-card":
+          "linear-gradient(180deg, #1C1D27 0%, rgba(28, 29, 39, 0) 116.07%)",
       },
       dropShadow: {
         "insight-card": "2px 2px 48px rgba(194, 194, 194, 0.00)",
-      }
+      },
     },
   },
-  plugins: [require("tailwindcss-radix")],
+  plugins: [require("tailwindcss-radix"), require("@tailwindcss/forms")],
 };
