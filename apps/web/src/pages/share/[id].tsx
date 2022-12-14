@@ -1,4 +1,4 @@
-import { Insights, Metrics, Nav } from "~/components";
+import { Insights, Metrics, Nav, Err } from "~/components";
 import { Loading } from "@bud/ui";
 import Head from "next/head";
 
@@ -39,7 +39,18 @@ export default function Analytics() {
   if (isError) {
     if (error.data?.code === "NOT_FOUND") {
       router.push("/");
-      return <></>;
+      return null;
+    }
+
+    if (error.data?.code === "UNAUTHORIZED") {
+      return (
+        <div className="h-screen w-screen">
+          <Err
+            statusCode={401}
+            description="Looks like you are not allowed in here."
+          />
+        </div>
+      );
     }
 
     return <div>Failed to load website</div>;
@@ -60,4 +71,3 @@ export default function Analytics() {
     </>
   );
 }
-
