@@ -35,6 +35,13 @@ export const createContextInner = async (opts: CreateContextOptions) => {
 export const createContext = async (opts: CreateNextContextOptions) => {
   const session = await getServerSession(opts);
 
+  if (!session) {
+    return createContextInner({
+      session,
+      userId: null,
+    });
+  }
+
   const user = await prisma.user.findUnique({
     where: {
       email: session?.user?.email as string,

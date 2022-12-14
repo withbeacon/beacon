@@ -7,3 +7,4 @@ export * from "./metrics";
 export * from "./websiteSelect";
 export * from "./dateSelect";
 export * from "./seo";
+export * from "./err";

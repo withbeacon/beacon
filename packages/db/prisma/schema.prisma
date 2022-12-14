@@ -94,6 +94,7 @@ model Website {
   name      String
   userId    String
   user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  public    Boolean       @default(false)
   sessions  UserSession[]
   pageViews PageView[]
 }

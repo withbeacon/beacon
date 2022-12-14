@@ -12,7 +12,14 @@ import { useSpring, animated } from "@react-spring/web";
 import { trpc } from "~/utils";
 import { cx } from "class-variance-authority";
 
-export function MobileMenu({ children }: PropsWithChildren) {
+interface Props {
+  shared?: boolean;
+}
+
+export function MobileMenu({
+  children,
+  shared = false,
+}: PropsWithChildren<Props>) {
   const router = useRouter();
   const { data } = useSession();
   const { id } = router.query;
@@ -75,28 +82,32 @@ export function MobileMenu({ children }: PropsWithChildren) {
               <p>Share Feedback</p>
             </div>
           </Feedback>
-          {query.data && (
-            <WebsiteSelect>
-              <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
-                <div className="flex cursor-pointer items-center gap-2">
-                  <img src={query.data.favicon || ""} className="h-6 w-6" />
-                  <h2>{query.data.name}</h2>
-                </div>
-              </div>
-            </WebsiteSelect>
-          )}
-          <SettingsDropdown>
-            <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
-              {data?.user && (
-                <img
-                  className="h-7 w-7 rounded-full"
-                  src={data?.user?.image || ""}
-                  alt={data?.user?.name || "Bud User"}
-                />
+          {!shared && (
+            <>
+              {query.data && (
+                <WebsiteSelect>
+                  <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
+                    <div className="flex cursor-pointer items-center gap-2">
+                      <img src={query.data.favicon || ""} className="h-6 w-6" />
+                      <h2>{query.data.name}</h2>
+                    </div>
+                  </div>
+                </WebsiteSelect>
               )}
-              <p>Settings</p>
-            </div>
-          </SettingsDropdown>
+              <SettingsDropdown>
+                <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
+                  {data?.user && (
+                    <img
+                      className="h-7 w-7 rounded-full"
+                      src={data?.user?.image || ""}
+                      alt={data?.user?.name || "Bud User"}
+                    />
+                  )}
+                  <p>Settings</p>
+                </div>
+              </SettingsDropdown>
+            </>
+          )}
         </div>
       </animated.div>
     </>
