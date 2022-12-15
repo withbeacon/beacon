@@ -14,6 +14,7 @@ import {
   toMonth,
 } from "@bud/basics";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
+import { getFavicon } from "../utils";
 import { z } from "zod";
 
 export const websiteRouter = router({
@@ -30,18 +31,21 @@ export const websiteRouter = router({
 
       if (url.includes("/") || (!url.includes(".") && !url.includes(":"))) {
         throw new TRPCError({
-          code: "BAD_USER_INPUT",
+          code: "BAD_REQUEST",
           message: "Invalid or malformed URL",
         });
       }
 
       try {
+        const favicon = await getFavicon(url);
+
         return await ctx.prisma.website.create({
           data: {
             id: url,
             name,
             url,
             userId,
+            favicon,
           },
 
           select: {
@@ -60,7 +64,7 @@ export const websiteRouter = router({
             });
           }
 
-          throw TRPCError({
+          throw new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
             message:
               "Whoops, sorry an unknown error occurred at our end. Please create an issue on GitHub if this persists.",
