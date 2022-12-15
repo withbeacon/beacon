@@ -10,7 +10,6 @@ import { load } from "cheerio";
 import cuid from "cuid";
 
 type BodyParams = {
-  id: string;
   url: string;
   visitTime: number; // in milliseconds
   screen: string; // screen size (width x height)
@@ -40,7 +39,6 @@ export default async function handler(
   res.setHeader("Accept", "application/json");
 
   const {
-    id,
     url: href,
     visitTime,
     referrer,
@@ -50,10 +48,6 @@ export default async function handler(
     ...body
   }: BodyParams = JSON.parse(req.body);
 
-  if (!id) {
-    return res.status(400).json("Missing data in the body");
-  }
-
   const { origin, pathname, host, searchParams } = new URL(href);
   const url = origin + pathname;
   const queryParams: QueryParams = Object.fromEntries(searchParams);
@@ -62,40 +56,18 @@ export default async function handler(
 
   let website = await prisma.website.findFirst({
     where: {
-      user: { id },
-      url: host,
+      id: host,
     },
   });
 
-  const auth = await getServerSession({ req, res });
-  const { name, favicon } = await getPageDetails(href, auth?.user?.name || "");
   const { os, browser, device } = parseAgent(userAgent);
 
   if (website === null) {
-    try {
-      website = await prisma.website.create({
-        data: {
-          id: hashid.encode(1, 2, 3),
-          url: host,
-          user: { connect: { id } },
-          name,
-          favicon,
-        },
-      });
-    } catch (err) {
-      if (err instanceof Prisma.PrismaClientKnownRequestError) {
-        if (err.code === "P2025") {
-          res.status(400).json({ error: "Invalid user id" });
-          return;
-        }
-      }
+    res
+      .status(404)
+      .json({ error: "Website not found. Please add it to your account." });
 
-      res
-        .status(500)
-        .json({ error: "Whoops something wen't wrong at our end, sorry!" });
-
-      return;
-    }
+    return;
   }
 
   const session = await prisma.userSession.findUnique({
