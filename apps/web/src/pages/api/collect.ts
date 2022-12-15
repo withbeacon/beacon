@@ -54,7 +54,7 @@ export default async function handler(
 
   const sessionId = getSession(req, host);
 
-  let website = await prisma.website.findFirst({
+  const website = await prisma.website.findFirst({
     where: {
       id: host,
     },
