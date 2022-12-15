@@ -18,4 +18,5 @@ export * from "./check";
 export * from "./user";
 export * from "./eye";
 export * from "./signOut";
+export * from "./zap";
 
