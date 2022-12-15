@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { Prisma } from "@prisma/client";
 
 import {
   getDaysBetween,
@@ -16,6 +17,58 @@ import { router, publicProcedure, protectedProcedure } from "../trpc";
 import { z } from "zod";
 
 export const websiteRouter = router({
+  add: protectedProcedure
+    .input(
+      z.object({
+        name: z.string(),
+        url: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { name, url } = input;
+      const { userId } = ctx;
+
+      if (url.includes("/") || (!url.includes(".") && !url.includes(":"))) {
+        throw new TRPCError({
+          code: "BAD_USER_INPUT",
+          message: "Invalid or malformed URL",
+        });
+      }
+
+      try {
+        return await ctx.prisma.website.create({
+          data: {
+            id: url,
+            name,
+            url,
+            userId,
+          },
+
+          select: {
+            id: true,
+            name: true,
+            url: true,
+            userId: true,
+          },
+        });
+      } catch (err) {
+        if (err instanceof Prisma.PrismaClientKnownRequestError) {
+          if (err.code === "P2002") {
+            throw new TRPCError({
+              code: "CONFLICT",
+              message: "Whoops, website already exists",
+            });
+          }
+
+          throw TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message:
+              "Whoops, sorry an unknown error occurred at our end. Please create an issue on GitHub if this persists.",
+          });
+        }
+      }
+    }),
+
   all: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.website.findMany({
       where: {
