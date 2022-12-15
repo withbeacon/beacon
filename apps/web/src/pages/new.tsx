@@ -4,6 +4,7 @@ import { Button, Label } from "@bud/ui";
 import { Nav } from "~/components";
 
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { trpc } from "~/utils";
 import { cx } from "class-variance-authority";
 
@@ -68,6 +69,8 @@ const resolver: Resolver<Values> = async ({ url, name }) => {
 };
 
 export default function New() {
+  const { push } = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -75,8 +78,10 @@ export default function New() {
   } = useForm<Values>({
     resolver,
   });
+
   const { mutate, isLoading, isError, error } = trpc.website.add.useMutation({
     onError: (err) => console.warn(err),
+    onSuccess: () => push("/"),
   });
 
   function onSubmit(values: Values) {
