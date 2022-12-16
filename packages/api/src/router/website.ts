@@ -37,22 +37,15 @@ export const websiteRouter = router({
       }
 
       try {
-        const favicon = await getFavicon(url);
+        const favicon = await getFavicon("https://" + url);
 
-        return await ctx.prisma.website.create({
+        await ctx.prisma.website.create({
           data: {
             id: url,
             name,
             url,
             userId,
             favicon,
-          },
-
-          select: {
-            id: true,
-            name: true,
-            url: true,
-            userId: true,
           },
         });
       } catch (err) {
@@ -63,14 +56,18 @@ export const websiteRouter = router({
               message: "Whoops, website already exists",
             });
           }
-
-          throw new TRPCError({
-            code: "INTERNAL_SERVER_ERROR",
-            message:
-              "Whoops, sorry an unknown error occurred at our end. Please create an issue on GitHub if this persists.",
-          });
         }
+
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Sorry, something went wrong at our end. Please create a issue on github if it persists.",
+          cause: err,
+        });
       }
+
+      return {
+        success: true,
+      };
     }),
 
   all: protectedProcedure.query(({ ctx }) => {
