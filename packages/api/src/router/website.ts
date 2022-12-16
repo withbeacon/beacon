@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { Prisma } from "@prisma/client";
 
 import {
   getDaysBetween,
@@ -13,9 +14,62 @@ import {
   toMonth,
 } from "@bud/basics";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
+import { getFavicon } from "../utils";
 import { z } from "zod";
 
 export const websiteRouter = router({
+  add: protectedProcedure
+    .input(
+      z.object({
+        name: z.string(),
+        url: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { name, url } = input;
+      const { userId } = ctx;
+
+      if (url.includes("/") || (!url.includes(".") && !url.includes(":"))) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Invalid or malformed URL",
+        });
+      }
+
+      try {
+        const favicon = await getFavicon("https://" + url);
+
+        await ctx.prisma.website.create({
+          data: {
+            id: url,
+            name,
+            url,
+            userId,
+            favicon,
+          },
+        });
+      } catch (err) {
+        if (err instanceof Prisma.PrismaClientKnownRequestError) {
+          if (err.code === "P2002") {
+            throw new TRPCError({
+              code: "CONFLICT",
+              message: "Whoops, website already exists",
+            });
+          }
+        }
+
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Sorry, something went wrong at our end. Please create a issue on github if it persists.",
+          cause: err,
+        });
+      }
+
+      return {
+        success: true,
+      };
+    }),
+
   all: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.website.findMany({
       where: {

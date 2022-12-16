@@ -1,24 +1,21 @@
 if (!(typeof window !== "undefined" && window.document)) {
-  throw new Error("[bud] stopping the execution as not currently on client side")
+  throw new Error(
+    "[bud] stopping the execution as not currently on client side"
+  );
 }
 
 import {
   url,
-  id,
   screen,
   referrer,
-  title,
   userAgent,
+  title,
   isDoNotTrackEnabled,
 } from "./client";
 import { COLLECT_API } from "./constants";
 
 if (isDoNotTrackEnabled) {
-  throw new Error("[bud] not tracking as do not track is enabled")
-}
-
-if (!id) {
-  throw new Error("[bud] missing tracker id")
+  throw new Error("[bud] not tracking as do not track is enabled");
 }
 
 type Events = Record<string, Record<string, boolean>>;
@@ -34,7 +31,6 @@ const timer = setInterval(() => {
 
 function send() {
   const payload = {
-    id,
     url,
     visitTime,
     screen,
