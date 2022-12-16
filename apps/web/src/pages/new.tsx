@@ -89,7 +89,7 @@ export default function New() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<Values>({
     resolver,
   });
@@ -104,17 +104,20 @@ export default function New() {
     duration: 300,
   });
 
-  const { mutate, isLoading, isError, error } = trpc.website.add.useMutation({
+  const { mutateAsync, isError, error } = trpc.website.add.useMutation({
     onError: (err) => console.warn(err),
-    onSuccess: () => push("/"),
   });
 
-  function onSubmit(values: Values) {
+  async function onSubmit(values: Values) {
     if (errors.name || errors.url) {
       return;
     }
 
-    mutate(values);
+    await mutateAsync(values);
+
+    if (!isError) {
+      push(`/dashboard/${values.url}`);
+    }
   }
 
   return (
@@ -171,7 +174,7 @@ export default function New() {
             size="lg"
             className="mt-2 !py-2"
             disabled={errors.name || errors.url ? true : false}
-            loading={isLoading}
+            loading={isSubmitting}
             submit
             filled
           >
