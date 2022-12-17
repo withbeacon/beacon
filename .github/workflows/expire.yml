@@ -10,5 +10,5 @@ jobs:
       - name: Check and expire sessions in every 2 days
         run: |
           curl --request POST \
-          --url '${{ secrets.APP_URL }}' \
+          --url '${{ secrets.APP_URL }}/api/cron/expire' \
           --header 'Authorization: Bearer ${{ secrets.ACTION_KEY }}'
