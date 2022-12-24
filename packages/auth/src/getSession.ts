@@ -4,16 +4,19 @@ import type {
   NextApiResponse,
 } from "next";
 import { unstable_getServerSession } from "next-auth";
-
 import { authOptions } from "./authOptions";
 
 export const getServerSession = async (
-  ctx:
+  ctx?:
     | {
         req: GetServerSidePropsContext["req"];
         res: GetServerSidePropsContext["res"];
       }
     | { req: NextApiRequest; res: NextApiResponse }
 ) => {
-  return await unstable_getServerSession(ctx.req, ctx.res, authOptions);
+  if (ctx) {
+    return await unstable_getServerSession(ctx.req, ctx.res, authOptions);
+  }
+
+  return await unstable_getServerSession(authOptions);
 };
