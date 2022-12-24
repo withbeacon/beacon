@@ -92,7 +92,6 @@ importers:
       next: 13.0.7
       next-auth: ^4.18.6
       next-themes: ^0.2.1
-      next-transpile-modules: ^10.0.0
       postcss: ^8.4.14
       react: 18.2.0
       react-dom: 18.2.0
@@ -129,7 +128,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-hook-form: 7.39.3_react@18.2.0
-      recharts: 2.1.16_v2m5e27vhdewzwhryxwfaorcca
+      recharts: 2.1.16_biqbaboplfbrettd7655fr4n2y
       request-ip: 3.3.0
       sharp: 0.31.1
       swr: 2.0.0_react@18.2.0
@@ -145,7 +144,6 @@ importers:
       autoprefixer: 10.4.12_postcss@8.4.17
       eslint: 8.22.0
       eslint-config-next: 13.0.7_yv3nvntfnealqm77uomj2fi4ki
-      next-transpile-modules: 10.0.0
       postcss: 8.4.17
       tailwindcss: 3.1.8_postcss@8.4.17
       typescript: 4.8.4
@@ -13710,12 +13708,6 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /next-transpile-modules/10.0.0:
-    resolution: {integrity: sha512-FyeJ++Lm2Fq31gbThiRCrJlYpIY9QaI7A3TjuhQLzOix8ChQrvn5ny4MhfIthS5cy6+uK1AhDRvxVdW17y3Xdw==}
-    dependencies:
-      enhanced-resolve: 5.12.0
-    dev: true
-
   /next/13.0.2_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-uQ5z5e4D9mOe8+upy6bQdYYjo/kk1v3jMW87kTy2TgAyAsEO+CkwRnMgyZ4JoHEnhPZLHwh7dk0XymRNLe1gFw==}
     engines: {node: '>=14.6.0'}
@@ -15530,7 +15522,7 @@ packages:
       throttle-debounce: 3.0.1
     dev: true
 
-  /react-smooth/2.0.1_v2m5e27vhdewzwhryxwfaorcca:
+  /react-smooth/2.0.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-Own9TA0GPPf3as4vSwFhDouVfXP15ie/wIHklhyKBH5AN6NFtdk0UpHBnonV11BtqDkAWlt40MOUc+5srmW7NA==}
     peerDependencies:
       prop-types: ^15.6.0
@@ -15538,7 +15530,6 @@ packages:
       react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
       fast-equals: 2.0.4
-      prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-transition-group: 2.9.0_biqbaboplfbrettd7655fr4n2y
@@ -15721,7 +15712,7 @@ packages:
       decimal.js-light: 2.5.1
     dev: false
 
-  /recharts/2.1.16_v2m5e27vhdewzwhryxwfaorcca:
+  /recharts/2.1.16_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-aYn1plTjYzRCo3UGxtWsduslwYd+Cuww3h/YAAEoRdGe0LRnBgYgaXSlVrNFkWOOSXrBavpmnli9h7pvRuk5wg==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -15738,12 +15729,11 @@ packages:
       d3-shape: 2.1.0
       eventemitter3: 4.0.7
       lodash: 4.17.21
-      prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-is: 16.13.1
       react-resize-detector: 7.1.2_biqbaboplfbrettd7655fr4n2y
-      react-smooth: 2.0.1_v2m5e27vhdewzwhryxwfaorcca
+      react-smooth: 2.0.1_biqbaboplfbrettd7655fr4n2y
       recharts-scale: 0.4.5
       reduce-css-calc: 2.1.8
     dev: false
