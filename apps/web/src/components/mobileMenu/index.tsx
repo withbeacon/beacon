@@ -1,35 +1,32 @@
-import type { PropsWithChildren } from "react";
-import { CrossIcon, HelpIcon, SearchIcon } from "@bud/ui";
-import { WebsiteSelect } from "~/components";
-import { Feedback } from "~/components/widgets";
-import { SettingsDropdown } from "./settingsDropdown";
+"use client";
 
+import type { PropsWithChildren } from "react";
+import type { Website } from "@prisma/client";
+import { CrossIcon, HelpIcon, SearchIcon } from "@bud/ui";
+import WebsiteSelect from "~/components/websiteSelect";
+import Feedback from "~/components/widgets/feedback";
+import Settings from "./settings";
+
+import useSWR from "swr";
 import { useState } from "react";
-import { useSession } from "next-auth/react";
-import { useDate } from "~/store";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { useSpring, animated } from "@react-spring/web";
-import { trpc } from "~/utils";
+import { getWebsite } from "~/utils/query";
 import { cx } from "class-variance-authority";
 
 interface Props {
   shared?: boolean;
 }
 
-export function MobileMenu({
+export default function MobileMenu({
   children,
   shared = false,
 }: PropsWithChildren<Props>) {
-  const router = useRouter();
-  const { data } = useSession();
-  const { id } = router.query;
-  const [date] = useDate();
+  const id = usePathname();
   const [open, setOpen] = useState(false);
-  const query = trpc.website.get.useQuery({
-    id: id as string,
-    from: date.from,
-    to: date.to,
-  });
+  const { data, isLoading } = useSWR<Website>(`/api/website/${id}`, () =>
+    getWebsite(id as string)
+  );
 
   const parentSprings = useSpring({
     from: {
@@ -84,30 +81,24 @@ export function MobileMenu({
           </Feedback>
           {!shared && (
             <>
-              {query.data && (
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="h-6 w-6 animate-pulse rounded-full bg-gray-200" />
+                  <div className="h-5 w-20 animate-pulse rounded-md bg-gray-200" />
+                </div>
+              ) : (
                 <WebsiteSelect>
                   <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
                     <div className="flex cursor-pointer items-center gap-2">
-                      <img src={query.data.favicon || ""} className="h-6 w-6" />
-                      <h2>{query.data.name}</h2>
+                      <img src={data?.favicon || ""} className="h-6 w-6" />
+                      <h2>{data?.name}</h2>
                     </div>
                   </div>
                 </WebsiteSelect>
               )}
-              <SettingsDropdown>
-                <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
-                  {data?.user && (
-                    <img
-                      className="h-7 w-7 rounded-full"
-                      src={data?.user?.image || ""}
-                      alt={data?.user?.name || "Bud User"}
-                    />
-                  )}
-                  <p>Settings</p>
-                </div>
-              </SettingsDropdown>
             </>
           )}
+          <Settings />
         </div>
       </animated.div>
     </>
