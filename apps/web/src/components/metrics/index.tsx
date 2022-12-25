@@ -1,3 +1,6 @@
+"use client";
+
+import type { Metrics as MetricsType } from "~/types";
 import { PagesMetrics } from "./pages";
 import { UtmMetrics } from "./utm";
 import { EventsMetrics } from "./events";
@@ -5,31 +8,15 @@ import { CountriesMetrics } from "./countries";
 import { BrowsersMetrics } from "./browsers";
 import { DevicesMetrics } from "./devices";
 
-import { useDate, useWebsite } from "~/store";
-import { trpc } from "~/utils";
-
 function hasData<T>(data: T): boolean {
   return JSON.stringify(data) !== "{}";
 }
 
-export function Metrics() {
-  const [id] = useWebsite();
-  const [date] = useDate();
+interface Props {
+  data: MetricsType;
+}
 
-  const { data, error, isLoading, isError } = trpc.website.metrics.useQuery({
-    websiteId: id as string,
-    from: date.from,
-    to: date.to,
-  });
-
-  if (isLoading) {
-    return null;
-  }
-
-  if (isError) {
-    return <div>{error?.message}</div>;
-  }
-
+export default function Metrics({ data }: Props) {
   const { pages, events, countries, browsers, devices, queryParams } = data;
 
   return (

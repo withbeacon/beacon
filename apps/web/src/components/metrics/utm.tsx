@@ -1,3 +1,5 @@
+"use client";
+
 import { MetricsContainer } from "./container";
 import { MetricsTable } from "./table";
 import { MetricsHeader } from "./header";
