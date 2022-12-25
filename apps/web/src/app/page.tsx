@@ -1,28 +1,32 @@
+import NoWebsite from "~/components/noWebsite";
+
 import { cookies as nextCookies } from "next/headers";
 import { getServerSession } from "@bud/auth";
 import { redirect } from "next/navigation";
 import { protect } from "~/utils/auth";
 import { prisma } from "@bud/db";
+import Nav from "~/components/nav";
 
 export default async function Page() {
   await protect();
 
   const session = await getServerSession();
-  const cookies = nextCookies();  
+  const cookies = nextCookies();
   const id = cookies.get("website");
 
   const query = await prisma.website.findMany({
     where: {
       user: {
-        email: session?.user?.email
-      }
-    }
+        email: session?.user?.email,
+      },
+    },
   });
 
   if (query.length === 0) {
     return (
-      <div className="flex h-screen flex-col">
-        Whoops no website found.
+      <div>
+        <Nav />
+        <NoWebsite />
       </div>
     );
   }
@@ -35,4 +39,3 @@ export default async function Page() {
     redirect(`/${query[0].id}`);
   }
 }
-
