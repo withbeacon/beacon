@@ -7,7 +7,6 @@ export default {
   experimental: {
     appDir: true,
     transpilePackages: [
-      "@bud/api",
       "@bud/db",
       "@bud/ui",
       "@bud/auth",
