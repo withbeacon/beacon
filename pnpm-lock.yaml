@@ -61,13 +61,13 @@ importers:
 
   apps/web:
     specifiers:
-      '@bud/api': '*'
       '@bud/auth': '*'
       '@bud/basics': '*'
       '@bud/config': '*'
       '@bud/db': '*'
       '@bud/ui': '*'
       '@feedback-fish/react': ^1.2.1
+      '@next/font': ^13.1.1
       '@radix-ui/react-dropdown-menu': ^2.0.1
       '@radix-ui/react-select': ^1.1.1
       '@react-spring/web': ^9.5.5
@@ -84,6 +84,7 @@ importers:
       '@typescript-eslint/parser': ^5.33.0
       '@wits/next-themes': ^0.2.16
       autoprefixer: ^10.4.7
+      cheerio: 1.0.0-rc.12
       cookies-next: ^2.1.1
       cuid: ^2.1.8
       eslint: 8.22.0
@@ -104,12 +105,12 @@ importers:
       typescript: ^4.8.3
       zod: ^3.18.0
     dependencies:
-      '@bud/api': link:../../packages/api
       '@bud/auth': link:../../packages/auth
       '@bud/basics': link:../../packages/basics
       '@bud/db': link:../../packages/db
       '@bud/ui': link:../../packages/ui
       '@feedback-fish/react': 1.2.1_react@18.2.0
+      '@next/font': 13.1.1
       '@radix-ui/react-dropdown-menu': 2.0.1_rj7ozvcq3uehdlnj3cbwzbi5ce
       '@radix-ui/react-select': 1.1.1_rj7ozvcq3uehdlnj3cbwzbi5ce
       '@react-spring/web': 9.5.5_biqbaboplfbrettd7655fr4n2y
@@ -119,6 +120,7 @@ importers:
       '@trpc/react': 10.0.0-proxy-beta.13_3whvodcar3pdbrhpuez2wm6yzq
       '@trpc/server': 10.0.0-proxy-beta.13
       '@wits/next-themes': 0.2.16_gvvct4imq5upoiloat43sswrza
+      cheerio: 1.0.0-rc.12
       cookies-next: 2.1.1
       cuid: 2.1.8
       hashids: 2.2.10
@@ -146,29 +148,6 @@ importers:
       eslint-config-next: 13.0.7_yv3nvntfnealqm77uomj2fi4ki
       postcss: 8.4.17
       tailwindcss: 3.1.8_postcss@8.4.17
-      typescript: 4.8.4
-
-  packages/api:
-    specifiers:
-      '@bud/auth': '*'
-      '@bud/basics': '*'
-      '@bud/db': '*'
-      '@trpc/client': 10.0.0-proxy-beta.13
-      '@trpc/server': 10.0.0-proxy-beta.13
-      cheerio: 1.0.0-rc.12
-      superjson: ^1.9.1
-      typescript: ^4.8.3
-      zod: ^3.18.0
-    dependencies:
-      '@bud/auth': link:../auth
-      '@bud/basics': link:../basics
-      '@bud/db': link:../db
-      '@trpc/client': 10.0.0-proxy-beta.13_itipy43llokwyezwccgik4t2sm
-      '@trpc/server': 10.0.0-proxy-beta.13
-      cheerio: 1.0.0-rc.12
-      superjson: 1.10.0
-      zod: 3.19.1
-    devDependencies:
       typescript: 4.8.4
 
   packages/auth:
@@ -3300,6 +3279,10 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /@next/font/13.1.1:
+    resolution: {integrity: sha512-amygRorS05hYK1/XQRZo5qBl7l2fpHnezeKU/cNveWU5QJg+sg8gMGkUXHtvesNKpiKIJshBRH1TzvO+2sKpvQ==}
+    dev: false
 
   /@next/swc-android-arm-eabi/13.0.2:
     resolution: {integrity: sha512-X54UQCTFyOGnJP//Z71dPPlp4BCYcQL2ncikKXQcPzVpqPs4C3m+tKC8ivBNH6edAXkppwsLRz1/yQwgSZ9Swg==}
@@ -8037,7 +8020,7 @@ packages:
       domhandler: 5.0.3
       domutils: 3.0.1
       htmlparser2: 8.0.1
-      parse5: 7.1.1
+      parse5: 7.1.2
       parse5-htmlparser2-tree-adapter: 7.0.0
     dev: false
 
@@ -8428,13 +8411,6 @@ packages:
       '@types/cookie': 0.4.1
       '@types/node': 16.18.4
       cookie: 0.4.2
-    dev: false
-
-  /copy-anything/3.0.2:
-    resolution: {integrity: sha512-CzATjGXzUQ0EvuvgOCI6A4BGOo2bcVx8B+eC2nF862iv9fopnPQwlrbACakNCHRIJbCSBj+J/9JeDf60k64MkA==}
-    engines: {node: '>=12.13'}
-    dependencies:
-      is-what: 4.1.7
     dev: false
 
   /copy-concurrently/1.0.5:
@@ -11946,11 +11922,6 @@ packages:
       get-intrinsic: 1.1.3
     dev: true
 
-  /is-what/4.1.7:
-    resolution: {integrity: sha512-DBVOQNiPKnGMxRMLIYSwERAS5MVY1B7xYiGnpgctsOFvVDz9f9PFXXxMcTOHuoqYp4NK9qFYQaIC1NRRxLMpBQ==}
-    engines: {node: '>=12.13'}
-    dev: false
-
   /is-whitespace-character/1.0.4:
     resolution: {integrity: sha512-SDweEzfIZM0SJV0EUga669UTKlmL0Pq8Lno0QDQsPnvECB3IM2aP0gdx5TrU0A01MAPfViaZiI2V1QMZLaKK5w==}
     dev: true
@@ -14406,15 +14377,15 @@ packages:
     resolution: {integrity: sha512-B77tOZrqqfUfnVcOrUvfdLbz4pu4RopLD/4vmu3HUPswwTA8OH0EMW9BlWR2B0RCoiZRAHEUu7IxeP1Pd1UU+g==}
     dependencies:
       domhandler: 5.0.3
-      parse5: 7.1.1
+      parse5: 7.1.2
     dev: false
 
   /parse5/6.0.1:
     resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}
     dev: true
 
-  /parse5/7.1.1:
-    resolution: {integrity: sha512-kwpuwzB+px5WUg9pyK0IcK/shltJN5/OVhQagxhCQNtT9Y9QRZqNY2e1cmbu/paRh5LMnz/oVTVLBpjFmMZhSg==}
+  /parse5/7.1.2:
+    resolution: {integrity: sha512-Czj1WaSVpaoj0wbhMzLmWD69anp2WH7FXMB9n1Sy8/ZFF9jolSQVMu1Ij5WIyGmcBmhk7EOndpO4mIpihVqAXw==}
     dependencies:
       entities: 4.4.0
     dev: false
@@ -16958,13 +16929,6 @@ packages:
       pirates: 4.0.5
       ts-interface-checker: 0.1.13
     dev: true
-
-  /superjson/1.10.0:
-    resolution: {integrity: sha512-ks6I5fm5KXUbDqt4Epe1VwkKDaC9+kIj5HF7yhiHjChFne0EkFqsnTv1mdHE2IT6fq2CzLC3zeA/fw0BRIoNwA==}
-    engines: {node: '>=10'}
-    dependencies:
-      copy-anything: 3.0.2
-    dev: false
 
   /supports-color/5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
