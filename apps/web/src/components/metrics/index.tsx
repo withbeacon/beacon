@@ -1,5 +1,3 @@
-"use client";
-
 import type { Metrics as MetricsType } from "~/types";
 import { PagesMetrics } from "./pages";
 import { UtmMetrics } from "./utm";
