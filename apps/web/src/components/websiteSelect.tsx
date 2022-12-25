@@ -1,18 +1,25 @@
+"use client";
+
 import type { PropsWithChildren } from "react";
-import { PlusIcon, ChevronUpIcon, ChevronDownIcon } from "@bud/ui";
+import type { Website } from "@prisma/client";
 import * as SelectPrimitive from "@radix-ui/react-select";
+import { PlusIcon, ChevronUpIcon, ChevronDownIcon } from "@bud/ui";
 
 import { cx } from "class-variance-authority";
-import { trpc } from "~/utils";
-import { useRouter } from "next/router";
+import { getAllWebsites } from "~/utils/query";
+import { useRouter } from "next/navigation";
 import { useWebsite } from "~/store";
+import useSWR from "swr";
 
-export function WebsiteSelect({ children }: PropsWithChildren) {
+export default function WebsiteSelect({ children }: PropsWithChildren) {
   const [id, setId] = useWebsite();
   const router = useRouter();
-  const query = trpc.website.all.useQuery().data || [];
+  const { data, isLoading, error } = useSWR<Website[]>(
+    "/api/website/all",
+    getAllWebsites
+  );
 
-  if (query.length === 0 || !query) {
+  if (!data || isLoading || error) {
     return null;
   }
 
@@ -40,7 +47,7 @@ export function WebsiteSelect({ children }: PropsWithChildren) {
         </SelectPrimitive.ScrollUpButton>
         <SelectPrimitive.Viewport className="z-50 rounded-lg bg-white p-2 shadow-xl dark:bg-gray-900">
           <SelectPrimitive.Group>
-            {query?.map((website) => (
+            {data?.map((website) => (
               <SelectPrimitive.Item
                 disabled={website.id === id}
                 key={website.id}
