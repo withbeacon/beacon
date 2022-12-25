@@ -1,3 +1,5 @@
+"use client";
+
 import type { Mode } from "~/store";
 import { EyeIcon, UserIcon } from "@bud/ui";
 
