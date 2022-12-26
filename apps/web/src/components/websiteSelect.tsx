@@ -25,12 +25,12 @@ export default function WebsiteSelect({ children }: PropsWithChildren) {
 
   function handleSelectChange(value: string) {
     if (value === "add") {
-      router.push(`/new`);
+      router.push("/add");
       return;
     }
 
     setId(value);
-    router.push(`/dashboard/${value}`);
+    router.push("/" + value);
   }
 
   return (
