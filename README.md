@@ -8,7 +8,7 @@
     </a>
 </p>
 
-Bud is an analytics tool that you always wanted to use, it's minimal, fast and privacy focused. It's script is < 1.2kb and doesn't affect your page load times at all.
+Bud is an analytics tool that you always wanted to use, it's minimal, fast and privacy focused. It's script is < 1.3kb and doesn't affect your page load times at all.
 
 > NOTE: Bud is highly under development and not in condition to use right now.
 
@@ -24,8 +24,6 @@ Bud is an analytics tool that you always wanted to use, it's minimal, fast and p
 
 # Monorepo
 
-## /apps
-
 - `web`: The bud web app.
 
 ## /packages
@@ -35,5 +33,4 @@ Bud is an analytics tool that you always wanted to use, it's minimal, fast and p
 - `auth`: Next auth related configs and util functions
 - `db`: Prisma config and client
 - `tracker`: The source code for tracker script
-- `api`: TRPC api routes
 - `basics`: Framework & runtime agnostic utility functions.
