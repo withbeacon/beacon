@@ -1,29 +1,24 @@
+"use client";
+
+import type { Metrics } from "~/types";
 import { Bar, XAxis, Tooltip, ResponsiveContainer, BarChart } from "recharts";
 import { BarTooltip } from "./tooltip";
 
-import { trpc } from "~/utils";
 import { formatDate } from "@bud/basics";
 import { primary, gray } from "@bud/config/colors";
-import { useWebsite, useDate, useMode } from "~/store";
-import { useTheme } from "next-themes";
+import { useMode } from "~/store";
+import { useTheme } from "@wits/next-themes";
 
-export default function Chart() {
-  const [id] = useWebsite();
+interface Props {
+  data: Metrics;
+}
+
+export default function Chart({ data: metrics }: Props) {
   const [mode] = useMode();
-  const [date] = useDate();
-  const { resolvedTheme } = useTheme();
-  const { data: query } = trpc.website.metrics.useQuery({
-    websiteId: id as string,
-    from: date.from,
-    to: date.to,
-  });
+  const { resolvedTheme: theme } = useTheme();
 
-  if (!query) {
-    return null;
-  }
-
-  const data = Object.entries(query[mode]).map(([timestamp, value]) => ({
-    name: formatDate(new Date(+timestamp), query.timeFormat),
+  const data = Object.entries(metrics[mode]).map(([timestamp, value]) => ({
+    name: formatDate(new Date(+timestamp), metrics.timeFormat),
     timestamp,
     value,
   }));
@@ -51,7 +46,7 @@ export default function Chart() {
           <XAxis
             dataKey="name"
             axisLine={{
-              stroke: resolvedTheme === "dark" ? gray["800"] : gray["200"],
+              stroke: theme === "dark" ? gray["800"] : gray["200"],
               strokeWidth: 1,
             }}
             tickLine={false}
@@ -66,4 +61,3 @@ export default function Chart() {
     </div>
   );
 }
-

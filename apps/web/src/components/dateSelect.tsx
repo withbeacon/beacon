@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ChevronUpIcon,
   ChevronDownIcon,
@@ -33,7 +35,7 @@ const options = {
   },
 };
 
-export function DateSelect() {
+export default function DateSelect() {
   const [active, setActive] = useState<Option>("Past Week");
   const [date, setDate] = useDate();
 
