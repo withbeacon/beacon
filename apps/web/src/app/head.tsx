@@ -1,9 +1,9 @@
-import Seo from "./seo";
+import DefaultSeo from "~/components/seo";
 
 export default function Head() {
   return (
     <>
-      <Seo />
+      <DefaultSeo />
       <title>
         Bud – fast, simple and privacy friendly analytics that you will love
         using.

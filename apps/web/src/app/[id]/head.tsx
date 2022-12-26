@@ -1,4 +1,4 @@
-import Seo from "../seo";
+import DefaultSeo from "~/components/seo";
 
 import { prisma } from "@bud/db";
 
@@ -19,7 +19,7 @@ export default async function Head({ params }: Props) {
     return (
       <>
         <title>404 - Not found</title>
-        <Seo />
+        <DefaultSeo />
       </>
     );
   }
@@ -27,7 +27,7 @@ export default async function Head({ params }: Props) {
   return (
     <>
       <title>Bud</title>
-      <Seo />
+      <DefaultSeo />
     </>
   );
 }

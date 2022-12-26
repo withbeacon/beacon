@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-export function Seo() {
+export default function DefaultSeo() {
   const opts = {
     title: "Bud – fast, simple and privacy friendly analytics that you will love using.",
     description: "Bud is a fast, simple and privacy friendly analytics tool that you will love using.",
