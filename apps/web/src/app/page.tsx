@@ -1,11 +1,11 @@
 import NoWebsite from "~/components/noWebsite";
+import Nav from "~/components/nav";
 
 import { cookies as nextCookies } from "next/headers";
 import { getServerSession } from "@bud/auth";
 import { redirect } from "next/navigation";
 import { protect } from "~/utils/auth";
 import { prisma } from "@bud/db";
-import Nav from "~/components/nav";
 
 export default async function Page() {
   await protect();
