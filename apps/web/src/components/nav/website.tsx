@@ -14,7 +14,13 @@ export default function Website() {
   );
 
   if (isLoading) {
-    return <div className="h-full w-48 animate-pulse bg-gray-500" />;
+    return (
+      <div className="ml-2 flex items-center gap-2">
+        <span className="mr-2 text-gray-500 dark:text-gray-700">{"/"}</span>
+        <div className="h-8 w-8 animate-pulse rounded-full bg-gray-500" />
+        <div className="h-8 w-36 animate-pulse bg-gray-500" />
+      </div>
+    );
   }
 
   if (!id || !data) {
