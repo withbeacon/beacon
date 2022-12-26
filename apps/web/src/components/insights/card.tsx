@@ -39,7 +39,7 @@ export default function InsightCard({
       )}
       onClick={handleClick}
     >
-      <span className="text-sm text-gray-500 dark:text-gray-400 md:text-base">
+      <span className="text-sm text-gray-500 dark:text-gray-400 md:text-base text-left mb-1">
         {label}
       </span>
 
