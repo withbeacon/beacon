@@ -42,5 +42,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-radix"), require("@tailwindcss/forms")],
+  plugins: [require("tailwindcss-radix"), require("@tailwindcss/forms"), require("@headlessui/tailwindcss")],
 };
