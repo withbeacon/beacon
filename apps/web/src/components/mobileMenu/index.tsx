@@ -1,32 +1,19 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
-import type { Website } from "@prisma/client";
 import { CrossIcon, HelpIcon, SearchIcon } from "@bud/ui";
-import WebsiteSelect from "~/components/websiteSelect";
+import WebsiteCombobox from "~/components/websiteCombobox";
 import Feedback from "~/components/widgets/feedback";
 import Settings from "./settings";
 
-import useSWR from "swr";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import { useSpring, animated } from "@react-spring/web";
-import { getWebsite } from "~/utils/query";
 import { cx } from "class-variance-authority";
-
-interface Props {
-  shared?: boolean;
-}
 
 export default function MobileMenu({
   children,
-  shared = false,
-}: PropsWithChildren<Props>) {
-  const id = usePathname();
+}: PropsWithChildren) {
   const [open, setOpen] = useState(false);
-  const { data, isLoading } = useSWR<Website>(`/api/website/${id}`, () =>
-    getWebsite(id as string)
-  );
 
   const parentSprings = useSpring({
     from: {
@@ -79,25 +66,7 @@ export default function MobileMenu({
               <p>Share Feedback</p>
             </div>
           </Feedback>
-          {!shared && (
-            <>
-              {isLoading ? (
-                <div className="flex items-center gap-2">
-                  <div className="h-6 w-6 animate-pulse rounded-full bg-gray-200" />
-                  <div className="h-5 w-20 animate-pulse rounded-md bg-gray-200" />
-                </div>
-              ) : (
-                <WebsiteSelect>
-                  <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
-                    <div className="flex cursor-pointer items-center gap-2">
-                      <img src={data?.favicon || ""} className="h-6 w-6" />
-                      <h2>{data?.name}</h2>
-                    </div>
-                  </div>
-                </WebsiteSelect>
-              )}
-            </>
-          )}
+          <WebsiteCombobox />
           <Settings />
         </div>
       </animated.div>
