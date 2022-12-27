@@ -52,8 +52,8 @@ export default function WebsiteCombobox() {
   }
 
   return (
-    <Combobox value={id} onChange={handleSelectChange}>
-      <div className="relative z-50 md:ml-4 mt-1">
+    <div className="relative z-50 mt-1 w-64 md:ml-4">
+      <Combobox value={id} onChange={handleSelectChange}>
         <div className="relative flex w-full cursor-default items-center overflow-hidden rounded-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-300 sm:text-sm">
           <img
             src={activeWebsite.favicon as string}
@@ -61,7 +61,7 @@ export default function WebsiteCombobox() {
             alt={activeWebsite.name}
           />
           <Combobox.Input
-            className="w-full border-none py-2 md:pl-3 pr-10 text-xl leading-5 text-gray-900 focus:ring-0 dark:text-gray-200 bg-transparent"
+            className="w-full border-none bg-transparent py-2 pr-10 text-xl leading-5 text-gray-900 focus:ring-0 dark:text-gray-200 md:pl-3"
             displayValue={() => activeWebsite.name}
             onChange={(event) => setQuery(event.target.value)}
           />
@@ -76,7 +76,7 @@ export default function WebsiteCombobox() {
           leaveTo="opacity-0"
           afterLeave={() => setQuery("")}
         >
-          <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md py-1 text-base shadow-md shadow-gray-900/5 ring-1 ring-black ring-opacity-5 focus:outline-none bg-gray-100 dark:bg-gray-900 dark:shadow-gray-100/5 dark:ring-gray-800 sm:text-sm sm:fixed">
+          <Combobox.Options className="absolute mt-1 max-h-60 w-64 overflow-auto rounded-md bg-gray-100 py-1 text-base shadow-md shadow-gray-900/5 ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-900 dark:shadow-gray-100/5 dark:ring-gray-800 sm:fixed sm:text-sm">
             {filteredWebsites.length === 0 && query !== "" ? (
               <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                 Nothing found.
@@ -130,7 +130,7 @@ export default function WebsiteCombobox() {
             )}
           </Combobox.Options>
         </Transition>
-      </div>
-    </Combobox>
+      </Combobox>
+    </div>
   );
 }
