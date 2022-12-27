@@ -94,8 +94,6 @@ let currentUrl = "";
 const observer = new MutationObserver(() => {
   if (window.location.href !== currentUrl) {
     currentUrl = window.location.href;
-
-    alert("routechanged");
     send();
   }
 });
