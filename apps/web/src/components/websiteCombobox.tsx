@@ -23,7 +23,7 @@ export default function WebsiteCombobox() {
     return (
       <div className="ml-2 flex items-center gap-2">
         <div className="h-8 w-8 animate-pulse rounded-full bg-gray-500" />
-        <div className="h-8 w-36 animate-pulse bg-gray-500" />
+        <div className="rounded-md h-8 w-40 animate-pulse bg-gray-500" />
       </div>
     );
   }
@@ -39,6 +39,7 @@ export default function WebsiteCombobox() {
     }
 
     router.push("/" + value);
+    return;
   }
 
   const filteredWebsites = data.filter((website) =>
