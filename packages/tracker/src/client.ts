@@ -1,4 +1,3 @@
-export const { href: url } = window.location;
 export const { width, height } = window.screen;
 export const { userAgent, doNotTrack } = navigator;
 export const { title, referrer } = document;

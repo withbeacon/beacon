@@ -1,1 +1,94 @@
-var{href:s}=window.location,{width:m,height:v}=window.screen,{userAgent:c,doNotTrack:h}=navigator,{title:d,referrer:a}=document,l=`${m}x${v}`,u=h==="1",{currentScript:r}=document;if(!r)throw new Error("[bud] unable to get the script for bud analytics");var E=r.getAttribute("data-endpoint")??"/api/collect";function y(){let t=new URL(r.getAttribute("src"));return`${t.protocol}//${t.host}`}var L=y(),f=L+E;if(!(typeof window<"u"&&window.document))throw new Error("[bud] stopping the execution as not currently on client side");if(u)throw new Error("[bud] not tracking as do not track is enabled");var p=0,i=!1,x=setInterval(()=>{i||(p+=500)},500);function b(){let t={url:s,visitTime:p,screen:l,referrer:a,userAgent:c,title:d,events:o};fetch(f,{method:"POST",body:JSON.stringify(t)})}document.addEventListener("visibilitychange",()=>{document.visibilityState==="hidden"&&b()});var A=document.querySelectorAll("[data-event]"),o={};function T(t,n,e){t={...t,[e+"ed"]:!0},o={...o,[n]:t}}A.forEach(t=>{let n=t.getAttribute("data-event-name"),e=t.getAttribute("data-event"),g={};!n||!e||t.addEventListener(e,()=>T(g,n,e))});window.addEventListener("blur",async()=>{i=!0});window.addEventListener("focus",async()=>{i=!1});window.addEventListener("beforeunload",async()=>{clearInterval(x)});var w="",R=new MutationObserver(()=>{window.location.href!==w&&(w=window.location.href,b())});R.observe(document,{subtree:!0,childList:!0});
+// src/client.ts
+var { width, height } = window.screen;
+var { userAgent, doNotTrack } = navigator;
+var { title, referrer } = document;
+var screen = `${width}x${height}`;
+var isDoNotTrackEnabled = doNotTrack === "1";
+var { currentScript: script } = document;
+if (!script) {
+  throw new Error("[bud] unable to get the script for bud analytics");
+}
+
+// src/constants.ts
+var endpoint = script.getAttribute("data-endpoint") ?? "/api/collect";
+function getBaseUrl() {
+  const url = new URL(script.getAttribute("src"));
+  return `${url.protocol}//${url.host}`;
+}
+var BASE_URL = getBaseUrl();
+var COLLECT_API = BASE_URL + endpoint;
+
+// src/track.ts
+if (!(typeof window !== "undefined" && window.document)) {
+  throw new Error(
+    "[bud] stopping the execution as not currently on client side"
+  );
+}
+if (isDoNotTrackEnabled) {
+  throw new Error("[bud] not tracking as do not track is enabled");
+}
+var visitTime = 0;
+var paused = false;
+var timer = setInterval(() => {
+  if (!paused) {
+    visitTime += 500;
+  }
+}, 500);
+function send(url) {
+  const payload = {
+    url: url || window.location.href,
+    visitTime,
+    screen,
+    referrer,
+    userAgent,
+    title,
+    events
+  };
+  fetch(COLLECT_API, {
+    method: "POST",
+    body: JSON.stringify(payload)
+  });
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") {
+    send();
+  }
+});
+var eventElems = document.querySelectorAll("[data-event]");
+var events = {};
+function listenEvt(data, name, event) {
+  data = {
+    ...data,
+    [event + "ed"]: true
+  };
+  events = {
+    ...events,
+    [name]: data
+  };
+}
+eventElems.forEach((evt) => {
+  const name = evt.getAttribute("data-event-name");
+  const event = evt.getAttribute("data-event");
+  let data = {};
+  if (!name || !event) {
+    return;
+  }
+  evt.addEventListener(event, () => listenEvt(data, name, event));
+});
+window.addEventListener("blur", async () => {
+  paused = true;
+});
+window.addEventListener("focus", async () => {
+  paused = false;
+});
+window.addEventListener("beforeunload", async () => {
+  clearInterval(timer);
+});
+var currentUrl = "";
+var observer = new MutationObserver(() => {
+  if (window.location.href !== currentUrl) {
+    currentUrl = window.location.href;
+    send(currentUrl);
+  }
+});
+observer.observe(document, { subtree: true, childList: true });

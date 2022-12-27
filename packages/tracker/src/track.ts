@@ -5,7 +5,6 @@ if (!(typeof window !== "undefined" && window.document)) {
 }
 
 import {
-  url,
   screen,
   referrer,
   userAgent,
@@ -27,9 +26,9 @@ const timer = setInterval(() => {
   }
 }, 500);
 
-function send() {
+function send(url?: string) {
   const payload = {
-    url,
+    url: url || window.location.href,
     visitTime,
     screen,
     referrer,
@@ -94,7 +93,7 @@ let currentUrl = "";
 const observer = new MutationObserver(() => {
   if (window.location.href !== currentUrl) {
     currentUrl = window.location.href;
-    send();
+    send(currentUrl);
   }
 });
 
