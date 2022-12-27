@@ -18,8 +18,6 @@ if (isDoNotTrackEnabled) {
   throw new Error("[bud] not tracking as do not track is enabled");
 }
 
-type Events = Record<string, Record<string, boolean>>;
-
 let visitTime = 0;
 let paused = false;
 
@@ -53,7 +51,7 @@ document.addEventListener("visibilitychange", () => {
 });
 
 const eventElems = document.querySelectorAll("[data-event]");
-let events: Events = {};
+let events: Record<string, Record<string, boolean>> = {};
 
 function listenEvt(data: Record<string, boolean>, name: string, event: string) {
   data = {
@@ -91,12 +89,15 @@ window.addEventListener("beforeunload", async () => {
   clearInterval(timer);
 });
 
-let previousUrl = "";
+let currentUrl = "";
 
-window.addEventListener("popstate", function () {
-  if (previousUrl !== window.location.href) {
+const observer = new MutationObserver(() => {
+  if (window.location.href !== currentUrl) {
+    currentUrl = window.location.href;
+
+    alert("routechanged");
     send();
   }
-
-  previousUrl = window.location.href;
 });
+
+observer.observe(document, { subtree: true, childList: true });
