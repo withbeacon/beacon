@@ -6,27 +6,30 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 
 const Feedback = dynamic(() => import("~/components/widgets/feedback"), {
-  suspense: true
+  suspense: true,
 });
 
 const MobileMenu = dynamic(() => import("~/components/mobileMenu"), {
-  suspense: true
+  suspense: true,
 });
 
-const SettingsDropdown = dynamic(() => import("~/components/settingsDropdown"), {
-  suspense: true
-});
+const SettingsDropdown = dynamic(
+  () => import("~/components/settingsDropdown"),
+  {
+    suspense: true,
+  }
+);
 
 const SignInButton = dynamic(() => import("./signInButton"), {
-  suspense: true
+  suspense: true,
 });
 
 const DateSelect = dynamic(() => import("~/components/dateSelect"), {
-  suspense: true
+  suspense: true,
 });
 
-const Website = dynamic(() => import("./website"), {
-  suspense: true
+const WebsiteCombobox = dynamic(() => import("~/components/websiteCombobox"), {
+  suspense: true,
 });
 
 interface Props {
@@ -35,19 +38,28 @@ interface Props {
   hideWebsiteSelect?: boolean;
 }
 
-export default function Nav({ loggedIn = false, hideDateSelect = false, hideWebsiteSelect = false }: Props) {
+export default function Nav({
+  loggedIn = false,
+  hideDateSelect = false,
+  hideWebsiteSelect = false,
+}: Props) {
   const baseIconStyles =
     "w-6 h-6 hover:opacity-90 cursor-pointer text-gray-800 dark:text-gray-200";
 
   return (
     <nav className="mx-6 flex items-center justify-between border-b border-gray-200 py-4 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex items-center gap-2 text-xl font-medium text-gray-800 dark:text-gray-200">
-        <Link href="/" className="cursor-pointer flex items-center gap-2">
+        <Link href="/" className="flex cursor-pointer items-center gap-2">
           <Logo className="h-6 w-6" />
           <span>Bud</span>
         </Link>
         <Suspense fallback={<p>Loading ...</p>}>
-          {!hideWebsiteSelect && <Website />}
+          {!hideWebsiteSelect && (
+            <div className="md:flex items-center hidden">
+              <span className="ml-2 text-gray-500 dark:text-gray-700">{"/"}</span>
+              <WebsiteCombobox />
+            </div>
+          )}
         </Suspense>
       </div>
 
@@ -71,7 +83,7 @@ export default function Nav({ loggedIn = false, hideDateSelect = false, hideWebs
       </div>
 
       <Suspense fallback={<p>Loading...</p>}>
-        <MobileMenu shared={loggedIn}>
+        <MobileMenu>
           <MenuIcon className={baseIconStyles + " inline-flex md:hidden"} />
         </MobileMenu>
       </Suspense>

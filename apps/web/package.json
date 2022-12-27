@@ -15,6 +15,7 @@
     "@bud/db": "*",
     "@bud/ui": "*",
     "@feedback-fish/react": "^1.2.1",
+    "@headlessui/react": "^1.7.7",
     "@next/font": "^13.1.1",
     "@radix-ui/react-dropdown-menu": "^2.0.1",
     "@radix-ui/react-select": "^1.1.1",
