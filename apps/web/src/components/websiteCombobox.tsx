@@ -23,23 +23,13 @@ export default function WebsiteCombobox() {
     return (
       <div className="ml-2 flex items-center gap-2">
         <div className="h-8 w-8 animate-pulse rounded-full bg-gray-500" />
-        <div className="rounded-md h-8 w-40 animate-pulse bg-gray-500" />
+        <div className="h-8 w-40 animate-pulse rounded-md bg-gray-500" />
       </div>
     );
   }
 
   if (!data || error) {
     return null;
-  }
-
-  function handleSelectChange(value: string) {
-    if (value === "add") {
-      router.push("/add");
-      return;
-    }
-
-    router.push("/" + value);
-    return;
   }
 
   const filteredWebsites = data.filter((website) =>
@@ -54,7 +44,7 @@ export default function WebsiteCombobox() {
 
   return (
     <div className="relative z-50 mt-1 w-64 md:ml-4">
-      <Combobox value={id} onChange={handleSelectChange}>
+      <Combobox value={id} onChange={(val) => router.push("/" + val)}>
         <div className="relative flex w-full cursor-default items-center overflow-hidden rounded-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-300 sm:text-sm">
           <img
             src={activeWebsite.favicon as string}
