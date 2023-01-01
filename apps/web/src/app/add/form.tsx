@@ -82,7 +82,12 @@ async function createWebsite(
   });
 
   if (!res.ok) {
-    throw new Error(await res.text());
+    const { error } = await res.json();
+
+    const err = new Error("Some problem occured while adding your website.");
+    err.message = error;
+
+    throw err;
   }
 
   return res.json();
@@ -106,10 +111,11 @@ export default function Form() {
       return;
     }
 
-    await trigger(values);
-
-    if (!error) {
+    try {
+      await trigger(values);
       push("/" + values.url);
+    } catch (err) {
+      console.error({ error, err });
     }
   }
 
@@ -161,7 +167,7 @@ export default function Form() {
       >
         <PlusIcon /> Add
       </Button>
-      <Label error={!!error ? error : undefined}></Label>
+      <Label error={!!error ? error.message : undefined}></Label>
     </form>
   );
 }
