@@ -35,7 +35,7 @@ export default function InsightCard({
     <button
       className={cx(
         "flex min-w-[75%] flex-col rounded-2xl p-4 py-3 outline-none md:w-full md:min-w-0 md:py-4",
-        currMode === mode ? "bg-insight-card drop-shadow-insight-card" : null
+        currMode === mode ? "bg-insight-card dark:bg-dark-insight-card drop-shadow-insight-card" : null
       )}
       onClick={handleClick}
     >
