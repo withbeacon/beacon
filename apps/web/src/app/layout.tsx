@@ -8,7 +8,7 @@ const font = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (
-    <ServerThemeProvider>
+    <ServerThemeProvider attribute="class">
       <html lang="en" className={font.className}>
         <head />
         <body>{children}</body>
