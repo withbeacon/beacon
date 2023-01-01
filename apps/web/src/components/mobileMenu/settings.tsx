@@ -1,5 +1,6 @@
 import type { Session } from "next-auth";
 import { UserIcon } from "@bud/ui";
+import SettingsDropdown from "~/components/settingsDropdown";
 
 import useSWR from "swr";
 
@@ -25,12 +26,14 @@ export default function Settings() {
   }
 
   return (
-    <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
-      <picture>
-        <source srcSet={data?.user?.image || ""} />
-        <UserIcon className="w-6 h-6" />
-      </picture>
-      Settings
-    </div>
+    <SettingsDropdown>
+      <div className="flex cursor-pointer gap-2 text-lg text-gray-900 dark:text-gray-100">
+        <picture>
+          <source srcSet={data?.user?.image || ""} />
+          <UserIcon className="w-6 h-6" />
+        </picture>
+        Settings
+      </div>
+    </SettingsDropdown>
   );
 }
