@@ -24,7 +24,7 @@ export default function Chart({ data: metrics }: Props) {
   }));
 
   return (
-    <div className="my-4 hidden h-full w-full px-6 sm:block">
+    <div className="my-4 h-full w-full px-6">
       <ResponsiveContainer height={320} width="100%">
         <BarChart width={50} height={200} data={data}>
           <defs>
@@ -38,7 +38,7 @@ export default function Chart({ data: metrics }: Props) {
             </linearGradient>
           </defs>
           <Bar
-            radius={[8, 8, 0, 0]}
+            radius={[6, 6, 0, 0]}
             dataKey="value"
             fill="url(#bar-background)"
             stroke={primary["500"]}
