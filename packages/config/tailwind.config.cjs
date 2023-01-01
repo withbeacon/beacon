@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["../../apps/web/src/**/*.tsx", "../../packages/*/src/**/*.tsx"],
+  darkMode: "class",
   theme: {
     extend: {
-      darkMode: "class",
       fontFamily: {
         sans: ["Inter", "sans-serif"],
         mono: ['"Jetbrains Mono"', "monospace"],
