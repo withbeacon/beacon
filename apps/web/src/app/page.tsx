@@ -25,7 +25,7 @@ export default async function Page() {
   if (query.length === 0) {
     return (
       <div>
-        <Nav />
+        <Nav loggedIn />
         <NoWebsite />
       </div>
     );
