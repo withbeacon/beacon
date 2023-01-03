@@ -1,36 +1,12 @@
 import { SearchIcon, HelpIcon, MenuIcon } from "@bud/ui";
 import { Logo } from "@bud/ui";
-import { Suspense } from "react";
+import WebsiteCombobox from "~/components/websiteCombobox";
+import Feedback from "~/components/widgets/feedback";
+import SettingsDropdown from "~/components/settingsDropdown";
+import SignInButton from "~/components/signInButton";
+import DateSelect from "~/components/dateSelect";
+import MobileMenu from "~/components/mobileMenu";
 import Link from "next/link";
-
-import dynamic from "next/dynamic";
-
-const Feedback = dynamic(() => import("~/components/widgets/feedback"), {
-  suspense: true,
-});
-
-const MobileMenu = dynamic(() => import("~/components/mobileMenu"), {
-  suspense: true,
-});
-
-const SettingsDropdown = dynamic(
-  () => import("~/components/settingsDropdown"),
-  {
-    suspense: true,
-  }
-);
-
-const SignInButton = dynamic(() => import("./signInButton"), {
-  suspense: true,
-});
-
-const DateSelect = dynamic(() => import("~/components/dateSelect"), {
-  suspense: true,
-});
-
-const WebsiteCombobox = dynamic(() => import("~/components/websiteCombobox"), {
-  suspense: true,
-});
 
 interface Props {
   loggedIn?: boolean;
@@ -53,40 +29,29 @@ export default function Nav({
           <Logo className="h-6 w-6" />
           <span>Bud</span>
         </Link>
-        <Suspense fallback={<p>Loading ...</p>}>
-          {!hideWebsiteSelect && (
-            <div className="md:flex items-center hidden">
-              <span className="ml-2 text-gray-500 dark:text-gray-700">{"/"}</span>
-              <WebsiteCombobox />
-            </div>
-          )}
-        </Suspense>
+        {!hideWebsiteSelect && (
+          <div className="gap-3 flex items-center">
+            <span className="ml-2 text-gray-500 dark:text-gray-700">{"/"}</span>
+            <WebsiteCombobox />
+          </div>
+        )}
       </div>
 
       <div className="hidden items-center gap-4 md:flex">
-        <Suspense fallback={<p>Loading ...</p>}>
-          {!hideDateSelect && <DateSelect />}
-        </Suspense>
+        {!hideDateSelect && <DateSelect />}
         {loggedIn ? (
           <>
-            <SearchIcon aria-label="Search" className={baseIconStyles} />
-            <Suspense fallback={<p>Loading ...</p>}>
-              <Feedback>
-                <HelpIcon className={baseIconStyles} />
-              </Feedback>
-            </Suspense>
+            <Feedback>
+              <HelpIcon className={baseIconStyles} />
+            </Feedback>
           </>
         ) : null}
-        <Suspense fallback={<p>Loading ...</p>}>
-          {loggedIn ? <SettingsDropdown /> : <SignInButton />}
-        </Suspense>
+        {loggedIn ? <SettingsDropdown /> : <SignInButton />}
       </div>
 
-      <Suspense fallback={<p>Loading...</p>}>
-        <MobileMenu>
-          <MenuIcon className={baseIconStyles + " inline-flex md:hidden"} />
-        </MobileMenu>
-      </Suspense>
+      <MobileMenu>
+        <MenuIcon className={baseIconStyles + " inline-flex md:hidden"} />
+      </MobileMenu>
     </nav>
   );
 }

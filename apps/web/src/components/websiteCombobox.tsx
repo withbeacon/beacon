@@ -43,7 +43,7 @@ export default function WebsiteCombobox() {
   }
 
   return (
-    <div className="relative z-50 mt-1 w-64 md:ml-4">
+    <div className="relative z-50 mt-1 w-40 md:w-64 md:ml-4">
       <Combobox value={id} onChange={(val) => router.push("/" + val)}>
         <div className="relative flex w-full cursor-default items-center overflow-hidden rounded-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-300 sm:text-sm">
           <img
