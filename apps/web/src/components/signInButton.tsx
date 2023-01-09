@@ -18,6 +18,7 @@ export default function SignInButton() {
     <Button
       intent="primary"
       size="lg"
+      className="my-2"
       onClick={handleSignIn}
       loading={loading}
       fullWidth
