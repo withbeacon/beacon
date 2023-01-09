@@ -1,4 +1,4 @@
-import { Logo } from "@bud/ui";
+import { Logo } from "@beacon/ui";
 import SignInButton from "~/components/signInButton";
 
 export default function SignIn() {
@@ -20,7 +20,7 @@ export default function SignIn() {
 
         <SignInButton />
         <p className="text-base text-gray-500 dark:text-gray-400 md:text-lg">
-          By signing in to Bud, you agree to our terms of service and privacy
+          By signing in to Beacon, you agree to our terms of service and privacy
           policy.
         </p>
       </div>

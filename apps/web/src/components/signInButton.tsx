@@ -1,7 +1,7 @@
 "use client";
 
-import { GoogleIcon } from "@bud/ui";
-import { Button } from "@bud/ui";
+import { GoogleIcon } from "@beacon/ui";
+import { Button } from "@beacon/ui";
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
