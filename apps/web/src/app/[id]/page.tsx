@@ -1,16 +1,12 @@
+import { SessionInsights, PageViewInsights, TimeInsights } from "~/components/insights";
 import { Suspense } from "react";
-import Insights from "~/components/insights";
 import Metrics from "~/components/metrics";
-import Nav from "~/components/nav";
 
 import { getServerSession } from "@beacon/auth";
 import { getMetrics, getInsights } from "~/utils/db";
 import { notFound } from "next/navigation";
 import { prisma } from "@beacon/db";
 import { fromNow } from "@beacon/basics";
-import dynamic from "next/dynamic";
-
-const Chart = dynamic(() => import("~/components/chart"), { suspense: true });
 
 interface Props {
   params: { id: string };
@@ -56,9 +52,7 @@ export default async function Page({
       notFound();
     }
   }
-
-  if (!from) {
-    from = +fromNow(7);
+if (!from) { from = +fromNow(7);
   } else {
     from = +from;
   }
@@ -79,17 +73,23 @@ export default async function Page({
     id,
     from: new Date(from),
     to: new Date(to),
-  })
+  });
 
   return (
-    <div>
-      <Nav loggedIn={!!session} />
-      <Insights data={insights} />
-      <Suspense fallback={null}>
-        <Chart data={metrics} />
-      </Suspense>
+    <div className="mx-6">
+      <div className="flex gap-4">
+        <SessionInsights
+          data={metrics.sessions}
+          value={insights.sessions}
+          timeFormat={metrics.timeFormat}
+        />
+        <PageViewInsights
+          data={metrics.pageViews}
+          value={insights.pageViews}
+          timeFormat={metrics.timeFormat}
+        />
+      </div>
       <Metrics data={metrics} />
     </div>
   );
 }
-

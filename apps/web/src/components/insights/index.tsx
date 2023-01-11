@@ -1,90 +1,45 @@
-import type { Mode } from "~/store";
-import type { Insights as InsightsType } from "~/utils/db";
-import InsightCard from "./card";
+import Chart from "./chart";
+import { ArrowUpIcon } from "@beacon/ui";
 
-interface Props {
-  data: InsightsType;  
+export interface InsightCardProps {
+  label: string;
+  value: string | number;
+  data: Record<number, number>;
+  timeFormat: "daily" | "weekly" | "monthly";
 }
 
-export default function Insights({ data }: Props) {
-
-  const containerStyles =
-    "hide-scrollbar flex flex-row gap-4 overflow-scroll p-4 text-gray-900 dark:text-gray-100";
-
-  function millisecondsToStandardTime(ms: number) {
-    const seconds = Math.floor((ms / 1000) % 60);
-    const minutes = Math.floor((ms / (1000 * 60)) % 60);
-    const hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
-
-    if (hours) {
-      return `${hours}h ${minutes}m ${seconds}s`;
-    }
-
-    if (minutes) {
-      return `${minutes}m ${seconds}s`;
-    }
-
-    return `${seconds}s`;
-  }
-
-  /*
-  if (isLoading) {
-    return (
-      <div
-        className={
-          containerStyles +
-          "first:bg-insight-card first:drop-shadow-insight-card"
-        }
-      >
-        {[1, 2, 3].map(() => (
-          <div
-            key={`insights-skeleton-${id}`}
-            className={
-              "flex h-28 min-w-[75%] animate-pulse flex-col rounded-2xl bg-gray-200 p-4 py-3 outline-none dark:bg-gray-800 md:w-full md:min-w-0 md:py-4"
-            }
-          ></div>
-        ))}
-      </div>
-    );
-  }
-  */
-
-  if (!data) {
-    return null;
-  }
-
-  const stats = [
-    {
-      mode: "pageViews" as Mode,
-      label: "Page Views",
-      value: data.pageViews,
-      growth: 8,
-      description:
-        "Page views are the number of times a user visits a page on your website.",
-    },
-    {
-      mode: "sessions" as Mode,
-      label: "Sessions",
-      value: data.sessions,
-      growth: 2,
-      description:
-        "Sessions are the number of users who have visited your website.",
-    },
-    {
-      mode: "viewDuration" as Mode,
-      label: "Avg Session Time",
-      value: millisecondsToStandardTime(data.avgDuration || 0),
-      growth: 5,
-      description:
-        "Average session time is the average amount of time a user spends on your website.",
-    },
-  ];
-
+function InsightCard({ data, label, value, timeFormat }: InsightCardProps) {
   return (
-    <div className={containerStyles}>
-      {stats.map((stat) => (
-        <InsightCard {...stat} key={stat.label} />
-      ))}
+    <div className="flex h-48 w-full flex-col gap-8 rounded-xl border border-gray-100 pt-6 dark:border-gray-800 overflow-hidden">
+      <div className="flex justify-between px-8">
+        <div className="flex flex-col">
+          <span className="text-base text-gray-600 dark:text-gray-400">
+            {label}
+          </span>
+          <h2 className="text-3xl font-bold">{value}</h2>
+        </div>
+
+        <div className="flex items-center gap-2 text-green-600 dark:text-green-400">
+          <ArrowUpIcon className="h-5 w-5" />
+          <span className="text-base font-medium">24%</span>
+        </div>
+      </div>
+
+      <Chart data={data} timeFormat={timeFormat} />
     </div>
   );
+}
+
+type InsightsProps = Omit<InsightCardProps, "label">;
+
+export function SessionInsights(props: InsightsProps) {
+  return <InsightCard label="Sessions" {...props} />;
+}
+
+export function PageViewInsights(props: InsightsProps) {
+  return <InsightCard label="Page Views" {...props} />;
+}
+
+export function TimeInsights(props: InsightsProps) {
+  return <InsightCard label="Avg Time" {...props} />;
 }
