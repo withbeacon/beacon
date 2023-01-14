@@ -76,7 +76,7 @@ if (!from) { from = +fromNow(7);
   });
 
   return (
-    <div className="mx-6">
+    <div className="m-6 flex flex-col gap-6">
       <div className="flex gap-4">
         <SessionInsights
           data={metrics.sessions}
