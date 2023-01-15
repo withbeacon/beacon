@@ -10,8 +10,8 @@ export interface InsightCardProps {
 
 function InsightCard({ data, label, value, timeFormat }: InsightCardProps) {
   return (
-    <div className="flex h-48 w-full flex-col gap-8 rounded-xl border border-gray-200 pt-6 dark:border-gray-800 overflow-hidden">
-      <div className="flex justify-between px-8">
+    <div className="flex h-48 w-full flex-col gap-8 rounded-xl border border-gray-200 pt-4 dark:border-gray-800 overflow-hidden">
+      <div className="flex justify-between px-4">
         <div className="flex flex-col">
           <span className="text-base text-gray-600 dark:text-gray-400">
             {label}
