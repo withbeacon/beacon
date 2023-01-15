@@ -48,6 +48,7 @@ module.exports = {
   plugins: [
     require("tailwindcss-radix"),
     require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
     require("@headlessui/tailwindcss"),
   ],
 };

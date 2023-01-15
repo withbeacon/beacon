@@ -1,6 +1,11 @@
-import { SessionInsights, PageViewInsights, TimeInsights } from "~/components/insights";
+import {
+  SessionInsights,
+  PageViewInsights,
+  TimeInsights,
+} from "~/components/insights";
 import { Suspense } from "react";
 import Metrics from "~/components/metrics";
+import AnalyticsSidebar from "~/components/analyticsSidebar";
 
 import { getServerSession } from "@beacon/auth";
 import { getMetrics, getInsights } from "~/utils/db";
@@ -52,7 +57,9 @@ export default async function Page({
       notFound();
     }
   }
-if (!from) { from = +fromNow(7);
+
+  if (!from) {
+    from = +fromNow(7);
   } else {
     from = +from;
   }
@@ -76,20 +83,29 @@ if (!from) { from = +fromNow(7);
   });
 
   return (
-    <div className="m-6 flex flex-col gap-6">
-      <div className="flex gap-4">
-        <SessionInsights
-          data={metrics.sessions}
-          value={insights.sessions}
-          timeFormat={metrics.timeFormat}
-        />
-        <PageViewInsights
-          data={metrics.pageViews}
-          value={insights.pageViews}
-          timeFormat={metrics.timeFormat}
-        />
-      </div>
-      <Metrics data={metrics} />
+    <div className="m-6 flex flex-col gap-6 lg:flex-row">
+      <AnalyticsSidebar
+        url={website.url}
+        favicon={website.favicon}
+        name={website.name}
+      />
+
+      <main className="flex w-full flex-col gap-6">
+        <div className="flex gap-4">
+          <SessionInsights
+            data={metrics.sessions}
+            value={insights.sessions}
+            timeFormat={metrics.timeFormat}
+          />
+          <PageViewInsights
+            data={metrics.pageViews}
+            value={insights.pageViews}
+            timeFormat={metrics.timeFormat}
+          />
+        </div>
+
+        <Metrics data={metrics} />
+      </main>
     </div>
   );
 }

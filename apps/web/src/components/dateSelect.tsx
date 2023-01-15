@@ -73,7 +73,7 @@ export default function DateSelect() {
     <SelectPrimitive.Root value={active} onValueChange={handleSelect}>
       <SelectPrimitive.Trigger asChild aria-label="Date Picker">
         <div>
-          <Button filled intent="normal" size="sm">
+          <Button intent="outline" size="md" className="!rounded-xl">
             <CalendarIcon />
             {active}
           </Button>

@@ -25,6 +25,7 @@ const buttonStyles = cva(
         normal: "text-gray-800 dark:bg-gray-800 dark:text-gray-200",
         primary: "text-primary-500 dark:text-primary-400",
         destructive: "text-red-500 dark:text-gray-400",
+        outline: "!border border-gray-200 dark:border-gray-800",
         "normal-filled":
           "bg-gray-200 text-gray-800 fill-gray-800 dark:bg-gray-800 dark:text-gray-200 dark:fill-gray-200",
         "primary-filled":
