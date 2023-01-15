@@ -12,6 +12,7 @@
     "tailwindcss-radix": "^2.6.1"
   },
   "dependencies": {
-    "@headlessui/tailwindcss": "^0.1.2"
+    "@headlessui/tailwindcss": "^0.1.2",
+    "@tailwindcss/typography": "^0.5.9"
   }
 }

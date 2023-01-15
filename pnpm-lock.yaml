@@ -178,12 +178,14 @@ importers:
     specifiers:
       '@headlessui/tailwindcss': ^0.1.2
       '@tailwindcss/forms': ^0.5.3
+      '@tailwindcss/typography': ^0.5.9
       autoprefixer: ^10.4.13
       postcss: ^8.4.18
       tailwindcss: ^3.1.8
       tailwindcss-radix: ^2.6.1
     dependencies:
       '@headlessui/tailwindcss': 0.1.2_tailwindcss@3.1.8
+      '@tailwindcss/typography': 0.5.9_tailwindcss@3.1.8
     devDependencies:
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
       autoprefixer: 10.4.13_postcss@8.4.18
@@ -5726,6 +5728,18 @@ packages:
       mini-svg-data-uri: 1.4.4
       tailwindcss: 3.1.8_postcss@8.4.18
     dev: true
+
+  /@tailwindcss/typography/0.5.9_tailwindcss@3.1.8:
+    resolution: {integrity: sha512-t8Sg3DyynFysV9f4JDOVISGsjazNb48AeIYQwcL+Bsq5uf4RYL75C1giZ43KISjeDGBaTN3Kxh7Xj/vRSMJUUg==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      postcss-selector-parser: 6.0.10
+      tailwindcss: 3.1.8_postcss@8.4.18
+    dev: false
 
   /@tanstack/query-core/4.9.0:
     resolution: {integrity: sha512-Vl0jAWJR3A1md0PoPMoEd6+H1dlRB5NqXDBNF+MZEgjQsR0Nly2kJgJj0Zh6eRDndnn7VlspxTWoOpt+dwDdAA==}
@@ -13097,6 +13111,10 @@ packages:
       p-locate: 5.0.0
     dev: true
 
+  /lodash.castarray/4.4.0:
+    resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
+    dev: false
+
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: true
@@ -13105,9 +13123,12 @@ packages:
     resolution: {integrity: sha512-uHaJFihxmJcEX3kT4I23ABqKKalJ/zDrDg0lsFtc1h+3uw49SIJ5beyhx5ExVRti3AvKoOJngIj7xz3oylPdWQ==}
     dev: true
 
+  /lodash.isplainobject/4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+    dev: false
+
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
-    dev: true
 
   /lodash.sortby/4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
