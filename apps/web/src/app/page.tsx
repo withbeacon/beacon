@@ -1,5 +1,4 @@
 import NoWebsite from "~/components/noWebsite";
-import Nav from "~/components/nav";
 
 import { cookies as nextCookies } from "next/headers";
 import { getServerSession } from "@beacon/auth";
@@ -23,12 +22,7 @@ export default async function Page() {
   });
 
   if (query.length === 0) {
-    return (
-      <div>
-        <Nav loggedIn />
-        <NoWebsite />
-      </div>
-    );
+    return <NoWebsite />;
   }
 
   if (id) {
