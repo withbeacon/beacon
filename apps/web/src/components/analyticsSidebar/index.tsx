@@ -3,17 +3,24 @@ import { HomeIcon, FileIcon } from "@beacon/ui";
 import DateSelect from "~/components/dateSelect";
 import Image from "next/image";
 import Link from "next/link";
+import SignInLinkButton from "./signInLinkButton";
 
 interface Props {
   url: string;
   name: string;
   favicon: string | null;
+  isAuthed: boolean;
 }
 
-export default function AnalyticsSidebar({ favicon, name, url }: Props) {
+export default function AnalyticsSidebar({
+  favicon,
+  name,
+  url,
+  isAuthed,
+}: Props) {
   return (
     <>
-      <div className="gap-4 overflow-hidden flex lg:hidden">
+      <div className="flex gap-4 overflow-hidden lg:hidden">
         <Image
           src={
             favicon ||
@@ -28,6 +35,7 @@ export default function AnalyticsSidebar({ favicon, name, url }: Props) {
           {name}
         </h2>
       </div>
+
       <aside className="hidden min-h-full w-64 flex-col gap-4 bg-gray-100 pb-6 dark:bg-gray-900 lg:flex">
         <div className="flex gap-4">
           <Image
@@ -51,15 +59,21 @@ export default function AnalyticsSidebar({ favicon, name, url }: Props) {
         <DateSelect />
 
         <div className="mt-auto flex flex-col gap-6">
-          <SidebarLink href="/">
-            <HomeIcon />
-            <span>Dashboard</span>
-          </SidebarLink>
+          {isAuthed ? (
+            <>
+              <SidebarLink href="/">
+                <HomeIcon />
+                <span>Dashboard</span>
+              </SidebarLink>
 
-          <SidebarLink href="#">
-            <FileIcon />
-            <span>Documentation</span>
-          </SidebarLink>
+              <SidebarLink href="#">
+                <FileIcon />
+                <span>Documentation</span>
+              </SidebarLink>
+            </>
+          ) : (
+            <SignInLinkButton />
+          )}
         </div>
       </aside>
     </>
