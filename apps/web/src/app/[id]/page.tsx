@@ -91,7 +91,7 @@ export default async function Page({
       />
 
       <main className="flex w-full flex-col gap-6">
-        <div className="flex gap-4">
+        <div className="flex gap-4 overflow-scroll hide-scrollbar">
           <SessionInsights
             data={metrics.sessions}
             value={insights.sessions}
