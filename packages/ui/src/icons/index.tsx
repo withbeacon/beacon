@@ -21,4 +21,7 @@ export * from "./signOut";
 export * from "./zap";
 export * from "./sun";
 export * from "./moon";
+export * from "./home";
+export * from "./file";
+export * from "./globe";
 

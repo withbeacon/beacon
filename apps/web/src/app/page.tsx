@@ -1,11 +1,10 @@
 import NoWebsite from "~/components/noWebsite";
-import Nav from "~/components/nav";
 
 import { cookies as nextCookies } from "next/headers";
-import { getServerSession } from "@bud/auth";
+import { getServerSession } from "@beacon/auth";
 import { redirect } from "next/navigation";
 import { protect } from "~/utils/auth";
-import { prisma } from "@bud/db";
+import { prisma } from "@beacon/db";
 
 export default async function Page() {
   await protect();
@@ -23,12 +22,7 @@ export default async function Page() {
   });
 
   if (query.length === 0) {
-    return (
-      <div>
-        <Nav loggedIn />
-        <NoWebsite />
-      </div>
-    );
+    return <NoWebsite />;
   }
 
   if (id) {

@@ -1,16 +1,17 @@
+import {
+  SessionInsights,
+  PageViewInsights,
+  TimeInsights,
+} from "~/components/insights";
 import { Suspense } from "react";
-import Insights from "~/components/insights";
 import Metrics from "~/components/metrics";
-import Nav from "~/components/nav";
+import AnalyticsSidebar from "~/components/analyticsSidebar";
 
-import { getServerSession } from "@bud/auth";
+import { getServerSession } from "@beacon/auth";
 import { getMetrics, getInsights } from "~/utils/db";
 import { notFound } from "next/navigation";
-import { prisma } from "@bud/db";
-import { fromNow } from "@bud/basics";
-import dynamic from "next/dynamic";
-
-const Chart = dynamic(() => import("~/components/chart"), { suspense: true });
+import { prisma } from "@beacon/db";
+import { fromNow } from "@beacon/basics";
 
 interface Props {
   params: { id: string };
@@ -79,17 +80,33 @@ export default async function Page({
     id,
     from: new Date(from),
     to: new Date(to),
-  })
+  });
 
   return (
-    <div>
-      <Nav loggedIn={!!session} />
-      <Insights data={insights} />
-      <Suspense fallback={null}>
-        <Chart data={metrics} />
-      </Suspense>
-      <Metrics data={metrics} />
+    <div className="p-6 flex flex-col gap-6 lg:flex-row min-h-screen">
+      <AnalyticsSidebar
+        isAuthed={!!session}
+        url={website.url}
+        favicon={website.favicon}
+        name={website.name}
+      />
+
+      <main className="flex w-full flex-col gap-6">
+        <div className="flex gap-4 lg:overflow-hidden overflow-scroll hide-scrollbar">
+          <SessionInsights
+            data={metrics.sessions}
+            value={insights.sessions}
+            timeFormat={metrics.timeFormat}
+          />
+          <PageViewInsights
+            data={metrics.pageViews}
+            value={insights.pageViews}
+            timeFormat={metrics.timeFormat}
+          />
+        </div>
+
+        <Metrics data={metrics} />
+      </main>
     </div>
   );
 }
-
