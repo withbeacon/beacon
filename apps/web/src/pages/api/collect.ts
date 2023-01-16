@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@beacon/db";
 import { isExpired } from "@beacon/basics";
 import { getSession, parseAgent } from "~/utils";
+import isBot from "isbot";
 import cuid from "cuid";
 
 type BodyParams = {
@@ -31,6 +32,11 @@ export default async function handler(
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST");
   res.setHeader("Accept", "application/json");
+
+  if (isBot(req.headers["user-agent"])) {
+    res.send("Ok");
+    return;
+  }
 
   const {
     url: href,
