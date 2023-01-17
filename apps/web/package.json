@@ -28,6 +28,7 @@
     "@wits/next-themes": "^0.2.16",
     "cheerio": "1.0.0-rc.12",
     "cookies-next": "^2.1.1",
+    "countries-and-timezones": "^3.4.0",
     "cuid": "^2.1.8",
     "hashids": "^2.2.10",
     "isbot": "^3.6.5",

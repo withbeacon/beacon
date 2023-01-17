@@ -87,6 +87,7 @@ importers:
       autoprefixer: ^10.4.7
       cheerio: 1.0.0-rc.12
       cookies-next: ^2.1.1
+      countries-and-timezones: ^3.4.0
       cuid: ^2.1.8
       eslint: 8.22.0
       eslint-config-next: 13.0.7
@@ -125,6 +126,7 @@ importers:
       '@wits/next-themes': 0.2.16_gvvct4imq5upoiloat43sswrza
       cheerio: 1.0.0-rc.12
       cookies-next: 2.1.1
+      countries-and-timezones: 3.4.0
       cuid: 2.1.8
       hashids: 2.2.10
       isbot: 3.6.5
@@ -8509,6 +8511,11 @@ packages:
       path-type: 4.0.0
       yaml: 1.10.2
     dev: true
+
+  /countries-and-timezones/3.4.0:
+    resolution: {integrity: sha512-E4YrEFSUKM8JWJB2VAIHJGp3tSCQPfG9xX6glKmr+LUObPnosmPwbsFizdNIewl+MGXTqbR2c3BKGL0HNpVGMQ==}
+    engines: {node: '>=8.x', npm: '>=5.x'}
+    dev: false
 
   /cp-file/7.0.0:
     resolution: {integrity: sha512-0Cbj7gyvFVApzpK/uhCtQ/9kE9UnYpxMzaq5nQQC/Dh4iaj5fxp7iEFIullrYwzj8nf0qnsI1Qsx34hAeAebvw==}
