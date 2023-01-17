@@ -92,6 +92,7 @@ importers:
       eslint: 8.22.0
       eslint-config-next: 13.0.7
       hashids: ^2.2.10
+      isbot: ^3.6.5
       jotai: ^1.10.0
       next: 13.0.7
       next-auth: ^4.18.6
@@ -128,6 +129,7 @@ importers:
       countries-and-timezones: 3.4.0
       cuid: 2.1.8
       hashids: 2.2.10
+      isbot: 3.6.5
       jotai: 1.10.0_react@18.2.0
       next: 13.0.7_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.18.6_gvvct4imq5upoiloat43sswrza
@@ -11995,6 +11997,11 @@ packages:
   /isarray/2.0.5:
     resolution: {integrity: sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==}
     dev: true
+
+  /isbot/3.6.5:
+    resolution: {integrity: sha512-BchONELXt6yMad++BwGpa0oQxo/uD0keL7N15cYVf0A1oMIoNQ79OqeYdPMFWDrNhCqCbRuw9Y9F3QBjvAxZ5g==}
+    engines: {node: '>=12'}
+    dev: false
 
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
