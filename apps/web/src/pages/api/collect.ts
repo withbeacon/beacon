@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "@beacon/db";
 import { isExpired } from "@beacon/basics";
 import { getSession, parseAgent } from "~/utils";
+import ct from "countries-and-timezones";
 import cuid from "cuid";
 
 type BodyParams = {
@@ -14,6 +15,7 @@ type BodyParams = {
   referrer: string;
   title: string;
   events?: Events;
+  timezone: string;
 };
 
 type Events = Record<string, Record<string, boolean>>;
@@ -39,10 +41,12 @@ export default async function handler(
     title,
     events,
     userAgent,
+    timezone,
     ...body
   }: BodyParams = JSON.parse(req.body);
 
   const { origin, pathname, host, searchParams } = new URL(href);
+  const country = ct.getCountryForTimezone(timezone);
   const url = origin + pathname;
   const queryParams: QueryParams = Object.fromEntries(searchParams);
 
@@ -92,6 +96,7 @@ export default async function handler(
       data: {
         ...body,
         id: sessionId,
+        country: country?.name,
         os,
         browser,
         device,
