@@ -17,8 +17,8 @@ const buttonStyles = cva(
         true: "opacity-80 cursor-progress",
       },
       size: {
-        sm: "px-4 py-2 rounded-full",
-        md: "px-5 py-2.5 text-base rounded-full",
+        sm: "px-4 py-2 rounded-lg",
+        md: "px-5 py-2.5 text-base rounded-xl",
         lg: "px-8 py-2.5 text-lg rounded-2xl",
       },
       intent: {
