@@ -10,6 +10,7 @@ import {
   userAgent,
   title,
   isDoNotTrackEnabled,
+  timezone,
 } from "./client";
 import { COLLECT_API } from "./constants";
 
@@ -35,6 +36,7 @@ function send(url?: string) {
     userAgent,
     title,
     events,
+    timezone,
   };
 
   fetch(COLLECT_API, {
