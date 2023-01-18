@@ -1,6 +1,7 @@
-import NoWebsite from "~/components/noWebsite";
+import Sidebar from "~/components/sidebar";
+import BottomNav from "~/components/bottomNav";
+import Header from "~/components/header";
 
-import { cookies as nextCookies } from "next/headers";
 import { getServerSession } from "@beacon/auth";
 import { redirect } from "next/navigation";
 import { protect } from "~/utils/auth";
@@ -10,8 +11,6 @@ export default async function Page() {
   await protect();
 
   const session = await getServerSession();
-  const cookies = nextCookies();
-  const id = cookies.get("website");
 
   const query = await prisma.website.findMany({
     where: {
@@ -22,14 +21,21 @@ export default async function Page() {
   });
 
   if (query.length === 0) {
-    return <NoWebsite />;
+    redirect("/add");
   }
 
-  if (id) {
-    redirect(`/${id}`);
-  }
-
-  if (query[0]?.id) {
-    redirect(`/${query[0].id}`);
-  }
+  return (
+    <div className="flex min-h-screen flex-col gap-6 p-6 lg:flex-row">
+      <Sidebar
+        user={{
+          name: session?.user?.name || "Cool Person",
+          image: session?.user?.image,
+        }}
+      />
+      <BottomNav />
+      <main className="flex w-full flex-col gap-6">
+        <Header />
+      </main>
+    </div>
+  );
 }
