@@ -26,7 +26,7 @@ export default function WebsiteCard({ url, name, favicon, views }: Props) {
     <div className="group flex flex-col items-start justify-start gap-4">
       <Link
         href={`/${url}`}
-        className="relative grid h-40 w-full place-items-center overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800"
+        className="relative grid h-40 w-full place-items-center overflow-hidden rounded-2xl bg-gray-200 dark:bg-gray-800"
       >
         <div className="relative h-8 w-8">
           <img src={favicon || undefined} className="h-8 w-8" />
