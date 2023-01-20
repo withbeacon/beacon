@@ -48,7 +48,7 @@ export default function WebsiteCard({ url, name, favicon, views }: Props) {
             {name}
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Got {views} views in the past day
+            Got {views} views since the past day
           </p>
         </div>
 
