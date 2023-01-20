@@ -4,6 +4,7 @@
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.2",
     "class-variance-authority": "^0.3.0"
   },
   "devDependencies": {
