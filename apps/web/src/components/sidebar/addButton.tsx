@@ -1,15 +1,27 @@
 "use client";
-import Link from "next/link";
+import AddDialog from "~/components/addDialog";
 import { Button } from "@beacon/ui";
 import { PlusIcon } from "@beacon/ui";
 
+import { useState } from "react";
+
 export default function AddWebsiteButton() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Link href="/add">
-      <Button intent="outline" size="md" className="rounded-xl" fullWidth>
+    <>
+      <Button
+        intent="outline"
+        size="md"
+        className="rounded-xl"
+        fullWidth
+        onClick={() => setIsOpen(true)}
+      >
         <PlusIcon />
         Add new site
       </Button>
-    </Link>
+
+      <AddDialog isOpen={isOpen} setIsOpen={setIsOpen} />
+    </>
   );
 }

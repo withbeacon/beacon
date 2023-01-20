@@ -5,7 +5,9 @@ import { HomeIcon, PlusIcon, UserIcon } from "@beacon/ui";
 import Link from "next/link";
 
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { cx } from "class-variance-authority";
+import AddDialog from "../addDialog";
 
 interface Props extends PropsWithChildren {
   href: string;
@@ -32,17 +34,21 @@ function NavItem({ href, children }: Props) {
 }
 
 export default function BottomNav() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   return (
     <nav className="fixed bottom-0 left-0 right-0 flex w-full items-center justify-center gap-6 border-t border-gray-200 bg-gray-900 py-4 shadow-lg shadow-gray-900/10 dark:border-gray-800 dark:shadow-gray-900/10 lg:hidden">
       <NavItem href="/">
         <HomeIcon />
       </NavItem>
-      <NavItem href="/add">
+      <button className="flex flex-col items-center justify-center" onClick={() => setIsDialogOpen(true)}>
         <PlusIcon />
-      </NavItem>
+      </button>
       <NavItem href="/settings">
         <UserIcon />
       </NavItem>
+
+      <AddDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
     </nav>
   );
 }
