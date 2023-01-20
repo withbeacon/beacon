@@ -16,6 +16,7 @@
     "@beacon/ui": "*",
     "@feedback-fish/react": "^1.2.1",
     "@headlessui/react": "^1.7.7",
+    "@hookform/resolvers": "^2.9.10",
     "@next/font": "^13.1.1",
     "@radix-ui/react-dropdown-menu": "^2.0.1",
     "@radix-ui/react-select": "^1.1.1",
@@ -42,7 +43,7 @@
     "request-ip": "^3.3.0",
     "sharp": "^0.31.1",
     "swr": "^2.0.0",
-    "zod": "^3.18.0"
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@beacon/config": "*",
