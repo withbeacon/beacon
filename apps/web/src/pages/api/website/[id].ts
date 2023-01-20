@@ -8,14 +8,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "PATCH") {
-    return res.status(405).end();
-  }
-
   const session = await getServerSession({ req, res });
 
   if (!session) {
-    return res.status(401).end();
+    res.status(401).json({ message: "Unauthorized" });
+    return;
   }
 
   const user = await prisma.user.findUnique({
@@ -33,6 +30,7 @@ export default async function handler(
   }
 
   const id = req.query.id as string;
+
   const website = await prisma.website.findUnique({
     where: {
       id,
@@ -52,36 +50,55 @@ export default async function handler(
     return;
   }
 
-  const { name, url } = JSON.parse(req.body);
-  const toUpdate: Pick<Prisma.WebsiteUpdateInput, "name" | "url"> = {};
 
-  if (name) {
-    toUpdate.name = name;
-  } 
+  if (req.method === "PATCH") {
+    const { name, url } = JSON.parse(req.body);
+    const toUpdate: Pick<Prisma.WebsiteUpdateInput, "name" | "url"> = {};
 
-  if (url) {
-    toUpdate.url = url;
-  }
+    if (name) {
+      toUpdate.name = name;
+    } 
 
-  try {
-    await prisma.website.update({
-      where: {
-        id,
-      },
-      data: toUpdate,
-    });
+    if (url) {
+      toUpdate.url = url;
+    }
 
-    return res.status(200).json({ message: "Ok" });
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2002") {
-        res.status(409).json({ message: "Website URL already exists" });
+    try {
+      await prisma.website.update({
+        where: {
+          id,
+        },
+        data: toUpdate,
+      });
+
+      return res.status(200).json({ message: "Ok" });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === "P2002") {
+          res.status(409).json({ message: "Website URL already exists" });
+          return;
+        }
+
+        res.status(500).json({ message: "Internal server error" });
         return;
       }
-
-      res.status(500).json({ message: "Internal server error" });
-      return;
     }
+  } else if (req.method === "DELETE") {
+    try {
+      await prisma.website.delete({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        res.status(500).json({ message: "Internal server error" });
+        return;
+      }
+    }
+
+    return res.status(200).json({ message: "Ok" });
   }
 
+  return res.status(405).end();
 }
