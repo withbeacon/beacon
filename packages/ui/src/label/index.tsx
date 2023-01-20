@@ -15,7 +15,13 @@ export function Label({
 }: PropsWithChildren<Props>) {
   return (
     <label
-      className={cx("block font-medium", error && "text-red-500 dark:text-red-400", className)}
+      className={cx(
+        "block",
+        error
+          ? "text-red-500 dark:text-red-400"
+          : "text-gray-700 dark:text-gray-300",
+        className
+      )}
       htmlFor={htmlFor}
     >
       {error ? error : children}
