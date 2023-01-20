@@ -10,7 +10,7 @@ import { cx } from "class-variance-authority";
 
 interface Props extends PropsWithChildren {
   title: string;
-  description?: string;
+  description?: ReactNode;
   trigger?: ReactNode;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
