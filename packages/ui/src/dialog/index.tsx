@@ -45,19 +45,19 @@ export function Dialog({
           </Transition.Child>
           <Transition.Child
             as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
+            enter="ease-out duration-300 -transform-y-full"
+            enterFrom="opacity-0 translate-y-5 md:scale-95"
+            enterTo="opacity-100 translate-y-0 md:scale-100"
             leave="ease-in duration-200"
-            leaveFrom="opacity-100 scale-100"
-            leaveTo="opacity-0 scale-95"
+            leaveFrom="opacity-100 translate-y-0 md:scale-100"
+            leaveTo="opacity-0 translate-y-5 md:scale-95"
           >
             <DialogPrimitive.Content
               forceMount
               className={cx(
                 "fixed z-50",
-                "w-[95vw] max-w-md rounded-lg p-4 md:w-full",
-                "top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]",
+                "w-screen rounded-t-lg p-4 md:w-[95vw] md:w-full md:max-w-md md:rounded-lg",
+                "bottom-0 md:bottom-auto md:top-[50%] md:left-[50%] md:-translate-x-[50%] md:-translate-y-[50%]",
                 "bg-white dark:bg-gray-800",
                 "focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75"
               )}
