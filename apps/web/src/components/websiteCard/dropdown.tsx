@@ -1,0 +1,43 @@
+"use client";
+
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import RenameDialog from "./renameDialog";
+import { Dropdown, Button } from "@beacon/ui";
+import { EllipsisIcon } from "@beacon/ui";
+
+import { useState } from "react";
+
+interface Props {
+  name: string;
+  id: string;
+}
+
+export default function CardDropdown({ name, id }: Props) {
+  const [isRenameDialogOpen, setIsRenameDialogOpen] = useState(false);
+
+  return (
+    <>
+      <Dropdown
+        trigger={
+          <EllipsisIcon className="h-6 w-6 text-gray-700 group-hover:block group-active:block radix-state-open:hidden dark:text-gray-300 hidden" />
+        }
+      >
+        <DropdownMenu.RadioGroup className="z-[99] flex flex-col gap-4 p-1">
+          <DropdownMenu.RadioItem value="rename">
+            <button onClick={() => setIsRenameDialogOpen(true)}>
+              Rename
+            </button>
+          </DropdownMenu.RadioItem>
+          <DropdownMenu.RadioItem value="delete">Delete</DropdownMenu.RadioItem>
+        </DropdownMenu.RadioGroup>
+      </Dropdown>
+
+      <RenameDialog
+        name={name}
+        id={id}
+        isOpen={isRenameDialogOpen}
+        setIsOpen={setIsRenameDialogOpen}
+      />
+    </>
+  );
+}
