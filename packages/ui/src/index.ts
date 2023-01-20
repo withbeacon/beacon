@@ -6,3 +6,6 @@ export * from "./button";
 export * from "./icons";
 export * from "./loading";
 export * from "./label";
+export * from "./dropdown";
+export * from "./dialog";
+
