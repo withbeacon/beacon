@@ -2,6 +2,7 @@
 
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import RenameDialog from "./renameDialog";
+import DeleteDialog from "./deleteDialog";
 import { Dropdown, Button } from "@beacon/ui";
 import { EllipsisIcon } from "@beacon/ui";
 
@@ -14,6 +15,7 @@ interface Props {
 
 export default function CardDropdown({ name, id }: Props) {
   const [isRenameDialogOpen, setIsRenameDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   return (
     <>
@@ -28,7 +30,12 @@ export default function CardDropdown({ name, id }: Props) {
               Rename
             </button>
           </DropdownMenu.RadioItem>
-          <DropdownMenu.RadioItem value="delete">Delete</DropdownMenu.RadioItem>
+
+          <DropdownMenu.RadioItem value="delete">
+            <button onClick={() => setIsDeleteDialogOpen(true)}>
+              Delete
+            </button>
+          </DropdownMenu.RadioItem>
         </DropdownMenu.RadioGroup>
       </Dropdown>
 
@@ -37,6 +44,13 @@ export default function CardDropdown({ name, id }: Props) {
         id={id}
         isOpen={isRenameDialogOpen}
         setIsOpen={setIsRenameDialogOpen}
+      />
+
+      <DeleteDialog
+        name={name}
+        id={id}
+        isOpen={isDeleteDialogOpen}
+        setIsOpen={setIsDeleteDialogOpen}
       />
     </>
   );
