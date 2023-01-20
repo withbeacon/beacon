@@ -1,68 +1,104 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { Prisma } from "@prisma/client";
 
 import { getServerSession } from "@beacon/auth";
 import { prisma } from "@beacon/db";
-import { fromNow } from "@beacon/basics";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "GET") {
+  const session = await getServerSession({ req, res });
+
+  if (!session) {
+    res.status(401).json({ message: "Unauthorized" });
     return;
   }
 
-  const session = await getServerSession({ req, res });
-  const id = req.query.id as string;
-
-  const { id: websiteId, from: inputFrom, to: inputTo } = req.query;
-
-  if (inputFrom && inputTo) {
-    try {
-      new Date(inputFrom as string);
-      new Date(inputTo as string);
-    } catch (err) {
-      res.status(400).json({ error: "Invalid date range provided" });
-      return;
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session.user?.email as string,
+    },
+    select: {
+      id: true,
     }
+  })
+
+  if (!user) {
+    res.status(404).json({ message: "User not found" });
+    return;
   }
 
-  const from = inputFrom
-    ? new Date(+(inputFrom as string))
-    : new Date(fromNow(7));
-  const to = inputTo ? new Date(+(inputTo as string)) : new Date();
+  const id = req.query.id as string;
 
-  const website = await prisma.website.findFirst({
+  const website = await prisma.website.findUnique({
     where: {
       id,
+    },
+    select: {
+      userId: true,
     },
   });
 
   if (!website) {
-    res.status(404).json({ error: "Not found" });
+    res.status(404).json({ message: "Website not found" });
     return;
   }
 
-  if (!session && !website.public) {
-    res.status(401).json({ error: "Unauthorized" });
+  if (website.userId !== user.id) {
+    res.status(401).json({ message: "Unauthorized" });
     return;
   }
 
-  if (session) {
-    const user = await prisma.user.findUnique({
-      where: {
-        email: session?.user?.email as string,
-      },
-      select: {
-        id: true,
-      },
-    });
 
-    if (website?.userId !== user?.id) {
-      res.status(401).json({ error: "Unauthorized" });
-      return;
+  if (req.method === "PATCH") {
+    const { name, url } = JSON.parse(req.body);
+    const toUpdate: Pick<Prisma.WebsiteUpdateInput, "name" | "url"> = {};
+
+    if (name) {
+      toUpdate.name = name;
+    } 
+
+    if (url) {
+      toUpdate.url = url;
     }
+
+    try {
+      await prisma.website.update({
+        where: {
+          id,
+        },
+        data: toUpdate,
+      });
+
+      return res.status(200).json({ message: "Ok" });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === "P2002") {
+          res.status(409).json({ message: "Website URL already exists" });
+          return;
+        }
+
+        res.status(500).json({ message: "Internal server error" });
+        return;
+      }
+    }
+  } else if (req.method === "DELETE") {
+    try {
+      await prisma.website.delete({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        res.status(500).json({ message: "Internal server error" });
+        return;
+      }
+    }
+
+    return res.status(200).json({ message: "Ok" });
   }
 
-  return res.json(website);
+  return res.status(405).end();
 }
