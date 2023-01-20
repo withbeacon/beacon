@@ -24,4 +24,5 @@ export * from "./moon";
 export * from "./home";
 export * from "./file";
 export * from "./globe";
+export * from "./ellipsis";
 
