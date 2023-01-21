@@ -8,12 +8,10 @@ import SignInLinkButton from "./signInLinkButton";
 interface Props {
   url: string;
   name: string;
-  favicon: string | null;
   isAuthed: boolean;
 }
 
 export default function AnalyticsSidebar({
-  favicon,
   name,
   url,
   isAuthed,
@@ -21,15 +19,7 @@ export default function AnalyticsSidebar({
   return (
     <>
       <div className="flex gap-4 overflow-hidden lg:hidden">
-        <Image
-          src={
-            favicon ||
-            "https://github.com/tailwindlabs/heroicons/raw/master/src/24/outline/globe-alt.svg"
-          }
-          alt={name}
-          width={28}
-          height={28}
-        />
+        <Image src={`/favicon/${url}`} alt={name} width={28} height={28} />
 
         <h2 className="truncate text-xl font-bold text-gray-800 dark:text-gray-100">
           {name}
@@ -39,10 +29,7 @@ export default function AnalyticsSidebar({
       <aside className="pr-6 hidden fixed h-screen w-64 flex-col gap-4 bg-gray-100 pb-12 dark:bg-gray-900 lg:flex">
         <div className="flex gap-4">
           <Image
-            src={
-              favicon ||
-              "https://github.com/tailwindlabs/heroicons/raw/master/src/24/outline/globe-alt.svg"
-            }
+            src={`/favicon/${url}`}
             alt={name}
             width={28}
             height={28}

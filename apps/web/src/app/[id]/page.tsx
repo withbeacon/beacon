@@ -87,7 +87,6 @@ export default async function Page({
       <AnalyticsSidebar
         isAuthed={!!session}
         url={website.url}
-        favicon={website.favicon}
         name={website.name}
       />
 

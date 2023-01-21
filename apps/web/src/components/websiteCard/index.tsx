@@ -4,7 +4,6 @@ import CardDropdown from "./dropdown";
 interface Props {
   url: string;
   name: string;
-  favicon: string | null;
   views: number;
 }
 
@@ -21,7 +20,7 @@ export function WebsiteCardShimmer() {
   );
 }
 
-export default function WebsiteCard({ url, name, favicon, views }: Props) {
+export default function WebsiteCard({ url, name, views }: Props) {
   return (
     <div className="group flex flex-col items-start justify-start gap-4">
       <Link
@@ -29,15 +28,15 @@ export default function WebsiteCard({ url, name, favicon, views }: Props) {
         className="relative grid h-40 w-full place-items-center overflow-hidden rounded-2xl bg-gray-200 dark:bg-gray-800"
       >
         <div className="relative h-8 w-8">
-          <img src={favicon || undefined} className="h-8 w-8" />
+          <img src={`/favicon/${url}` || undefined} className="h-8 w-8" />
           <img
-            src={favicon || undefined}
+            src={`/favicon/${url}`  || undefined}
             className="absolute inset-0 h-8 w-8 opacity-30 blur-md"
           />
         </div>
 
         <img
-          src={favicon || undefined}
+          src={`/favicon/${url}` || undefined}
           className="absolute -bottom-10 -right-10 h-28 w-28 opacity-50 blur-2xl"
         />
       </Link>

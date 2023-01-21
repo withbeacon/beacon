@@ -90,7 +90,6 @@ model Website {
   url       String        @unique
   createdAt DateTime      @default(now()) @map("created_at")
   updatedAt DateTime      @updatedAt @map("updated_at")
-  favicon   String?
   name      String
   userId    String
   user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
