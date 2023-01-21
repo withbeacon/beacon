@@ -90,7 +90,7 @@ export default async function Page({
         name={website.name}
       />
 
-      <main className="flex w-full flex-col gap-6 overflow-scroll">
+      <main className="flex w-full flex-col gap-6 overflow-scroll ml-0 lg:ml-64">
         <div className="flex gap-4 lg:overflow-hidden overflow-scroll hide-scrollbar">
           <SessionInsights
             data={metrics.sessions}
