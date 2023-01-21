@@ -33,6 +33,7 @@ export default function AnalyticsSidebar({
             alt={name}
             width={28}
             height={28}
+            className="h-8 w-8 rounded-md"
           />
 
           <div className="flex flex-col overflow-hidden">
