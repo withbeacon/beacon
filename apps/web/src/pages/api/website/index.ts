@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma } from "@prisma/client";
 
 import { getServerSession } from "@beacon/auth";
-import { getFavicon } from "~/utils";
 import { prisma } from "@beacon/db";
 
 export default async function handler(
@@ -40,15 +39,12 @@ export default async function handler(
   }
 
   try {
-    const favicon = await getFavicon("https://" + url);
-
     await prisma.website.create({
       data: {
         id: url,
         name,
         url,
         userId: user.id,
-        favicon,
       },
     });
   } catch (err) {
