@@ -87,6 +87,10 @@ export default {
 };
 
 function isUrl(str: string) {
+  if (str === "http://favicon.ico") {
+    return false;
+  }
+
   try {
     new URL(str);
     return true;
