@@ -6,9 +6,8 @@ export default {
     };
 
     let { pathname } = new URL(req.url);
-    pathname = pathname.startsWith("https://")
-      ? pathname
-      : "https://" + pathname;
+    pathname = pathname.slice(1);
+    pathname = (pathname.startsWith("http://") || pathname.startsWith("https://")) ? pathname : "http://" + pathname;
 
     if (pathname === "/") {
       return new Response("404 Not Found", { status: 404 });
