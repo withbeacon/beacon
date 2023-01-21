@@ -20,4 +20,12 @@ export default {
       "autoprefixer",
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/favicon/:path*",
+        destination: "https://icon.horse/icon/:path*",
+      }
+    ]
+  }
 };
