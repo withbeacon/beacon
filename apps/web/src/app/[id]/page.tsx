@@ -83,7 +83,7 @@ export default async function Page({
   });
 
   return (
-    <div className="p-6 flex flex-col gap-6 lg:flex-row min-h-screen">
+    <div className="p-6 pr-2 flex flex-col gap-6 lg:flex-row overflow-scroll">
       <AnalyticsSidebar
         isAuthed={!!session}
         url={website.url}
@@ -91,7 +91,7 @@ export default async function Page({
         name={website.name}
       />
 
-      <main className="flex w-full flex-col gap-6">
+      <main className="flex w-full flex-col gap-6 overflow-scroll">
         <div className="flex gap-4 lg:overflow-hidden overflow-scroll hide-scrollbar">
           <SessionInsights
             data={metrics.sessions}
