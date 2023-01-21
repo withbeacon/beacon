@@ -88,7 +88,6 @@ export default async function Page({ searchParams }: Props) {
                 key={website.id}
                 name={website.name}
                 url={website.url}
-                favicon={website.favicon}
                 views={recentPageViews[website.id] ?? 0}
               />
             ))}
