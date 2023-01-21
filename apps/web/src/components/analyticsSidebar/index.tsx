@@ -36,7 +36,7 @@ export default function AnalyticsSidebar({
         </h2>
       </div>
 
-      <aside className="hidden min-h-full w-64 flex-col gap-4 bg-gray-100 pb-6 dark:bg-gray-900 lg:flex">
+      <aside className="pr-6 hidden fixed h-screen w-64 flex-col gap-4 bg-gray-100 pb-12 dark:bg-gray-900 lg:flex">
         <div className="flex gap-4">
           <Image
             src={
