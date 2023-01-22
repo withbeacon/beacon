@@ -1,6 +1,6 @@
-import Sidebar from "~/components/sidebar";
-import BottomNav from "~/components/bottomNav";
-import Header from "~/components/header";
+import Sidebar, { SidebarShimmer } from "~/components/sidebar";
+import BottomNav, { BottomNavShimmer } from "~/components/bottomNav";
+import Header, { HeaderShimmer } from "~/components/header";
 import WebsiteCard, { WebsiteCardShimmer } from "~/components/websiteCard";
 import { Suspense } from "react";
 
@@ -64,15 +64,24 @@ export default async function Page({ searchParams }: Props) {
 
   return (
     <div className="flex min-h-screen flex-col gap-6 p-6 lg:flex-row">
-      <Sidebar
-        user={{
-          name: session?.user?.name || "Cool Person",
-          image: session?.user?.image,
-        }}
-      />
-      <BottomNav />
+      <Suspense fallback={<SidebarShimmer />}>
+        <Sidebar
+          user={{
+            name: session?.user?.name || "Cool Person",
+            image: session?.user?.image,
+          }}
+        />
+      </Suspense>
+
+      <Suspense fallback={<BottomNavShimmer />}>
+        <BottomNav />
+      </Suspense>
+
       <main className="flex w-full flex-col gap-6">
-        <Header />
+        <Suspense fallback={<HeaderShimmer />}>
+          <Header />
+        </Suspense>
+
         <Suspense
           fallback={
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
