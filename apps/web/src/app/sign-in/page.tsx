@@ -11,7 +11,7 @@ export default function SignIn() {
 
       <div className="flex my-auto max-w-lg flex-col items-start gap-3 px-6 md:p-0">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 md:text-3xl">
-          Sign up for Beacon
+          Sign in to Beacon
         </h1>
 
         <p className="text-base text-gray-500 dark:text-gray-400 md:text-lg">

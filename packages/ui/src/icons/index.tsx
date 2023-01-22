@@ -25,4 +25,5 @@ export * from "./home";
 export * from "./file";
 export * from "./globe";
 export * from "./ellipsis";
+export * from "./discord";
 
