@@ -10,11 +10,11 @@ export default async function Page() {
   return (
     <>
       <h1 className="text-2xl font-bold">Help us build Beacon</h1>
-      <p className="-mt-2 text-gray-500 dark:text-gray-400">
+      <p className="text-gray-500 dark:text-gray-400">
         Join our community to help us shape the future of Beacon, we would love
         to build the app with you.
       </p>
-      <Link href="https://discord.gg/x8Gkt6upmb" target="_blank" className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-gray-100 py-4 px-6 text-gray-800 hover:bg-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 mb-1">
+      <Link href="https://discord.gg/x8Gkt6upmb" target="_blank" className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-gray-100 py-4 px-6 text-gray-800 hover:bg-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 my-2">
         <div className="flex items-center gap-2">
           <DiscordIcon />
           <span className="text-lg font-semibold">Join our community</span>

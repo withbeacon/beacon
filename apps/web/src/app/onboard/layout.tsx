@@ -9,7 +9,7 @@ export default function Layout({ children }: PropsWithChildren) {
         <h1 className="ml-2 text-2xl font-bold">Beacon</h1>
       </header>
 
-      <main className="flex flex-col my-auto w-full gap-4 px-6 lg:px-0 lg:w-[32rem]">{children}</main>
+      <main className="flex flex-col my-auto w-full gap-2 px-6 lg:px-0 lg:w-[32rem]">{children}</main>
     </div>
   );
 }

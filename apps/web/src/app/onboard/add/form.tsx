@@ -148,10 +148,10 @@ export default function Form() {
         />
       </div>
 
-      <div className="mt-4 flex gap-4">
+      <div className="flex gap-4">
         <Button
           intent="primary"
-          size="sm"
+          size="md"
           loading={!!isMutating}
           className="!rounded-xl"
           filled
