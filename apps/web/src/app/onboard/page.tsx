@@ -4,10 +4,10 @@ import { prisma } from "@beacon/db";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
-  await protect();
+ await protect();
 
-  const session = await getServerSession();
-
+ const session = await getServerSession();
+  
   const websites = await prisma.website.count({
     where: {
       user: {
@@ -21,4 +21,6 @@ export default async function Page() {
   }
 
   redirect("/");
+
+  return null;
 }
