@@ -1,36 +1,28 @@
-![](https://user-images.githubusercontent.com/70624701/205416407-dfdbe14d-816f-4e33-aad6-be6f49e64bde.png)
+<div text-align="center" align="center">
+  <img
+		src="https://raw.githubusercontent.com/withbeacon/beacon/main/packages/ui/src/assets/logo.svg" 
+		alt="Beacon" 
+		height="64px" 
+		width="64px"
+	>
+	<h1>Beacon</h1>
+</div>
+<p align="center">Analytics tool built from the future, to be used today.</p>
 
-<p align="center">
-    <img src="https://img.shields.io/tokei/lines/github/vedantnn71/beacon">
-    <img src="https://img.shields.io/github/languages/top/vedantnn71/beacon">
-    <a href="https://discord.gg/jXpsbRU2Rr">
-      <img src="https://img.shields.io/badge/discord-join-blue" />
-    </a>
-</p>
+## Inspiration
+Beacon is a fully open source, privacy friendly and blazingly fast analytics tool which actually makes sense. It is made out of frustration from the existing analytics tools in the market, currently either analytics tools are way clunky and slow or lighweight with a bad user experience as well as the interface. No one of the analytics tool was *actually* good.
 
-Beacon is an analytics tool that you always wanted to use, it's minimal, fast and privacy focused. It's script is < 1.3kb and doesn't affect your page load times at all.
+## Features
+- 🔒 Privacy friendly - GPDR and CCPA compliant
+- ❤️  Fully open source and built with community
+- 🔥 Heavenly fast (<1.5KBs)
+- 🤩 Gorgeous and super simple user interface
+- 📎 Sharable dasbhoards
 
-> NOTE: Beacon is highly under development and not in condition to use right now.
+## Contributing
+Contributions are always welcome and appreciated. If you found some bug, it is preferred to create an issue or if you have want to help us in improving Beacon, you can create a pull request.
 
-# Features
-- [x] ⚡ Blazing fast tracking script (1.2kb)
-- [x] ☘️ Simple and minimal ui, no bs
-- [x] 🔒 Privacy friendly; no one tracked is identifiable, you own your data 
-- [ ] 🚀 Command + K Launcher to get things done blazingly fast
-- [x] ✨ Just add the script snippet to your site and you're good to go! Dashboard will get automatically created for you!
-- [ ] 🌠 Share screenshots for your analytics in one click!
-- [ ] 📈 Get sharable links and share your dashboard with other people
-- [ ] 🤟 Framework agnostic tracking packages
-
-# Monorepo
-
-- `web`: The beacon web app.
-
-## /packages
-
-- `ui`: Reusable components for react
-- `config`: Config for tailwind, postcss, etc for whole project.
-- `auth`: Next auth related configs and util functions
-- `db`: Prisma config and client
-- `tracker`: The source code for tracker script
-- `basics`: Framework & runtime agnostic utility functions.
+## FAQs
+<details>
+  <summary>Why would I use it over google analytics?</summary>
+  Well, there are several reasons, firstly it just sucks in terms of privacy and speed. GA collects Personal Identifiable Information (PII) and uses cookies, so clearly, if you do not have ToS and Privacy Policy in your website and you are using GA, you are using it illegaly, but whereas Beacon on the other hand, is completely GDPR and CCPA compliant. Secondly, GA is terrible for your users. The script which you embed in your script while using GA is *>44KBs*, whereas the script which you embed in your website while using Beacon is just *<1.5KBs*.
