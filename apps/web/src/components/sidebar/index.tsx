@@ -12,7 +12,7 @@ interface Props {
 
 export default function Sidebar({ user }: Props) {
   return (
-    <aside className="hidden min-h-full w-64 flex-col gap-4 bg-gray-100 pb-6 dark:bg-gray-900 lg:flex">
+    <aside className="hidden min-h-full w-64 flex-col gap-4 bg-gray-100 dark:bg-gray-900 lg:flex">
       <div className="flex gap-4 items-center">
         <img
           src={
@@ -58,3 +58,28 @@ function SidebarLink({ href, children }: SidebarLinkProps) {
     </Link>
   );
 }
+
+export function SidebarShimmer() {
+  return (
+    <aside className="hidden min-h-full w-64 flex-col gap-4 bg-gray-100 pb-6 dark:bg-gray-900 lg:flex">
+      <div className="flex gap-3 items-center">
+        <div className="rounded-full w-7 h-7 bg-gray-300 animate-pulse" />
+
+        <div className="w-32 h-6 bg-gray-300 animate-pulse" />
+      </div>
+
+      <div className="mt-auto flex flex-col gap-6">
+        <div className="flex gap-3 text-gray-700 dark:text-gray-300">
+          <div className="rounded-full w-6 h-6 bg-gray-300 animate-pulse" />
+          <div className="w-32 h-6 bg-gray-300 animate-pulse" />
+        </div>
+
+        <div className="flex gap-3 text-gray-700 dark:text-gray-300">
+          <div className="rounded-full w-6 h-6 bg-gray-300 animate-pulse" />
+          <div className="w-32 h-6 bg-gray-300 animate-pulse" />
+        </div>
+      </div>
+    </aside>
+  );
+}
+
