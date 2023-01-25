@@ -97,6 +97,7 @@ export default async function Page({ searchParams }: Props) {
                 key={website.id}
                 name={website.name}
                 url={website.url}
+                createdAt={+website.createdAt}
                 views={recentPageViews[website.id] ?? 0}
               />
             ))}
