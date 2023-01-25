@@ -10,7 +10,7 @@ interface Props {
 }
 
 export function UtmMetrics({ data }: Props) {
-  const [utmParam, setUtmParam] = useState("utm_source");
+  const [utmParam, setUtmParam] = useState("ref");
   const isActive = (val: string): boolean => utmParam === val;
 
   const options = [
