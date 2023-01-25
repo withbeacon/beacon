@@ -17,7 +17,7 @@ export function useDate() {
   const router = useRouter();
 
   useEffect(() => {
-    if (pathname === "/") {
+    if (pathname === "/" || window.location.pathname === "/") {
       return;
     }
 
