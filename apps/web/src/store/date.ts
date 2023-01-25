@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { fromNow } from "@beacon/basics";
 
 interface DateRange {
@@ -8,6 +8,7 @@ interface DateRange {
 }
 
 export function useDate() {
+  const pathname = usePathname();
   const [date, setDate] = useState<DateRange>({
     from: fromNow(7),
     to: fromNow(),
@@ -16,6 +17,10 @@ export function useDate() {
   const router = useRouter();
 
   useEffect(() => {
+    if (pathname === "/") {
+      return;
+    }
+
     const { from, to } = date;
 
     const url = new URL(window.location.href);
@@ -27,4 +32,3 @@ export function useDate() {
 
   return [date, setDate] as const;
 }
-
