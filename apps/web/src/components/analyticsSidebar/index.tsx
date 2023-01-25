@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { HomeIcon, FileIcon } from "@beacon/ui";
 import DateSelect from "~/components/dateSelect";
-import Image from "next/image";
 import Link from "next/link";
 import SignInLinkButton from "./signInLinkButton";
 
@@ -19,7 +18,7 @@ export default function AnalyticsSidebar({
   return (
     <>
       <div className="flex gap-4 overflow-hidden lg:hidden">
-        <Image src={`/favicon/${url}`} alt={name} width={28} height={28} />
+        <img src={`/favicon/${url}`} alt={name} width={28} height={28}  />
 
         <h2 className="truncate text-xl font-bold text-gray-800 dark:text-gray-100">
           {name}
@@ -28,7 +27,7 @@ export default function AnalyticsSidebar({
 
       <aside className="pr-6 hidden fixed h-screen w-64 flex-col gap-4 bg-gray-100 pb-12 dark:bg-gray-900 lg:flex">
         <div className="flex gap-4">
-          <Image
+          <img
             src={`/favicon/${url}`}
             alt={name}
             width={28}
@@ -37,7 +36,7 @@ export default function AnalyticsSidebar({
           />
 
           <div className="flex flex-col overflow-hidden">
-            <h2 className="truncate text-xl font-bold text-gray-800 dark:text-gray-100">
+            <h2 className="truncate text-xl font-bold text-gray-800 dark:text-gray-100 -mt-1">
               {name}
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">{url}</p>
