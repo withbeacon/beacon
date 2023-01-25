@@ -28,7 +28,7 @@ export function useDate() {
     url.searchParams.set("to", +to + "");
 
     router.replace(url.href);
-  }, [date]);
+  }, [date, pathname]);
 
   return [date, setDate] as const;
 }
