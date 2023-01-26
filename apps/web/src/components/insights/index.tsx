@@ -1,6 +1,8 @@
 import Chart from "./chart";
 import { ArrowUpIcon } from "@beacon/ui";
 
+import useWebsiteStore from "~/store/website";
+
 export interface InsightCardProps {
   label: string;
   value: string | number;
@@ -30,18 +32,32 @@ function InsightCard({ data, label, value, timeFormat }: InsightCardProps) {
   );
 }
 
-type InsightsProps = Omit<InsightCardProps, "label">;
+export function SessionInsights() {
+  const { sessions, timeFormat } = useWebsiteStore.getState().metrics;
+  const value = useWebsiteStore.getState().sessions;
 
-export function SessionInsights(props: InsightsProps) {
-  return <InsightCard label="Sessions" {...props} />;
+  return (
+    <InsightCard
+      label="Sessions"
+      timeFormat={timeFormat}
+      data={sessions}
+      value={value}
+    />
+  );
 }
 
-export function PageViewInsights(props: InsightsProps) {
-  return <InsightCard label="Page Views" {...props} />;
-}
+export function PageViewInsights() {
+  const { pageViews, timeFormat } = useWebsiteStore.getState().metrics;
+  const value = useWebsiteStore.getState().pageViews;
 
-export function TimeInsights(props: InsightsProps) {
-  return <InsightCard label="Avg Time" {...props} />;
+  return (
+    <InsightCard
+      label="Page Views"
+      timeFormat={timeFormat}
+      data={pageViews}
+      value={value}
+    />
+  );
 }
 
 export function InsightsShimmer({ label }: Pick<InsightCardProps, "label">) {
@@ -63,4 +79,3 @@ export function InsightsShimmer({ label }: Pick<InsightCardProps, "label">) {
     </div>
   );
 }
-
