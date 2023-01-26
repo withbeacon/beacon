@@ -26,7 +26,6 @@
     "countries-and-timezones": "^3.4.0",
     "cuid": "^2.1.8",
     "isbot": "^3.6.5",
-    "jotai": "^1.10.0",
     "next": "13.0.7",
     "next-auth": "^4.18.6",
     "react": "18.2.0",
