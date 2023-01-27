@@ -6,6 +6,7 @@ import {
 import { Suspense } from "react";
 import Metrics from "~/components/metrics";
 import AnalyticsSidebar from "~/components/analyticsSidebar";
+import BottomNav from "~/components/bottomNav";
 
 import { getServerSession } from "@beacon/auth";
 import { getMetrics, getInsights } from "~/utils/db";
@@ -84,6 +85,8 @@ export default async function Page({
 
   return (
     <div className="p-6 pr-2 flex flex-col gap-6 lg:flex-row overflow-scroll">
+      {!!session && <BottomNav />}
+
       <AnalyticsSidebar
         isAuthed={!!session}
         url={website.url}
