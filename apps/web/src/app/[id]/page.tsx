@@ -1,13 +1,10 @@
-import {
-  SessionInsights,
-  PageViewInsights,
-  TimeInsights,
-} from "~/components/insights";
-import { Suspense } from "react";
+import { SessionInsights, PageViewInsights } from "~/components/insights";
 import Metrics from "~/components/metrics";
 import AnalyticsSidebar from "~/components/analyticsSidebar";
+import StoreInitializer from "~/components/storeInitializer";
 import BottomNav from "~/components/bottomNav";
 
+import useWebsiteStore from "~/store/website";
 import { getServerSession } from "@beacon/auth";
 import { getMetrics, getInsights } from "~/utils/db";
 import { notFound } from "next/navigation";
@@ -83,31 +80,31 @@ export default async function Page({
     to: new Date(to),
   });
 
+  const defaultState = {
+    name: website.name,
+    url: website.url,
+    public: website.public,
+    pageViews: insights.pageViews,
+    sessions: insights.sessions,
+    createdAt: website.createdAt,
+    metrics,
+  } as const;
+
+  useWebsiteStore.setState({ ...defaultState });
+
   return (
-    <div className="p-6 pr-2 flex flex-col gap-6 lg:flex-row overflow-scroll">
+    <div className="flex flex-col gap-6 overflow-scroll p-6 pr-2 lg:flex-row">
       {!!session && <BottomNav />}
+      <StoreInitializer {...defaultState} />
+      <AnalyticsSidebar isAuthed={!!session} />
 
-      <AnalyticsSidebar
-        isAuthed={!!session}
-        url={website.url}
-        name={website.name}
-      />
-
-      <main className="flex w-full flex-col gap-6 overflow-scroll ml-0 lg:ml-64">
-        <div className="flex gap-4 lg:overflow-hidden overflow-scroll hide-scrollbar">
-          <SessionInsights
-            data={metrics.sessions}
-            value={insights.sessions}
-            timeFormat={metrics.timeFormat}
-          />
-          <PageViewInsights
-            data={metrics.pageViews}
-            value={insights.pageViews}
-            timeFormat={metrics.timeFormat}
-          />
+      <main className="ml-0 flex w-full flex-col gap-6 overflow-scroll lg:ml-64">
+        <div className="hide-scrollbar flex gap-4 overflow-scroll lg:overflow-hidden">
+          <SessionInsights />
+          <PageViewInsights />
         </div>
 
-        <Metrics data={metrics} />
+        <Metrics />
       </main>
     </div>
   );
