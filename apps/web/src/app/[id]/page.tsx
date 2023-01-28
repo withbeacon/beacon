@@ -2,6 +2,7 @@ import { SessionInsights, PageViewInsights } from "~/components/insights";
 import Metrics from "~/components/metrics";
 import AnalyticsSidebar from "~/components/analyticsSidebar";
 import StoreInitializer from "~/components/storeInitializer";
+import BottomNav from "~/components/bottomNav";
 
 import useWebsiteStore from "~/store/website";
 import { getServerSession } from "@beacon/auth";
@@ -66,6 +67,7 @@ export default async function Page({
   } else {
     to = +to;
   }
+
   const metrics = await getMetrics({
     id,
     from: new Date(from),
@@ -92,6 +94,7 @@ export default async function Page({
 
   return (
     <div className="flex flex-col gap-6 overflow-scroll p-6 pr-2 lg:flex-row">
+      {!!session && <BottomNav />}
       <StoreInitializer {...defaultState} />
       <AnalyticsSidebar isAuthed={!!session} />
 
