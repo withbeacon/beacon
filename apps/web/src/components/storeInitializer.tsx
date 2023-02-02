@@ -7,12 +7,10 @@ import useWebsiteStore from "~/store/website";
 
 interface Website extends Omit<WebsiteType, "createdAt"> {
   createdAt: number | string;
-  updatedAt: number | string;
 }
 
 export default function StoreInitializer({
   createdAt,
-  updatedAt,
   ...state
 }: Website) {
   const initialized = useRef(false);
