@@ -1,18 +1,30 @@
 "use client";
 
-import type { Website } from "~/store/website";
+import type { Website as WebsiteType } from "~/store/website";
 
 import { useRef } from "react";
 import useWebsiteStore from "~/store/website";
 
-export default function StoreInitializer(props: Website) {
+interface Website extends Omit<WebsiteType, "createdAt"> {
+  createdAt: number | string;
+  updatedAt: number | string;
+}
+
+export default function StoreInitializer({
+  createdAt,
+  updatedAt,
+  ...state
+}: Website) {
   const initialized = useRef(false);
 
   if (!initialized.current) {
-    useWebsiteStore.setState({ ...props });
+    useWebsiteStore.setState({
+      createdAt: new Date(createdAt),
+      ...state,
+    });
+
     initialized.current = true;
   }
 
   return null;
 }
-

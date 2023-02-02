@@ -80,7 +80,7 @@ export default async function Page({
     to: new Date(to),
   });
 
-  const defaultState = {
+  const { createdAt, ...defaultState } = {
     name: website.name,
     url: website.url,
     public: website.public,
@@ -90,12 +90,12 @@ export default async function Page({
     metrics,
   } as const;
 
-  useWebsiteStore.setState({ ...defaultState });
+  useWebsiteStore.setState({ createdAt, ...defaultState });
 
   return (
     <div className="flex flex-col gap-6 overflow-scroll p-6 pr-2 lg:flex-row">
       {!!session && <BottomNav />}
-      <StoreInitializer {...defaultState} />
+      <StoreInitializer createdAt={+createdAt} {...defaultState} />
       <AnalyticsSidebar isAuthed={!!session} />
 
       <main className="ml-0 flex w-full flex-col gap-6 overflow-scroll lg:ml-64">
