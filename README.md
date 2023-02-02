@@ -10,7 +10,7 @@
 <p align="center">Analytics tool built from the future, to be used today.</p>
 
 ## Inspiration
-Beacon is a fully open source, privacy friendly and blazingly fast analytics tool which actually makes sense. It is made out of frustration from the existing analytics tools in the market, currently either analytics tools are way clunky and slow or lighweight with a bad user experience as well as the interface. No one of the analytics tool was *actually* good.
+Beacon is made out of frustration from the existing analytics tools in the market, currently either analytics tools are way a too clunky and slow or lighweight with a bad user experience as well as the interface. Beacon is simple yet delightful, super fast and privacy respecting.
 
 ## Features
 - 🔒 Privacy friendly - GPDR and CCPA compliant
