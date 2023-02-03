@@ -3,6 +3,7 @@
 import type { PropsWithChildren } from "react";
 import { HomeIcon, PlusIcon, UserIcon } from "@beacon/ui";
 import Link from "next/link";
+import SettingsDropdown from "~/components/settingsDropdown";
 
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -47,9 +48,9 @@ export default function BottomNav() {
       >
         <PlusIcon />
       </button>
-      <NavItem href="/settings">
+      <SettingsDropdown>
         <UserIcon />
-      </NavItem>
+      </SettingsDropdown>
 
       <AddDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
     </nav>
