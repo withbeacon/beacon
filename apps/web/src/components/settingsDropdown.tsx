@@ -14,7 +14,7 @@ export default function SettingsDropdown({ children }: PropsWithChildren) {
   return (
     <>
       <Dropdown trigger={children}>
-        <DropdownMenu.Group className="z-[99] flex w-40 flex-col gap-4 p-0.5">
+        <DropdownMenu.Group className="z-[99] flex w-40 flex-col gap-4 p-0.5 mb-4 lg:mb-0">
           <DropdownMenu.Item
             className="flex cursor-pointer gap-2 outline-none"
             onClick={() => setIsDialogOpen(true)}
