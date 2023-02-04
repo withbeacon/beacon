@@ -8,6 +8,6 @@
     "class-variance-authority": "^0.3.0"
   },
   "devDependencies": {
-    "@storybook/react": "^6.5.14"
+    "@storybook/react": "^6.5.16"
   }
 }
