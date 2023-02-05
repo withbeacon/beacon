@@ -71,11 +71,11 @@ importers:
 
   apps/web:
     specifiers:
-      '@beacon/auth': ^0.1.0
-      '@beacon/basics': ^0.0.1
-      '@beacon/config': ^0.1.0
-      '@beacon/db': ^0.1.0
-      '@beacon/ui': ^0.0.0
+      '@beacon/auth': '*'
+      '@beacon/basics': '*'
+      '@beacon/config': '*'
+      '@beacon/db': '*'
+      '@beacon/ui': '*'
       '@feedback-fish/react': ^1.2.1
       '@headlessui/react': ^1.7.8
       '@hookform/resolvers': ^2.9.10
@@ -156,7 +156,7 @@ importers:
 
   packages/auth:
     specifiers:
-      '@beacon/db': ^0.1.0
+      '@beacon/db': '*'
       '@next-auth/prisma-adapter': ^1.0.5
       next: 13.1.6
       next-auth: ^4.19.2
