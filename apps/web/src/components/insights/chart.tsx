@@ -37,8 +37,45 @@ export default function Chart({ data, timeFormat }: ChartProps) {
           stroke={theme ? primary["400"] : primary["500"]}
           strokeWidth={2}
         />
-        <Tooltip />
+        <Tooltip
+          offset={10}
+          wrapperStyle={{ outline: "none" }}
+          position={{ y: 0 }}
+          content={({ active, payload }) => (
+            <CustomTooltip active={active} payload={payload as any} />
+          )}
+        />
       </AreaChart>
     </ResponsiveContainer>
   );
+}
+
+interface ChartTooltipProps {
+  active?: boolean;
+  payload?: {
+    value: number;
+    name: string;
+    payload: { timestamp: string };
+  }[];
+}
+
+function CustomTooltip({ active, payload }: ChartTooltipProps) {
+  if (active && payload && payload.length) {
+    const time = new Intl.DateTimeFormat("en-US", {
+      dateStyle: "medium",
+    }).format(new Date(+(payload[0]?.payload.timestamp as string))); // casting to string, then to number
+
+    const formatNumber = Intl.NumberFormat("en", { notation: "compact" });
+
+    return (
+      <div className="gap-2 rounded border border-gray-700 bg-white px-2 py-1 shadow outline-transparent dark:bg-gray-800">
+        <p className="font-medium">
+          {formatNumber.format(payload[0]?.value as number)}
+        </p>
+        <p className="text-gray-600 dark:text-gray-400">{time}</p>
+      </div>
+    );
+  }
+
+  return null;
 }
