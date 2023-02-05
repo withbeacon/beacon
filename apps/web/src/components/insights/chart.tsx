@@ -68,7 +68,7 @@ function CustomTooltip({ active, payload }: ChartTooltipProps) {
     const formatNumber = Intl.NumberFormat("en", { notation: "compact" });
 
     return (
-      <div className="gap-2 rounded border border-gray-700 bg-white px-2 py-1 shadow outline-transparent dark:bg-gray-800">
+      <div className="gap-2 rounded border border-gray-200 dark:border-gray-700 bg-white px-2 py-1 shadow outline-transparent dark:bg-gray-800">
         <p className="font-medium">
           {formatNumber.format(payload[0]?.value as number)}
         </p>
