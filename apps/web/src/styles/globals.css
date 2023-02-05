@@ -33,3 +33,8 @@ body {
   @apply bg-gray-300 dark:bg-gray-700 rounded-full;
 }
 
+/* Recharts */
+.recharts-tooltip-cursor {
+  @apply stroke-gray-400 dark:stroke-gray-600;
+}
+
