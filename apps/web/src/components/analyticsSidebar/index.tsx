@@ -38,7 +38,13 @@ export default function AnalyticsSidebar({ isAuthed }: Props) {
             <h2 className="-mt-1 truncate text-xl font-bold text-gray-800 dark:text-gray-100">
               {name}
             </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{url}</p>
+            <Link
+              href={"http://" + url}
+              target="_blank"
+              className="text-sm text-gray-500 dark:text-gray-400"
+            >
+              {url}
+            </Link>
           </div>
         </div>
 
