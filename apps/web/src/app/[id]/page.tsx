@@ -25,17 +25,17 @@ export default async function Page({
 }: Props) {
   id = id.replace("%3A", ":");
 
-  const website = await prisma.website.findUnique({
-    where: {
-      id,
-    },
-  });
+  const [website, session] = await Promise.all([
+    prisma.website.findUnique({
+      where: { id },
+    }),
+
+    getServerSession(),
+  ]);
 
   if (!website) {
     notFound();
   }
-
-  const session = await getServerSession();
 
   if (!session && !website.public) {
     notFound();
@@ -68,17 +68,19 @@ export default async function Page({
     to = +to;
   }
 
-  const metrics = await getMetrics({
-    id,
-    from: new Date(from),
-    to: new Date(to),
-  });
+  const [insights, metrics] = await Promise.all([
+    getInsights({
+      id,
+      from: new Date(from),
+      to: new Date(to),
+    }),
 
-  const insights = await getInsights({
-    id,
-    from: new Date(from),
-    to: new Date(to),
-  });
+    getMetrics({
+      id,
+      from: new Date(from),
+      to: new Date(to),
+    }),
+  ]);
 
   const { createdAt, ...defaultState } = {
     name: website.name,
