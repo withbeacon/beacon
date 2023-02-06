@@ -18,7 +18,7 @@ export function MetricsTable({
   return (
     <div className="flex h-96 w-full flex-col gap-4 rounded-xl border border-gray-200 px-6 pb-8 pt-5 dark:border-gray-800">
       {children}
-      <table className="flex h-full w-full flex-col gap-4">
+      <table className="flex h-full w-full flex-col gap-4 overflow-hidden">
         <thead>
           <tr className="flex justify-between text-gray-400 dark:text-gray-600">
             <th className="font-medium">{title.toUpperCase()}</th>
