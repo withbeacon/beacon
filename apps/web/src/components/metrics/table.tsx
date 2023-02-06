@@ -16,7 +16,7 @@ export function MetricsTable({
   const percent = (v: number) => (v * 100) / total;
 
   return (
-    <div className="hide-scrollbar flex h-96 w-full flex-col gap-4 overflow-scroll rounded-xl border border-gray-200 px-6 pb-8 pt-5 dark:border-gray-800">
+    <div className="flex h-96 w-full flex-col gap-4 rounded-xl border border-gray-200 px-6 pb-8 pt-5 dark:border-gray-800">
       {children}
       <table className="flex h-full w-full flex-col gap-4">
         <thead>
@@ -25,7 +25,7 @@ export function MetricsTable({
             <th className="font-medium">{dataValueType.toUpperCase()}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="hide-scrollbar overflow-scroll">
           {Object.entries(data)
             .sort(([, a], [, b]) => b - a)
             .map(([dataKey, value]) => (
