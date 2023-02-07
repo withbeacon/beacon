@@ -16,9 +16,9 @@ export function MetricsTable({
   const percent = (v: number) => (v * 100) / total;
 
   return (
-    <div className="flex h-96 w-full flex-col gap-4 rounded-xl border border-gray-200 px-6 pb-8 pt-5 dark:border-gray-800">
+    <div className="flex h-96 w-full flex-col gap-4 overflow-hidden rounded-xl border border-gray-200 px-6 pb-8 pt-5 dark:border-gray-800">
       {children}
-      <table className="flex h-full w-full flex-col gap-4 overflow-hidden">
+      <table className="flex h-full w-full flex-col gap-4">
         <thead>
           <tr className="flex justify-between text-gray-400 dark:text-gray-600">
             <th className="font-medium">{title.toUpperCase()}</th>
