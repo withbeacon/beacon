@@ -39,7 +39,7 @@ function InsightCard({
         >
           <ArrowUpIcon className="h-4 w-4" />
           <span className="text-base font-medium">
-            {growth === Infinity ? "1000" : growth}%
+            {growth === Infinity ? "1000" : growth.toFixed()}%
           </span>
         </div>
       </div>
