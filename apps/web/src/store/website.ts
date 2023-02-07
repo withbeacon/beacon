@@ -1,5 +1,6 @@
 import type { Website as PrismaWebsite } from "@prisma/client";
 import type { Metrics } from "~/types";
+import type { Insights } from "~/utils/db/insights";
 
 import { create } from "zustand";
 
@@ -12,6 +13,7 @@ export interface Website
 
 export interface WebsiteState extends Website {
   setWebsite: (website: Website) => void;
+  growth: Insights["growth"];
 }
 
 const useWebsiteStore = create<WebsiteState>()((set) => ({
@@ -31,6 +33,10 @@ const useWebsiteStore = create<WebsiteState>()((set) => ({
     sessions: {},
     pageViews: {},
     timeFormat: "weekly",
+  },
+  growth: {
+    pageViews: 0,
+    sessions: 0,
   },
   setWebsite: (website) => set(website),
 }));

@@ -2,15 +2,23 @@ import Chart from "./chart";
 import { ArrowUpIcon } from "@beacon/ui";
 
 import useWebsiteStore from "~/store/website";
+import { cx } from "class-variance-authority";
 
 export interface InsightCardProps {
   label: string;
   value: string | number;
   data: Record<number, number>;
   timeFormat: "daily" | "weekly" | "monthly";
+  growth: number;
 }
 
-function InsightCard({ data, label, value, timeFormat }: InsightCardProps) {
+function InsightCard({
+  data,
+  label,
+  value,
+  timeFormat,
+  growth,
+}: InsightCardProps) {
   return (
     <div className="hide-scrollbar flex h-48 min-w-full flex-col gap-8 overflow-scroll rounded-xl border border-gray-200 pt-4 dark:border-gray-800 lg:w-full lg:min-w-fit lg:overflow-hidden">
       <div className="flex justify-between px-4">
@@ -21,9 +29,18 @@ function InsightCard({ data, label, value, timeFormat }: InsightCardProps) {
           <h2 className="text-3xl font-bold">{value}</h2>
         </div>
 
-        <div className="flex items-center gap-2 text-green-600 dark:text-green-400">
-          <ArrowUpIcon className="h-5 w-5" />
-          <span className="text-base font-medium">24%</span>
+        <div
+          className={cx(
+            "flex items-center gap-2",
+            growth > -1
+              ? "text-green-600 dark:text-green-400"
+              : "text-red-600 dark:text-red-400"
+          )}
+        >
+          <ArrowUpIcon className="h-4 w-4" />
+          <span className="text-base font-medium">
+            {growth === Infinity ? "1000" : growth}%
+          </span>
         </div>
       </div>
 
@@ -35,6 +52,7 @@ function InsightCard({ data, label, value, timeFormat }: InsightCardProps) {
 export function SessionInsights() {
   const { sessions, timeFormat } = useWebsiteStore.getState().metrics;
   const value = useWebsiteStore.getState().sessions;
+  const growth = useWebsiteStore.getState().growth;
 
   return (
     <InsightCard
@@ -42,6 +60,7 @@ export function SessionInsights() {
       timeFormat={timeFormat}
       data={sessions}
       value={value}
+      growth={growth.sessions}
     />
   );
 }
@@ -49,6 +68,7 @@ export function SessionInsights() {
 export function PageViewInsights() {
   const { pageViews, timeFormat } = useWebsiteStore.getState().metrics;
   const value = useWebsiteStore.getState().pageViews;
+  const growth = useWebsiteStore.getState().growth;
 
   return (
     <InsightCard
@@ -56,6 +76,7 @@ export function PageViewInsights() {
       timeFormat={timeFormat}
       data={pageViews}
       value={value}
+      growth={growth.pageViews}
     />
   );
 }
