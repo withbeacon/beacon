@@ -89,6 +89,7 @@ export default async function Page({
     pageViews: insights.pageViews,
     sessions: insights.sessions,
     createdAt: website.createdAt,
+    growth: insights.growth,
     metrics,
   } as const;
 
