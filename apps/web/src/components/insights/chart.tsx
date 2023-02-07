@@ -21,7 +21,7 @@ export default function Chart({ data, timeFormat }: ChartProps) {
   return (
     <ResponsiveContainer>
       <AreaChart
-        margin={{ top: 4, left: 0, bottom: 1, right: 0 }}
+        margin={{ top: 8, left: 0, bottom: 1, right: 0 }}
         data={chartData}
       >
         <defs>
@@ -30,13 +30,6 @@ export default function Chart({ data, timeFormat }: ChartProps) {
             <stop offset="100%" stopColor={primary["500"]} stopOpacity={0} />
           </linearGradient>
         </defs>
-        <Area
-          type="monotone"
-          dataKey="value"
-          fill="url(#chart-background)"
-          stroke={theme ? primary["400"] : primary["500"]}
-          strokeWidth={2}
-        />
         <Tooltip
           offset={10}
           wrapperStyle={{ outline: "none" }}
@@ -44,6 +37,13 @@ export default function Chart({ data, timeFormat }: ChartProps) {
           content={({ active, payload }) => (
             <CustomTooltip active={active} payload={payload as any} />
           )}
+        />
+        <Area
+          type="monotone"
+          dataKey="value"
+          fill="url(#chart-background)"
+          stroke={theme ? primary["400"] : primary["500"]}
+          strokeWidth={2}
         />
       </AreaChart>
     </ResponsiveContainer>
