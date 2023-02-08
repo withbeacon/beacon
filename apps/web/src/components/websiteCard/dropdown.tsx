@@ -24,19 +24,19 @@ export default function CardDropdown({ name, id }: Props) {
           <EllipsisIcon className="h-6 w-6 text-gray-700 group-hover:block group-active:block radix-state-open:hidden dark:text-gray-300 hidden" />
         }
       >
-        <DropdownMenu.RadioGroup className="z-[99] flex flex-col gap-4 p-1">
-          <DropdownMenu.RadioItem value="rename">
+        <DropdownMenu.Group className="z-[99] flex flex-col gap-4 p-1">
+          <DropdownMenu.Item>
             <button onClick={() => setIsRenameDialogOpen(true)}>
               Rename
             </button>
-          </DropdownMenu.RadioItem>
+          </DropdownMenu.Item>
 
-          <DropdownMenu.RadioItem value="delete">
+          <DropdownMenu.Item>
             <button onClick={() => setIsDeleteDialogOpen(true)}>
               Delete
             </button>
-          </DropdownMenu.RadioItem>
-        </DropdownMenu.RadioGroup>
+          </DropdownMenu.Item>
+        </DropdownMenu.Group>
       </Dropdown>
 
       <RenameDialog
