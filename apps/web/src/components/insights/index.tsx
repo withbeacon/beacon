@@ -19,7 +19,6 @@ function InsightCard({
   timeFormat,
   growth,
 }: InsightCardProps) {
-  growth = growth * -1;
   return (
     <div className="hide-scrollbar flex h-48 min-w-full flex-col gap-8 overflow-scroll rounded-xl border border-gray-200 pt-4 dark:border-gray-800 lg:w-full lg:min-w-fit lg:overflow-hidden">
       <div className="flex justify-between px-4">
