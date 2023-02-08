@@ -1,5 +1,5 @@
 import Chart from "./chart";
-import { ArrowUpIcon } from "@beacon/ui";
+import { ArrowUpIcon, ArrowDownIcon } from "@beacon/ui";
 
 import useWebsiteStore from "~/store/website";
 import { cx } from "class-variance-authority";
@@ -19,6 +19,7 @@ function InsightCard({
   timeFormat,
   growth,
 }: InsightCardProps) {
+  growth = growth * -1;
   return (
     <div className="hide-scrollbar flex h-48 min-w-full flex-col gap-8 overflow-scroll rounded-xl border border-gray-200 pt-4 dark:border-gray-800 lg:w-full lg:min-w-fit lg:overflow-hidden">
       <div className="flex justify-between px-4">
@@ -37,7 +38,11 @@ function InsightCard({
               : "text-red-600 dark:text-red-400"
           )}
         >
-          <ArrowUpIcon className="h-4 w-4" />
+          {growth > -1 ? (
+            <ArrowUpIcon className="h-4 w-4" />
+          ) : (
+            <ArrowDownIcon className="h-4 w-4" />
+          )}
           <span className="text-base font-medium">
             {growth === Infinity ? "1000" : growth.toFixed()}%
           </span>
