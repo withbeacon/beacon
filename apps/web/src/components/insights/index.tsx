@@ -33,15 +33,15 @@ function InsightCard({
         <div
           className={cx(
             "flex items-center gap-2",
-            growth > -1
-              ? "text-green-600 dark:text-green-400"
-              : "text-red-600 dark:text-red-400"
+            growth < -1
+              ? "text-red-600 dark:text-red-400"
+              : "text-green-600 dark:text-green-400"
           )}
         >
-          {growth > -1 ? (
-            <ArrowUpIcon className="h-4 w-4" />
-          ) : (
+          {growth < -1 ? (
             <ArrowDownIcon className="h-4 w-4" />
+          ) : (
+            <ArrowUpIcon className="h-4 w-4" />
           )}
           <span className="text-base font-medium">
             {growth === Infinity ? "1000" : growth.toFixed()}%
