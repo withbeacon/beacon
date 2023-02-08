@@ -40,10 +40,6 @@ export async function getMetrics({ id, from, to }: Params): Promise<Metrics> {
       browser: true,
       country: true,
     },
-
-    orderBy: {
-      createdAt: "desc",
-    },
   });
 
   const pageViews = await prisma.pageView.findMany({
@@ -203,11 +199,11 @@ export async function getMetrics({ id, from, to }: Params): Promise<Metrics> {
       sessions.forEach((session) => {
         const date = toMonth(session.createdAt);
 
-        if (sessionMetrics[date.getTime()]) {
-          sessionMetrics[date.getTime()] += 1;
+        if (!sessionMetrics[date.getTime()]) {
+          sessionMetrics[date.getTime()] = 0;
         }
 
-        sessionMetrics[date.getTime()] = 0;
+        sessionMetrics[date.getTime()] += 1;
       });
 
       pageViews.forEach((pageView) => {
