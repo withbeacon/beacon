@@ -21,6 +21,7 @@
     "@radix-ui/react-dropdown-menu": "^2.0.2",
     "@radix-ui/react-select": "^1.2.0",
     "@react-spring/web": "^9.6.1",
+    "@rehookify/datepicker": "^4.1.1",
     "@wits/next-themes": "^0.2.16",
     "cheerio": "1.0.0-rc.12",
     "countries-and-timezones": "^3.4.1",
