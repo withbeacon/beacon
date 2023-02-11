@@ -3,6 +3,7 @@
 import type { CalendarDay } from "@rehookify/datepicker";
 import { ChevronUpIcon, ChevronDownIcon } from "@beacon/ui";
 import { Button } from "@beacon/ui";
+import ButtonGroup from "./buttonGroup";
 
 import { cx } from "class-variance-authority";
 import { useState, useEffect } from "react";
@@ -28,7 +29,7 @@ export default function DatePicker({ minDate }: Props) {
   const datePickerState = useDatePickerState({
     selectedDates,
     onDatesChange,
-    dates: { toggle: true, mode: "range", maxDate: new Date() },
+    dates: { toggle: true, mode: "range", maxDate: new Date(), minDate },
   });
 
   const { dayButton } = useDaysPropGetters(datePickerState);
@@ -50,8 +51,9 @@ export default function DatePicker({ minDate }: Props) {
   );
 
   return (
-    <section className="absolute z-50 flex min-h-fit w-80 flex-wrap rounded-lg border-2 border-gray-800 bg-white p-4 dark:bg-gray-900">
+    <section className="absolute z-50 flex min-h-fit w-80 flex-wrap rounded-xl border-2 border-gray-200 bg-white p-4 dark:bg-gray-900">
       <header className="max-h-fit w-full">
+        <ButtonGroup />
         <div className="flex w-full items-center justify-between">
           <Button
             className="rounded-lg border border-gray-200 px-2 py-2 dark:border-gray-800"
@@ -106,7 +108,7 @@ function getClassName(day: CalendarDay): string {
     day.disabled === true ? "cursor-not-allowed opacity-50" : "",
 
     day.range === "in-range"
-      ? "bg-gray-300 dark:bg-gray-700"
+      ? "bg-gray-200 dark:bg-gray-700"
       : day.range === "will-be-in-range"
       ? "border-gray-700 border"
       : day.range === "will-be-range-start"
@@ -114,9 +116,9 @@ function getClassName(day: CalendarDay): string {
       : day.range === "will-be-range-end"
       ? "rounded-r-md border border-gray-700"
       : day.range === "range-start"
-      ? "rounded-l-md bg-gray-300 dark:bg-gray-700"
+      ? "rounded-l-md bg-gray-200 dark:bg-gray-700"
       : day.range === "range-end"
-      ? "rounded-r-md bg-gray-300 dark:bg-gray-700"
+      ? "rounded-r-md bg-gray-200 dark:bg-gray-700"
       : ""
   );
 }
