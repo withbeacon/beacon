@@ -6,7 +6,7 @@ import BottomNav from "~/components/bottomNav";
 
 import useWebsiteStore from "~/store/website";
 import { getServerSession } from "@beacon/auth";
-import { getMetrics, getInsights } from "~/utils/db";
+import { getMinDate, getMetrics, getInsights } from "~/utils/db";
 import { notFound } from "next/navigation";
 import { prisma } from "@beacon/db";
 import { fromNow } from "@beacon/basics";
@@ -68,7 +68,7 @@ export default async function Page({
     to = +to;
   }
 
-  const [insights, metrics] = await Promise.all([
+  const [insights, metrics, minDate] = await Promise.all([
     getInsights({
       id,
       from: new Date(from),
@@ -80,6 +80,8 @@ export default async function Page({
       from: new Date(from),
       to: new Date(to),
     }),
+
+    getMinDate(id),
   ]);
 
   const { createdAt, ...defaultState } = {
@@ -90,6 +92,7 @@ export default async function Page({
     sessions: insights.sessions,
     createdAt: website.createdAt,
     growth: insights.growth,
+    minDate: minDate ?? new Date(),
     metrics,
   } as const;
 
@@ -98,7 +101,11 @@ export default async function Page({
   return (
     <div className="flex flex-col gap-6 overflow-scroll p-6 pr-2 lg:flex-row">
       {!!session && <BottomNav />}
-      <StoreInitializer createdAt={+createdAt} {...defaultState} />
+      <StoreInitializer
+        {...defaultState}
+        createdAt={+createdAt}
+        minDate={minDate ? minDate.getTime() : +new Date()}
+      />
       <AnalyticsSidebar isAuthed={!!session} />
 
       <main className="ml-0 flex w-full flex-col gap-6 overflow-scroll lg:ml-64">
