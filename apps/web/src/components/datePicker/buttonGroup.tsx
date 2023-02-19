@@ -26,8 +26,12 @@ const options = {
   },
 } as const;
 
-export default function ButtonGroup() {
-  const [active, setActive] = useState<Option>("Past Week");
+type Props = {
+  active: Option | null;
+  setActive: (option: Option | null) => void;
+}
+
+export default function ButtonGroup({ active, setActive }: Props) {
   const [date, setDate] = useDate();
 
   function handleSelect(val: string) {
