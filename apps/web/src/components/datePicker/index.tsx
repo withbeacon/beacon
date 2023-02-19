@@ -87,13 +87,13 @@ export default function DatePicker({ children, minDate }: Props) {
   );
 
   return (
-    <Popover.Root>
+    <Popover.Root modal>
       <Popover.Trigger className="flex items-center justify-center gap-2.5 rounded-lg border border-gray-200 px-4 py-2.5 font-medium transition-all duration-200 active:scale-[98%] active:shadow-sm dark:border-gray-800">
         <CalendarIcon />
         {active ? active : format.formatRange(date.from, date.to)}
       </Popover.Trigger>
       <Popover.Portal className="border-none outline-none">
-        <Popover.Content className="fixed right-0 top-3 z-50 flex min-h-fit w-80 flex-wrap rounded-xl border-2 border-gray-200 bg-white p-4 outline-none dark:bg-gray-900 lg:absolute lg:top-0 lg:right-auto">
+        <Popover.Content className="top-3 z-50 flex min-h-fit w-80 flex-wrap rounded-xl border-2 border-gray-200 bg-white p-4 outline-none dark:bg-gray-900 mt-3 mx-8 lg:mx-6" data-align="center" data-side="bottom">
           <header className="max-h-fit w-full">
             <ButtonGroup active={active} setActive={setActive} />
             <div className="flex w-full items-center justify-between">
