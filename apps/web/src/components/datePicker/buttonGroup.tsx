@@ -68,6 +68,7 @@ export default function ButtonGroup({ active, setActive }: Props) {
     <div className="hide-scrollbar mb-3 flex min-w-full gap-3 overflow-scroll">
       {Object.keys(options).map((option) => (
         <Button
+          key={option}
           intent="outline"
           size="md"
           className="min-w-fit"
