@@ -1,28 +1,34 @@
 import type { PropsWithChildren } from "react";
-import { HomeIcon, FileIcon, CalendarIcon } from "@beacon/ui";
+import { HomeIcon, FileIcon, CalendarIcon, Button } from "@beacon/ui";
 import DateSelect from "~/components/dateSelect";
 import Link from "next/link";
 import SignInLinkButton from "./signInLinkButton";
 
 import useWebsiteStore from "~/store/website";
+import DatePicker from "../datePicker";
 
 interface Props {
   isAuthed: boolean;
 }
 
 export default function AnalyticsSidebar({ isAuthed }: Props) {
-  const url = useWebsiteStore.getState().url;
-  const name = useWebsiteStore.getState().name;
+  const { url, name, minDate } = useWebsiteStore.getState();
 
   return (
     <>
-      <div className="flex gap-4 overflow-hidden lg:hidden">
-        <img src={`/favicon/${url}`} alt={name} width={28} height={28} />
+      <nav className="flex justify-between px-2 items-center">
+        <div className="flex gap-4 overflow-hidden lg:hidden items-center">
+          <div>
+            <img src={`/favicon/${url}`} alt={name} width={28} height={28} className="aspect-square rounded" />
+          </div>
 
-        <h2 className="truncate text-xl font-bold text-gray-800 dark:text-gray-100">
-          {name}
-        </h2>
-      </div>
+          <h2 className="truncate text-xl font-bold text-gray-800 dark:text-gray-100">
+            {name}
+          </h2>
+        </div>
+
+        <DatePicker minDate={minDate} />
+      </nav>
 
       <aside className="fixed hidden h-screen w-64 flex-col gap-4 bg-gray-100 pr-6 pb-12 dark:bg-gray-900 lg:flex">
         <div className="flex gap-4">
@@ -48,7 +54,7 @@ export default function AnalyticsSidebar({ isAuthed }: Props) {
           </div>
         </div>
 
-        <DateSelect />
+        <DatePicker minDate={minDate} />
 
         <div className="mt-auto flex flex-col gap-6">
           {isAuthed ? (

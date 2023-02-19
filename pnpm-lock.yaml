@@ -81,8 +81,10 @@ importers:
       '@hookform/resolvers': ^2.9.10
       '@next/font': ^13.1.6
       '@radix-ui/react-dropdown-menu': ^2.0.2
+      '@radix-ui/react-popover': ^1.0.3
       '@radix-ui/react-select': ^1.2.0
       '@react-spring/web': ^9.6.1
+      '@rehookify/datepicker': ^4.1.1
       '@types/node': ^18.11.18
       '@types/react': ^18.0.27
       '@types/react-dom': ^18.0.10
@@ -121,8 +123,10 @@ importers:
       '@hookform/resolvers': 2.9.10_react-hook-form@7.43.0
       '@next/font': 13.1.6
       '@radix-ui/react-dropdown-menu': 2.0.2_5ndqzdd6t4rivxsukjv3i3ak2q
+      '@radix-ui/react-popover': 1.0.3_5ndqzdd6t4rivxsukjv3i3ak2q
       '@radix-ui/react-select': 1.2.0_5ndqzdd6t4rivxsukjv3i3ak2q
       '@react-spring/web': 9.6.1_biqbaboplfbrettd7655fr4n2y
+      '@rehookify/datepicker': 4.1.1_react@18.2.0
       '@wits/next-themes': 0.2.16_3vryta7zmbcsw4rrqf4axjqggm
       cheerio: 1.0.0-rc.12
       countries-and-timezones: 3.4.1
@@ -4190,6 +4194,34 @@ packages:
       - '@types/react'
     dev: false
 
+  /@radix-ui/react-popover/1.0.3_5ndqzdd6t4rivxsukjv3i3ak2q:
+    resolution: {integrity: sha512-YwedSukfWsyJs3/yP3yXUq44k4/JBe3jqU63Z8v2i19qZZ3dsx32oma17ztgclWPNuqp3A+Xa9UiDlZHyVX8Vg==}
+    peerDependencies:
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@babel/runtime': 7.20.13
+      '@radix-ui/primitive': 1.0.0
+      '@radix-ui/react-compose-refs': 1.0.0_react@18.2.0
+      '@radix-ui/react-context': 1.0.0_react@18.2.0
+      '@radix-ui/react-dismissable-layer': 1.0.2_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-focus-guards': 1.0.0_react@18.2.0
+      '@radix-ui/react-focus-scope': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-id': 1.0.0_react@18.2.0
+      '@radix-ui/react-popper': 1.1.0_5ndqzdd6t4rivxsukjv3i3ak2q
+      '@radix-ui/react-portal': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-presence': 1.0.0_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-primitive': 1.0.1_biqbaboplfbrettd7655fr4n2y
+      '@radix-ui/react-slot': 1.0.1_react@18.2.0
+      '@radix-ui/react-use-controllable-state': 1.0.0_react@18.2.0
+      aria-hidden: 1.2.2_3stiutgnnbnfnf3uowm5cip22i
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-remove-scroll: 2.5.5_3stiutgnnbnfnf3uowm5cip22i
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
   /@radix-ui/react-popper/1.1.0_5ndqzdd6t4rivxsukjv3i3ak2q:
     resolution: {integrity: sha512-07U7jpI0dZcLRAxT7L9qs6HecSoPhDSJybF7mEGHJDBDv+ZoGCvIlva0s+WxMXwJEav+ckX3hAlXBtnHmuvlCQ==}
     peerDependencies:
@@ -4525,6 +4557,15 @@ packages:
       '@react-spring/types': 9.6.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@rehookify/datepicker/4.1.1_react@18.2.0:
+    resolution: {integrity: sha512-QdepN5liEtFyk/r5dwfm56OM1N3qX2EEewoJrayT4BiXIZjlFN0MpKketka9VVeTHQoXWIRcvWtOV/v5ghBDeA==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@rushstack/eslint-patch/1.2.0:
@@ -8139,7 +8180,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.6
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1_bluebird@3.7.2
+      promise-inflight: 1.0.1
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -15726,17 +15767,6 @@ packages:
     peerDependenciesMeta:
       bluebird:
         optional: true
-    dev: true
-
-  /promise-inflight/1.0.1_bluebird@3.7.2:
-    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
-    peerDependencies:
-      bluebird: '*'
-    peerDependenciesMeta:
-      bluebird:
-        optional: true
-    dependencies:
-      bluebird: 3.7.2
     dev: true
 
   /promise.allsettled/1.0.6:

@@ -14,6 +14,7 @@ export interface Website
 export interface WebsiteState extends Website {
   setWebsite: (website: Website) => void;
   growth: Insights["growth"];
+  minDate: Date;
 }
 
 const useWebsiteStore = create<WebsiteState>()((set) => ({
@@ -23,6 +24,7 @@ const useWebsiteStore = create<WebsiteState>()((set) => ({
   sessions: 0,
   public: false,
   createdAt: new Date(),
+  minDate: new Date(),
   metrics: {
     devices: {},
     browsers: {},
