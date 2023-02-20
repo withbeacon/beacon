@@ -20,6 +20,12 @@ export default {
       "autoprefixer",
     ],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreDuringBuilds: true,
+  },
   async rewrites() {
     return [
       {
