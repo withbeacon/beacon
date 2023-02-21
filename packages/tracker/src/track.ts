@@ -4,6 +4,10 @@ if (!(typeof window !== "undefined" && window.document)) {
   );
 }
 
+if (window.location.hostname === "localhost") {
+  throw new Error("[beacon] stopping the execution as on localhost");
+}
+
 import {
   screen,
   referrer,
