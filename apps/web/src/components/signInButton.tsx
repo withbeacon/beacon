@@ -11,7 +11,7 @@ export default function SignInButton() {
 
   function handleSignIn() {
     setLoading(true);
-    signIn("google", { callbackUrl: "/beta" });
+    signIn("google");
   }
 
   return (
