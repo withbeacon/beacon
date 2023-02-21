@@ -47,7 +47,7 @@ const buttonStyles = cva(
 
 interface Props extends VariantProps<typeof buttonStyles> {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (evt: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
   tinted?: boolean;
   filled?: boolean;
@@ -80,7 +80,7 @@ export function Button({
       className={
         buttonStyles({ intent, loading, disabled, ...props }) + " " + className
       }
-      onClick={() => onClick?.()}
+      onClick={(evt) => onClick?.(evt)}
       disabled={disabled || loading}
       type={submit ? "submit" : "button"}
     >
