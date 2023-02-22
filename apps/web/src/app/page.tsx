@@ -28,7 +28,7 @@ export default async function Page({ searchParams }: Props) {
   });
 
   if (query.length === 0) {
-    redirect("/add");
+    redirect("/onboard");
   }
 
   const recentPageViews: Record<string, number> = {};
