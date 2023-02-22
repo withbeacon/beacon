@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { HomeIcon, FileIcon, CalendarIcon, Button } from "@beacon/ui";
-import DateSelect from "~/components/dateSelect";
+import { HomeIcon, FileIcon, CalendarIcon } from "@beacon/ui";
 import Link from "next/link";
 import SignInLinkButton from "./signInLinkButton";
 
