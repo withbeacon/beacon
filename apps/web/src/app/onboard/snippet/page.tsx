@@ -8,7 +8,7 @@ export default async function Page() {
   await protect();
 
   const host = headers().get("host");
-  const snippet = `<script defer src="${host}/track.js"></script>`;
+  const snippet = `<script defer src="://${host}/track.js"></script>`;
 
   return (
     <>
@@ -17,7 +17,7 @@ export default async function Page() {
         Copy and paste the following snippet in your site and you will be good
         to go :)
       </p>
-      <code className="rounded-xl bg-gray-100 px-4 py-3 text-base dark:bg-gray-800 my-2">
+      <code className="rounded-xl bg-gray-100 px-4 py-3 text-base dark:bg-gray-800 my-2 break-all">
         {snippet}
       </code>
       <div className="flex gap-4">
