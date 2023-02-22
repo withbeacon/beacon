@@ -46,7 +46,7 @@ export default function AnalyticsSidebar({ isAuthed }: Props) {
             <Link
               href={"http://" + url}
               target="_blank"
-              className="text-sm text-gray-500 dark:text-gray-400"
+              className="text-sm text-gray-500 dark:text-gray-400 truncate"
             >
               {url}
             </Link>
