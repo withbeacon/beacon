@@ -24,7 +24,7 @@ export default async function Settings() {
   }
 
   return (
-    <div className="flex h-screen flex-col gap-6 overflow-scroll p-6 px-4 lg:flex-row lg:px-2">
+    <div className="flex h-screen flex-col gap-6 overflow-scroll pt-6 pb-2 px-4 lg:flex-row lg:px-5">
       <Suspense fallback={<SidebarShimmer />}>
         <Sidebar
           user={{
