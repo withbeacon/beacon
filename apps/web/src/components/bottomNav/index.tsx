@@ -3,12 +3,11 @@
 import type { PropsWithChildren } from "react";
 import { HomeIcon, PlusIcon, UserIcon } from "@beacon/ui";
 import Link from "next/link";
-import SettingsDropdown from "~/components/settingsDropdown";
+import AddDialog from "../addDialog";
 
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { cx } from "class-variance-authority";
-import AddDialog from "../addDialog";
 
 interface Props extends PropsWithChildren {
   href: string;
@@ -48,9 +47,9 @@ export default function BottomNav() {
       >
         <PlusIcon />
       </button>
-      <SettingsDropdown>
+      <NavItem href="/settings">
         <UserIcon />
-      </SettingsDropdown>
+      </NavItem>
 
       <AddDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} />
     </nav>
