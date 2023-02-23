@@ -12,18 +12,20 @@ const font = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   const session = await getServerSession();
-  const websites = await prisma.website.findMany({
-    where: {
-      user: {
-        email: session?.user?.email || undefined,
-      },
-    },
-    select: {
-      id: true,
-      url: true,
-      name: true,
-    },
-  });
+  const websites = session?.user?.email
+    ? await prisma.website.findMany({
+        where: {
+          user: {
+            email: session?.user?.email,
+          },
+        },
+        select: {
+          id: true,
+          url: true,
+          name: true,
+        },
+      })
+    : undefined;
 
   return (
     <ServerThemeProvider attribute="class">
