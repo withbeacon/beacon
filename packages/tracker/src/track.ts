@@ -43,6 +43,13 @@ function send(url?: string) {
     timezone,
   };
 
+  if (
+    window.beacon.before &&
+    window.beacon.before({ pathname: window.location.pathname }) === null
+  ) {
+    return;
+  }
+
   fetch(COLLECT_API, {
     method: "POST",
     body: JSON.stringify(payload),
@@ -104,3 +111,15 @@ const observer = new MutationObserver(() => {
 });
 
 observer.observe(document, { subtree: true, childList: true });
+
+type PageEvent = {
+  pathname: string;
+};
+
+declare global {
+  interface Window {
+    beacon: {
+      before: ({ pathname }: PageEvent) => PageEvent | null;
+    };
+  }
+}
