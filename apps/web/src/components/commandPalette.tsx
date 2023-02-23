@@ -38,7 +38,16 @@ export default function CommandPalette({ websites }: Props) {
         setOpen((open) => !open);
       }
     };
+
+    const pinch = (evt: TouchEvent) => {
+      if (evt.touches.length === 2) {
+        setOpen((open) => !open);
+      }
+    };
+
     document.addEventListener("keydown", down);
+    document.addEventListener("touchstart", pinch);
+
     return () => document.removeEventListener("keydown", down);
   }, []);
 
