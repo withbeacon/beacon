@@ -15,7 +15,7 @@ export default function DefaultSeo() {
     <>
       <title>{opts.title}</title>
       <meta name="description" content={opts.description} />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
       <link rel="icon" href={opts.favicon} />
 
       <meta name="twitter:card" content="summary" />
