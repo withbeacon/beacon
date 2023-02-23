@@ -14,7 +14,7 @@ export default async function Settings() {
   const session = await getServerSession();
   const user = await prisma.user.findUnique({
     where: {
-      email: session?.user?.email!,
+      email: session?.user?.email || undefined,
     },
     select: { id: true },
   });
