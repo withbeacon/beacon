@@ -40,6 +40,8 @@ export default function CommandPalette({ websites }: Props) {
     };
 
     const pinch = (evt: TouchEvent) => {
+      evt.preventDefault();
+
       if (evt.touches.length === 2) {
         setOpen((open) => !open);
       }
