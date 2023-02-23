@@ -24,7 +24,7 @@ export default async function Settings() {
   }
 
   return (
-    <div className="flex h-screen flex-col gap-6 overflow-scroll p-6 pr-2 lg:flex-row">
+    <div className="flex h-screen flex-col gap-6 overflow-scroll p-6 px-4 lg:flex-row lg:px-2">
       <Suspense fallback={<SidebarShimmer />}>
         <Sidebar
           user={{
@@ -34,7 +34,7 @@ export default async function Settings() {
           page="settings"
         />
       </Suspense>
-      <main className="ml-2 flex w-full flex-col gap-6 py-1 lg:w-80">
+      <main className="ml-1 flex w-full flex-col gap-6 py-1 lg:w-80">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
           My Account
         </h1>
