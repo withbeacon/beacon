@@ -1,91 +1,172 @@
 "use client";
 
+import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import type { PropsWithChildren, ReactNode } from "react";
-import { Fragment } from "react";
-import { Transition } from "@headlessui/react";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { CrossIcon } from "../icons";
 
 import { cx } from "class-variance-authority";
 
-interface Props extends PropsWithChildren {
-  title: string;
-  description?: ReactNode;
-  trigger?: ReactNode;
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-}
+const Dialog = DialogPrimitive.Root;
 
-export function Dialog({
+const DialogTrigger = DialogPrimitive.Trigger;
+
+const DialogPortal = ({
+  className,
   children,
-  trigger,
-  title,
-  description,
-  isOpen,
-  setIsOpen,
-}: Props) {
+  ...props
+}: DialogPrimitive.DialogPortalProps) => (
+  <DialogPrimitive.Portal className={cx(className)} {...props}>
+    <div className="fixed inset-0 z-50 flex items-start justify-center sm:items-center">
+      {children}
+    </div>
+  </DialogPrimitive.Portal>
+);
+DialogPortal.displayName = DialogPrimitive.Portal.displayName;
+
+const DialogOverlay = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+>(({ className, children, ...props }, ref) => (
+  <DialogPrimitive.Overlay
+    className={cx(
+      "data-[state=closed]:animate-out data-[state=open]:fade-in data-[state=closed]:fade-out fixed inset-0 z-50 bg-black/50 backdrop-blur-sm transition-all duration-100",
+      className
+    )}
+    {...props}
+    ref={ref}
+  />
+));
+DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
+
+const DialogContent = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <DialogPortal>
+    <DialogOverlay />
+    <DialogPrimitive.Content
+      ref={ref}
+      className={cx(
+        "animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0 fixed z-50 grid w-full gap-4 rounded-b-lg bg-white p-6 sm:max-w-lg sm:rounded-lg",
+        "dark:bg-gray-800",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <DialogPrimitive.Close className="absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-gray-100 dark:focus:ring-gray-400 dark:focus:ring-offset-gray-800 dark:data-[state=open]:bg-gray-800">
+        <CrossIcon className="h-4 w-4" />
+        <span className="sr-only">Close</span>
+      </DialogPrimitive.Close>
+    </DialogPrimitive.Content>
+  </DialogPortal>
+));
+DialogContent.displayName = DialogPrimitive.Content.displayName;
+
+const DialogHeader = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cx(
+      "flex flex-col space-y-2 text-center sm:text-left",
+      className
+    )}
+    {...props}
+  />
+);
+DialogHeader.displayName = "DialogHeader";
+
+const DialogFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={cx(
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      className
+    )}
+    {...props}
+  />
+);
+DialogFooter.displayName = "DialogFooter";
+
+const DialogTitle = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Title>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Title
+    ref={ref}
+    className={cx(
+      "text-lg font-semibold text-gray-800",
+      "dark:text-gray-50",
+      className
+    )}
+    {...props}
+  />
+));
+DialogTitle.displayName = DialogPrimitive.Title.displayName;
+
+const DialogDescription = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cx("text-sm text-gray-500", "dark:text-gray-400", className)}
+    {...props}
+  />
+));
+DialogDescription.displayName = DialogPrimitive.Description.displayName;
+
+const DialogClose = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Close>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Close ref={ref} className={className} {...props} />
+));
+
+type DialogItemProps = {
+  triggerChildren: React.ReactNode;
+  onSelect?: (event: Event) => unknown | void;
+};
+
+const DialogItem = React.forwardRef<
+  React.ElementRef<typeof Dialog>,
+  React.ComponentPropsWithoutRef<typeof Dialog> & DialogItemProps
+>((props, forwardedRef) => {
+  const { triggerChildren, children, onSelect, onOpenChange, ...itemProps } =
+    props;
+
   return (
-    <DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
-      {trigger && <DialogPrimitive.Trigger>{trigger}</DialogPrimitive.Trigger>}
-      <DialogPrimitive.Portal forceMount>
-        <Transition.Root show={isOpen}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <DialogPrimitive.Overlay
-              forceMount
-              className="fixed inset-0 z-20 bg-black/50"
-            />
-          </Transition.Child>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300 -transform-y-full"
-            enterFrom="opacity-0 translate-y-5 md:scale-95"
-            enterTo="opacity-100 translate-y-0 md:scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0 md:scale-100"
-            leaveTo="opacity-0 translate-y-5 md:scale-95"
-          >
-            <DialogPrimitive.Content
-              forceMount
-              className={cx(
-                "fixed z-50",
-                "w-screen rounded-t-lg p-4 md:w-[95vw] md:w-full md:max-w-md md:rounded-lg",
-                "bottom-0 md:bottom-auto md:top-[50%] md:left-[50%] md:-translate-x-[50%] md:-translate-y-[50%]",
-                "bg-white dark:bg-gray-800",
-                "focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75"
-              )}
-            >
-              <DialogPrimitive.Title className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {title}
-              </DialogPrimitive.Title>
+    <Dialog onOpenChange={onOpenChange}>
+      <DialogTrigger asChild>
+        <DropdownMenu.Item
+          {...itemProps}
+          ref={forwardedRef}
+          onSelect={(event) => {
+            event.preventDefault();
+            onSelect && onSelect(event);
+          }}
+        >
+          {triggerChildren}
+        </DropdownMenu.Item>
+      </DialogTrigger>
 
-              {description && (
-                <DialogPrimitive.Description className="my-2 text-sm font-normal text-gray-700 dark:text-gray-400">
-                  {description}
-                </DialogPrimitive.Description>
-              )}
-
-              {children}
-
-              <DialogPrimitive.Close
-                className={cx(
-                  "absolute top-3.5 right-3.5 inline-flex items-center justify-center rounded-full p-1",
-                  "focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75"
-                )}
-              >
-                <CrossIcon className="h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
-              </DialogPrimitive.Close>
-            </DialogPrimitive.Content>
-          </Transition.Child>
-        </Transition.Root>
-      </DialogPrimitive.Portal>
-    </DialogPrimitive.Root>
+      {children}
+    </Dialog>
   );
-}
+});
+
+export {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+  DialogItem,
+};

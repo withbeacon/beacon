@@ -1,6 +1,12 @@
 "use client";
 
-import { Dialog, Button } from "@beacon/ui";
+import {
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  Button,
+  Dialog,
+} from "@beacon/ui";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -61,35 +67,41 @@ export default function RenameDialog({ name, id, isOpen, setIsOpen }: Props) {
   }
 
   return (
-    <Dialog title={`Rename ${name}`} isOpen={isOpen} setIsOpen={setIsOpen}>
-      <form onSubmit={handleSubmit(submit)}>
-        {errors.name && (
-          <p className="mt-2 text-sm text-red-500">{errors.name.message}</p>
-        )}
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Rename {name}</DialogTitle>
+        </DialogHeader>
 
-        <input
-          type="text"
-          placeholder="New website name"
-          className="mt-2 mb-4 w-full rounded-lg border border-gray-300 bg-gray-100 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700"
-          {...register("name")}
-        />
+        <form onSubmit={handleSubmit(submit)}>
+          {errors.name && (
+            <p className="mt-2 text-sm text-red-500">{errors.name.message}</p>
+          )}
 
-        <div className="mt-4 flex gap-4">
-          <Button onClick={() => setIsOpen(false)} intent="outline" fullWidth>
-            Cancel
-          </Button>
-          <Button
-            intent="primary"
-            size="sm"
-            loading={!!isMutating}
-            filled
-            submit
-            fullWidth
-          >
-            Rename
-          </Button>
-        </div>
-      </form>
+          <input
+            type="text"
+            placeholder="New website name"
+            className="mt-2 mb-4 w-full rounded-lg border border-gray-300 bg-gray-100 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700"
+            {...register("name")}
+          />
+
+          <div className="mt-4 flex gap-4">
+            <Button onClick={() => setIsOpen(false)} intent="outline" fullWidth>
+              Cancel
+            </Button>
+            <Button
+              intent="primary"
+              size="sm"
+              loading={!!isMutating}
+              filled
+              submit
+              fullWidth
+            >
+              Rename
+            </Button>
+          </div>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }
