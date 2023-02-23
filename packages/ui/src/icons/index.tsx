@@ -27,3 +27,4 @@ export * from "./globe";
 export * from "./ellipsis";
 export * from "./discord";
 export * from "./logout";
+export * from "./trash";
