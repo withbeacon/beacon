@@ -1,7 +1,14 @@
 "use client";
 
 import type { Resolver } from "react-hook-form";
-import { Button, Label, Dialog } from "@beacon/ui";
+import {
+  Button,
+  Label,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@beacon/ui";
 
 import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
@@ -113,58 +120,69 @@ export default function AddDialog({ isOpen, setIsOpen }: Props) {
   }
 
   return (
-    <Dialog title="Add website" isOpen={isOpen} setIsOpen={setIsOpen}>
-      <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-5">
-        <div className="flex flex-col gap-2 mt-2">
-          <Label error={errors.name?.message} htmlFor="name">
-            Name
-          </Label>
-          <input
-            className={cx(
-              "rounded-xl border border-gray-200 bg-white py-2 px-3 transition-all duration-100 dark:border-gray-600 dark:bg-gray-700",
-              errors.name && "!ring-red-500 focus:!border-red-500"
-            )}
-            placeholder="My Example"
-            type="text"
-            id="name"
-            required
-            {...register("name", { required: true })}
-          />
-        </div>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Add website</DialogTitle>
+        </DialogHeader>
 
-        <div className="flex flex-col gap-2">
-          <Label error={errors.url?.message} htmlFor="url">
-            URL (hostname)
-          </Label>
-          <input
-            className={cx(
-              "rounded-xl border border-gray-200 bg-white py-2.5 px-3 transition-all duration-100 dark:border-gray-600 dark:bg-gray-700",
-              errors.url && "!ring-red-500 focus:!border-red-500"
-            )}
-            placeholder="example.com"
-            type="text"
-            id="url"
-            required
-            {...register("url", { required: true })}
-          />
-        </div>
+        <form onSubmit={handleSubmit(submit)} className="flex flex-col gap-5">
+          <div className="mt-2 flex flex-col gap-2">
+            <Label error={errors.name?.message} htmlFor="name">
+              Name
+            </Label>
+            <input
+              className={cx(
+                "rounded-xl border border-gray-200 bg-white py-2 px-3 transition-all duration-100 dark:border-gray-600 dark:bg-gray-700",
+                errors.name && "!ring-red-500 focus:!border-red-500"
+              )}
+              placeholder="My Example"
+              type="text"
+              id="name"
+              required
+              {...register("name", { required: true })}
+            />
+          </div>
 
-        <div className="mt-4 flex gap-4">
-          <Button onClick={() => setIsOpen(false)} intent="outline" fullWidth>
-            Cancel
-          </Button>
-          <Button
-            intent="primary"
-            size="sm"
-            loading={!!isMutating}
-            filled
-            submit
-            fullWidth
-          >
-            Add {getValues().name}
-          </Button>
-        </div>
-      </form>
+          <div className="flex flex-col gap-2">
+            <Label error={errors.url?.message} htmlFor="url">
+              URL (hostname)
+            </Label>
+            <input
+              className={cx(
+                "rounded-xl border border-gray-200 bg-white py-2.5 px-3 transition-all duration-100 dark:border-gray-600 dark:bg-gray-700",
+                errors.url && "!ring-red-500 focus:!border-red-500"
+              )}
+              placeholder="example.com"
+              type="text"
+              id="url"
+              required
+              {...register("url", { required: true })}
+            />
+          </div>
+
+          <div className="mt-4 flex gap-4">
+            <Button
+              onClick={() => setIsOpen(false)}
+              intent="outline"
+              className="rounded-xl"
+              fullWidth
+            >
+              Cancel
+            </Button>
+            <Button
+              intent="primary"
+              size="sm"
+              loading={!!isMutating}
+              filled
+              submit
+              fullWidth
+            >
+              Add {getValues().name}
+            </Button>
+          </div>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }

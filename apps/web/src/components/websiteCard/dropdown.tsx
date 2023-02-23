@@ -3,7 +3,7 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import RenameDialog from "./renameDialog";
 import DeleteDialog from "./deleteDialog";
-import { Dropdown, Button } from "@beacon/ui";
+import { Dialog, DialogTrigger, Dropdown, Button } from "@beacon/ui";
 import { EllipsisIcon } from "@beacon/ui";
 
 import { useState } from "react";

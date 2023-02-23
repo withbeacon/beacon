@@ -1,6 +1,13 @@
 "use client";
 
-import { Dialog, Button } from "@beacon/ui";
+import {
+  Dialog,
+  Button,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogHeader,
+} from "@beacon/ui";
 
 import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
@@ -77,48 +84,54 @@ export default function DeleteDialog({ name, id, isOpen, setIsOpen }: Props) {
   }
 
   return (
-    <Dialog
-      title={`Delete ${name}`}
-      description={
-        <p>
-          Are you sure that you want to delete {name}? Note, this action is{" "}
-          <span className="font-bold">irreversible.</span> If you are sure,
-          please type {name} in the below input.
-        </p>
-      }
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-    >
-      <form onSubmit={handleSubmit(submit)}>
-        <input
-          type="text"
-          placeholder={name}
-          className={cx(
-            "mt-2 mb-4 w-full rounded-lg border bg-gray-100 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 dark:bg-gray-700",
-            !!errors.name
-              ? "border-gray-300 focus:ring-primary-500 dark:border-gray-600"
-              : "border-red-500 focus:ring-red-500 dark:border-red-500"
-          )}
-          {...register("name")}
-        />
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete {name}</DialogTitle>
+          <DialogDescription>
+            Are you sure that you want to delete {name}? Note, this action is{" "}
+            <span className="font-bold">irreversible.</span> If you are sure,
+            please type {name} in the below input.
+          </DialogDescription>
+        </DialogHeader>
 
-        <div className="mt-4 flex gap-4">
-          <Button onClick={() => setIsOpen(false)} intent="outline" fullWidth>
-            Cancel
-          </Button>
-          <Button
-            intent="destructive"
-            size="sm"
-            loading={!!isMutating}
-            disabled={!!errors.name}
-            filled
-            submit
-            fullWidth
-          >
-            Delete
-          </Button>
-        </div>
-      </form>
+        <form onSubmit={handleSubmit(submit)}>
+          <input
+            type="text"
+            placeholder={name}
+            className={cx(
+              "mt-2 mb-4 w-full rounded-lg border bg-gray-100 px-3 py-2 focus:border-transparent focus:outline-none focus:ring-2 dark:bg-gray-700",
+              !!errors.name
+                ? "border-gray-300 focus:ring-primary-500 dark:border-gray-600"
+                : "border-red-500 focus:ring-red-500 dark:border-red-500"
+            )}
+            {...register("name")}
+          />
+
+          <div className="mt-4 flex gap-4">
+            <Button
+              onClick={() => {
+                setIsOpen(false);
+              }}
+              intent="outline"
+              fullWidth
+            >
+              Cancel
+            </Button>
+            <Button
+              intent="destructive"
+              size="sm"
+              loading={!!isMutating}
+              disabled={!!errors.name}
+              filled
+              submit
+              fullWidth
+            >
+              Delete
+            </Button>
+          </div>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }
