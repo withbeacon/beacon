@@ -9,4 +9,5 @@ export * from "./label";
 export * from "./dropdown";
 export * from "./dialog";
 export * from "./alertDialog";
+export * from "./command";
 

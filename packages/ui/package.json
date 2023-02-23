@@ -6,7 +6,8 @@
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.2",
     "@radix-ui/react-dialog": "^1.0.2",
-    "class-variance-authority": "^0.3.0"
+    "class-variance-authority": "^0.3.0",
+    "cmdk": "^0.1.22"
   },
   "devDependencies": {
     "@storybook/react": "^6.5.16"
