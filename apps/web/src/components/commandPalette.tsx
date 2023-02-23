@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { SettingsIcon, HomeIcon, CommandDialog } from "@beacon/ui";
 import { Prisma } from "@prisma/client";
 import {
@@ -71,7 +70,7 @@ export default function CommandPalette({ websites }: Props) {
                 className="flex items-center gap-2"
                 onSelect={() => navigate(`/${website.id}`)}
               >
-                <Image
+                <img
                   src={`/favicon/${website.url}`}
                   width={64}
                   height={64}
