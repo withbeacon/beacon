@@ -47,12 +47,13 @@ const buttonStyles = cva(
 
 interface Props extends VariantProps<typeof buttonStyles> {
   children: ReactNode;
-  onClick?: (evt: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: JSX.IntrinsicElements["button"]["onClick"];
   className?: string;
   tinted?: boolean;
   filled?: boolean;
   loading?: boolean;
   submit?: boolean;
+  role?: JSX.IntrinsicElements["button"]["role"];
 }
 
 export function Button({
@@ -65,6 +66,7 @@ export function Button({
   className,
   children,
   onClick,
+  role,
   ...props
 }: Props) {
   if (tinted) {
@@ -80,7 +82,8 @@ export function Button({
       className={
         buttonStyles({ intent, loading, disabled, ...props }) + " " + className
       }
-      onClick={(evt) => onClick?.(evt)}
+      onClick={loading || disabled ? undefined : onClick}
+      role={role}
       disabled={disabled || loading}
       type={submit ? "submit" : "button"}
     >

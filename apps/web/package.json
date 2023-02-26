@@ -25,6 +25,7 @@
     "@rehookify/datepicker": "^4.1.1",
     "@wits/next-themes": "^0.2.16",
     "cheerio": "1.0.0-rc.12",
+    "chrono-node": "^2.5.0",
     "countries-and-timezones": "^3.4.1",
     "cuid": "^2.1.8",
     "isbot": "^3.6.5",
