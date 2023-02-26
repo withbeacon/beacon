@@ -108,7 +108,7 @@ export default async function Page({
       />
       <AnalyticsSidebar isAuthed={!!session} />
 
-      <main className="ml-0 flex w-full flex-col gap-6 overflow-scroll lg:ml-64">
+      <main className="ml-0 flex w-full flex-col gap-6 overflow-scroll lg:ml-24">
         <div className="hide-scrollbar flex gap-4 overflow-scroll lg:overflow-hidden">
           <SessionInsights />
           <PageViewInsights />
