@@ -55,7 +55,7 @@ export function getDateFormat(from: Date): "daily" | "weekly" | "monthly" {
 
   if (days < 60) {
     return "daily";
-  } else if (days < 180) {
+  } else if (days <= 120) {
     return "weekly";
   } else {
     return "monthly";
