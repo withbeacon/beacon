@@ -84,7 +84,6 @@ importers:
       '@radix-ui/react-popover': ^1.0.3
       '@radix-ui/react-select': ^1.2.0
       '@react-spring/web': ^9.6.1
-      '@rehookify/datepicker': ^4.1.1
       '@types/node': ^18.11.18
       '@types/react': ^18.0.27
       '@types/react-dom': ^18.0.10
@@ -127,7 +126,6 @@ importers:
       '@radix-ui/react-popover': 1.0.3_5ndqzdd6t4rivxsukjv3i3ak2q
       '@radix-ui/react-select': 1.2.0_5ndqzdd6t4rivxsukjv3i3ak2q
       '@react-spring/web': 9.6.1_biqbaboplfbrettd7655fr4n2y
-      '@rehookify/datepicker': 4.1.1_react@18.2.0
       '@wits/next-themes': 0.2.16_3vryta7zmbcsw4rrqf4axjqggm
       cheerio: 1.0.0-rc.12
       chrono-node: 2.5.0
@@ -4760,15 +4758,6 @@ packages:
       '@react-spring/types': 9.6.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-    dev: false
-
-  /@rehookify/datepicker/4.1.1_react@18.2.0:
-    resolution: {integrity: sha512-QdepN5liEtFyk/r5dwfm56OM1N3qX2EEewoJrayT4BiXIZjlFN0MpKketka9VVeTHQoXWIRcvWtOV/v5ghBDeA==}
-    engines: {node: '>=16'}
-    peerDependencies:
-      react: ^16.8.0 || ^17 || ^18
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /@rushstack/eslint-patch/1.2.0:
