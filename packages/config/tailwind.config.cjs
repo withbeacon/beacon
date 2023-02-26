@@ -59,6 +59,9 @@ module.exports = {
       },
     },
   },
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   plugins: [
     require("tailwindcss-radix"),
     require("tailwindcss-animate"),
