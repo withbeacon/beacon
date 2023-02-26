@@ -71,9 +71,11 @@ export default function DatePicker({ minDate }: Props) {
   function onCustomRange() {
     const parsed = parseNlpDateRange(inputValue);
 
-    if (parsed && parsed[0]) {
+    if (parsed && parsed[0] && parsed[1]) {
       if (parsed[0] < minDate) {
         parsed[0] = new Date(minDate);
+      } else if (parsed[1] > new Date()) {
+        parsed[1] = new Date();
       }
 
       setSelectedDates(parsed);
@@ -96,7 +98,9 @@ export default function DatePicker({ minDate }: Props) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger className="flex items-center justify-center gap-2 rounded-lg border border-gray-100 px-4 py-2 transition-all duration-300 active:scale-[98%] dark:border-gray-800">
         <CalendarIcon className="h-5 w-5" />
-        {date ? format.formatRange(date.from, date.to) : "Select Date Range"}
+        <span className="text-sm lg:text-base truncate w-full overflow-hidden">
+          {active ? active : format.formatRange(date.from, date.to)}
+        </span>
       </PopoverTrigger>
       <PopoverContent
         className="ml-6 !p-0"
@@ -127,8 +131,13 @@ export default function DatePicker({ minDate }: Props) {
               <CommandItem
                 key={option.label}
                 value={option.label}
-                onSelect={(currentValue) => {
-                  setActive(currentValue as Option);
+                onSelect={() => {
+                  setActive(option.label);
+                  setSelectedDates([option.from, option.to]);
+                }}
+                onClick={() => {
+                  setActive(option.label);
+                  setOpen(false);
                 }}
               >
                 <>
