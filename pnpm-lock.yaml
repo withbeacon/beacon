@@ -84,7 +84,6 @@ importers:
       '@radix-ui/react-popover': ^1.0.3
       '@radix-ui/react-select': ^1.2.0
       '@react-spring/web': ^9.6.1
-      '@rehookify/datepicker': ^4.1.1
       '@types/node': ^18.11.18
       '@types/react': ^18.0.27
       '@types/react-dom': ^18.0.10
@@ -94,6 +93,7 @@ importers:
       '@wits/next-themes': ^0.2.16
       autoprefixer: ^10.4.13
       cheerio: 1.0.0-rc.12
+      chrono-node: ^2.5.0
       countries-and-timezones: ^3.4.1
       cuid: ^2.1.8
       eslint: 8.22.0
@@ -126,9 +126,9 @@ importers:
       '@radix-ui/react-popover': 1.0.3_5ndqzdd6t4rivxsukjv3i3ak2q
       '@radix-ui/react-select': 1.2.0_5ndqzdd6t4rivxsukjv3i3ak2q
       '@react-spring/web': 9.6.1_biqbaboplfbrettd7655fr4n2y
-      '@rehookify/datepicker': 4.1.1_react@18.2.0
       '@wits/next-themes': 0.2.16_3vryta7zmbcsw4rrqf4axjqggm
       cheerio: 1.0.0-rc.12
+      chrono-node: 2.5.0
       countries-and-timezones: 3.4.1
       cuid: 2.1.8
       isbot: 3.6.5
@@ -4760,15 +4760,6 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@rehookify/datepicker/4.1.1_react@18.2.0:
-    resolution: {integrity: sha512-QdepN5liEtFyk/r5dwfm56OM1N3qX2EEewoJrayT4BiXIZjlFN0MpKketka9VVeTHQoXWIRcvWtOV/v5ghBDeA==}
-    engines: {node: '>=16'}
-    peerDependencies:
-      react: ^16.8.0 || ^17 || ^18
-    dependencies:
-      react: 18.2.0
-    dev: false
-
   /@rushstack/eslint-patch/1.2.0:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: true
@@ -8668,6 +8659,12 @@ packages:
     engines: {node: '>=6.0'}
     dev: true
 
+  /chrono-node/2.5.0:
+    resolution: {integrity: sha512-GasdFCw4tsb8UKlwyJW1S+3bdN06vsyGR2cEDMlhEGI7ic4SQRnLyl/hbItwSum6pPkkUTrzFcaR3C2tZnnO5Q==}
+    dependencies:
+      dayjs: 1.11.7
+    dev: false
+
   /ci-info/2.0.0:
     resolution: {integrity: sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==}
     dev: true
@@ -9388,6 +9385,10 @@ packages:
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
     dev: true
+
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
