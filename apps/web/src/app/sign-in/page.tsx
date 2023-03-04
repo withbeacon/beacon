@@ -27,3 +27,8 @@ export default function SignIn() {
     </div>
   );
 }
+
+export const metadata = {
+  title: "Sign in to Beacon",
+}
+

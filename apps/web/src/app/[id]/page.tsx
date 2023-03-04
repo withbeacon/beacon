@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { SessionInsights, PageViewInsights } from "~/components/insights";
 import Metrics from "~/components/metrics";
 import AnalyticsSidebar from "~/components/analyticsSidebar";
@@ -19,6 +20,41 @@ interface Props {
   };
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  params.id = params.id.replace("%3A", ":");
+
+  const website = await prisma.website.findUnique({
+    where: {
+      id: params.id,
+    },
+    select: {
+      name: true,
+      url: true,
+    },
+  });
+
+  if (!website) {
+    return {};
+  }
+
+  return {
+    title: `${website.name} – Beacon`,
+    description: `Analytics for ${website.url} powered by Beacon.`,
+    openGraph: {
+      title: `${website.name} – Beacon`,
+      description: `Analytics for ${website.url} powered by Beacon.`,
+      images: [
+        {
+          url: `
+https://og-image.vercel.app/${encodeURIComponent(
+            website.name
+          )}%20%E2%80%93%20Beacon.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fgithub.com%2Fwithbeacon%2Fbeacon%2Fraw%2Fmain%2Fapps%2Fweb%2Fpublic%2Fsocial.png`,
+        },
+      ],
+    },
+  };
+}
+
 export default async function Page({
   params: { id },
   searchParams: { from, to },
@@ -33,7 +69,7 @@ export default async function Page({
     getServerSession(),
   ]);
 
-  if (!website) {
+  if (website === null) {
     notFound();
   }
 
