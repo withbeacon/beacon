@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { ServerThemeProvider } from "@wits/next-themes";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 import CommandPalette from "~/components/commandPalette";
 
 import { prisma } from "@beacon/db";
@@ -39,3 +39,35 @@ export default async function RootLayout({ children }: PropsWithChildren) {
     </ServerThemeProvider>
   );
 }
+
+export const metadata = {
+  title:
+    "Beacon – fast, simple and privacy friendly analytics that you will love using.",
+  description:
+    "Beacon is a fast, simple and privacy friendly analytics tool that you will love using.",
+  openGraph: {
+    siteName: "Beacon",
+    url: "https://github.com/withbeacon/beacon",
+    locale: "en-US",
+    type: "website",
+    images: [
+      {
+        url: "https://github.com/withbeacon/beacon/raw/main/apps/web/public/social.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    creatorId: "@withbeacon",
+    siteId: "@withbeacon",
+    card: "summary_large_image",
+    images: [
+      {
+        url: "https://github.com/withbeacon/beacon/raw/main/apps/web/public/social.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+};

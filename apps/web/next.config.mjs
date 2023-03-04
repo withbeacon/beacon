@@ -1,17 +1,18 @@
 // @ts-check
 import { env } from "./src/env/server.mjs";
 
+// @typedef {import('next').NextConfig} NextConfig
 export default {
   reactStrictMode: true,
   swcMinify: true,
+  transpilePackages: [
+    "@beacon/db",
+    "@beacon/ui",
+    "@beacon/auth",
+    "@beacon/basics",
+  ],
   experimental: {
     appDir: true,
-    transpilePackages: [
-      "@beacon/db",
-      "@beacon/ui",
-      "@beacon/auth",
-      "@beacon/basics",
-    ],
     serverComponentsExternalPackages: [
       "prisma",
       "@prisma/client",
@@ -24,7 +25,7 @@ export default {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreDuringBuilds: true,
+    ignoreBuildErrors: true,
   },
   async rewrites() {
     return [
