@@ -28,3 +28,6 @@ export * from "./ellipsis";
 export * from "./discord";
 export * from "./logout";
 export * from "./trash";
+export * from "./email";
+export * from "./github";
+export * from "./twitter";
