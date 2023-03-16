@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Dialog,
   Button,
@@ -113,17 +111,16 @@ export default function DeleteDialog({ name, id, isOpen, setIsOpen }: Props) {
               onClick={() => {
                 setIsOpen(false);
               }}
-              intent="outline"
+              variant="outline"
               fullWidth
             >
               Cancel
             </Button>
             <Button
-              intent="destructive"
+              variant="destructive"
               size="sm"
               loading={!!isMutating}
               disabled={!!errors.name}
-              filled
               submit
               fullWidth
             >

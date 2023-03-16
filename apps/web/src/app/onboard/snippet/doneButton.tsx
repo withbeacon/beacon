@@ -9,10 +9,9 @@ export default function DoneButton() {
 
   return (
     <Button
-      intent="primary"
+      variant="primary"
       size="md"
       onClick={() => router.push("/onboard/community")}
-      filled
       fullWidth
     >
       Done!

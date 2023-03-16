@@ -69,7 +69,7 @@ export default function ButtonGroup({ active, setActive }: Props) {
       {Object.keys(options).map((option) => (
         <Button
           key={option}
-          intent="outline"
+          variant="outline"
           size="md"
           className="min-w-fit"
           onClick={() => handleSelect(option)}

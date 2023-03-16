@@ -17,8 +17,7 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  intent: "primary",
-  filled: true,
+  variant: "primary",
   children,
   size,
 };
@@ -32,8 +31,7 @@ Primary.play = async ({ canvasElement }) => {
 export const Normal = Template.bind({});
 
 Normal.args = {
-  intent: "normal",
-  filled: true,
+  variant: "normal",
   children,
   size,
 };
@@ -47,8 +45,7 @@ Normal.play = async ({ canvasElement }) => {
 export const Destructive = Template.bind({});
 
 Destructive.args = {
-  intent: "destructive",
-  filled: true,
+  variant: "destructive",
   children,
   size,
 };

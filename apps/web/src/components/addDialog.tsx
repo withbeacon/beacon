@@ -164,17 +164,16 @@ export default function AddDialog({ isOpen, setIsOpen }: Props) {
           <div className="mt-4 flex gap-4">
             <Button
               onClick={() => setIsOpen(false)}
-              intent="outline"
+              variant="outline"
               className="rounded-xl"
               fullWidth
             >
               Cancel
             </Button>
             <Button
-              intent="primary"
+              variant="primary"
               size="sm"
               loading={!!isMutating}
-              filled
               submit
               fullWidth
             >
