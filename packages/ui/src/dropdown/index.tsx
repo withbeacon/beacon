@@ -16,7 +16,7 @@ export function Dropdown({
       <DropdownMenu.Trigger>{trigger}</DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="mr-4 rounded-lg bg-gray-100 px-2 py-2 shadow-sm dark:bg-gray-800 pointer-events-none">
+        <DropdownMenu.Content className="mr-4 rounded-lg bg-gray-100 px-2 py-2 shadow-sm dark:bg-gray-800 pointer-events-none border border-gray-200 dark:border-gray-700">
           <DropdownMenu.Label />
           <DropdownMenu.Item />
 
