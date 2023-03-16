@@ -96,9 +96,9 @@ export default function DatePicker({ minDate }: Props) {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger className="flex items-center justify-center gap-2 rounded-lg border border-gray-100 px-4 py-2 transition-all duration-300 active:scale-[98%] dark:border-gray-800">
+      <PopoverTrigger className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 py-2 transition-all duration-300 active:scale-[98%] dark:border-gray-800">
         <CalendarIcon className="h-5 w-5" />
-        <span className="text-sm lg:text-base truncate w-full overflow-hidden">
+        <span className="text-sm lg:text-base truncate overflow-hidden">
           {active ? active : format.formatRange(date.from, date.to)}
         </span>
       </PopoverTrigger>
