@@ -150,11 +150,10 @@ export default function Form() {
 
       <div className="flex gap-4">
         <Button
-          intent="primary"
+          variant="primary"
           size="md"
           loading={!!isMutating}
           className="!rounded-xl"
-          filled
           submit
           fullWidth
         >

@@ -9,10 +9,9 @@ export default function ContinueButton() {
 
   return (
     <Button
-      intent="primary"
+      variant="primary"
       size="md"
       onClick={() => router.push("/")}
-      filled
       fullWidth
     >
       Take me to app

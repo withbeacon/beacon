@@ -49,7 +49,7 @@ export default function DeleteDialog({ userId }: Props) {
   return (
     <AlertDialog open={isOpen} onOpenChange={(val) => setIsOpen(val)}>
       <AlertDialogTrigger asChild className="-mt-2">
-        <Button size="md" intent="destructive" filled fullWidth>
+        <Button size="md" variant="destructive" fullWidth>
           <TrashIcon className="h-5 w-5" />
           Delete my account
         </Button>
@@ -73,11 +73,10 @@ export default function DeleteDialog({ userId }: Props) {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <Button
             size="sm"
-            intent="destructive"
+            variant="destructive"
             className="rounded-md"
             onClick={() => deleteUser()}
             loading={isPending}
-            filled
           >
             {isPending ? "Deleting..." : "Yes, delete"}
           </Button>

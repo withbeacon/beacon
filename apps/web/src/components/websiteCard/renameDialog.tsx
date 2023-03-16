@@ -1,5 +1,3 @@
-"use client";
-
 import {
   DialogContent,
   DialogHeader,
@@ -86,14 +84,13 @@ export default function RenameDialog({ name, id, isOpen, setIsOpen }: Props) {
           />
 
           <div className="mt-4 flex gap-4">
-            <Button onClick={() => setIsOpen(false)} intent="outline" fullWidth>
+            <Button onClick={() => setIsOpen(false)} variant="outline" fullWidth>
               Cancel
             </Button>
             <Button
-              intent="primary"
+              variant="primary"
               size="sm"
               loading={!!isMutating}
-              filled
               submit
               fullWidth
             >

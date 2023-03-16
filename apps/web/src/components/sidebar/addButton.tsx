@@ -11,7 +11,7 @@ export default function AddWebsiteButton() {
   return (
     <>
       <Button
-        intent="outline"
+        variant="outline"
         size="md"
         className="rounded-xl"
         fullWidth

@@ -16,13 +16,12 @@ export default function SignInButton() {
 
   return (
     <Button
-      intent="primary"
+      variant="primary"
       size="lg"
       className="my-2"
       onClick={handleSignIn}
       loading={loading}
       fullWidth
-      filled
     >
       <GoogleIcon /> Sign In
     </Button>

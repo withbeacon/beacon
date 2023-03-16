@@ -20,7 +20,7 @@ export default function CopyButton({ snippet }: Props) {
   }
 
   return (
-    <Button onClick={copy} intent="outline" size="md" fullWidth>
+    <Button onClick={copy} variant="outline" size="md" fullWidth>
       {isCopied ? (
         <>
           <CheckIcon className="h-4 w-4" />

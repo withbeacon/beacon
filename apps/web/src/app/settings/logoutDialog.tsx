@@ -19,7 +19,7 @@ export default function LogoutDialog() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size="md" intent="normal" fullWidth>
+        <Button size="md" variant="normal" fullWidth>
           <LogoutIcon className="w-5 h-5" />
           Logout
         </Button>
