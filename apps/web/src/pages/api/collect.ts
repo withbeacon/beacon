@@ -62,6 +62,9 @@ export default async function handler(
     where: {
       id: host,
     },
+    select: {
+      id: true,
+    },
   });
 
   const { os, browser, device } = parseAgent(userAgent);
@@ -77,6 +80,10 @@ export default async function handler(
   const session = await prisma.userSession.findUnique({
     where: {
       id: sessionId,
+    },
+    select: {
+      id: true,
+      expires: true,
     },
   });
 
@@ -122,6 +129,9 @@ export default async function handler(
         id: sessionId,
       },
       url,
+    },
+    select: {
+      id: true,
     },
   });
 
@@ -171,4 +181,3 @@ export default async function handler(
   res.json({ message: "Ok" });
   return;
 }
-
