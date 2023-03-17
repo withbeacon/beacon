@@ -23,9 +23,9 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "https://github.com/withbeacon/beacon/raw/main/apps/web/public/social.png",
+        url: "https://withbeacon.vercel.app/social.png",
         width: 1200,
-        height: 630,
+        height: 675,
       },
     ],
   },
@@ -35,9 +35,9 @@ export const metadata = {
     card: "summary_large_image",
     images: [
       {
-        url: "https://github.com/withbeacon/beacon/raw/main/apps/web/public/social.png",
+        url: "https://withbeacon.vercel.app/social.png",
         width: 1200,
-        height: 630,
+        height: 675,
       },
     ],
   },
