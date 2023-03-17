@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Nav() {
   return (
-    <nav className="flex w-full items-center justify-between py-9 text-base px-4 lg:px-0">
+    <nav className="flex w-full items-center justify-between py-9 text-base px-4">
       <Link href="/" className="flex items-center gap-2">
         <Logo className="h-8 w-8" />
         <span className="text-lg font-medium text-gray-900">Beacon</span>
