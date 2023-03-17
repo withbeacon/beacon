@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { protect } from "~/utils/auth";
 import { prisma } from "@beacon/db";
 import { date, fromNow } from "@beacon/basics";
+import { retrieveCustomer } from "~/utils/payments";
 
 interface Props {
   searchParams?: Record<string, string | undefined>;
@@ -16,7 +17,7 @@ interface Props {
 
 export const metadata = {
   title: "Dashboard – Beacon",
-}
+};
 
 export default async function Page({ searchParams }: Props) {
   await protect();
@@ -66,6 +67,10 @@ export default async function Page({ searchParams }: Props) {
     }
   });
 
+  const customer = await retrieveCustomer({
+    email: session?.user?.email as string,
+  });
+
   return (
     <div className="flex min-h-screen flex-col gap-6 p-6 lg:flex-row">
       <Suspense fallback={<SidebarShimmer />}>
@@ -73,7 +78,13 @@ export default async function Page({ searchParams }: Props) {
           user={{
             name: session?.user?.name || "Cool Person",
             image: session?.user?.image,
+            email: session?.user?.email as string,
           }}
+          isPro={
+            customer.success
+              ? customer.data?.at(0)?.attributes.status === "subscribed"
+              : false
+          }
         />
       </Suspense>
 
