@@ -7,7 +7,7 @@ import commandPalette from "~/assets/command-palette.svg";
 export default function Features() {
   return (
     <section className="mt-6 grid grid-cols-1 auto-rows-auto auto-cols-auto lg:grid-cols-2 gap-6 px-4 lg:px-0">
-      <div className="lg:col-span-2 flex flex-col items-start justify-between gap-6 rounded-2xl border-gray-200 bg-gray-50 p-8 lg:flex-row">
+      <div className="lg:col-span-2 flex flex-col items-start justify-between gap-6 rounded-2xl border-gray-200 bg-gray-50 p-8 lg:flex-row border border-gray-200">
         <div className="flex w-full flex-col gap-4">
           <h2 className="text-3xl font-semibold md:leading-[3.15rem] leading-auto text-gray-900 md:text-4xl">
             Super simple and easy to understand
@@ -23,7 +23,7 @@ export default function Features() {
         <Image src={insightCards} alt="Insight cards" />
       </div>
 
-      <div className="flex flex-col items-start gap-6 rounded-2xl border-gray-200 bg-gray-50 p-8">
+      <div className="flex flex-col items-start gap-6 rounded-2xl border-gray-200 bg-gray-50 p-8 border border-gray-200">
         <div className="flex w-full flex-col gap-4">
           <h2 className="text-3xl font-semibold md:leading-[3.15rem] leading-auto text-gray-900 md:text-4xl">
             No annoying cookie banners anymore
@@ -46,7 +46,7 @@ export default function Features() {
         <Image src={cookieBanner} alt="Cookie banner" className="w-full shadow-md shadow-gray-100" />
       </div>
 
-      <div className="flex flex-col items-start gap-6 rounded-2xl border-gray-200 bg-gray-50 p-8">
+      <div className="flex flex-col items-start gap-6 rounded-2xl border-gray-200 bg-gray-50 p-8 border border-gray-200">
         <div className="flex w-full flex-col gap-4">
           <h2 className="text-3xl font-semibold md:leading-[3.15rem] leading-auto text-gray-900 md:text-4xl">
             Do everything, super fast
