@@ -10,6 +10,7 @@ export const serverSchema = z.object({
   GOOGLE_ID: z.string(),
   GOOGLE_SECRET: z.string(),
   APP_KEY: z.string(),
+  LEMONSQUEEZY_KEY: z.string(),
 });
 
 /**

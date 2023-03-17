@@ -1,17 +1,32 @@
 import type { PropsWithChildren } from "react";
-import { HelpIcon, FileIcon, SettingsIcon, ChevronUpIcon } from "@beacon/ui";
-import Link from "next/link";
+import {
+  HelpIcon,
+  FileIcon,
+  SettingsIcon,
+  ChevronUpIcon,
+  StarIcon,
+} from "@beacon/ui";
+import Link, { LinkProps } from "next/link";
 import AddWebsiteButton from "./addButton";
+
+import { cx } from "class-variance-authority";
+import { retrieveCustomer } from "~/utils/payments";
 
 type Props = {
   user: {
     name: string;
     image: string | null | undefined;
+    email: string;
   };
   page?: "dashboard" | "settings";
+  isPro?: boolean;
 };
 
-export default function Sidebar({ user, page = "dashboard" }: Props) {
+export default function Sidebar({
+  user,
+  page = "dashboard",
+  isPro = false,
+}: Props) {
   return (
     <aside className="hidden min-h-full w-64 cursor-default flex-col gap-4 bg-gray-100 dark:bg-gray-900 lg:flex">
       {page === "dashboard" ? (
@@ -53,12 +68,17 @@ export default function Sidebar({ user, page = "dashboard" }: Props) {
       )}
 
       <div className="mt-auto flex flex-col gap-6">
-        <SidebarLink href="/">
+        <SidebarLink href="https://beacon.lemonsqueezy.com/checkout/buy/f1807aef-3f25-4756-b918-cf12249e6a2e">
+          <StarIcon />
+          <span>{isPro ? "Activate Pro" : "Pro Activated"}</span>
+        </SidebarLink>
+
+        <SidebarLink href="/" disabled>
           <HelpIcon />
           <span>Help & Support</span>
         </SidebarLink>
 
-        <SidebarLink href="#">
+        <SidebarLink href="#" disabled>
           <FileIcon />
           <span>Documentation</span>
         </SidebarLink>
@@ -67,13 +87,25 @@ export default function Sidebar({ user, page = "dashboard" }: Props) {
   );
 }
 
-interface SidebarLinkProps extends PropsWithChildren {
-  href: string;
-}
+type SidebarLinkProps = {
+  disabled?: boolean;
+} & PropsWithChildren &
+  LinkProps;
 
-function SidebarLink({ href, children }: SidebarLinkProps) {
+function SidebarLink({
+  children,
+  disabled = false,
+  ...props
+}: SidebarLinkProps) {
   return (
-    <Link href={href} className="flex gap-2 text-gray-700 dark:text-gray-300">
+    <Link
+      className={cx(
+        "flex gap-2 text-gray-700 dark:text-gray-300",
+        disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"
+      )}
+      title="Coming soon"
+      {...props}
+    >
       {children}
     </Link>
   );
