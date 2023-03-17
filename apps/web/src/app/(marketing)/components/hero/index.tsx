@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <header className="mx-auto mt-16 flex w-full max-w-4xl flex-col items-center justify-center gap-7 text-center">
+    <header className="mx-auto mt-16 flex w-full max-w-4xl flex-col items-center justify-center gap-7 text-center px-4 lg:px-0">
       <h1 className="bg-landing-title bg-clip-text md:text-6xl text-4xl font-bold text-transparent select-none">
         Analytics, but without all the nonsense.
       </h1>
