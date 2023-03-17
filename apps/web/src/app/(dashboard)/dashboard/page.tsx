@@ -14,6 +14,10 @@ interface Props {
   searchParams?: Record<string, string | undefined>;
 }
 
+export const metadata = {
+  title: "Dashboard – Beacon",
+}
+
 export default async function Page({ searchParams }: Props) {
   await protect();
 
@@ -106,8 +110,4 @@ export default async function Page({ searchParams }: Props) {
       </main>
     </div>
   );
-}
-
-export const metadata = {
-  title: "Dashboard – Beacon",
 }
