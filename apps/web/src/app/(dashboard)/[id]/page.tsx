@@ -64,6 +64,14 @@ export default async function Page({
   const [website, session] = await Promise.all([
     prisma.website.findUnique({
       where: { id },
+      select: {
+        id: true,
+        name: true,
+        url: true,
+        public: true,
+        userId: true,
+        createdAt: true,
+      },
     }),
 
     getServerSession(),

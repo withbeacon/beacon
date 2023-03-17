@@ -26,6 +26,10 @@ export default async function handler(
         lte: new Date(+(new Date()) - 48 * 3600 * 1000),
       },
     },
+
+    select: {
+      id: true,
+    }
   });
 
   const ids = sessions.map(({ id }) => id);
