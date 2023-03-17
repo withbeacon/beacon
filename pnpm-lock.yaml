@@ -107,6 +107,7 @@ importers:
       react-hook-form: ^7.43.0
       recharts: ^2.3.2
       request-ip: ^3.3.0
+      server-only: ^0.0.1
       sharp: ^0.31.3
       sonner: ^0.2.0
       swr: ^2.0.3
@@ -140,6 +141,7 @@ importers:
       react-hook-form: 7.43.5_react@18.2.0
       recharts: 2.5.0_v2m5e27vhdewzwhryxwfaorcca
       request-ip: 3.3.0
+      server-only: 0.0.1
       sharp: 0.31.3
       sonner: 0.2.0_biqbaboplfbrettd7655fr4n2y
       swr: 2.1.0_react@18.2.0
@@ -17306,6 +17308,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /server-only/0.0.1:
+    resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
+    dev: false
 
   /set-blocking/2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
