@@ -39,6 +39,12 @@ module.exports = {
 
         "insight-card":
           "linear-gradient(180deg, #E5E6EB 0%, rgba(243, 243, 246, 0) 116.07%)",
+
+        "landing-title":
+          "linear-gradient(183.86deg, #1E1E1E 3.16%, rgba(143, 143, 143, 0) 455.06%, rgba(30, 30, 30, 0.2) 455.06%)",
+
+        "landing-title-dark": 
+          "linear-gradient(178.82deg, #EAEBEB 1.01%, rgba(143, 143, 143, 0) 434.92%, #121316 434.92%)",
       },
       dropShadow: {
         "insight-card": "2px 2px 48px rgba(194, 194, 194, 0.00)",
@@ -57,6 +63,10 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+
+      screens: {
+        xl: "1440px",
+      }
     },
   },
   future: {

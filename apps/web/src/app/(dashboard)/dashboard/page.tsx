@@ -107,3 +107,7 @@ export default async function Page({ searchParams }: Props) {
     </div>
   );
 }
+
+export const metadata = {
+  title: "Dashboard – Beacon",
+}

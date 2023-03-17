@@ -85,7 +85,7 @@ export default function CommandPalette({ websites }: Props) {
         )}
         <CommandGroup heading="Go to">
           <CommandItem
-            onSelect={() => navigate("/")}
+            onSelect={() => navigate("/dashboard")}
             className="flex items-center gap-2"
           >
             <HomeIcon />

@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from "react";
 import { ServerThemeProvider } from "@wits/next-themes";
 import { Inter } from "next/font/google";
+import { Toaster } from "~/components/toaster";
 import CommandPalette from "~/components/commandPalette";
 
 import { prisma } from "@beacon/db";
@@ -32,6 +33,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
       <html lang="en" className={font.className}>
         <head />
         <body>
+          <Toaster richColors />
           <CommandPalette websites={websites} />
           {children}
         </body>
