@@ -32,3 +32,4 @@ export * from "./creditCard";
 export * from "./email";
 export * from "./github";
 export * from "./twitter";
+export * from "./error";
