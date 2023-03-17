@@ -11,37 +11,6 @@ import "~/styles/globals.css";
 
 const font = Inter({ subsets: ["latin"] });
 
-export default async function RootLayout({ children }: PropsWithChildren) {
-  const session = await getServerSession();
-  const websites = session?.user?.email
-    ? await prisma.website.findMany({
-        where: {
-          user: {
-            email: session?.user?.email,
-          },
-        },
-        select: {
-          id: true,
-          url: true,
-          name: true,
-        },
-      })
-    : undefined;
-
-  return (
-    <ServerThemeProvider attribute="class">
-      <html lang="en" className={font.className}>
-        <head />
-        <body>
-          <Toaster richColors />
-          <CommandPalette websites={websites} />
-          {children}
-        </body>
-      </html>
-    </ServerThemeProvider>
-  );
-}
-
 export const metadata = {
   title:
     "Beacon – fast, simple and privacy friendly analytics that you will love using.",
@@ -73,3 +42,34 @@ export const metadata = {
     ],
   },
 };
+
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const session = await getServerSession();
+  const websites = session?.user?.email
+    ? await prisma.website.findMany({
+        where: {
+          user: {
+            email: session?.user?.email,
+          },
+        },
+        select: {
+          id: true,
+          url: true,
+          name: true,
+        },
+      })
+    : undefined;
+
+  return (
+    <ServerThemeProvider attribute="class">
+      <html lang="en" className={font.className}>
+        <head />
+        <body>
+          <Toaster richColors />
+          <CommandPalette websites={websites} />
+          {children}
+        </body>
+      </html>
+    </ServerThemeProvider>
+  );
+}
