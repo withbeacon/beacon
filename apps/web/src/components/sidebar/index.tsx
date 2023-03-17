@@ -10,7 +10,6 @@ import Link, { LinkProps } from "next/link";
 import AddWebsiteButton from "./addButton";
 
 import { cx } from "class-variance-authority";
-import { retrieveCustomer } from "~/utils/payments";
 
 type Props = {
   user: {
@@ -68,9 +67,15 @@ export default function Sidebar({
       )}
 
       <div className="mt-auto flex flex-col gap-6">
-        <SidebarLink href="https://beacon.lemonsqueezy.com/checkout/buy/f1807aef-3f25-4756-b918-cf12249e6a2e">
+        <SidebarLink
+          href={
+            isPro
+              ? ""
+              : "https://beacon.lemonsqueezy.com/checkout/buy/f1807aef-3f25-4756-b918-cf12249e6a2e"
+          }
+        >
           <StarIcon />
-          <span>{isPro ? "Activate Pro" : "Pro Activated"}</span>
+          <span>{isPro ? "Pro Activated" : "Activate Pro"}</span>
         </SidebarLink>
 
         <SidebarLink href="/" disabled>
