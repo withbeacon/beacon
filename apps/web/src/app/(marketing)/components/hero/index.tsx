@@ -1,8 +1,5 @@
-import { ChevronDownIcon, CreditCardIcon } from "@beacon/ui";
-import { Button } from "@beacon/ui";
+import { CreditCardIcon } from "@beacon/ui";
 import EarlyAccessForm from "./earlyAccessForm";
-import WindowImage from "./windowImage";
-import Link from "next/link";
 
 export default function Hero() {
   return (
