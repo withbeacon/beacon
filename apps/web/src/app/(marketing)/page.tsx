@@ -6,13 +6,25 @@ import Footer from "./components/footer";
 
 import { getServerSession } from "@beacon/auth";
 import { redirect } from "next/navigation";
+import { prisma } from "@beacon/db";
 
 export default async function Page() {
   const session = await getServerSession();
 
   if (session) {
-    redirect("/dashboard");
-    return null;
+    const user = await prisma.waitlist.findUnique({
+      where: {
+        email: session.user?.email || undefined,
+      },
+      select: {
+        isApproved: true,
+      }
+    });
+
+    if (user?.isApproved) {
+      redirect("/dashboard");
+      return null;
+    }
   }
 
   return (
