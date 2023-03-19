@@ -1,7 +1,6 @@
 import { Logo, ErrorIcon } from "@beacon/ui";
+import Link from "next/link";
 import SignInButton from "~/components/signInButton";
-
-import { getServerSession } from "@beacon/auth";
 
 type Props = {
   searchParams?: { [key: string]: string | string[] | undefined };
@@ -28,7 +27,7 @@ export default async function SignIn({ searchParams }: Props) {
         </p>
 
         {error === "access_denied" ? (
-          <div className="my-2 flex flex-col gap-2 rounded-xl border border-gray-200 bg-gray-100 py-4 px-6 text-gray-800 hover:bg-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 select-none">
+          <div className="my-2 flex select-none flex-col gap-2 rounded-xl border border-gray-200 bg-gray-100 py-4 px-6 text-gray-800 hover:bg-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700">
             <div className="flex items-center gap-2">
               <ErrorIcon />
               <span className="text-lg font-semibold">
@@ -37,8 +36,8 @@ export default async function SignIn({ searchParams }: Props) {
             </div>
             <p className="text-base text-gray-600 dark:text-gray-400">
               We are currently in early access, if you want to get access to
-              Beacon, please sign up for the waitlist. We will send you an
-              invite asap.
+              Beacon, please sign up for the <Link href="/" className="underline underline-offset-4">waitlist</Link>. We
+              will send you an invite asap.
             </p>
           </div>
         ) : null}
