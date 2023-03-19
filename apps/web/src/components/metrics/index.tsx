@@ -1,5 +1,5 @@
 import { PagesMetrics } from "./pages";
-import { UtmMetrics } from "./utm";
+import { SourceMetrics } from "./source";
 import { EventsMetrics } from "./events";
 import { CountriesMetrics } from "./countries";
 import { BrowsersMetrics } from "./browsers";
@@ -18,7 +18,7 @@ export default function Metrics() {
   return (
     <div className="wrap grid auto-rows-auto grid-cols-1 gap-4 md:grid-cols-2">
       {hasData(pages) && <PagesMetrics data={pages} />}
-      {hasData(queryParams) && <UtmMetrics data={queryParams} />}
+      {hasData(queryParams) && <SourceMetrics data={queryParams} />}
       {hasData(countries) && <CountriesMetrics data={countries} />}
       {hasData(browsers) && <BrowsersMetrics data={browsers} />}
       {hasData(devices) && <DevicesMetrics data={devices} />}

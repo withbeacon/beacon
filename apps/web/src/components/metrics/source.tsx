@@ -9,7 +9,7 @@ interface Props {
   data: Record<string, Record<string, number>>;
 }
 
-export function UtmMetrics({ data }: Props) {
+export function SourceMetrics({ data }: Props) {
   const [utmParam, setUtmParam] = useState("ref");
   const isActive = (val: string): boolean => utmParam === val;
 
@@ -38,7 +38,7 @@ export function UtmMetrics({ data }: Props) {
 
   return (
     <MetricsTable title="Source" dataValueType="Views" data={data[utmParam] || {}}>
-      <MetricsHeader title="UTM" options={options} />
+      <MetricsHeader title="Sources" options={options} />
     </MetricsTable>
   );
 }
