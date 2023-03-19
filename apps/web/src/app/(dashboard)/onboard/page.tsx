@@ -20,7 +20,7 @@ export default async function Page() {
     redirect("/onboard/add");
   }
 
-  redirect("/");
+  redirect("/dashboard");
 
   return null;
 }
