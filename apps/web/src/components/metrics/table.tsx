@@ -25,7 +25,7 @@ export function MetricsTable({
             <th className="font-medium">{dataValueType.toUpperCase()}</th>
           </tr>
         </thead>
-        <tbody className="hide-scrollbar overflow-scroll">
+        <tbody className="hide-scrollbar overflow-scroll pb-10">
           {Object.entries(data)
             .sort(([, a], [, b]) => b - a)
             .map(([dataKey, value]) => (
