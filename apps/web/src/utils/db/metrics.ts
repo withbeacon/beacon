@@ -116,7 +116,17 @@ export async function getMetrics({ id, from, to }: Params): Promise<Metrics> {
     }
 
     if (referrer) {
-      pages[referrer] ? (pages[referrer] += 1) : (pages[referrer] = 1);
+      queryParams["referrer"] = queryParams["referrer"] || {};
+
+      let referrerUrl: URL | string | undefined = new URL(referrer);
+      referrerUrl = referrerUrl.host === id ? undefined : referrerUrl.host;
+
+
+      if (typeof referrerUrl === "string") {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        queryParams["referrer"][referrerUrl] = queryParams["referrer"][referrerUrl] + 1 || 1;
+      }
     }
   });
 
