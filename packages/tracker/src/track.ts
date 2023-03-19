@@ -44,7 +44,7 @@ function send(url?: string) {
   };
 
   if (
-    window.beacon.before &&
+    window.beacon?.before &&
     window.beacon.before({ pathname: window.location.pathname }) === null
   ) {
     return;
@@ -118,8 +118,8 @@ type PageEvent = {
 
 declare global {
   interface Window {
-    beacon: {
-      before: ({ pathname }: PageEvent) => PageEvent | null;
+    beacon?: {
+      before?: ({ pathname }: PageEvent) => PageEvent | null;
     };
   }
 }
