@@ -60,6 +60,7 @@ export async function getMetrics({ id, from, to }: Params): Promise<Metrics> {
       events: true,
       url: true,
       queryParams: true,
+      referrer: true,
     },
   });
 
@@ -87,7 +88,7 @@ export async function getMetrics({ id, from, to }: Params): Promise<Metrics> {
   });
 
   pageViews.forEach((pageView) => {
-    const { queryParams: params, events: pageEvents } = pageView;
+    const { queryParams: params, events: pageEvents, referrer } = pageView;
     const url = new URL(pageView.url).pathname;
 
     if (url) {
@@ -112,6 +113,10 @@ export async function getMetrics({ id, from, to }: Params): Promise<Metrics> {
           queryParams[param][val] = queryParams[param][val] + 1 || 1;
         }
       });
+    }
+
+    if (referrer) {
+      pages[referrer] ? (pages[referrer] += 1) : (pages[referrer] = 1);
     }
   });
 

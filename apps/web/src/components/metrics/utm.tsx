@@ -16,8 +16,8 @@ export function UtmMetrics({ data }: Props) {
   const options = [
     {
       title: "Referrer",
-      active: isActive("ref"),
-      onClick: () => setUtmParam("ref"),
+      active: isActive("referrer"),
+      onClick: () => setUtmParam("referrer"),
     },
     {
       title: "Source",
