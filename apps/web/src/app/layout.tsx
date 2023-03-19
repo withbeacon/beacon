@@ -2,6 +2,7 @@ import type { PropsWithChildren } from "react";
 import { ServerThemeProvider } from "@wits/next-themes";
 import { Inter } from "next/font/google";
 import { Toaster } from "~/components/toaster";
+import Script from "next/script";
 import CommandPalette from "~/components/commandPalette";
 
 import { prisma } from "@beacon/db";
@@ -62,6 +63,8 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
   return (
     <ServerThemeProvider attribute="class">
+      <Script src="/track.js" strategy="afterInteractive" />
+
       <html lang="en" className={font.className}>
         <head />
         <body>
