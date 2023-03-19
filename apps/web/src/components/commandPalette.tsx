@@ -59,7 +59,7 @@ export default function CommandPalette({ websites }: Props) {
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Type a command or search..." />
+      <CommandInput placeholder="Jump to..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         {websites && (
