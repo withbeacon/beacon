@@ -19,7 +19,7 @@ export default function Nav() {
           Twitter
         </Link>
         <Link
-          href="https://twitter.com/withbeacon"
+          href="https://discord.gg/jXpsbRU2Rr"
           rel="noopener noreferrer"
           target="_blank"
           className="text-lg hidden md:block"
