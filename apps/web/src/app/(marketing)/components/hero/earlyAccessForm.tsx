@@ -95,6 +95,8 @@ export default function EarlyAccessForm() {
         submit={true}
         loading={isMutating}
         disabled={isMutating || isError}
+        data-event-name="Join Waitlist"
+        data-event="click"
       >
         Get early access
         <ChevronDownIcon className="-ml-1 h-4 w-4 -rotate-90" />
