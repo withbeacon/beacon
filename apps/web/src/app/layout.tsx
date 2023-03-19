@@ -63,10 +63,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
   return (
     <ServerThemeProvider attribute="class">
-      <Script src="/track.js" strategy="afterInteractive" />
-
       <html lang="en" className={font.className}>
         <head />
+        <Script src="https://www.withbeacon.co/track.js" strategy="afterInteractive" />
         <body>
           <Toaster richColors />
           <CommandPalette websites={websites} />
