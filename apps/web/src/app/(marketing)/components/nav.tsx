@@ -26,6 +26,12 @@ export default function Nav() {
         >
           Community
         </Link>
+        <Link
+          href="/sign-in"
+          className="text-lg hidden md:block"
+        >
+          Sign In
+        </Link>
       </div>
     </nav>
   );
