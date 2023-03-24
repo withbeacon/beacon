@@ -11,6 +11,11 @@ export const serverSchema = z.object({
   GOOGLE_SECRET: z.string(),
   APP_KEY: z.string(),
   LEMONSQUEEZY_KEY: z.string(),
+  EMAIL_SERVER_USER: z.string(),
+  EMAIL_SERVER_PASSWORD: z.string(),
+  EMAIL_SERVER_HOST: z.string(),
+  EMAIL_SERVER_PORT: z.string(),
+  EMAIL_FROM: z.string(),
 });
 
 /**

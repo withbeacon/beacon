@@ -6,7 +6,7 @@ import { Button } from "@beacon/ui";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 
-export default function SignInButton() {
+export default function GoogleOAuthSignInButton() {
   const [loading, setLoading] = useState(false);
 
   function handleSignIn() {
@@ -16,14 +16,14 @@ export default function SignInButton() {
 
   return (
     <Button
-      variant="primary"
-      size="lg"
-      className="my-2"
+      variant="outline"
+      size="md"
+      className="my-2 bg-white dark:bg-gray-800"
       onClick={handleSignIn}
       loading={loading}
       fullWidth
     >
-      <GoogleIcon /> Sign In
+      <GoogleIcon className="w-5 h-5 fill-gray-700 dark:fill-gray-200" /> Sign in with Google
     </Button>
   );
 }
