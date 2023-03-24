@@ -19,12 +19,12 @@ export default function SignInForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<FormValues>();
 
   async function onSubmit({ email }: FormValues) {
     setIsFetching(true);
-    await signIn("email", { email });
+    await signIn("email", { email, redirect: false });
   }
 
   return (
@@ -56,7 +56,7 @@ export default function SignInForm() {
         loading={isSubmitting}
         fullWidth
       >
-        Sign In
+        {isSubmitSuccessful ? "Magic Link Sent!" : "Sign In"}
       </Button>
     </form>
   );
