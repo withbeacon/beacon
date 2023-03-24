@@ -32,7 +32,7 @@ export function MagicLinkEmail({ magicLink = "https://withbeacon.co" }: Props) {
       <Body style={main}>
         <Container style={container}>
           <Img
-            src={`${baseUrl}/logo.svg`}
+            src="https://withbeacon.co/logo.svg"
             width={48}
             height={48}
             alt="Beacon"
@@ -97,7 +97,7 @@ const container = {
 const heading = {
   fontSize: "28px",
   fontWeight: "bold",
-  marginTop: "48px",
+  marginTop: "20px",
 };
 
 const body = {
@@ -106,7 +106,7 @@ const body = {
 
 const paragraph = {
   fontSize: "16px",
-  lineHeight: "26px",
+  lineHeight: "2px",
 };
 
 const link = {
