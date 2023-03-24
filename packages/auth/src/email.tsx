@@ -106,7 +106,7 @@ const body = {
 
 const paragraph = {
   fontSize: "16px",
-  lineHeight: "2px",
+  lineHeight: "24px",
 };
 
 const link = {
