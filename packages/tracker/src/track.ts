@@ -15,6 +15,7 @@ import {
   title,
   isDoNotTrackEnabled,
   timezone,
+  track404,
 } from "./client";
 import { COLLECT_API } from "./constants";
 
@@ -31,9 +32,15 @@ const timer = setInterval(() => {
   }
 }, 500);
 
-function send(url?: string) {
+async function send(url: undefined | string = window.location.href) {
+  const { status } = await fetch(COLLECT_API);
+
+  if (status === 404 && track404) {
+    return;
+  }
+
   const payload = {
-    url: url || window.location.href,
+    url: url,
     visitTime,
     screen,
     referrer,
