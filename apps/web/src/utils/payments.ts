@@ -85,7 +85,7 @@ const customerSchema = z.object({
 });
 
 export async function retrieveCustomer({ email }: { email: string }) {
-  const resp = await fetch(`${BASE_URL}/customers?email=${email}`, {
+  const resp = await fetch(`${BASE_URL}/customers?filter[email]=${email}`, {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/vnd.api+json",
@@ -103,7 +103,7 @@ export async function retrieveCustomer({ email }: { email: string }) {
   }
 
   return {
-    ...parse.data,
+    ...parse.data.data.at(0),
     success: true,
   } as const;
 }
