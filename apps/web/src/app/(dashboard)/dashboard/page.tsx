@@ -106,7 +106,7 @@ export default async function Page({ searchParams }: Props) {
             </div>
           }
         >
-          <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mb-14 lg:mb-0">
             {filteredWebsites.map((website) => (
               <WebsiteCard
                 key={website.id}
