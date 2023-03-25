@@ -82,7 +82,7 @@ export default async function Page({ searchParams }: Props) {
           }}
           isPro={
             customer.success
-              ? customer.data?.at(0)?.attributes.status === "subscribed"
+              ? customer?.attributes?.status === "subscribed"
               : false
           }
         />
