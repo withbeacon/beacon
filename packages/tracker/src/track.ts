@@ -33,7 +33,7 @@ const timer = setInterval(() => {
 }, 500);
 
 async function send(url: undefined | string = window.location.href) {
-  const { status } = await fetch(COLLECT_API);
+  const { status } = await fetch(url);
 
   if (status === 404 && track404) {
     return;
