@@ -10,7 +10,7 @@ interface Props {
 }
 
 export function SourceMetrics({ data }: Props) {
-  const [utmParam, setUtmParam] = useState("ref");
+  const [utmParam, setUtmParam] = useState("referrer");
   const isActive = (val: string): boolean => utmParam === val;
 
   const options = [
