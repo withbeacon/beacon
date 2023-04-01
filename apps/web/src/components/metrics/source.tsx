@@ -36,9 +36,6 @@ export function SourceMetrics({ data }: Props) {
     },
   ];
 
-  console.log({ 'source-metrics-data': data });
-  console.log({ 'source-metrics-utmParam': utmParam });
-
   return (
     <MetricsTable title="Source" dataValueType="Views" data={data[utmParam] || {}}>
       <MetricsHeader title="Sources" options={options} />
