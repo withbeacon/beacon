@@ -10,14 +10,14 @@ interface Props {
 }
 
 export function SourceMetrics({ data }: Props) {
-  const [utmParam, setUtmParam] = useState("ref");
+  const [utmParam, setUtmParam] = useState("referrer");
   const isActive = (val: string): boolean => utmParam === val;
 
   const options = [
     {
       title: "Referrer",
-      active: isActive("ref"),
-      onClick: () => setUtmParam("ref"),
+      active: isActive("referrer"),
+      onClick: () => setUtmParam("referrer"),
     },
     {
       title: "Source",
@@ -35,6 +35,9 @@ export function SourceMetrics({ data }: Props) {
       onClick: () => setUtmParam("utm_medium"),
     },
   ];
+
+  console.log({ 'source-metrics-data': data });
+  console.log({ 'source-metrics-utmParam': utmParam });
 
   return (
     <MetricsTable title="Source" dataValueType="Views" data={data[utmParam] || {}}>
