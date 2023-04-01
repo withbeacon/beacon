@@ -90,6 +90,7 @@ export async function getMetrics({ id, from, to }: Params): Promise<Metrics> {
   pageViews.forEach((pageView) => {
     const { queryParams: params, events: pageEvents, referrer } = pageView;
     const url = new URL(pageView.url).pathname;
+    const referrersToIgnore = ["https://accounts.google.com"];
 
     if (url) {
       pages[url] ? (pages[url] += 1) : (pages[url] = 1);
@@ -117,10 +118,14 @@ export async function getMetrics({ id, from, to }: Params): Promise<Metrics> {
 
     if (referrer) {
       queryParams["referrer"] = queryParams["referrer"] || {};
-
       let referrerUrl: URL | string | undefined = new URL(referrer);
-      referrerUrl = referrerUrl.host === id ? undefined : referrerUrl.host;
 
+      if (referrersToIgnore.includes(referrerUrl.origin)) {
+        return;
+      }
+
+      referrerUrl = referrerUrl.host === id ? undefined : referrerUrl.host;
+      referrerUrl = referrerUrl?.startsWith("www.") ? referrerUrl.slice(4) : referrerUrl;
 
       if (typeof referrerUrl === "string") {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
