@@ -8,7 +8,7 @@ export default async function Page() {
   await protect();
 
   const host = headers().get("host");
-  const snippet = `<script defer src="://${host}/track.js"></script>`;
+  const snippet = `<script defer src="https://${host}/track.js"></script>`;
 
   return (
     <>
